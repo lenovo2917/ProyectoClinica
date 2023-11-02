@@ -1,0 +1,316 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Rubik:wght@300&display=swap');
+
+/* Showcase */
+.showcase {
+  width: 100%;
+  height: 400px;
+  background: url('../carrusel/doctor-563429_1920.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-end;
+  padding-bottom: 50px;
+  margin-bottom: 20px;
+}
+
+.showcase h2, .showcase p {
+  margin-bottom: 10px;
+}
+
+.showcase .btn {
+  margin-top: 20px;
+}
+
+.showcase a{
+  color: #053B50; /* Color normal del enlace */
+  text-decoration: none; /* Quita el subrayado predeterminado */
+  transition: color 0.3s; /* Agrega una transición suave */
+
+}
+.showcase  a:hover i{
+  color: white; /* Color del enlace al pasar el cursor por encima */
+  margin-left: 10px;
+}
+.showcase a:hover {
+  color: white; /* Color del enlace al pasar el cursor por encima */
+}
+
+
+
+
+/* Home cards */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  margin-bottom: 40px;
+}
+
+.home-cards img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.home-cards h3 {
+  margin-bottom: 5px;
+  font-family: 'DM Serif Display', serif;
+  font-weight: bold ; /* Texto en negritas */
+  font-size: 25px;/* Puedes ajustar el tamaño según el nivel del subtítulo */
+}
+
+.home-cards a {
+  display: inline-block;
+  padding-top: 10px;
+  color: #053B50 ;
+
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.home-cards a:hover i {
+  margin-left: 10px;
+}
+
+
+/* Xbox */
+.xbox {
+  width: 100%;
+  height: 350px;
+  background: url('https://assets.mayoclinic.org/content/dam/media/global/images/2023/06/26/human_experience.jpg') no-repeat center center/cover;
+  margin-bottom: 20px;
+}
+
+.xbox .content {
+  width: 40%;
+  padding: 50px 0 0 30px;
+}
+
+.xbox p {
+  margin: 10px 0 20px;
+  color: white;
+}
+
+.xbox h3{
+  font-family: 'DM Serif Display', serif;
+  font-weight: bold ; /* Texto en negritas */
+  font-size: 25px;/* Puedes ajustar el tamaño según el nivel del subtítulo */
+  color: #ffffff; /* Texto en color negro */
+
+}
+
+
+.xbox a{
+  color: #053B50; /* Color normal del enlace */
+  text-decoration: none; /* Quita el subrayado predeterminado */
+  transition: color 0.3s; /* Agrega una transición suave */
+
+}
+.xbox a:hover i{
+  color: white; /* Color del enlace al pasar el cursor por encima */
+  margin-left: 10px;
+}
+.xbox a:hover {
+  color: white; /* Color del enlace al pasar el cursor por encima */
+}
+.links li {
+  line-height: 2.8;
+}
+
+@media(max-width: 700px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .menu-btn:hover {
+    opacity: 0.5;
+  }
+
+  .main-nav ul.right-menu {
+    margin-right: 50px;
+  }
+
+  .main-nav ul.main-menu {
+    display: block;
+    position: absolute;
+    top:0;
+    left: 0;
+    background: #f2f2f2;
+    width: 50%;
+    height: 100%;
+    border-right: #ccc 1px solid;
+    opacity: 0.9;
+    padding: 30px;
+    transform: translateX(-500px);
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .main-nav ul.main-menu li {
+    padding: 10px;
+    border-bottom: #ccc solid 1px;
+    font-size: 14px;
+  }
+
+  .main-nav ul.main-menu li:last-child {
+    border-bottom: 0;
+  }
+
+  .main-nav ul.main-menu.show {
+    transform: translateX(-20px);
+  }
+
+  .home-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .xbox .content p {
+    display: none;
+  }
+
+  .xbox .content h2 {
+    margin-bottom: 20px;
+  }
+
+  .carbon .content {
+    width: 85%;
+  }
+
+  .links .links-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 500px) {
+  .home-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .links .links-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .links .links-inner ul {
+    margin-bottom: 20px;
+  }
+}
+
+/* Estilo para titulos */
+h1, .Titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 50px;
+    color: #000; /* Texto en color negro */
+}
+
+/* Estilos personalizados para las tarjetas */
+/* Estilos personalizados para las tarjetas */
+.card-custom {
+  width: 243px !important;
+  height: 385px !important;
+  margin: 25px !important;
+  font-family: 'Rubik', sans-serif !important;
+}
+
+.custom-card-img-top {
+  width: 243px !important;
+  height: 270px !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+
+/* Clases de colores personalizadas para las tarjetas */
+.card-color-4 {
+  background-color: #053B50; /* Color 1 */
+  color: white; /* Texto en blanco */
+}
+
+.card-color-1 {
+  background-color: #075166; /* Color 2 */
+}
+
+.card-color-2 {
+  background-color: #09677D; /* Color 3 */
+}
+
+.card-color-3 {
+  background-color: #0A7E93; /* Color 4 */
+}
+
+/* Estilos para el título de la tarjeta */
+.custom-title {
+  margin-top: 10px;
+  text-align: center;
+  color: white;
+  font-family: 'Rubik', sans-serif !important;
+  font-size: 24px !important;
+}
+
+/* Estilos para el texto de la tarjeta con la clase "white-text" */
+.white-text .custom-text {
+  color: white !important; /* Texto en blanco */
+  font-family: 'Rubik', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.sd-item {
+  width: 130px;
+  height: 130px;
+  margin: 5px;
+  border: 2px solid;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.bot{
+  font-size: 18px;
+  text-align: center;
+}
+
+.sd-item i {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+.sd-item a {
+  text-decoration: none;
+}
+/* Estilo para los círculos con efecto de movimiento */
+.sd-item:hover i {
+  animation: bounce 0.5s infinite; /* Aplicar animación al ícono */
+}
+
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0); /* Posición inicial y final */
+  }
+  50% {
+      transform: translateY(-5px); /* Posición intermedia */
+  }
+}
+/* Medios de consulta para ajustar el tamaño en pantallas más pequeñas */
+@media (max-width: 850px) {
+  .sd-item {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .sd-item i {
+      font-size: 18px; /* Reducir el tamaño del ícono en pantallas más pequeñas */
+  }
+
+  .sd-item p {
+      font-size: 14px; /* Reducir el tamaño del texto en pantallas más pequeñas */
+  }
+}
+/* Estilo para subtitulos */
+h2, .subtitulo {
+  font-family: 'DM Serif Display', serif !important; 
+  font-weight: bold !important;  /* Texto en negritas */
+  font-size: 25px !important;  /* Puedes ajustar el tamaño según el nivel del subtítulo */
+  color: #3c3c3c !important; /* Texto en color negro */
+}
+

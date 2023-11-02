@@ -1,0 +1,52 @@
+@import url(https://fonts.google.com/specimen/DM+Serif+Display);
+/* Estilos generales */
+body{
+    
+    /*height: 100vh;
+    overflow: hidden;*/
+    font-family: "Poppins", sans-serif;
+    background-color: #EEEEEE;
+  
+} 
+.formatoLogin{
+  z-index: 1;
+  background: #E4E4E4 ;
+  max-width: 500px;
+  margin: 0 auto; /* Esto centrará horizontalmente el formulario */
+  margin-top: 100px;
+  margin-bottom: 100px; /* Esto proporciona un espacio superior */
+  padding: 70px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: #C5C5C5; 
+  
+}
+  .form input {
+    outline: 0;
+    background: #f2f2f2;
+    /* width: 100%;*/
+    border: 0;
+    border-radius: 7px;
+    margin: 0 0 15px;
+    padding: 20px;
+    font-size: 14px;
+  }
+  .form button {
+    font-family: "Poppins", sans-serif;
+    outline: 0;
+    background: #176B87;
+    
+    /* width: 100%;*/
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    border-radius: 7px;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .form button:hover,.form button:active,.form button:focus {
+    background: #0e2941;
+  }
