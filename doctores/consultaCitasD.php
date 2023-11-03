@@ -13,13 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <!--ESTILOS CSS-->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/doctores.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
 
 </head>
 
 <body style="background-color: #EEEEEE;">
+
+
     <!--Header-->
     <div class="container-fluid-lg mb-4">
         <div class="row">
@@ -42,7 +44,6 @@
             </div>
         </div>
     </div>
-
     <!--Main o contenido-->
     <div class="container">
         <div class="row">
@@ -113,60 +114,101 @@
                                 </div>
                                 <div class="col-12">
     <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1" style="background-color: white">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th class="col-1">#</th>
-                    <th class="col-3">Paciente</th>
-                    <th class="col-2">Fecha</th>
-                    <th class="col-2">Estado</th>
-                    <th class="col-4">Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                include '../php/acceso.php';
+    <div style="height: 400px; overflow-y: auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="col-1">#</th>
+                <th class="col-3">Paciente</th>
+                <th class="col-2">Fecha</th>
+                <th class="col-2">Estado</th>
+                <th class="col-4">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            include '../php/acceso.php';
 
-                // Definir la consulta SQL para obtener las citas
-                $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
-                          FROM citas c
-                          LEFT JOIN pacientes p ON c.IDP = p.IDP";
+            $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
+            FROM citas c
+            LEFT JOIN pacientes p ON c.IDP = p.IDP";
+  
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $nombrePaciente = $_POST['nombrePaciente'];
+      if (!empty($nombrePaciente)) {
+          $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
+                    FROM citas c
+                    LEFT JOIN pacientes p ON c.IDP = p.IDP
+                    WHERE p.NombreCompletoP LIKE '%$nombrePaciente%'";
+      }
+  }
+  
 
-                // Si se ha enviado un nombre de paciente, ajustar la consulta para buscar por nombre
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $nombrePaciente = $_POST['nombrePaciente'];
-                    if (!empty($nombrePaciente)) {
-                        $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
-                                  FROM citas c
-                                  LEFT JOIN pacientes p ON c.IDP = p.IDP
-                                  WHERE p.NombreCompletoP LIKE '%$nombrePaciente%'";
-                    }
-                }
+            // Ejecutar la consulta
+            $result = mysqli_query($dp, $query);
 
-                // Ejecutar la consulta
-                $result = mysqli_query($dp, $query);
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['IDC'] . "</td>";
-                    echo "<td>" . $row['NombreCompletoP'] . "</td>"; // Nombre del paciente
-                    echo "<td>" . $row['fechaC'] . "</td>";
-                    echo "<td>" . $row['ESTATUS'] . "</td>";
-                    echo '<td class="text-center">';
-                    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-                    echo '<a class="btn-rechazar" href="./cancelarCitasD.html?citaID=' . $row['IDC'] . '">Rechazar</a>';
-                    echo '<a class="btn-trasladar" href="./creaResetaD.html?citaID=' . $row['IDC'] . '">Trasladar</a>';
-                    echo '</td>';
-                    echo "</tr>";
-                }
-
-                // Liberar los resultados
-                mysqli_free_result($result);
-                ?>
-            </tbody>
-        </table>
-    </div>
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td>" . $row['IDC'] . "</td>";
+                echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
+                echo "<td>" . $row['fechaC'] . "</td>";
+                echo "<td>" . $row['ESTATUS'] . "</td>";
+                echo '<td class="text-center">';
+                echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
+                echo '<a class="btn-rechazar" href="./cancelarCitasD.html?citaID=' . $row['IDC'] . '">Rechazar</a>';
+                echo '  <button type="button" class="btn btn-rechazar  btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">
+                Trasladar
+            </button>
+                ';
+                echo '</td>';
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 </div>
+
+
+
+                                    </div>
+                                </div>
+                                
+                                <div class="modal" tabindex="-1" id="miModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Trasladar paciente</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Selecciona al nuevo médico para el paciente:</p>
+                                                <select id="doctorSelect" class="form-select">
+                                                    <option value="">Seleccione un médico</option>
+                                                    <?php
+                                                    // Realiza una consulta para obtener los médicos disponibles de la especialidad "Medico General"
+                                                    include '../php/acceso.php';
+                                    
+                                                    $query = "SELECT IDD, NombreCompletoD FROM doctores WHERE EspecialidadD = 'Medico General' AND EstatusD = 'Activo'";
+                                                    $result = mysqli_query($dp, $query);
+                                    
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        echo '<option value="' . $row['IDD'] . '">' . $row['NombreCompletoD'] . '</option>';
+                                                    }
+                                    
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <a href="#" id="guardarCambios">Guardar Cambios</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+
+
+
+
 
                                 <div class="col-1">
 
@@ -179,8 +221,7 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
     <!--footer-->
     <div class="container-fluid-lg">
         <footer class="bg-dark text-center py-5 mt-5">
@@ -193,9 +234,16 @@
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/consutarCitasD.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="../js/creaCitas.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/consutarCitasD.js"></script>
+
+
+</body>
+
 
 
 </body>
