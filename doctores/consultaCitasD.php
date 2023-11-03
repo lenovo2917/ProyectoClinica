@@ -88,7 +88,7 @@
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
                                         <div class="col-2 text-start">
-                                            <select class="form-select" aria-label="">
+                                           <select class="form-select" aria-label="" name="mes">
                                                 <option value="enero">enero</option>
                                                 <option value="febrero">febrero</option>
                                                 <option value="marzo">marzo</option>
@@ -126,22 +126,54 @@
             </tr>
         </thead>
         <tbody>
-            <?php
-            include '../php/acceso.php';
+        <?php
+                                                include '../php/acceso.php';
 
-            $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
-            FROM citas c
-            LEFT JOIN pacientes p ON c.IDP = p.IDP";
-  
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $nombrePaciente = $_POST['nombrePaciente'];
-      if (!empty($nombrePaciente)) {
-          $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
-                    FROM citas c
-                    LEFT JOIN pacientes p ON c.IDP = p.IDP
-                    WHERE p.NombreCompletoP LIKE '%$nombrePaciente%'";
-      }
-  }
+                                                $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
+                                                FROM citas c
+                                                LEFT JOIN pacientes p ON c.IDP = p.IDP
+                                                WHERE 1 = 1";  // Usamos "1=1" como marcador inicial
+                                      
+                                      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                          $nombrePaciente = $_POST['nombrePaciente'];
+                                          $mesSeleccionado = $_POST['mes'];
+    
+                                      
+                                          if (!empty($nombrePaciente)) {
+                                              $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
+                                          }
+                                          
+                                          if (isset($_POST['mes'])) {
+                                            $mesSeleccionado = $_POST['mes'];
+                                        
+                                            // Mapea el nombre del mes al número de mes
+                                            $meses = [
+                                                'enero' => '01',
+                                                'febrero' => '02',
+                                                'marzo' => '03',
+                                                'abril' => '04',
+                                                'mayo' => '05',
+                                                'junio' => '06',
+                                                'julio' => '07',
+                                                'agosto' => '08',
+                                                'septiempre' => '09',
+                                                'octubre' => '10',
+                                                'noviembre' => '11',
+                                                'diciembre' => '12'
+                                            ];
+                                        
+                                            if (isset($meses[$mesSeleccionado])) {
+                                                $mesNumero = $meses[$mesSeleccionado];
+                                                $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
+                                            } else {
+                                                // Tratar errores o manejar casos en los que el mes no sea válido
+                                            }
+                                        }
+                                    }
+                                        
+                                
+                                      
+          
   
 
             // Ejecutar la consulta
