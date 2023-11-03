@@ -60,4 +60,10 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
+
+    // Agrega este código al final
+    $('#miModal').on('hidden.bs.modal', function () {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    });
 });

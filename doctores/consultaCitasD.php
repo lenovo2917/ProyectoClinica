@@ -83,7 +83,7 @@
                                         </div>
 
                                         <div class="col-1">
-                                            <button type="submit" class="btn btn-primary">Buscar</button>
+                                        <button type="submit" class="btn my-custom-button">Buscar</button>
 
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
@@ -265,11 +265,12 @@
     </div>
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../js/consutarCitasD.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 
     <script src="../js/creaCitas.js"></script>
     <script src="../js/main.js"></script>
