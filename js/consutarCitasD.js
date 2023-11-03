@@ -46,7 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             console.log("Clic en Guardar Cambios");
                             console.log("Respuesta del servidor: " + response);
                             // Puedes agregar más lógica aquí si es necesario
-                            $('#miModal').modal('hide');
+                            // $('#miModal').modal('hide');
+                            $('.modal-body').html('<p>Cambios realizados</p>'); // Agrega un mensaje en el modal
                         },
                         error: function () {
                             console.log('Error en la solicitud al servidor.');

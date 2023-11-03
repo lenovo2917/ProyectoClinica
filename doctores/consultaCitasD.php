@@ -198,10 +198,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
-
-
-                                    </div>
+                                         </div>
                                 </div>
 
                                 <div class="modal" tabindex="-1" id="miModal">
@@ -233,17 +230,12 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cerrar</button>
-                                                <a href="#" id="guardarCambios">Guardar Cambios</a>
+                                                    <button type="button" class="btn my-custom-buttonr" id="guardarCambios">Guardar Cambios</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-                                <div class="col-1">
+                                 <div class="col-1">
 
                                 </div>
                             </div>
