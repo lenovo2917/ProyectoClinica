@@ -8,16 +8,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Obtener el IDC de la cita y el nuevo estado desde la solicitud
         $citaID = $requestData['citaID'];
         $nuevoEstatus = $requestData['estatus'];
-
+        
+        // Cambiar el valor de 'estatus' dependiendo del botón
+        if ($nuevoEstatus === "aceptada") {
+            $nuevoEstatus = "Aceptada";
+        } elseif ($nuevoEstatus === "rechazada") {
+            $nuevoEstatus = "Rechazada";
+        }
+        
         // Realizar la actualización en la base de datos
         include '../../php/acceso.php';
-
-
+        
         // Preparar una consulta para actualizar el estado de la cita
         $updateQuery = "UPDATE citas SET ESTATUS = ? WHERE IDC = ?";
         
         // Preparar la sentencia
         $stmt = $dp->prepare($updateQuery);
+      
         
         if ($stmt) {
             // Vincular los parámetros

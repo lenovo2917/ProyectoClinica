@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <!--ESTILOS CSS-->
+    <link href="node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/doctores.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
@@ -67,8 +68,24 @@
                 <div class="row border border-1 border-secondary border-opacity-50 rounded-1"
                     style="background-color: #C5C5C5;">
                     <div class="col-12 text-center mb-4 mt-4">
-                        <h2>Consulta citas</h2>
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <button class="btn btn-secondary" id="limpiarFiltrosButton">
+                                    <i class="fa-solid fa-trash" style="color: #346293;"></i>
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <h2>Consulta citas</h2>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="./IndexDoctores.html">
+                                    <i class="bi bi-arrow-90deg-left" style="font-size: 24px; color: #007bff;"></i>
+                                </a>
+                            </div>
+                            
+                        </div>
                     </div>
+                    
                     <div class="col-12 px-5">
                         <form class="form" method="post">
                             <div class="row ">
@@ -76,14 +93,16 @@
                                     <div class="row mb-1">
                                         <label for="nombrePaciente" class="col-2 col-form-label">Buscar por
                                             nombre:</label>
-                                        <div class="col-5 text-start">
-                                            <input type="text" class="form-control" id="nombrePaciente"
-                                                name="nombrePaciente" placeholder="Nombre del paciente">
-
-                                        </div>
+                                            <div class="col-5 text-start">
+                                                <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" placeholder="Nombre del paciente">
+                                                <div class="alert alert-danger d-none" id="nombrePacienteError">
+                                                    Por favor, ingrese el nombre del paciente.
+                                                </div>
+                                                
+                                            </div>                                            
 
                                         <div class="col-1">
-                                        <button type="submit" class="btn my-custom-button">Buscar</button>
+                                            <button type="submit" class="btn my-custom-button" id="buscarButton">Buscar</button>
 
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
@@ -185,7 +204,7 @@
                                                                     echo "<td>" . $row['ESTATUS'] . "</td>";
                                                                     echo '<td class="text-center">';
                                                                     echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-                                                                    echo '<a class="btn-rechazar" href="./cancelarCitasD.html?citaID=' . $row['IDC'] . '">Rechazar</a>';
+                                                                    echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
                                                                     echo '  <button type="button" class="btn btn-rechazar  btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">
                                                                     Trasladar
                                                                 </button>
@@ -236,7 +255,8 @@
                                     </div>
                                 </div>
                                  <div class="col-1">
-
+                                   
+                                    
                                 </div>
                             </div>
                         </form>
@@ -246,7 +266,9 @@
             </div>
         </div>
     </div>
-
+    <button class="btn btn-secondary" id="limpiarFiltrosButton">
+        <i class="fa-solid fa-trash" style="color: #346293;"></i>
+    </button>
     <!--footer-->
     <div class="container-fluid-lg">
         <footer class="bg-dark text-center py-5 mt-5">
@@ -266,7 +288,39 @@
 
     <script src="../js/creaCitas.js"></script>
     <script src="../js/main.js"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buscarButton = document.getElementById('buscarButton');
+            const nombrePacienteInput = document.getElementById('nombrePaciente');
+            const nombrePacienteError = document.getElementById('nombrePacienteError');
+            const limpiarFiltrosButton = document.getElementById('limpiarFiltrosButton');
+    
+            // Agregar un evento de clic al botón "Buscar"
+            buscarButton.addEventListener('click', function (event) {
+                if (nombrePacienteInput.value.trim() === '') {
+                    event.preventDefault(); // Evita que el formulario se envíe
+                    nombrePacienteError.classList.remove('d-none'); // Muestra la alerta
+                } else {
+                    nombrePacienteError.classList.add('d-none'); // Oculta la alerta si el campo no está vacío
+                }
+            });
+    
+            // Agregar un evento de clic al botón "Borrar filtros"
+            limpiarFiltrosButton.addEventListener('click', function () {
+                // Limpia los valores de los campos de búsqueda
+                const nombrePacienteInput = document.getElementById('nombrePaciente');
+                const mesSelect = document.querySelector('select[name="mes"]');
+                
+                nombrePacienteInput.value = ''; // Limpia el campo de nombre
+                mesSelect.selectedIndex = 0; // Reinicia el selector de mes
+    
+                // Envía el formulario para volver a cargar todas las citas sin filtros
+                document.querySelector('form').submit();
+            });
+        });
+    </script>
+    
+        
 
 </body>
 
