@@ -112,73 +112,62 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class=" row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
-                                        style="background-color: white ">
-                                        <table class="table table-striped">
-                                            <tbody>
-                                                <?php
-                                                include '../php/acceso.php';
-                                                
-                                                // Definir la consulta SQL para obtener las citas
-                                                $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
-                                                          FROM citas c
-                                                          LEFT JOIN pacientes p ON c.IDP = p.IDP";
-                                                
-                                                // Si se ha enviado un nombre de paciente, ajustar la consulta para buscar por nombre
-                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    $nombrePaciente = $_POST['nombrePaciente'];
-                                                    if (!empty($nombrePaciente)) {
-                                                        $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
-                                                                  FROM citas c
-                                                                  LEFT JOIN pacientes p ON c.IDP = p.IDP
-                                                                  WHERE p.NombreCompletoP LIKE '%$nombrePaciente%'";
-                                                    }
-                                                }
-                                                
-                                                // Ejecutar la consulta
-                                                $result = mysqli_query($dp, $query);
-                                                
-                                                echo '<table class="table table-striped">';
-                                                echo '<thead>';
-                                                echo '<tr>';
-                                                echo '<th class="col-1">#</th>';
-                                                echo '<th class="col-5">Paciente</th>';
-                                                echo '<th class="col-2">Fecha</th>';
-                                                echo '<th class="col-1">Estado</th>';
-                                                echo '<th class="col-3">Opciones</th>';
-                                                echo '</tr>';
-                                                echo '</thead>';
-                                                echo '<tbody>';
-                                                
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                    echo "<tr>";
-                                                    echo "<td>" . $row['IDC'] . "</td>";
-                                                    echo "<td>" . $row['NombreCompletoP'] . "</td"; // Nombre del paciente
-                                                    echo "<td>" . $row['fechaC'] . "</td>";
-                                                    echo "<td>" . $row['ESTATUS'] . "</td>";
-                                                    echo '<td class="text-center">';
-                                                    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-                                                    echo '<a class="btn-rechazar" href="./cancelarCitasD.html?citaID=' . $row['IDC'] . '">Rechazar</a>';
-                                                    echo '<a class="btn-trasladar" href="./creaResetaD.html?citaID=' . $row['IDC'] . '">Trasladar</a>';
-                                                    echo '</td>';
-                                                    echo "</tr>";
-                                                }
-                                                
-                                                echo '</tbody>';
-                                                echo '</table>';
-                                                
-                                                // Liberar los resultados
-                                                mysqli_free_result($result);
-                                                ?>
+    <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1" style="background-color: white">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-1">#</th>
+                    <th class="col-3">Paciente</th>
+                    <th class="col-2">Fecha</th>
+                    <th class="col-2">Estado</th>
+                    <th class="col-4">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include '../php/acceso.php';
 
+                // Definir la consulta SQL para obtener las citas
+                $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
+                          FROM citas c
+                          LEFT JOIN pacientes p ON c.IDP = p.IDP";
 
+                // Si se ha enviado un nombre de paciente, ajustar la consulta para buscar por nombre
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $nombrePaciente = $_POST['nombrePaciente'];
+                    if (!empty($nombrePaciente)) {
+                        $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS
+                                  FROM citas c
+                                  LEFT JOIN pacientes p ON c.IDP = p.IDP
+                                  WHERE p.NombreCompletoP LIKE '%$nombrePaciente%'";
+                    }
+                }
 
+                // Ejecutar la consulta
+                $result = mysqli_query($dp, $query);
 
-                                            </tbody>
-                                        </table>
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['IDC'] . "</td>";
+                    echo "<td>" . $row['NombreCompletoP'] . "</td>"; // Nombre del paciente
+                    echo "<td>" . $row['fechaC'] . "</td>";
+                    echo "<td>" . $row['ESTATUS'] . "</td>";
+                    echo '<td class="text-center">';
+                    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
+                    echo '<a class="btn-rechazar" href="./cancelarCitasD.html?citaID=' . $row['IDC'] . '">Rechazar</a>';
+                    echo '<a class="btn-trasladar" href="./creaResetaD.html?citaID=' . $row['IDC'] . '">Trasladar</a>';
+                    echo '</td>';
+                    echo "</tr>";
+                }
 
-                                    </div>
-                                </div>
+                // Liberar los resultados
+                mysqli_free_result($result);
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
                                 <div class="col-1">
 
                                 </div>
