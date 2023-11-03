@@ -91,4 +91,29 @@ document.addEventListener('DOMContentLoaded', function () {
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     });
+
+
+    // Agregar código para el botón "Buscar" y "Borrar filtros"
+    const buscarButton = document.getElementById('buscarButton');
+    const nombrePacienteInput = document.getElementById('nombrePaciente');
+    const nombrePacienteError = document.getElementById('nombrePacienteError');
+    const limpiarFiltrosButton = document.getElementById('limpiarFiltrosButton');
+
+    // Agregar un evento de clic al botón "Buscar"
+    buscarButton.addEventListener('click', function (event) {
+        if (nombrePacienteInput.value.trim() === '') {
+            event.preventDefault(); // Evita que el formulario se envíe
+            nombrePacienteError.classList.remove('d-none'); // Muestra la alerta
+        } else {
+            nombrePacienteError.classList.add('d-none'); // Oculta la alerta si el campo no está vacío
+        }
+    });
+
+    // Agregar un evento de clic al botón "Borrar filtros"
+    limpiarFiltrosButton.addEventListener('click', function () {
+        // Limpia los valores de los campos de búsqueda
+        nombrePacienteInput.value = ''; // Limpia el campo de nombre
+        // Envía el formulario para volver a cargar todas las citas sin filtros
+        document.querySelector('form').submit();
+    });
 });
