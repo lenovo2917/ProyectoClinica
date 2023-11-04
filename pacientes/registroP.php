@@ -162,7 +162,7 @@
                             <label class="form-label" for="estatus">Estatus Activo:</label>
                             <input type="checkbox" id="estatus" name="estatus" checked disabled>disabled-->
                             <div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
-                                <button type="submit" type="button">Crear</button>
+                                <button type="submit" name="crearpaciente" type="button">Crear</button>
                             </div>
                             <div>
                                 <p class="">¿Ya registrado? <a style="color: #176B87;" href="../login.php">Iniciar

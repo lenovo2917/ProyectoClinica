@@ -1,5 +1,6 @@
 
 <?php
+if (isset($_POST['crear_paciente'])) {
 include 'acceso.php';
 // Recoger los datos del formulario
 $nombreCompleto = $_POST['nombre'];
@@ -28,4 +29,5 @@ if ($conn->query($sql) === TRUE) {
 
 // Cerrar la conexión a la base de datos
 $conn->close();
+}
 ?>
