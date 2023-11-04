@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>MEDICATEC</title>
     <meta charset="UTF-8">

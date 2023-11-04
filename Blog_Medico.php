@@ -49,6 +49,7 @@
                   // Llama a la función generarMenu con el rol del usuario
                   generarMenu($rol);
                   ?>
+                  
                   <li><a class="login-button" type="button" style="color: white;" href="login.html">Login</a>
                   </li>
                 </ul>
