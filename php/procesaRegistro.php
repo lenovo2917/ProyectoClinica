@@ -1,5 +1,6 @@
-include 'acceso.php';
+
 <?php
+include 'acceso.php';
 // Recoger los datos del formulario
 $nombreCompleto = $_POST['nombre'];
 $curp = $_POST['curp'];
