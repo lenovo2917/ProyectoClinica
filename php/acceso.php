@@ -4,3 +4,6 @@
  $password="";
  $bdname="medicatec_2023";
  $dp=new mysqli($server,$username,$password,$bdname);
+ // Establece la codificación de caracteres a UTF-8
+$dp->set_charset("utf8");
+?>

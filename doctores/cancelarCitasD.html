@@ -66,21 +66,29 @@
                 <div class="row border border-1 border-secondary border-opacity-50 rounded-1"
                     style="background-color: #C5C5C5;">
                     <div class="col-12 text-center mb-4 mt-4">
-                        <h2>Cancelación de la cita</h2>
+                        <h2>Consulta citas</h2>
                     </div>
                     <div class="col-12 px-5">
                         <form class="form" method="post">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="row mb-1">
-                                        <label for="" class=" col-2 col-form-label">Buscar por nombre:</label>
+                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por
+                                            nombre:</label>
                                         <div class="col-5 text-start">
-                                            <input type="text" class="form-control" id=""
-                                                value="Jorge Damian Reyes Hernandez">
+                                            <input type="text" class="form-control" id="nombrePaciente"
+                                                name="nombrePaciente" placeholder="Nombre del paciente">
+
+                                        </div>
+
+                                        <div class="col-1">
+                                        <button type="submit" class="btn my-custom-button">Buscar</button>
+
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
-                                        <div class="col-3 text-start">
-                                            <select class="form-control" aria-label="">
+                                        <div class="col-2 text-start">
+                                            <select class="form-select" aria-label="" name="mes">
+                                                <option value="">Seleccione un mes</option>
                                                 <option value="enero">enero</option>
                                                 <option value="febrero">febrero</option>
                                                 <option value="marzo">marzo</option>
@@ -94,34 +102,29 @@
                                                 <option value="noviembre">noviembre</option>
                                                 <option value="diciembre">diciembre</option>
                                             </select>
-                                        </div>
 
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row my-2">
-                                        <div class="col-12 my-2">
-                                            <h4 class="">Pacientes:</h4>
                                         </div>
                                     </div>
                                 </div>
+  
+
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="row py-2">
                                             <label for="" class=" py-2 col-1 col-form-label">Paciente:</label>
                                             <div class="border-bottom border-secondary col-5 text-start">
                                                 <input type="text" readonly class="form-control-plaintext" id=""
-                                                    value="Jorge Damian Reyes Hernandez">
+                                                    value="NOMBRE DEL PACINETE ">
                                             </div>
                                             <label for="" class=" col-1 col-form-label">CURP:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
                                                 <input type="text" readonly class="form-control-plaintext" id=""
-                                                    value="RECA020205HGRYRNA1">
+                                                    value="AQUI VA LA CURP DEL PACIENTE">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Edad:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
                                                 <input type="text" readonly class="form-control-plaintext" id=""
-                                                    value="25">
+                                                    value="AQUI LA EDAD DEL PACIENTE">
                                             </div>
                                         </div>
                                     </div>
@@ -136,8 +139,7 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+ 
     <!--footer-->
     <div class="container-fluid-lg ">
         <footer class="bg-dark text-center py-5 mt-5">
