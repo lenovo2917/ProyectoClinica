@@ -50,7 +50,7 @@
                 </div>
                 <!--Main o contenido-->
                 <div class="container-fluid formato mt-5 mb-2">
-                    <form class="form" action="php/procesaRegistro.php" method="post">
+                    <form class="form" action="../php/procesaRegistro.php" method="post">
                         <div class="row ">
                             <div class="col-12">
                                 <div class="row align-items-center">
