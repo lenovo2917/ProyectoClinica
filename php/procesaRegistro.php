@@ -21,13 +21,13 @@ $estatus = $_POST['estatus'];
 $sql = "INSERT INTO pacientes (NombreCompletoP, CURPP, fechaP, enfermedadesP, generoP, tipoSangreP, telefonoP, correoP, alergiasP, ContrasenaP, capacidadesdiferentesP, Estatus) 
         VALUES ('$nombreCompleto', '$curp', '$fecha', '$enfermedades', '$genero', '$tipoSangre', '$telefono', '$correo', '$alergias', '$contraseña', '$capacidades', '$estatus')";
 
-if ($conn->query($sql) === TRUE) {
+if ($dp->query($sql) == TRUE) {
     echo "Paciente registrado exitosamente.";
 } else {
-    echo "Error al registrar al paciente: " . $conn->error;
+    echo "Error al registrar al paciente: " . $dp->error;
 }
 
 // Cerrar la conexión a la base de datos
-$conn->close();
+$dp->close();
 }
 ?>

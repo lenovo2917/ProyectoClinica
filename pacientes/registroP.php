@@ -39,11 +39,6 @@
                                     <div class="line2"></div>
                                     <div class="line3"></div>
                                 </div>
-                                <div class="text-end">
-                                    <button class="btn btn-secondary" value="hola">
-                                        hola
-                                    </button>
-                                </div>
                             </nav>
                         </div>
                     </div>
@@ -85,7 +80,7 @@
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Correo:</label>
                                 <input class="form-control" name="correo" type="email" placeholder="ejemplo@gmail.com" required
-                                    maxlength="8" title="ejemplo@gmail.com" />
+                                 title="ejemplo@gmail.com" />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Contraseña:</label>
@@ -162,7 +157,7 @@
                             <label class="form-label" for="estatus">Estatus Activo:</label>
                             <input type="checkbox" id="estatus" name="estatus" checked disabled>disabled-->
                             <div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
-                                <button type="submit" name="crearpaciente" type="button">Crear</button>
+                                <button type="submit" name="crear_paciente" type="button">Crear</button>
                             </div>
                             <div>
                                 <p class="">¿Ya registrado? <a style="color: #176B87;" href="../login.php">Iniciar
