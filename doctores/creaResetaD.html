@@ -11,7 +11,7 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/fontawesome.css"rel="stylesheet">
-        <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
+    <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <!--ESTILOS CSS-->
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
@@ -85,54 +85,60 @@
                         <!-- Tab 1: Crear Receta Médica -->
                         <div class="tab-pane fade show active" id="receta" role="tabpanel" aria-labelledby="receta-tab">
                             <h2>Formulario para Crear Receta Médica</h2>
-                            <form id="recetaForm">
+                            <form id="recetaForm" action="../doctores/herramientas/insertarReceta.php" method="post" onsubmit="return validarFormulario()">
                                 <div class="form-group">
                                     <label for="nombre">Nombre del Paciente</label>
-                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidoPaterno">Apellido Paterno</label>
-                                    <input type="text" class="form-control" id="apellidoPaterno" placeholder="Apellido Paterno"
-                                        required>
+                                    <input type="text" class="form-control" id="apellidoP" name="apellidoP" placeholder="ApellidoP" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidoMaterno">Apellido Materno</label>
-                                    <input type="text" class="form-control" id="apellidoMaterno" placeholder="Apellido Materno"
-                                        required>
+                                    <input type="text" class="form-control" id="apellidoM" name="apellidoM" placeholder="ApellidoM" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="fecha">Fecha de la Receta</label>
-                                    <input type="date" class="form-control" id="fecha" required>
+                                    <input type="date" class="form-control" name="fecha" id="fecha" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="diagnostico">Diagnóstico</label>
-                                    <textarea class="form-control" id="diagnostico" rows="3"
-                                        placeholder="Ingrese el diagnóstico" required style="resize: none;"></textarea>
+                                    <textarea class="form-control" id="diagnostico" rows="3" placeholder="Ingrese el diagnóstico" name="diagnostico" required style="resize: none"></textarea>
                                 </div>
-        
                                 <div class="form-group">
                                     <label for="medicamento">Medicamento Recetado</label>
-                                    <input type="text" class="form-control" id="medicamento"
-                                        placeholder="Nombre del medicamento" required>
+                                    <input type="text" class="form-control" id="medicamento" name="medicamento" placeholder="Nombre del medicamento" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="instrucciones">Instrucciones de Uso</label>
-                                    <textarea class="form-control" id="instrucciones" rows="8"
-                                        placeholder="Instrucciones de uso" required style="resize: none;"></textarea>
+                                    <label for="intruccionUsoR">Instrucciones de Uso</label>
+                                    <textarea class="form-control" id="intruccionUsoR" rows="8" placeholder="intruccionUsoR" name="intruccionUsoR" required style="resize: none"></textarea>
                                 </div>
-                                <button stype="button" class="btn btn-custom" id="btnCrearReceta">Crear Receta</button>
-        
+                                <button type="submit">Crear Receta</button>
                             </form>
-        
+                            
+                            <script>
+                            function validarFormulario() {
+                                var nombre = document.getElementById("nombre").value;
+                                var apellidoPaterno = document.getElementById("apellidoPaterno").value;
+                                var apellidoMaterno = document.getElementById("apellidoMaterno").value;
+                                var fecha = document.getElementById("fecha").value;
+                                var diagnostico = document.getElementById("diagnostico").value;
+                                var medicamento = document.getElementById("medicamento").value;
+                                var intruccionUsoR = document.getElementById("intruccionUsoR").value;
+                            
+                                if (nombre === "" || apellidoPaterno === "" || apellidoMaterno === "" || fecha === "" || diagnostico === "" || medicamento === "" || intruccionUsoR === "") {
+                                    alert("Todos los campos son obligatorios. Por favor, complete todos los campos.");
+                                    return false; // Evita el envío del formulario
+                                }
+                            
+                             
+                                return true; 
+                            }
+                            </script>
+                            
                         </div>
-                        <div id="modal" class="modal">
-                            <div class="modal-content">
-                                <span id="close" class="close">&times;</span>
-                                <div id="recetaContent">
-        
-                                </div>
-                            </div>
-                        </div>
+                      
                         <!-- Tab 2: Expedientes de Paciente -->
                         <div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
                             <h2>Expedientes de Paciente</h2>
@@ -395,8 +401,9 @@
         </div>
     </div>
     
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/receta.js"></script>
     <script src="../js/Crear_Receta.js"></script>
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
 </body>
