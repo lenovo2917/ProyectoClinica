@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
   <!--ESTILOS CSS-->
   <link rel="shortcut icon" href="img/web.png" type="img">
+  <link rel="stylesheet" href="fontawesome/css/all.css">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/nav2.css">
   <link rel="stylesheet" type="text/css" href="css/Blog.css">
@@ -50,7 +51,7 @@
                   generarMenu($rol);
                   ?>
 
-                  <li><a class="login-button" type="button" style="color: white;" href="login.html">Login</a>
+                  <li><a class="login-button" type="button" style="color: white;" href="login.php">Login</a>
                   </li>
                 </ul>
               </nav>
@@ -62,7 +63,7 @@
       <div class="col-12">
         <div class="container">
           <header class="showcase">
-            <h1 class="estilo-independiente">La Transformacion a llegado</h1>
+            <h1 class="estilo-independiente">La Transformación a llegado</h1>
             <a href="../pacientes/creaCitasP.html" class="">
               Pide una cita <i class="fas fa-chevron-right"></i>
             </a>
@@ -74,6 +75,7 @@
                 src="https://assets.mayoclinic.org/content/dam/media/global/images/2023/06/26/healing-starts-here-unmasked-21-7949-600x800.jpg"
                 alt="">
               <h3>La recuperación empieza aquí</h3>
+              <br>
               <p>
                 Las respuestas correctas, desde el principio
 
@@ -81,44 +83,47 @@
                 correcto. Nuestros expertos diagnostican y tratan
                 los problemas médicos más complicados.
               </p>
-              <a href="#">leer mas <i class="fas fa-chevron-right"></i></a>
+              <a href="#">leer más <i class="fas fa-chevron-right"></i></a>
             </div>
             <div>
               <img
                 src="https://assets.mayoclinic.org/content/dam/media/global/images/2023/05/30/photo_people_man-standing-turban-rocks-sea_600x800.png"
                 alt="" />
               <h3>Atención médica de primera categoría para pacientes de todo el mundo</h3>
+              <br>
               <p>
                 Hacemos que sea fácil recibir
                 atención médica en Clinica Tachirito para los pacientes.
 
               </p>
-              <a href="#">Leer mas <i class="fas fa-chevron-right"></i></a>
+              <a href="#">Leer más <i class="fas fa-chevron-right"></i></a>
             </div>
             <div>
               <img
                 src="https://assets.mayoclinic.org/content/dam/media/global/images/2023/06/26/providing-peace-26-10320-600x800.jpg"
                 alt="" />
               <h3>Brindar esperanza y tranquilidad</h3>
+              <br>
               <p>
                 Obtener el diagnóstico correcto desde el principio
                 significa que comenzarás con el plan más eficaz de
                 tratamiento.
               </p>
-              <a href="#">leer mas<i class="fas fa-chevron-right"></i></a>
+              <a href="#">leer más<i class="fas fa-chevron-right"></i></a>
             </div>
             <div>
               <img
                 src="https://assets.mayoclinic.org/content/dam/media/global/images/2023/06/12/innovation-impact-1200x1600.jpg"
                 alt="" />
               <h3>El punto es elaborar un plan que funcione para ti</h3>
+              <br>
               <p>
                 El punto es elaborar un plan que funcione para ti
                 Un equipo de especialistas evaluará exhaustiva y atentamente tu
                 afección para elaborar contigo un plan personalizado que cumpla
                 con tus objetivos.
               </p>
-              <a href="#">leer mas <i class="fas fa-chevron-right"></i></a>
+              <a href="#">leer más <i class="fas fa-chevron-right"></i></a>
             </div>
           </section>
 
@@ -127,8 +132,8 @@
           <!-- Xbox -->
           <section class="xbox">
             <div class="content">
-              <h3>¿Por qué elegir Clinica Tachirio?</h3>
-              <p>«Nunca he visto a profesionales de la salud comportarse como lo hacen los Clinica Tachirito.
+              <h3>¿Por qué elegir Clínica Tachirio?</h3>
+              <p>«Nunca he visto a profesionales de la salud comportarse como lo hacen los Clínica Tachirito.
                 Sentí mucha gratitud al recibir tratamiento con tanto respeto y cuidado».
               </p>
               <a href="#">
@@ -198,10 +203,10 @@
 
           <div class="container">
   <div class="row justify-content-center">
-    <h2 class="subtitulo">También puede interesarte</h5>
-      <br>
-      <br>
+    <h2 class="subtitulo">También puede interesarte</h2>
   </div>
+  <br>
+  <br>
   <div class="row justify-content-center">
     <div class="col-md-2">
       <div class="sd-item" style="border-color: #053B50;">
