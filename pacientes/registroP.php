@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
     <link rel="stylesheet" type="text/css" href="../css/registro.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
 </head>
 
 <body>
