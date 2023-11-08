@@ -12,6 +12,7 @@
     <!--ESTILOS CSS-->
     <link rel="shortcut icon" href="img/web.png" type="img">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="css/nav2.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
@@ -50,7 +51,7 @@
                             <h2><i class="fas fa-lock" ></i> Login</h2>
                         </div>
                         <div class="col-12">
-                            <input type="text" name="nombree" valueplaceholder="Nombre Completo *" required />
+                            <input type="text" name="nombree" placeholder="Nombre Completo *" required />
                         </div>
                         <div class="col-12">
                             <input type="password" name="clave" placeholder="Contraseña *" required />
