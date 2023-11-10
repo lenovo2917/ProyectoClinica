@@ -36,20 +36,19 @@ if ($resultPaciente->num_rows > 0) {
             echo json_encode($response);
         } else {
             // La inserción falló
-            $response = array('success' => false);
+            $response = array('success' => false, 'message' => 'Error al insertar la receta.');
             echo json_encode($response);
         }
     } else {
-        // No se encontraron citas para este paciente, maneja este caso según tus requerimientos
-        $response = array('success' => false, 'message' => 'No se encontraron citas para este paciente.');
+        // No se encontraron citas para este paciente
+        $response = array('success' => false, 'message' => 'Este paciente no tiene cita.');
         echo json_encode($response);
     }
 } else {
-    // El paciente no existe en la tabla de pacientes, debes manejar este caso según tus requerimientos
-    $response = array('success' => false, 'message' => 'El paciente no existe en la tabla de pacientes.');
+    // El paciente no existe en la tabla de pacientes
+    $response = array('success' => false, 'message' => 'No se encontró al paciente.');
     echo json_encode($response);
 }
 
 $dp->close();
-
 ?>

@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@500&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/fontawesome.css"rel="stylesheet">
-    <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
+    <link rel="stylesheet" href="../fontawesome/css/all.css"rel="stylesheet">
+   
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <!--ESTILOS CSS-->
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
@@ -80,12 +80,38 @@
                         </li>
                     </ul>
         
+             
+
                     <!-- Tab content -->
                     <div class="tab-content" id="myTabContent">
+                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">RECETA MEDICA</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Aquí irá la tabla -->
+                                        <table id="datosReceta">
+                                            <!-- Contenido de la tabla -->
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="agregarExpediente" class="btn btn-primary">Agregar al expediente</button>
+                                        <button id="descargar" class="btn btn-secondary" style="display: none;">Descargar</button>
+                                        <button id="imprimir" class="btn btn-secondary" style="display: none;">Imprimir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                     
+                        
                         <!-- Tab 1: Crear Receta Médica -->
                         <div class="tab-pane fade show active" id="receta" role="tabpanel" aria-labelledby="receta-tab">
                             <h2>Formulario para Crear Receta Médica</h2>
-                            <form id="recetaForm" action="../doctores/herramientas/insertarReceta.php" method="post">
+                            <form id="recetaForm" method="post">
                                 <div class="form-group">
                                     <label for="nombre">Nombre del Paciente</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
@@ -114,69 +140,10 @@
                                     <label for="intruccionUsoR">Instrucciones de Uso</label>
                                     <textarea class="form-control" id="intruccionUsoR" rows="8" placeholder="intruccionUsoR" name="intruccionUsoR" required style="resize: none"></textarea>
                                 </div>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recetaModal">
-                                    Crear Receta
-                                  </button>
+                                <button type="button" id="crearReceta" class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Crear Receta</button>
                             </form>
-                            
-
-
-
-                 
                         </div>
-                                           <!-- Modal de Bootstrap -->
-<div class="modal" tabindex="-1" id="recetaModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Receta Médica</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Aquí es donde se mostrarán los datos del formulario -->
-          <table id="recetaTable" class="table">
-            <!-- Las filas de la tabla se agregarán dinámicamente -->
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" id="agregarAlExpediente">Agregar al expediente</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById('recetaForm').addEventListener('submit', function(event) {
-        // Prevenir el envío del formulario
-        event.preventDefault();
-    
-        // Obtener los datos del formulario
-        var nombre = document.getElementById('nombre').value;
-        var apellidoPaterno = document.getElementById('apellidoP').value;
-        var apellidoMaterno = document.getElementById('apellidoM').value;
-        var fecha = document.getElementById('fecha').value;
-        var diagnostico = document.getElementById('diagnostico').value;
-        var medicamento = document.getElementById('medicamento').value;
-        var intruccionUsoR = document.getElementById('intruccionUsoR').value;
-    
-        // Agregar los datos a la tabla en el modal
-        document.getElementById('recetaTable').innerHTML = `
-            <tr><th>Receta Médica</th></tr>
-            <tr><td>Nombre del Paciente: ${nombre} ${apellidoPaterno} ${apellidoMaterno}</td></tr>
-            <tr><td>Fecha de la Receta: ${fecha}</td></tr>
-            <tr><td>Diagnóstico: ${diagnostico}</td></tr>
-            <tr><td>Medicamento Recetado: ${medicamento}</td></tr>
-            <tr><td>Instrucciones de Uso: ${intruccionUsoR}</td></tr>
-        `;
-    
-        // Mostrar el modal
-        var recetaModal = new bootstrap.Modal(document.getElementById('recetaModal'));
-        recetaModal.show();
-    });
-    </script>
-    
-
+        
                         <!-- Tab 2: Expedientes de Paciente -->
                         <div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
                             <h2>Expedientes de Paciente</h2>
@@ -201,23 +168,19 @@
                                         <div class="col-md-6">
                                             <h3>Datos del Paciente</h3>
                                             <p>
-                                                <img src="/Clinica_Tachirito/iconos/PACIENTE.png" alt="Paciente"
-                                                    style="width: 16px; height: 16px; margin-right: 5px;">
+                                                <i class="fa-solid fa-user fa-lg"></i>
                                                 Nombre del Paciente: Nombre del Paciente
                                             </p>
                                             <p>
-                                                <img src="/Clinica_Tachirito/iconos/EDAD.png" alt="Edad"
-                                                    style="width: 16px; height: 16px; margin-right: 5px;">
+                                                <i class="fa-regular fa-calendar-plus fa-lg"></i>
                                                 Edad: Edad del Paciente
                                             </p>
                                             <p>
-                                                <img src="/Clinica_Tachirito/iconos/TIPO_DE_SANGRE.png" alt="Tipo de Sangre"
-                                                    style="width: 16px; height: 16px; margin-right: 5px;">
+                                                <i class="fa-solid fa-droplet fa-lg" style="color: #ff0000;"></i>
                                                 Tipo de Sangre: Tipo de Sangre del Paciente
                                             </p>
                                             <p>
-                                                <img src="/Clinica_Tachirito/iconos/ALERGIAS.png" alt="Alergias"
-                                                    style="width: 16px; height: 16px; margin-right: 5px;">
+                                                <i class="fa-solid fa-virus"></i>
                                                 Alergias: Alergias del Paciente
                                             </p>
         
@@ -274,8 +237,8 @@
         
                                                 <!-- Columna 2: Botón (+) para agregar diagnósticos -->
                                                 <div class="col-md-1 text-right">
-                                                    <button class="btn btn-custom btn-sm"
-                                                        style="background-color: white; color: rgb(0, 139, 181); font-size: 25px; margin-right: 4px;">+</button>
+                                                    <button class="fa-sharp fa-solid fa-circle-check fa-2xl" style="color: #04f000;"></button>
+
                                                 </div>
                                             </div>
         
@@ -393,15 +356,22 @@
                                             <!-- Subtítulo para Diagnóstico y Temporalidad -->
                                             <div class="row align-items-center">
                                                 <div class="form-group">
-                                                    <label for="motivoCita">Motivo de la Cita para el Especialista:</label>
+                                                    <label for="motivoCita">Diagnostico: </label>
                                                     <textarea class="form-control" id="motivoCita" rows="3"
-                                                        placeholder="Especifique el motivo de la cita" required></textarea>
+                                                        placeholder="Diagnotico del paciente" required></textarea>
                                                 </div>
         
                                                 <!-- Nota Médica del Doctor (md-6) -->
                                                 <div class="form-group">
-                                                    <label for="notaMedica">Nota Médica del Doctor:</label>
-                                                    <textarea class="form-control" id="notaMedica" rows="3" required></textarea>
+                                                    <label for="notaMedica">Sintomas:</label>
+                                                    <textarea class="form-control" id="notaMedica" rows="3"  
+                                                     placeholder="Sintomas del paciente" required></textarea>
+                                                </div>
+
+                                                 <div class="form-group">
+                                                    <label for="notaMedica">Motivo de cita: </label>
+                                                    <textarea class="form-control" id="notaMedica" rows="3" 
+                                                    placeholder="Motivo de cita" required></textarea>
                                                 </div>
                                             </div>
         
@@ -444,6 +414,8 @@
     <script src="../js/main.js"></script>
     <script src="../js/receta.js"></script>
     <script src="../js/Crear_Receta.js"></script>
+   
+
   
 </body>
 
