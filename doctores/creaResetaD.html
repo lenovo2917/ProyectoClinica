@@ -40,6 +40,7 @@
                         </div>
                     </div>
                 </div>
+                
             </header>
             <main>
                 <div class="container mt-5">
@@ -83,31 +84,56 @@
              
 
                     <!-- Tab content -->
-                    <div class="tab-content" id="myTabContent">
-                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">RECETA MEDICA</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- Encabezado -->
+                                    <img src="../img/LOGO.png" alt="Clinica Tachirito" class="logo">
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">RECETA MÉDICA</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Información del doctor -->
+                                    <p>Nombre del doctor: <span id="doctorNombre">Nombre del doctor</span></p>
+                                    <p>Cedula profesional: <span id="cedulaProfesional">Cedula del doctor</span></p>
+                                    <p>Dirección: <span id="direccion">Dirección del doctor</span></p>
+                                    <hr class="my-4">
+                                    <!-- Contenido de la receta en forma de tabla -->
+                                    <table class="table" id="datosReceta" >
+                                        <tr><td>Nombre:</td><td>${nombre}</td></tr>
+                                        <tr><td>Apellido Paterno:</td><td>${apellidoP}</td></tr>
+                                        <tr><td>Apellido Materno:</td><td>${apellidoM}</td></tr>
+                                        <tr><td>Fecha:</td><td>${fecha}</td></tr>
+                                        <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
+                                        <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
+                                        <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
+                                    </table>
+                                    <!-- Firma y nombre del doctor -->
+                                    <div class="firma">
+                                        <hr class="my-4">
+                                        <p>Firma del doctor: __________________________</p>
+                                        <p>Nombre del doctor: <span id="nombreFirma">Nombre del doctor</span></p>
                                     </div>
-                                    <div class="modal-body">
-                                        <!-- Aquí irá la tabla -->
-                                        <table id="datosReceta">
-                                            <!-- Contenido de la tabla -->
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button id="agregarExpediente" class="btn btn-primary">Agregar al expediente</button>
-                                        <button id="descargar" class="btn btn-secondary" style="display: none;">Descargar</button>
-                                        <button id="imprimir" class="btn btn-secondary" style="display: none;">Imprimir</button>
-                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="agregarExpediente" class="btn btn-primary">Agregar al expediente</button>
+                                    <!-- Botones con iconos -->
+                                    <button id="descargar" class="btn btn-secondary" style="display: none;"><i class="fas fa-download"></i></button>
+                                    <button id="imprimir" class="btn btn-secondary" style="display: none;"><i class="fas fa-print"></i></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- Texto y línea adicional -->
+                                    <p class="indicaciones">Seguir indicaciones y tomar tratamiento completo</p>
+                                    <hr class="my-4">
                                 </div>
                             </div>
                         </div>
-                        
-                     
-                        
+                    </div>
+                    
+                
+                         <!-- Tab content -->
+                    <div class="tab-content" id="myTabContent">
                         <!-- Tab 1: Crear Receta Médica -->
                         <div class="tab-pane fade show active" id="receta" role="tabpanel" aria-labelledby="receta-tab">
                             <h2>Formulario para Crear Receta Médica</h2>
@@ -406,8 +432,18 @@
                     </div>
                 </div>
             </main>
-        </div>
+      
+          <!--footer-->
+    <div class="container-fluid-lg py-5">
+        <footer class="bg-dark text-white text-center py-5 mt-5">
+            <div class="row">
+                <p>&copy; 2023 Medicatec</p>
+            </div>
+        </footer>
     </div>
+
+</div>
+</div>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
