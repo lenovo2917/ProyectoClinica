@@ -157,7 +157,7 @@
                             <div class="col-12 " style="padding: 0.5rem; text-align: left;">
                             <label class="form-label" for="estatus">Estatus Activo:</label>
                             <input type="checkbox" id="estatus" name="estatus" checked disabled>disabled-->
-                            <div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
+                            <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <button type="submit" name="crear_paciente" type="button">Crear</button>
                             </div>
                             <div>
