@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             document.getElementById('edadAut').innerHTML = calcularEdad(respuesta.data.fecha);
                             document.getElementById('tipoSangreAut').innerHTML = respuesta.data.tipoSangre;
                             document.getElementById('alergiasAut').innerHTML = respuesta.data.alergias;
-                          }
+
+                            // Llamada a la función para actualizar la tabla con las recetas
+                            actualizarTablaRecetas(nombrePaciente);
+                        }
                     } catch (error) {
                         console.error('Error al parsear la respuesta JSON:', error);
                     }
@@ -48,4 +51,56 @@ function calcularEdad(fechaNacimiento) {
     }
 
     return edad;
+}
+
+// Función para actualizar la tabla de recetas en la sección de información adicional
+function actualizarTablaRecetas(nombrePaciente) {
+    var xhrRecetas = new XMLHttpRequest();
+    xhrRecetas.open('POST', './herramientas/busquedaRecetas.php', true);
+    xhrRecetas.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xhrRecetas.onreadystatechange = function () {
+        if (xhrRecetas.readyState == 4) {
+            if (xhrRecetas.status == 200) {
+                try {
+                    console.log(xhrRecetas.responseText);
+                    var respuestaRecetas = JSON.parse(xhrRecetas.responseText);
+
+                    if (respuestaRecetas.error) {
+                        console.error('Error en la respuesta del servidor:', respuestaRecetas.error);
+                    } else {
+                        // Actualizar la tabla con las recetas
+                        actualizarTablaInformacionAdicional(respuestaRecetas.data);
+                    }
+                } catch (error) {
+                    console.error('Error al parsear la respuesta JSON:', error);
+                }
+            } else {
+                console.error('Error en la solicitud. Código de estado:', xhrRecetas.status);
+            }
+        }
+    };
+
+    xhrRecetas.send('nombrePaciente=' + encodeURIComponent(nombrePaciente));
+}
+
+// Función para actualizar la tabla de información adicional con las recetas obtenidas
+function actualizarTablaInformacionAdicional(data) {
+    var cuerpoTabla = document.getElementById('cuerpoTablaInformacionAdicional');
+
+    // Limpiar el cuerpo de la tabla antes de agregar nuevas filas
+    cuerpoTabla.innerHTML = '';
+
+    // Iterar sobre los datos de las recetas y agregar filas a la tabla
+    data.forEach(function (receta) {
+        var fila = document.createElement('tr');
+        fila.innerHTML = 
+            '<td>' + receta.FechaReceta + '</td>' +
+            '<td>' + receta.Diagnostico + '</td>' +
+            '<td>' + receta.NotasMedicas + '</td>' +
+            '<td>' + receta.InstruccionUso + '</td>' +
+            '<td><button class="btn btn-custom">Ver Nota</button></td>';
+
+        cuerpoTabla.appendChild(fila);
+    });
 }

@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // Cuando se haga clic en el botón "Crear Receta"...
-    $('#crearReceta').on('click', function() {
+    $('#crearReceta').on('click', function () {
         // Captura los datos del formulario
         var nombre = $('#nombre').val();
         var apellidoP = $('#apellidoP').val();
@@ -34,29 +34,55 @@ $(document).ready(function() {
         $('#exampleModalToggle').modal('show');
     });
 
-    // Cuando se haga clic en el botón "Agregar al expediente"...
-    $('#agregarExpediente').on('click', function() {
-        // Hace una solicitud AJAX a "insertarReceta.php"
-        $.ajax({
-            url: '../doctores/herramientas/insertarReceta.php',
-            type: 'post',
-            data: $('#recetaForm').serialize(),
-            success: function(response) {
-                var data = JSON.parse(response);
+    // Variable para almacenar el ID de la cita seleccionada
+    var IDCSeleccionada;
 
-                if (data.success) {
-                    // Oculta el botón "Agregar al expediente" y muestra los botones "Descargar" e "Imprimir"
-                    $('#agregarExpediente').hide();
-                    $('#descargar, #imprimir').show();
-                } else {
-                    // Muestra un mensaje de alerta basado en el mensaje del servidor
-                    alert(data.message);
+    // Cuando se hace clic en una cita del menú desplegable
+    $('#citasDropdown').on('click', 'a', function () {
+        // Captura el ID de la cita
+        IDCSeleccionada = $(this).data('idc');
+
+        // Muestra el ID de la cita en la consola
+        console.log('ID de la cita seleccionada:', IDCSeleccionada);
+    });
+
+    // Cuando se haga clic en el botón "Agregar al expediente"...
+    $('#agregarExpediente').on('click', function () {
+        // Asegúrate de que el ID de la cita seleccionada esté disponible aquí
+        if (IDCSeleccionada !== undefined) {
+            // Agrega el ID de la cita al formulario antes de enviar la solicitud AJAX
+            $('#recetaForm').append('<input type="hidden" name="IDC" value="' + IDCSeleccionada + '">');
+
+            // Captura los datos del formulario
+            var nombre = $('#nombre').val();
+            var apellidoP = $('#apellidoP').val();
+            var apellidoM = $('#apellidoM').val();
+
+            // Hace una solicitud AJAX a "insertarReceta.php"
+            $.ajax({
+                url: '../doctores/herramientas/insertarReceta.php',
+                type: 'post',
+                data: $('#recetaForm').serialize(), // Envía todo el formulario, incluyendo el nuevo campo oculto
+                success: function (response) {
+                    var data = JSON.parse(response);
+
+                    if (data.success) {
+                        // Oculta el botón "Agregar al expediente" y muestra los botones "Descargar" e "Imprimir"
+                        $('#agregarExpediente').hide();
+                        $('#descargar, #imprimir').show();
+                    } else {
+                        // Muestra un mensaje de alerta basado en el mensaje del servidor
+                        alert(data.message);
+                    }
+                },
+                error: function () {
+                    // Aquí puedes agregar código para manejar errores, como mostrar un mensaje de error
+                    alert('Error en la solicitud AJAX.');
                 }
-            },
-            error: function() {
-                // Aquí puedes agregar código para manejar errores, como mostrar un mensaje de error
-                alert('Error en la solicitud AJAX.');
-            }
-        });
+            });
+        } else {
+            // Muestra un mensaje de alerta si no se ha seleccionado ninguna cita
+            alert('Por favor, selecciona una cita antes de agregar al expediente.');
+        }
     });
 });
