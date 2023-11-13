@@ -8,7 +8,8 @@ if (isset($_POST['nombrePaciente'])) {
     r.fechaR AS FechaReceta,
     c.diagnosticoC AS Diagnostico,
     e.notaConsulta AS NotasMedicas,
-    r.intruccionUsoR AS InstruccionUso
+    r.intruccionUsoR AS InstruccionUso,
+    r.idR AS idR
 FROM pacientes p
 JOIN citas c ON p.IDP = c.IDP
 LEFT JOIN recetas r ON c.IDC = r.IDC

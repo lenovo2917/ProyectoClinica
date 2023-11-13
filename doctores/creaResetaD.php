@@ -172,31 +172,35 @@
                             <form id="recetaForm" method="post">
                                 <div class="form-group">
                                     <label for="nombre">Nombre del Paciente</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                        placeholder="Nombre" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidoPaterno">Apellido Paterno</label>
-                                    <input type="text" class="form-control" id="apellidoP" name="apellidoP" placeholder="ApellidoP" required>
+                                    <input type="text" class="form-control" id="apellidoP" name="apellidoP"
+                                        placeholder="ApellidoP" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidoMaterno">Apellido Materno</label>
-                                    <input type="text" class="form-control" id="apellidoM" name="apellidoM" placeholder="ApellidoM" required>
+                                    <input type="text" class="form-control" id="apellidoM" name="apellidoM"
+                                        placeholder="ApellidoM" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="fecha">Fecha de la Receta</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
                                             <ul class="dropdown-menu" id="citasDropdown">
-                                               
+
                                                 <input type="hidden" id="idCita" name="idCita" value="">
-                                              
+
                                             </ul>
                                         </div>
                                         <input type="date" class="form-control" name="fecha" id="fecha" required>
                                     </div>
-                                </div>                                
-                                 
+                                </div>
+
                                 <div class="form-group">
                                     <label for="diagnostico">Diagnóstico</label>
                                     <textarea class="form-control" id="diagnostico" rows="3"
@@ -266,7 +270,8 @@
                                             <!-- Agrega un nuevo contenedor para mostrar la información -->
                                             <div id="informacionAdicional">
                                                 <h2>Información Adicional</h2>
-                                                <table class="table table-striped table-hover" id="tablaInformacionAdicional">
+                                                <table class="table table-striped table-hover"
+                                                    id="tablaInformacionAdicional">
                                                     <thead>
                                                         <tr>
                                                             <th>Fecha de la receta medica</th>
@@ -280,15 +285,16 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            
+
 
                                         </div>
 
                                         <div class="col-md-6">
                                             <h3>Nota Médica</h3>
                                             <!-- Aquí se muestra la nota del paciente (se recupera de la base de datos) -->
-                                            <textarea class="form-control"
+                                            <textarea id="notaCompleta" class="form-control"
                                                 rows="10">Contenido de la nota médica</textarea>
+
 
                                             <!-- Subtítulo para Diagnóstico y Temporalidad -->
                                             <div class="row align-items-center">
@@ -298,12 +304,14 @@
 
                                                 <!-- Columna 2: Botón (+) para agregar diagnósticos -->
                                                 <div class="col-md-1 text-right">
-                                                    <button style="border: none; background: none; cursor: pointer;">
+                                                    <button onclick="guardarCambios()"
+                                                        style="border: none; background: none; cursor: pointer;">
                                                         <i class="fa-solid fa-folder-plus fa-xl"
-                                                            style="color: #004bcc;"></i> </button>
-
-
-
+                                                            style="color: #004bcc;"></i>
+                                                    </button>
+                                              
+                                                
+                                                
 
                                                 </div>
                                             </div>
@@ -318,8 +326,8 @@
 
                                                 <!-- Columna 2: Temporalidad -->
                                                 <div class="col-md-5">
-                                                    <label for="temporalidad">Temporalidad:</label>
-                                                    <input type="text" class="form-control" id="temporalidad">
+                                                    <label for="Medicamento">Medicamento</label>
+                                                    <input type="text" class="form-control" id="Medicamento">
                                                 </div>
 
                                                 <!-- Columna 3: Botón (✓) -->

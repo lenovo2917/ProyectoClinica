@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.send('buscar=true&nombrePaciente=' + encodeURIComponent(nombrePaciente));
     });
 });
-
+var idR;
 // Función para calcular la edad a partir de la fecha de nacimiento
 function calcularEdad(fechaNacimiento) {
     // Lógica para calcular la edad (puedes implementar esto según tus necesidades)
@@ -83,8 +83,7 @@ function actualizarTablaRecetas(nombrePaciente) {
 
     xhrRecetas.send('nombrePaciente=' + encodeURIComponent(nombrePaciente));
 }
-
-// Función para actualizar la tabla de información adicional con las recetas obtenidas
+// Modificar la función actualizarTablaInformacionAdicional
 function actualizarTablaInformacionAdicional(data) {
     var cuerpoTabla = document.getElementById('cuerpoTablaInformacionAdicional');
 
@@ -94,13 +93,59 @@ function actualizarTablaInformacionAdicional(data) {
     // Iterar sobre los datos de las recetas y agregar filas a la tabla
     data.forEach(function (receta) {
         var fila = document.createElement('tr');
-        fila.innerHTML = 
+        fila.innerHTML =
             '<td>' + receta.FechaReceta + '</td>' +
             '<td>' + receta.Diagnostico + '</td>' +
             '<td>' + receta.NotasMedicas + '</td>' +
             '<td>' + receta.InstruccionUso + '</td>' +
-            '<td><button class="btn btn-custom">Ver Nota</button></td>';
+            '<td><button class="btn btn-custom" onclick="verNota(' + receta.idR + ')">Ver Nota</button></td>';
 
         cuerpoTabla.appendChild(fila);
     });
 }
+
+function verNota(idR) {
+    // Almacenar el idR en la variable global
+    idRActual = idR;
+
+    console.log('Clic en "Ver Nota" para la receta con idR:', idR);
+
+    $.ajax({
+        url: './herramientas/obtenerNota.php',
+        method: 'POST',
+        data: { idR: idR },
+        success: function (data) {
+            // Mostrar la nota en un cuadro de texto editable
+            $('#notaCompleta').val(data.notaConsulta);
+        },
+        error: function (error) {
+            console.error('Error al obtener la nota:', error);
+        }
+    });
+}
+
+function guardarCambios() {
+    // Utilizar la variable global idRActual en lugar de idR
+    var nuevaNota = document.getElementById('notaCompleta').value;
+
+    // Enviar la nueva nota al servidor para actualizar la base de datos
+    $.ajax({
+        url: './herramientas/guardarCambiosNota.php',
+        method: 'POST',
+        data: { idR: idRActual, notaConsulta: nuevaNota }, 
+        success: function (data) {
+            // Manejar la respuesta del servidor
+            if (data.success) {
+                // Mostrar mensaje de éxito
+                alert('Cambios guardados con éxito');
+            } else {
+                // Manejar error si es necesario
+                console.error('Error al guardar cambios:', data.error);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error al guardar cambios:', error);
+        }
+    });
+}
+
