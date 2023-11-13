@@ -2,27 +2,37 @@
 include '../../php/acceso.php';
 
 if (isset($_POST['idR'])) {
-    $idR = $_POST['idR'];
+    $idR = mysqli_real_escape_string($dp, $_POST['idR']);
 
-    $consulta = "SELECT notaConsulta FROM expediente WHERE idR = $idR";
-    $resultado = mysqli_query($dp, $consulta);
+    // Crear una sentencia preparada
+    $consulta = "SELECT e.notaConsulta, c.diagnosticoC, r.medicamentoR 
+                 FROM expediente e
+                 LEFT JOIN citas c ON e.IDC = c.IDC
+                 LEFT JOIN recetas r ON e.IDR = r.IDR
+                 WHERE e.idR = ?";
+                 
+    $stmt = mysqli_prepare($dp, $consulta);
 
-    if ($resultado) {
-        $nota = mysqli_fetch_assoc($resultado);
+    // Vincular parámetros
+    mysqli_stmt_bind_param($stmt, "i", $idR);
 
-        // Devuelve la nota como respuesta JSON
-        header('Content-Type: application/json');
-        echo json_encode(array(
-            'success' => true,
-            'notaConsulta' => $nota['notaConsulta'],
-        ));
-    } else {
-        // Manejar el error y devolver una respuesta JSON
-        echo json_encode(array(
-            'success' => false,
-            'error' => 'Hubo un error en la consulta: ' . mysqli_error($dp),
-        ));
-    }
+    // Ejecutar la sentencia preparada
+    mysqli_stmt_execute($stmt);
+
+    // Vincular resultados
+    mysqli_stmt_bind_result($stmt, $notaConsulta, $Diagnostico, $medicamento);
+
+    // Obtener los resultados
+    mysqli_stmt_fetch($stmt);
+
+    // Devolver resultados como JSON
+    header('Content-Type: application/json');
+    echo json_encode(array('notaConsulta' => $notaConsulta, 'Diagnostico' => $Diagnostico, 'medicamento' => $medicamento));
+
+    // Cerrar la sentencia preparada
+    mysqli_stmt_close($stmt);
 }
 
+// Cerrar la conexión a la base de datos
 mysqli_close($dp);
+?>

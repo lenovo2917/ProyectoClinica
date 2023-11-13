@@ -85,6 +85,7 @@
                             <a class="nav-link" id="citas-tab" data-toggle="tab" href="#citas" role="tab"
                                 aria-controls="citas" aria-selected="false">Programar Citas Médicas</a>
                         </li>
+                         
                     </ul>
 
 
@@ -168,7 +169,13 @@
                     <div class="tab-content" id="myTabContent">
                         <!-- Tab 1: Crear Receta Médica -->
                         <div class="tab-pane fade show active" id="receta" role="tabpanel" aria-labelledby="receta-tab">
-                            <h2>Formulario para Crear Receta Médica</h2>
+                            <div class="navbar">
+                                <a href="./IndexDoctores.html">
+                                    <i class="fa-solid fa-arrow-left fa-lg"></i>
+                                </a>
+                                <h2>Formulario para Crear Receta Médica</h2>
+                            </div>
+
                             <form id="recetaForm" method="post">
                                 <div class="form-group">
                                     <label for="nombre">Nombre del Paciente</label>
@@ -190,7 +197,7 @@
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                                                data-bs-toggle="dropdown" aria-expanded="false">CITAS</button>
                                             <ul class="dropdown-menu" id="citasDropdown">
 
                                                 <input type="hidden" id="idCita" name="idCita" value="">
@@ -290,10 +297,8 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <h3>Nota Médica</h3>
-                                            <!-- Aquí se muestra la nota del paciente (se recupera de la base de datos) -->
-                                            <textarea id="notaCompleta" class="form-control"
-                                                rows="10">Contenido de la nota médica</textarea>
+                                            <h3>Receta Medica</h3>
+                                            <textarea class="form-control" rows="10"></textarea>
 
 
                                             <!-- Subtítulo para Diagnóstico y Temporalidad -->
@@ -320,8 +325,8 @@
                                             <div class="row align-items-center">
                                                 <!-- Columna 1: Diagnóstico -->
                                                 <div class="col-md-5">
-                                                    <label for="diagnostico">Diagnóstico:</label>
-                                                    <input type="text" class="form-control" id="diagnostico">
+                                                    <label for="Diagnostico">Diagnóstico:</label>
+                                                    <input type="text" class="form-control" id="Diagnostico">
                                                 </div>
 
                                                 <!-- Columna 2: Temporalidad -->
@@ -330,37 +335,21 @@
                                                     <input type="text" class="form-control" id="Medicamento">
                                                 </div>
 
-                                                <!-- Columna 3: Botón (✓) -->
-                                                <div class="col-md-1 d-flex align-items-center">
-                                                    <button style="border: none; background: none; cursor: pointer;">
-                                                        <i class="fa-solid fa-circle-check fa-xl"
-                                                            style="color: #00b415;"></i>
-                                                    </button>
-                                                </div>
-
-                                                <!-- Columna 4: Botón (x) -->
-                                                <div class="col-md-1 d-flex align-items-center">
-                                                    <button style="border: none; background: none; cursor: pointer;">
-                                                        <i class="fa-solid fa-circle-xmark fa-xl"
-                                                            style="color: #d10000;"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        
 
                                             <label for="notaConsulta">Nota de la Consulta:</label>
-                                            <textarea class="form-control" rows="4"></textarea>
+                                            <textarea id="notaCompleta" class="form-control"
+                                            rows="2">Contenido de la nota médica</textarea>
+                                          
 
-                                            <!-- Botones de Guardar y Cancelar -->
-                                            <button class="btn btn-custom">Guardar</button>
-                                            <button class="btn btn-custom"
-                                                style="background-color: gray;color: white; border-color: gray;">Cancelar</button>
+                                       
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                         <!-- Tab 3: Programar Citas Médicas -->
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
                             <h2>Crear Cita Especialidad</h2>

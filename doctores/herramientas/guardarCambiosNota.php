@@ -1,22 +1,43 @@
 <?php
 include '../../php/acceso.php';
 
-if (isset($_POST['idR']) && isset($_POST['notaConsulta'])) {
+if (isset($_POST['idR']) && isset($_POST['notaConsulta']) && isset($_POST['medicamento']) && isset($_POST['Diagnostico'])) {
     // Obtener datos y asegurarlos contra inyección SQL
     $idR = mysqli_real_escape_string($dp, $_POST['idR']);
     $nuevaNota = mysqli_real_escape_string($dp, $_POST['notaConsulta']);
+    $nuevoMedicamento = mysqli_real_escape_string($dp, $_POST['medicamento']);
+    $nuevoDiagnostico = mysqli_real_escape_string($dp, $_POST['Diagnostico']);
 
-    // Crear una sentencia preparada
-    $consulta = "UPDATE expediente SET notaConsulta = ? WHERE idR = ?";
-    $stmt = mysqli_prepare($dp, $consulta);
+    // Obtener el IDC correspondiente al IDR
+    $consultaIDC = "SELECT IDC FROM recetas WHERE IDR = ?";
+    $stmtIDC = mysqli_prepare($dp, $consultaIDC);
+    mysqli_stmt_bind_param($stmtIDC, "i", $idR);
+    mysqli_stmt_execute($stmtIDC);
+    mysqli_stmt_bind_result($stmtIDC, $idCita);
+    mysqli_stmt_fetch($stmtIDC);
+    mysqli_stmt_close($stmtIDC);
+    
+    // Actualizar diagnosticoC en la tabla citas
+    $consultaCitas = "UPDATE citas SET diagnosticoC = ? WHERE IDC = ?";
+    $stmtCitas = mysqli_prepare($dp, $consultaCitas);
+    mysqli_stmt_bind_param($stmtCitas, "si", $nuevoDiagnostico, $idCita);
+    $resultadoCitas = mysqli_stmt_execute($stmtCitas);
 
-    // Vincular parámetros
-    mysqli_stmt_bind_param($stmt, "si", $nuevaNota, $idR);
+    // Actualizar notaConsulta en la tabla expediente
+    $consultaExpediente = "UPDATE expediente SET notaConsulta = ? WHERE IDR = ?";
+    $stmtExpediente = mysqli_prepare($dp, $consultaExpediente);
+    mysqli_stmt_bind_param($stmtExpediente, "si", $nuevaNota, $idR);
+    $resultadoExpediente = mysqli_stmt_execute($stmtExpediente);
 
-    // Ejecutar la sentencia preparada
-    $resultado = mysqli_stmt_execute($stmt);
+    // Actualizar medicamentoR en la tabla recetas
+    $consultaRecetas = "UPDATE recetas SET medicamentoR = ? WHERE IDR = ?";
+    $stmtRecetas = mysqli_prepare($dp, $consultaRecetas);
+    mysqli_stmt_bind_param($stmtRecetas, "si", $nuevoMedicamento, $idR);
+    $resultadoRecetas = mysqli_stmt_execute($stmtRecetas);
 
-    if ($resultado) {
+
+    // Verificar resultados y devolver respuesta JSON
+    if ($resultadoExpediente && $resultadoRecetas && $resultadoCitas) {
         // Devuelve una respuesta JSON indicando éxito
         header('Content-Type: application/json');
         echo json_encode(array('success' => true));
@@ -31,11 +52,12 @@ if (isset($_POST['idR']) && isset($_POST['notaConsulta'])) {
         error_log('Error en la consulta: ' . mysqli_error($dp));
     }
 
-    // Cerrar la sentencia preparada
-    mysqli_stmt_close($stmt);
+    // Cerrar las sentencias preparadas
+    mysqli_stmt_close($stmtExpediente);
+    mysqli_stmt_close($stmtRecetas);
+    mysqli_stmt_close($stmtCitas);
 }
 
 // Cerrar la conexión a la base de datos
 mysqli_close($dp);
 ?>
-

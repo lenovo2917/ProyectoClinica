@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <!--ESTILOS CSS-->
+    <link rel="stylesheet" href="../fontawesome/css/all.css" rel="stylesheet">
     <link href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/doctores.css">
@@ -71,7 +72,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-2">
                                 <a href="./IndexDoctores.html">
-                                    <i class="bi bi-arrow-90deg-left" style="font-size: 24px; color: #021f3e;"></i>
+                                <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
                               
                             </div>

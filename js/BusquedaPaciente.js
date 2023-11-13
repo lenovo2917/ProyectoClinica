@@ -103,7 +103,6 @@ function actualizarTablaInformacionAdicional(data) {
         cuerpoTabla.appendChild(fila);
     });
 }
-
 function verNota(idR) {
     // Almacenar el idR en la variable global
     idRActual = idR;
@@ -116,23 +115,32 @@ function verNota(idR) {
         data: { idR: idR },
         success: function (data) {
             // Mostrar la nota en un cuadro de texto editable
+            
             $('#notaCompleta').val(data.notaConsulta);
+            $('#Diagnostico').val(data.Diagnostico);
+            $('#Medicamento').val(data.medicamento);
         },
         error: function (error) {
             console.error('Error al obtener la nota:', error);
         }
     });
 }
-
 function guardarCambios() {
     // Utilizar la variable global idRActual en lugar de idR
     var nuevaNota = document.getElementById('notaCompleta').value;
+    var nuevoDiagnostico = document.getElementById('Diagnostico').value;
+    var nuevoMedicamento = document.getElementById('Medicamento').value;
 
     // Enviar la nueva nota al servidor para actualizar la base de datos
     $.ajax({
         url: './herramientas/guardarCambiosNota.php',
         method: 'POST',
-        data: { idR: idRActual, notaConsulta: nuevaNota }, 
+        data: { 
+            idR: idRActual, 
+            notaConsulta: nuevaNota,
+            Diagnostico: nuevoDiagnostico,
+            medicamento: nuevoMedicamento
+        }, 
         success: function (data) {
             // Manejar la respuesta del servidor
             if (data.success) {
@@ -148,4 +156,3 @@ function guardarCambios() {
         }
     });
 }
-
