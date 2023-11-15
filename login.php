@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>MEDICATEC</title>
     <meta charset="UTF-8">
@@ -13,6 +12,7 @@
     <!--ESTILOS CSS-->
     <link rel="shortcut icon" href="img/web.png" type="img">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="css/nav2.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
@@ -48,19 +48,19 @@
                 <form class="form" action="php/procesaLogin.php" method="post">
                     <div class="row">
                         <div class="col-12" style="padding: 2rem;">
-                            <h2><i class="fas fa-lock" ></i> Login</h2>
+                            <h2><i class="fa-solid fa-lock"></i> Login</h2>
                         </div>
                         <div class="col-12">
-                            <input type="text" name="nombree" valueplaceholder="Nombre Completo *" required />
+                            <input type="text" name="nombree" placeholder="Nombre Completo *" required />
                         </div>
                         <div class="col-12">
                             <input type="password" name="clave" placeholder="Contraseña *" required />
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
-                            <button type="submit" type="button">Entrar</button>
+                            <button type="submit" type="button"><i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Inicia sesión</button>
                         </div>
                         <div>
-                            <p class="">¿No estas registrado? <a style="color: #176B87;" href="pacientes/registroP.html">Crea una cuenta</a></p>
+                            <p class="">¿No estas registrado? <a style="color: #176B87;" href="pacientes/registroP.php">Crea una cuenta</a></p>
                         </div>
                     </div>
                 </form>
