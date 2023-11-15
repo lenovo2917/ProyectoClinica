@@ -85,7 +85,7 @@
                             <a class="nav-link" id="citas-tab" data-toggle="tab" href="#citas" role="tab"
                                 aria-controls="citas" aria-selected="false">Programar Citas Médicas</a>
                         </li>
-                         
+
                     </ul>
 
 
@@ -314,9 +314,9 @@
                                                         <i class="fa-solid fa-folder-plus fa-xl"
                                                             style="color: #004bcc;"></i>
                                                     </button>
-                                              
-                                                
-                                                
+
+
+
 
                                                 </div>
                                             </div>
@@ -335,144 +335,134 @@
                                                     <input type="text" class="form-control" id="Medicamento">
                                                 </div>
 
-                                        
 
-                                            <label for="notaConsulta">Nota de la Consulta:</label>
-                                            <textarea id="notaCompleta" class="form-control"
-                                            rows="2">Contenido de la nota médica</textarea>
-                                          
 
-                                       
+                                                <label for="notaConsulta">Nota de la Consulta:</label>
+                                                <textarea id="notaCompleta" class="form-control"
+                                                    rows="2">Contenido de la nota médica</textarea>
 
+
+
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                         <!-- Tab 3: Programar Citas Médicas -->
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
-                            <h2>Crear Cita Especialidad</h2>
+                            <div class="navbar">
+                                <a href="./IndexDoctores.html">
+                                    <i class="fa-solid fa-arrow-left fa-lg"></i>
+                                </a>
+                                <h2>Crear Cita Medica</h2>
+                            </div>
+                            <form id="crearCitaForm" action="./herramientas/procesar_cita.php" method="POST">
                             <div class="row">
                                 <!-- Fila 1: Datos del paciente y nota -->
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <!-- Columna 1: Datos del paciente -->
-                                        <!--ESTO TENDRA PHP Y SCRIPT PARA QUE SE LLENE AUTOMATICAMENTE SEGUN LA BASE DE DATOS-->
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="fechaCita">Fecha de la Cita</label>
-                                                <input type="date" class="form-control" id="fechaCita" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="horaCita">Hora de la Cita</label>
-                                                <input type="time" class="form-control" id="horaCita" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-9">
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label for="nombrePacienteCita">Paciente:</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control" id="nombrePacienteCita"
-                                                        placeholder="Nombre" required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control"
-                                                        id="apellidoPacientePaternoCita" placeholder="Apellido Paterno"
-                                                        required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control"
-                                                        id="apellidoPacienteMaternoCita" placeholder="Apellido Materno"
-                                                        required>
-                                                </div>
-                                            </div>
-
-                                            <div style="margin-top: 10px;" class="row align-items-center">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <button id="abrirEspecialidades" class="btn btn-custom"
-                                                            type="button">Especialidad</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" id="especialidadCita"
-                                                            name="especialidadCita" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div id="cuadroEspecialidades" class="cuadro-dialogo">
-                                                <div class="opciones-especialidades">
-                                                    <div class="opcion-especialidad" data-especialidad="Especialidad 1">
-                                                        <img src="/Clinica_Tachirito/iconos/PACIENTE.png"
-                                                            alt="Especialidad 1">
-                                                        <p>Especialidad 1</p>
-                                                    </div>
-                                                    <div class="opcion-especialidad" data-especialidad="Especialidad 2">
-                                                        <img src="/Clinica_Tachirito/iconos/PACIENTE.png"
-                                                            alt="Especialidad 2">
-                                                        <p>Especialidad 2</p>
-                                                    </div>
-                                                    <!-- Agrega más opciones de especialidades aquí -->
-                                                </div>
-                                            </div>
-
-                                            <!-- Subtítulo para Diagnóstico y Temporalidad -->
-                                            <div class="row align-items-center">
+                                      
+                                            <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="motivoCita">Diagnostico: </label>
-                                                    <textarea class="form-control" id="motivoCita" rows="3"
-                                                        placeholder="Diagnotico del paciente" required></textarea>
+                                                    <label for="fechaCita">Fecha de la Cita</label>
+                                                    <input type="date" class="form-control" id="fechaCita" name="fechaCita" required>
                                                 </div>
-
-                                                <!-- Nota Médica del Doctor (md-6) -->
                                                 <div class="form-group">
-                                                    <label for="notaMedica">Sintomas:</label>
-                                                    <textarea class="form-control" id="notaMedica" rows="3"
-                                                        placeholder="Sintomas del paciente" required></textarea>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="notaMedica">Motivo de cita: </label>
-                                                    <textarea class="form-control" id="notaMedica" rows="3"
-                                                        placeholder="Motivo de cita" required></textarea>
+                                                    <label for="horaCita">Hora de la Cita</label>
+                                                    <select class="form-select" id="horaCita" name="horaCita" required>
+                                                        <!-- Las opciones de horas disponibles se cargarán dinámicamente aquí -->
+                                                    </select>
                                                 </div>
                                             </div>
 
-                                            <div style="margin-top: 50px;" class="row align-items-center">
-                                                <div class="col-md-6">
-                                                    <!-- Espacio para la firma del Doctor -->
-                                                    <div class="form-group">
-                                                        <label for="firmaDoctor">Firma del Doctor:</label>
-                                                        <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
-                                                            class="signature-line"></div>
+                                            <div class="col-md-9">
+
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label for="nombrePacienteCita">Paciente:</label>
                                                     </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="nombrePacienteCita" name="nombrePacienteCita" placeholder="Nombre" required>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="apellidoPacientePaternoCita" name="apellidoPacientePaternoCita" placeholder="Apellido Paterno" required>
 
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="firmaDoctor">Nombre del Doctor:</label>
-                                                        <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
-                                                            class="signature-line"></div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="apellidoPacienteMaternoCita" name="apellidoPacienteMaternoCita" placeholder="Apellido Materno" required>
                                                     </div>
                                                 </div>
+
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="especialidadCita">Especialidad</label>
+                                                            <select class="form-select" id="especialidadCita" name="especialidadCita" aria-label="Especialidad select menu" required>
+                                                                <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                                <!-- Subtítulo para Diagnóstico y Temporalidad -->
+
+                                                      <!-- Nota Médica del Doctor (md-6) -->
+                                                      <div class="form-group">
+                                                        <label for="notaMedica">Sintomas:</label>
+                                                        <textarea class="form-control" id="notaMedica" name="notaMedica" rows="3"
+                                                        placeholder="Sintomas" required></textarea>
+                                                    </div>
+
+                                                <div class="row align-items-center">
+                                                    <div class="form-group">
+                                                        <label for="motivoCita">Diagnostico: </label>
+                                                        <textarea class="form-control" id="motivoCita" name="motivoCita" rows="3" placeholder="Diagnóstico del paciente" required></textarea>
+                                                    </div>
+
+                                              
+
+                                                    <div class="form-group">
+                                                        <label for="Descripcion">Motivo de cita: </label>
+                                                        <textarea class="form-control" id="Descripcion" name="Descripcion" rows="3"
+                                                            placeholder="Descripcion" required></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div style="margin-top: 50px;" class="row align-items-center">
+                                                    <div class="col-md-6">
+                                                        <!-- Espacio para la firma del Doctor -->
+                                                        <div class="form-group">
+                                                            <label for="firmaDoctor">Firma del Doctor:</label>
+                                                            <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
+                                                                class="signature-line"></div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="firmaDoctor">Nombre del Doctor:</label>
+                                                            <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
+                                                                class="signature-line"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Botón para Generar Cita (md-12) -->
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-custom">Generar Cita</button>
+                                                </div>
                                             </div>
-                                            <!-- Botón para Generar Cita (md-12) -->
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-custom">Generar Cita</button>
-                                            </div>
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -489,6 +479,7 @@
 
         </div>
     </div>
+
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
@@ -497,6 +488,7 @@
     <script src="../js/Crear_Receta.js"></script>
     <script src="../js/BusquedaPaciente.js"></script>
     <script src="../js/BusquedaCitas"></script>
+    <script src="../js/BusquedaEspecialidad.js"></script>
 
 
 </body>
