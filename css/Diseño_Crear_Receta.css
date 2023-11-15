@@ -75,107 +75,20 @@ form {
     margin-right: 10px;
   }
 
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow: auto;
-  }
 
-  .modal-content {
-    background: url('/Clinica_Tachirito/Logo/LOGO_TRANSPARENTE.png') center no-repeat; /* Ruta de tu imagen de fondo */
-    background-size: 40%; /* Ajusta la imagen de fondo al 40% del tamaño del contenedor */
-      background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 75%; /* Cambia este valor al que desees */
-    border-radius: 5px;
-    position: relative;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  }
-
-  
-  /* Estilo del botón de cierre */
-  .close {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  /* Estilo para el título "Receta Médica" */
-  .modal-content h2 {
-    text-align: center;
-    font-size: 24px;
-  }
-  
-  /* Estilo para la información del doctor y la clínica */
-  .doctor-info {
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  
-  /* Estilo para la imagen del doctor */
-  .doctor-icon {
-    display: block;
-    margin: 0 auto;
-  }
-  
-  /* Estilo para las tablas */
-  table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    font-size: 16px;
-  }
-  
-  table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  /* Estilo para el mensaje "Favor de tomar el tratamiento completo" */
-  .complete-treatment {
-    margin-top: 20px;
-    font-size: 16px;
-    text-align: center;
-  }
-  
-  /* Estilo para la línea de firma del doctor */
-  .signature-line {
-    border-top: 2px solid #000;
-    margin-top: 20px;
-  }
-  
-  /* Estilo adicional para el botón "Crear Receta" si es necesario */
-  #btnCrearReceta {
-    cursor: pointer;
-  }
-  
-  /* Estilo para ocultar el scroll del cuerpo mientras el modal está abierto */
-  body.modal-open {
-    overflow: hidden;
-  }
-  
-
-  /* Estilo para botones redondos */
-.btn-round {
-    border-radius: 50%; /* Hace que los botones sean redondos */
-    width: 40px; /* Establece el ancho deseado */
-    height: 40px; /* Establece la altura deseada */
-    text-align: center; /* Centra el contenido del botón */
-    font-size: 18px; /* Establece el tamaño del icono */
-    padding: 0; /* Elimina el relleno para el ícono */
+  .logo {
+    max-width:10%;
+    margin-right: auto;
 }
 
-/* Oculta los botones de impresión y descarga inicialmente */
-#print, #download {
-    display: none;
+
+.firma {
+    text-align: center;
 }
+
+.indicaciones {
+    text-align: center;
+    color: #555; /* Color del texto */
+}
+
+

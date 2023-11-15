@@ -1,0 +1,32 @@
+$(document).ready(function () {
+    // Cuando se ingresa información del paciente
+    $('#nombre, #apellidoP, #apellidoM').on('input', function () {
+        // Captura los datos del paciente
+        var nombre = $('#nombre').val();
+        var apellidoP = $('#apellidoP').val();
+        var apellidoM = $('#apellidoM').val();
+
+        // Realiza la solicitud AJAX para obtener las citas del paciente
+        $.ajax({
+            url: '../doctores/herramientas/obtenerCitas.php',
+            type: 'post',
+            data: { nombre: nombre, apellidoP: apellidoP, apellidoM: apellidoM },
+            success: function (response) {
+                // Llena dinámicamente el menú desplegable con las citas obtenidas
+                $('#citasDropdown').html(response);
+
+                // Cuando se hace clic en una cita del menú desplegable
+                $('#citasDropdown a').on('click', function () {
+                    // Captura el ID de la cita y lo almacena en el campo oculto
+                    var idCita = $(this).data('idc');
+                    console.log('ID de la cita seleccionada:', idCita);
+                    $('#idCita').val(idCita);
+                });
+            },
+            error: function () {
+                // Manejar errores si es necesario
+                alert('Error en la solicitud AJAX.');
+            }
+        });
+    });
+});
