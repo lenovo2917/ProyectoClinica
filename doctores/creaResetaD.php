@@ -404,8 +404,16 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="doctorCita">Doctor</label>
+                                                            <select class="form-select" id="doctorCita" name="doctorCita" aria-label="Doctor select menu" required>
+                                                                <!-- Las opciones de doctores se cargarán dinámicamente aquí -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-
+                                                
 
 
 

@@ -2,9 +2,10 @@
 // Incluir archivo de conexión
 include '../../php/acceso.php';
 
-// Obtener fecha y especialidad desde la URL
+// Obtener fecha, especialidad y doctor desde la URL
 $fecha = $_GET['fecha'];
 $especialidad = $_GET['especialidad'];
+$doctor = $_GET['doctor']; // Agregar esta línea
 
 // Verificar si la fecha es válida (no en el pasado)
 $hoy = date("Y-m-d");
@@ -12,8 +13,8 @@ if ($fecha < $hoy) {
     die("La fecha seleccionada está en el pasado.");
 }
 
-// Obtener las horas disponibles para la fecha y especialidad
-$sql = "SELECT HoraDisponible FROM horas_disponibles_view WHERE FechaDisponible = '$fecha' AND EspecialidadID = '$especialidad' AND Estado = 'disponible'";
+// Modificar la consulta SQL para incluir el doctor
+$sql = "SELECT HoraDisponible FROM horas_disponibles_view WHERE FechaDisponible = '$fecha' AND EspecialidadID = '$especialidad' AND DoctorID = '$doctor' AND Estado = 'disponible'";
 $result = $dp->query($sql);
 
 if ($result->num_rows > 0) {
@@ -29,7 +30,7 @@ if ($result->num_rows > 0) {
 }
 
 // Agregar log
-error_log("Horas disponibles para fecha: $fecha, especialidad: $especialidad");
+error_log("Horas disponibles para fecha: $fecha, especialidad: $especialidad, doctor: $doctor");
 
 // Cerrar la conexión
 $dp->close();
