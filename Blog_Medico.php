@@ -40,7 +40,7 @@
                   <div class="line3"></div>
                 </div>
                 <ul class="nav-links">
-                  <li><a href="Blog_Medico.html">Inicio</a></li>
+                  <li><a href="Blog_Medico.php">Inicio</a></li>
                   <?php 
                   // Recupera el valor de rol de la URL
                   $rol = isset($_GET['rol']) ? $_GET['rol'] : '';
