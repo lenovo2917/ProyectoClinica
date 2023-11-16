@@ -1,29 +1,20 @@
 <?php
-// Recuperar el id del paciente de la URL
-$id = $_GET['id'];
+include 'acceso.php';
 
-// Realizar una consulta para obtener los datos del paciente con el id proporcionado
-$sql = "SELECT NombreCompletoP, CURPP, correoP, Estatus FROM pacientes WHERE CURPP = '$id'";
-$result = $dp->query($sql);
+    // Recupera los datos del formulario
+    $userID = $_SESSION["idp"];
+    $nombreP = $_SESSION["NombreCompletoP"]; // Asegúrate de que este nombre coincide con el atributo name en tu campo de entrada
 
-// Verificar si hay errores en la consulta
-if (!$result) {
-    die("Error en la consulta: " . $dp->error);
-}
+    // Actualiza el nombre en la base de datos
+    $sqlUpdate = "UPDATE pacientes SET NombreCompletoP = '$nombreP' WHERE IDP = $userID";
+    $resultUpdate = $dp->query($sqlUpdate);
 
-// Verificar si hay datos para mostrar
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    // Ahora puedes utilizar los datos para llenar el formulario o realizar otras acciones
-    // ...
-} else {
-    echo "No se encontró el paciente con ID: $id";
-}
-
-// Cerrar la conexión a la base de datos
-$dp->close();
+    // Verifica si la actualización fue exitosa
+    if ($resultUpdate) {
+        // Redirige al índice después de la modificación
+        header("Location: ../secretarios/consultaPacientesS.php"); // Reemplaza "index.php" con la página a la que deseas redirigir
+        exit();
+    } else {
+        echo "Error al actualizar el usuario";
+    }
 ?>
- 
-
-
-
