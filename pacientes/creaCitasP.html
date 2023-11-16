@@ -53,15 +53,18 @@
     
     <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agendar nueva cita</h1>
 
-    <form id="citaForm" action="procesar_cita.php" method="post">
+    <form id="citaForm" action="../php/procesaCitaP.php" method="post">
         <label for="fecha">Fecha de Cita:</label>
-        <input type="date" id="fecha" name="fecha"  required><br>
+        <input type="date" id="fecha" name="fecha" required><br>
+
+        <label for="hora">Hora cita:</label>
+        <input type="time" id="hora" name="hora" required><br>
 
         <label for="sintomas">Síntomas:</label>
         <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas" required></textarea><br>
 
-        <label for="diagnostico">Descripción:</label>
-        <textarea id="diagnostico" name="diagnostico" rows="4" placeholder="Ingrese descripción de padecimiento" required></textarea><br>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Ingrese descripción de padecimiento"></textarea><br>
 
         <label for="alergias">Alergias:</label>
         <input type="text" id="alergias" name="alergias" placeholder="Ingrese alergias si presenta"><br>
@@ -78,7 +81,9 @@
             <option value="O-">O-</option>
         </select><br>
 
-        <input type="submit" value="Realizar cita">
+        <input type="submit" name="crear_cita" value="Realizar cita">
+        <input type="reset" value="Limpiar" style="background-color: #176b87; color: #fff; padding-top: 8px;
+        margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 6%; text-decoration: none;">
         <a class="b" href="../Blog_Medico.php?rol=paciente" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
         margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; height: 6%; text-decoration: none;">Regresar</a>
     </form>
