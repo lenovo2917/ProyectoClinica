@@ -4,7 +4,6 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
   header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
 } 
 ?>
-
 <!DOCTYPE html>
 <html>
 
