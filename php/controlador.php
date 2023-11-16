@@ -24,6 +24,12 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
     $sql3->execute();
     $result3 = $sql3->get_result();
 
+    // Consulta para doctores
+    $sql4 = $dp->prepare("SELECT * FROM administrador WHERE NombreCompletoA=? AND ContrasenaA=?");
+    $sql4->bind_param("ss", $nombre, $password);
+    $sql4->execute();
+    $result4 = $sql4->get_result();
+
     // Verificación de la autenticación y asignación de roles
     if ($result1->num_rows === 1) {
         $row1 = $result1->fetch_assoc();
@@ -43,7 +49,13 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
         $_SESSION["Rol"] = 'doctor';
         header("Location: doctores/IndexDoctores.html"); // Redirigir al doctor
         exit();
-    } else {
+    } else if ($result4->num_rows === 1) {
+        $row4 = $result4->fetch_assoc();
+        $_SESSION["NombreCompleto"] =$nombre;
+        $_SESSION["Rol"] = 'admin';
+        header("Location: Blog_Medico.php"); // Redirigir al doctor
+        exit();
+    }{
         echo "<div class='alert alert-danger'>ACCESO DENEGADO</div>";
     }
 }
