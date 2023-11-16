@@ -66,10 +66,9 @@
                             <button type="submit" name="btningresar" type="button"><i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Inicia sesión</button>
                         </div>-->
                         
-                        <div class="d-grid">
-            
-            <input type="submit" value="Iniciar Sesión" name="btningresar" class="btn btn-outline-warning fs-5 fw-bold">
-          </div>
+                        <div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
+                            <button type="submit" value="Iniciar Sesión" type="button" name="btningresar"><i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Inicia sesión</button>
+                        </div>
                         <div>
                             <p class="">¿No estas registrado? <a style="color: #176B87;" href="pacientes/registroP.php">Crea una cuenta</a></p>
                         </div>
