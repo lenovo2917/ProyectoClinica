@@ -1,3 +1,3 @@
 # ProyectoClinica
-HOLAA SOY ANTONIO
-Hola yo soy Julian y me gusta el dinero
+# HOLAA SOY ANTONIO
+# Hola yo soy Julian
