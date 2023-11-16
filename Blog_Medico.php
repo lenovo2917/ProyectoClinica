@@ -25,7 +25,6 @@
     <div class="row">
       <div class="col-12">
         <!--Header-->
-        <!-- GUACHATE ESTA BROOO-->
         <div class="container-fluid-lg mb-5">
           <div class="row">
             <div class="col-12">

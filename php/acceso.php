@@ -6,7 +6,7 @@
  $dp=new mysqli($server,$username,$password,$bdname);
  // Establece la codificación de caracteres a UTF-8
 $dp->set_charset("utf8");
-//hola soy julian
+
 //hola yo soy antonio
 //soy hola yo rogelio
 ?>
