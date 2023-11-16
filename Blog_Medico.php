@@ -55,8 +55,6 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                   generarMenu($rol);
                   ?>
                   <?php
-
-   
                   if(isset($_GET['cerrar_sesion'])) {
                           // Eliminar las cookies de sesión
                           if (ini_get("session.use_cookies")) {
