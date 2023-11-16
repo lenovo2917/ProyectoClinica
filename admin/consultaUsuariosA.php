@@ -74,13 +74,16 @@
                     <div class="col-12">
                         <table class="table table-striped" style="vertical-align: middle;">
                             <tr>
+                                <th colspan="5" class="text-center">DOCTORES</th>
+                            </tr>
+                            <tr>
                                 <th>Nombre</th>
                                 <th>CURP</th>
                                 <th>Email</th>
                                 <th>Estatus</th>
                                 <th>Opciones</th>
                             </tr>
-                            <tr>
+                            <!--<tr>
                                 <td>Juan Pérez</td>
                                 <td>ABC123456XYZ78901</td>
                                 <td>juanperez@example.com</td>
@@ -88,17 +91,17 @@
                                 <td>
                                     <div class="gap-2 mx-auto form" style="padding: 1rem;">
                                         <a href="modificaUsuariosA.html" type="button">
-                                            <button>Modificar</button>
+                                            <button >Modificar</button>
                                         </a>
                                         <a href="eliminaUsuariosA.html" type="button">
                                             <button>Borrar</button>
                                         </a>
                                         <a href="detallesUsuariosA.html" type="button">
-                                            <button>Detalles</button>
+                                            <button class="btn btn-info">Detalles</button>
                                         </a>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>-->
                             <?php
                             
                             include '../php/acceso.php';
@@ -117,7 +120,9 @@
                                     echo "<td>";
                                     echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
                                     echo '<a href="modificaUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Modificar</button></a>';
+                                    echo '&nbsp;';  // Agrega un espacio en blanco entre los botones
                                     echo '<a href="eliminaUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Borrar</button></a>';
+                                    echo '&nbsp;';  // Agrega otro espacio en blanco entre los botones
                                     echo '<a href="detallesUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Detalles</button></a>';
                                     echo '</div>';
                                     echo "</td>";
@@ -126,11 +131,27 @@
                             } else {
                                 echo "<tr><td colspan='5'>No hay usuarios (SECRETARIOS)</td></tr>";
                             }
+                            
+                            ?>
+                        
+                            <tr>
+                                <th colspan="5" class="text-center">SECRETARIOS</th>
+                            </tr>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>CURP</th>
+                                <th>Email</th>
+                                <th>Estatus</th>
+                                <th>Opciones</th>
+                            </tr>
+
+                            <?php
+                            include '../php/acceso.php';
 
                             // Muestra los resultados de la consulta (SECRETARIOS)
                             $sqlS = "SELECT * FROM secretarios";
                             $resultS = $dp->query($sqlS);
-                            
+
                             if ($resultS->num_rows > 0) {
                                 while ($rowS = $resultS->fetch_assoc()) {
                                     echo "<tr>";
@@ -141,7 +162,9 @@
                                     echo "<td>";
                                     echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
                                     echo '<a href="modificaUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Modificar</button></a>';
+                                    echo '&nbsp;';  // Agrega un espacio en blanco entre los botones
                                     echo '<a href="eliminaUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Borrar</button></a>';
+                                    echo '&nbsp;';  // Agrega otro espacio en blanco entre los botones
                                     echo '<a href="detallesUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Detalles</button></a>';
                                     echo '</div>';
                                     echo "</td>";
@@ -150,83 +173,8 @@
                             } else {
                                 echo "<tr><td colspan='5'>No hay usuarios (SECRETARIOS)</td></tr>";
                             }
+                            
                             ?>
-                            <!--<tr>
-                                <td>Maria López</td>
-                                <td>DEF789012UVW34567</td>
-                                <td>marialopez@example.com</td>
-                                <td>Inactivo</td>
-                                <td>
-                                    <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaUsuariosA.html" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaUsuariosA.html" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="detallesUsuariosA.html" type="button">
-                                            <button>Detalles</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Rodríguez</td> asdasdasd
-                                <td>GHI456789RST01234</td>
-                                <td>carlosrodriguez@example.com</td>
-                                <td>Activo</td>
-                                <td>
-                                    <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaUsuariosA.html" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaUsuariosA.html" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="detallesUsuariosA.html" type="button">
-                                            <button>Detalles</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ana García</td>
-                                <td>JKL901234MNO56789</td>
-                                <td>anagarcia@example.com</td>
-                                <td>Inactivo</td>
-                                <td>
-                                    <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaUsuariosA.html" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaUsuariosA.html" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="detallesUsuariosA.html" type="button">
-                                            <button>Detalles</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Luis Martínez</td>
-                                <td>PQR678901XYZ23456</td>
-                                <td>luismartinez@example.com</td>
-                                <td>Activo</td>
-                                <td>
-                                    <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaUsuariosA.html" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaUsuariosA.html" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="detallesUsuariosA.html" type="button">
-                                            <button>Detalles</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>-->
                         </table>
                     </div>
                 </div>
