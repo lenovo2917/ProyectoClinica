@@ -54,7 +54,6 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                   // Llama a la función generarMenu con el rol del usuario
                   generarMenu($rol);
                   ?>
-<<<<<<< HEAD
                   <?php
 
    
@@ -85,32 +84,6 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
             }
             unset($_SESSION['sesion_cerrada']);
             ?>
-=======
-                  <?php 
-if(isset($_GET['cerrar_sesion'])) {
-        // Eliminar las cookies de sesión
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"],
-                $params["secure"], $params["httponly"]
-            );
-        }
-        // Destruir la sesión
-        session_unset();
-        session_destroy();
-        $_SESSION = array();
-        // Redirigir a la página de inicio de sesión
-        header("Location: login.php");
-        exit();
-    } else if(!isset($_SESSION['sesion_cerrada'])) {
-      echo '<li><a href="login.php?cerrar_sesion=true" class="login-button" type="button" onclick="return confirm(\'Seguro que quieres salir?\')" 
-      style="color: white;"> Cerrar</a></li>';
-    }else {   
-}
-unset($_SESSION['sesion_cerrada']);
-?>
->>>>>>> 4f021a874d336c1ce33268158de167a1d14960d5
                   
                 </ul>
               </nav>
