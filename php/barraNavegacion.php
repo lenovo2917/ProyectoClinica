@@ -1,7 +1,7 @@
 <?php
 function generarMenu($rolUsuario) {
     if ($rolUsuario === "paciente") {
-        echo '<li><a href="pacientes/creaCitasP.html">Crear cita</a></li>';
+        echo '<li><a href="pacientes/creaCitasP.php">Crear cita</a></li>';
         echo '<li><a href="pacientes/consultaCitasP.php">Consultar citas</a></li>';
         echo '<li><a class="login-button" type="button" style="color: white;">Paciente</a></li>';
     } elseif ($rolUsuario === "admin") {
