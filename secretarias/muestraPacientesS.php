@@ -77,13 +77,17 @@
                             <?php
                             // Incluye el archivo de conexión
                             include '../php/acceso.php';
-                            // Realizar la consulta para obtener los registros de pacientes
-                            $sql = "SELECT NombreCompletoP, CURPP, correoP, Estatus FROM pacientes";
+                            // Realizar la consulta para obtener los registros de pacientes dependiendo de la secretaria
+                            $ID_secretaria = $_SESSION['Rol=?secretario'];
+                            $ID_secretaria = mysqli_real_escape_string($dp, $ID_secretaria);
+
+                            $sql = "SELECT NombreCompletoP, CURPP, correoP, Estatus FROM pacientes WHERE IDS = $ID_secretaria";
                             $result = $dp->query($sql);
-                            // Verificar si hay errores en la consulta
+                            
                             if (!$result) {
                                 die("Error en la consulta: " . $dp->error);
                             }
+                            
 
                             // Imprimir los registros en la tabla
                             if ($result->num_rows > 0) {
