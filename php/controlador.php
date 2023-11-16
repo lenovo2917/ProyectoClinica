@@ -25,7 +25,7 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
     $result3 = $sql3->get_result();
 
     // Consulta para doctores
-    $sql4 = $dp->prepare("SELECT * FROM administrador WHERE NombreCompletoA=? AND ContrasenaA=?");
+    $sql4 = $dp->prepare("SELECT * FROM administrador WHERE UsuarioA=? AND ContrasenaA=?");
     $sql4->bind_param("ss", $nombre, $password);
     $sql4->execute();
     $result4 = $sql4->get_result();
