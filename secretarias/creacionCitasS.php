@@ -20,6 +20,7 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
     <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
     <!--ESTILOS CSS-->
     <link rel="shortcut icon" href="../img/web.png" type="img">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
     <link rel="stylesheet" type="text/css" href="../css/doctores.css">
