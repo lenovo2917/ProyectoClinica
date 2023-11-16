@@ -83,18 +83,6 @@ if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
         <label for="alergias">Alergias:</label>
         <input type="text" id="alergias" name="alergias" placeholder="Ingrese alergias si presenta"><br>
 
-        <label for="tipo_sangre">Tipo de Sangre:</label>
-        <select id="tipo_sangre" name="tipo_sangre">
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-        </select><br>
-
         <input type="submit" name="crear_cita" value="Realizar cita">
         <input type="reset" value="Limpiar" style="background-color: #176b87; color: #fff; padding-top: 8px;
         margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 6%; text-decoration: none;">
