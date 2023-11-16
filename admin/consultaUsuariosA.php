@@ -129,7 +129,7 @@
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='5'>No hay usuarios (SECRETARIOS)</td></tr>";
+                                echo "<tr><td colspan='5'>No hay usuarios (DOCTORES)</td></tr>";
                             }
                             
                             ?>

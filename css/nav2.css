@@ -30,7 +30,7 @@ nav{
 }
 
 .nav-links{
-    text-align: center;
+   text-align: center;
    display: flex;
    list-style: none; 
    width: 88vw;

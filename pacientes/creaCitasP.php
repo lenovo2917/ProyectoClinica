@@ -9,6 +9,7 @@ if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
     header("Location: login.php");
     exit();
+    //chi
 }
 ?>
 
@@ -82,18 +83,6 @@ if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
 
         <label for="alergias">Alergias:</label>
         <input type="text" id="alergias" name="alergias" placeholder="Ingrese alergias si presenta"><br>
-
-        <label for="tipo_sangre">Tipo de Sangre:</label>
-        <select id="tipo_sangre" name="tipo_sangre">
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-        </select><br>
 
         <input type="submit" name="crear_cita" value="Realizar cita">
         <input type="reset" value="Limpiar" style="background-color: #176b87; color: #fff; padding-top: 8px;
