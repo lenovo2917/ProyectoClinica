@@ -102,28 +102,53 @@
                             <?php
                             
                             include '../php/acceso.php';
-                            $sql = "SELECT * FROM doctores";
-                            $result = $dp->query($sql);
 
-                            // Muestra los resultados de la consulta
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
+                            // Muestra los resultados de la consulta (DOCTORES)
+                            $sqlD = "SELECT * FROM doctores";
+                            $resultD = $dp->query($sqlD);
+
+                            if ($resultD->num_rows > 0) {
+                                while ($rowD = $resultD->fetch_assoc()) {
                                     echo "<tr>";
-                                    echo "<td>" . $row["NombreCompletoD"] . "</td>";
-                                    echo "<td>" . $row["CURP"] . "</td>";
-                                    echo "<td>" . $row["Email"] . "</td>";
-                                    echo "<td>" . $row["Estatus"] . "</td>";
+                                    echo "<td>" . $rowD["NombreCompletoD"] . "</td>";
+                                    echo "<td>" . $rowD["CURPD"] . "</td>";
+                                    echo "<td>" . $rowD["CorreoD"] . "</td>";
+                                    echo "<td>" . $rowD["EstatusD"] . "</td>";
                                     echo "<td>";
                                     echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
-                                    echo '<a href="modificaUsuariosA.php?id=' . $row["IDD"] . '" type="button"><button>Modificar</button></a>';
-                                    echo '<a href="eliminaUsuariosA.php?id=' . $row["IDD"] . '" type="button"><button>Borrar</button></a>';
-                                    echo '<a href="detallesUsuariosA.php?id=' . $row["IDD"] . '" type="button"><button>Detalles</button></a>';
+                                    echo '<a href="modificaUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Modificar</button></a>';
+                                    echo '<a href="eliminaUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Borrar</button></a>';
+                                    echo '<a href="detallesUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Detalles</button></a>';
                                     echo '</div>';
                                     echo "</td>";
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='5'>No hay usuarios</td></tr>";
+                                echo "<tr><td colspan='5'>No hay usuarios (SECRETARIOS)</td></tr>";
+                            }
+
+                            // Muestra los resultados de la consulta (SECRETARIOS)
+                            $sqlS = "SELECT * FROM secretarios";
+                            $resultS = $dp->query($sqlS);
+                            
+                            if ($resultS->num_rows > 0) {
+                                while ($rowS = $resultS->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $rowS["NombreCompletoS"] . "</td>";
+                                    echo "<td>" . $rowS["CURPS"] . "</td>";
+                                    echo "<td>" . $rowS["CorreoS"] . "</td>";
+                                    echo "<td>" . $rowS["EstatusS"] . "</td>";
+                                    echo "<td>";
+                                    echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
+                                    echo '<a href="modificaUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Modificar</button></a>';
+                                    echo '<a href="eliminaUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Borrar</button></a>';
+                                    echo '<a href="detallesUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Detalles</button></a>';
+                                    echo '</div>';
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>No hay usuarios (SECRETARIOS)</td></tr>";
                             }
                             ?>
                             <!--<tr>
