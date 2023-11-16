@@ -45,7 +45,13 @@
                 <!--Main o contenido-->
                 <!--Main o contenido-->
             <div class="container-fluid formatoLogin mt-5 mb-2">
-                <form class="form" action="php/procesaLogin.php" method="post">
+                <form class="form" action="" method="post">
+                <?php
+                    include "php/acceso.php";
+                   
+                    
+                    include "php/controlador.php";
+                ?>
                     <div class="row">
                         <div class="col-12" style="padding: 2rem;">
                             <h2><i class="fa-solid fa-lock"></i> Login</h2>
@@ -56,8 +62,12 @@
                         <div class="col-12">
                             <input type="password" name="clave" placeholder="Contraseña *" required />
                         </div>
+                        <!--<div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
+                            <button type="submit" name="btningresar" type="button"><i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Inicia sesión</button>
+                        </div>-->
+                        
                         <div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
-                            <button type="submit" type="button"><i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Inicia sesión</button>
+                            <button type="submit" value="Iniciar Sesión" type="button" name="btningresar"><i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Inicia sesión</button>
                         </div>
                         <div>
                             <p class="">¿No estas registrado? <a style="color: #176B87;" href="pacientes/registroP.php">Crea una cuenta</a></p>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) && empty($_SESSION["NombreCompletoD"])) {
+  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+} 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -40,19 +46,52 @@
                   <div class="line3"></div>
                 </div>
                 <ul class="nav-links">
+<<<<<<< HEAD
                   <li><a href="Blog_Medico.php">Inicio</a></li>
+=======
+                  <li><a href="Blog_Medico.html">Inicio</a></li>
+                  
+
+>>>>>>> 16e367c7d5f84a87af89b905867d98144e613e28
                   <?php 
-                  // Recupera el valor de rol de la URL
-                  $rol = isset($_GET['rol']) ? $_GET['rol'] : '';
+                 $rol=$_SESSION['Rol'];
                   // Incluye barraNavegacion.php antes de llamar a la función generarMenu
                   include('php/barraNavegacion.php');
                   
                   // Llama a la función generarMenu con el rol del usuario
                   generarMenu($rol);
                   ?>
+                  <?php
 
-                  <li><a class="login-button" type="button" style="color: white;" href="login.php">Login</a>
-                  </li>
+   
+if(isset($_GET['cerrar_sesion'])) {
+        // Eliminar las cookies de sesión
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+        // Destruir la sesión
+        session_unset();
+        session_destroy();
+        $_SESSION = array();
+        // Redirigir a la página de inicio de sesión
+        header("Location: login.php");
+        exit();
+    } else if(!isset($_SESSION['sesion_cerrada'])) {
+      echo '
+      <li><a href="login.php?cerrar_sesion=true" class="login-button" type="button" onclick="return confirm(\'Seguro que quieres salir?\')" 
+      style="color: white;">
+      Cerrar sesión
+    </a>
+  </li>';
+    }else {   
+}
+unset($_SESSION['sesion_cerrada']);
+?>
+                  
                 </ul>
               </nav>
             </div>

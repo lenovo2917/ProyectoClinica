@@ -45,7 +45,7 @@
  echo '</h2>Usuario o contraseña incorrecta</h2>';
  echo '<br><a href="login.html">Ir a login</a>';
  }
- mysqli_close($dp);
+
  ?>
 
 
