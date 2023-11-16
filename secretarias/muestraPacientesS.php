@@ -77,11 +77,10 @@
                             <?php
                             // Incluye el archivo de conexión
                             include '../php/acceso.php';
+                            session_start();
                             // Realizar la consulta para obtener los registros de pacientes dependiendo de la secretaria
-                            $ID_secretaria = $_SESSION['secretario'];
-                            $ID_secretaria = mysqli_real_escape_string($dp, $ID_secretaria);
-
-                            $sql = "SELECT NombreCompletoP, CURPP, correoP, Estatus FROM pacientes WHERE IDS = $ID_secretaria";
+                            //$IDS = $_SESSION['IDS'];
+                            $sql = "SELECT NombreCompletoP, CURPP, correoP, Estatus FROM pacientes";
                             $result = $dp->query($sql);
                             
                             if (!$result) {
@@ -97,19 +96,15 @@
                                     echo "<td>" . $row['CURPP'] . "</td>";
                                     echo "<td>" . $row['correoP'] . "</td>";
                                     echo "<td>" . $row['Estatus'] . "</td>";
-                                    echo '<td>
-                                            <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                                <a href="modificaPacientesS.php?id=' . $row['CURPP'] . '" type="button">
-                                                    <button>Modificar</button>
-                                                </a>
-                                                <a href="eliminaPacientesS.php?id=' . $row['CURPP'] . '" type="button">
-                                                    <button>Borrar</button>
-                                                </a>
-                                                <a href="consultaPacientesS.php?id=' . $row['CURPP'] . '" type="button">
-                                                    <button>Consultar</button>
-                                                </a>
-                                            </div>
-                                        </td>';
+                                    echo "<td>";
+                                    echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
+                                    echo '<a href="modificaPacientesS.php?id=' . $row["CURPP"] . '" type="button"><button>Modificar</button></a>';
+                                    echo '&nbsp;';  
+                                    echo '<a href="eliminaPacientesS.php?id=' . $row["CURPP"] . '" type="button"><button>Borrar</button></a>';
+                                    echo '&nbsp;'; 
+                                    echo '<a href="consultaPacientesS.php?id=' . $row["CURPP"] . '" type="button"><button>Consultar</button></a>';
+                                    echo '</div>';
+                                    echo "</td>";
                                     echo "</tr>";
                                 }
                             } else {
