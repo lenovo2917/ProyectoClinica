@@ -16,7 +16,7 @@ function generarMenu($rolUsuario) {
         echo '<li><a href="/secretarias/muestraPacientesS.php">Pacientes</a></li>';
         echo '<li><a href="/proyectoClinica/secretarias/creacionCitasS.php">Crear cita</a></li>';
         echo '<li><a href="/proyectoClinica/secretarias/consultaCitasS.php">Consultar Citas</a></li>';
-        echo '<li><a class="login-button" style="color: white;">Secretario</a></li>';
+        echo '<li><button class="login-button" style="color: white;">Secretario</button></li>';
     }
 }
 ?>
