@@ -4,7 +4,7 @@ function generarMenu($rolUsuario) {
         echo '<ul class="nav-links">'
         '<li><a href="pacientes/creaCitasP.html">Crear cita</a></li>'
         '<li><a href="pacientes/consultaCitasP.php">Consultar citas</a></li>'
-        '<li><a class="login-button" type="button" style="color: white;">Paciente</a></li>'
+        '<li><button class="login-button" style="color: white;">Paciente</button></li>'
         '</ul>';
     } elseif ($rolUsuario === "admin") {
         echo '<li><a href="admin/creacionUsuarios.html">Crear usuario</a></li>';
