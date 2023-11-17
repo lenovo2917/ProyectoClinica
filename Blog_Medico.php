@@ -46,9 +46,6 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                   <div class="line3"></div>
                 </div>
                 <ul class="nav-links">
-                  <li><a href="Blog_Medico.html">Inicio</a></li>
-                  
-
                   <?php 
                  $rol=$_SESSION['Rol'];
                   // Incluye barraNavegacion.php antes de llamar a la función generarMenu
@@ -77,12 +74,8 @@ if(isset($_GET['cerrar_sesion'])) {
         header("Location: login.php");
         exit();
     } else if(!isset($_SESSION['sesion_cerrada'])) {
-      echo '
-      <li><a href="login.php?cerrar_sesion=true" class="login-button" type="button" onclick="return confirm(\'Seguro que quieres salir?\')" 
-      style="color: white;">
-      Cerrar sesión
-    </a>
-  </li>';
+      echo '<li><a href="login.php?cerrar_sesion=true" class="login-button" type="button" onclick="return confirm(\'Seguro que quieres salir?\')" 
+      style="color: white;"> Cerrar</a></li>';
     }else {   
 }
 unset($_SESSION['sesion_cerrada']);
