@@ -1,15 +1,17 @@
 <?php
 function generarMenu($rolUsuario) {
     if ($rolUsuario === "paciente") {
-        echo '<ul class="nav-links">
-        <li><a href="pacientes/creaCitasP.php">Crear cita</a></li>
-        <li><a href="pacientes/consultaCitasP.php">Consultar citas</a></li>
-        <li><button class="login-button" style="color: white;">Paciente</button></li>
-        </ul>';
+        echo '<li><a href="pacientes/creaCitasP.html">Crear cita</a></li>';
+        echo '<li><a href="pacientes/consultaCitasP.html">Consultar citas</a></li>';
+        echo '<li><a class="login-button" style="color: white;">Paciente</a></li>';
+        echo '<li><a href="pacientes/creaCitasP.php">Crear cita</a></li>';
+        echo '<li><a href="pacientes/consultaCitasP.php">Consultar citas</a></li>';
+        echo '<li><button class="login-button" style="color: white;">Paciente</button></li>';
     } elseif ($rolUsuario === "admin") {
         echo '<li><a href="admin/creacionUsuarios.html">Crear usuario</a></li>';
         echo '<li><a href="admin/consultaUsuariosA.html">Usuarios</a></li>';
         echo '<li><button class="login-button" style="color: white;">Admin</button></li>';
+>>>>>>> 16e367c7d5f84a87af89b905867d98144e613e28
     }
     elseif ($rolUsuario === "secretario") {
         echo '<li><a href="/secretarias/muestraPacientesS.php">Pacientes</a></li>';
