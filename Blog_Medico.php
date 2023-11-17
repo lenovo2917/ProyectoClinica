@@ -46,16 +46,6 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                   <div class="line3"></div>
                 </div>
                 <ul class="nav-links">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-                  <li><a href="Blog_Medico.php">Inicio</a></li>
-=======
-                  <li><a href="Blog_Medico.html">Inicio</a></li>
-                  
-
->>>>>>> 16e367c7d5f84a87af89b905867d98144e613e28
->>>>>>> cfb862540735ae3b95cfe5e4880e74d325369667
                   <?php 
                  $rol=$_SESSION['Rol'];
                   // Incluye barraNavegacion.php antes de llamar a la función generarMenu
@@ -64,9 +54,7 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                   // Llama a la función generarMenu con el rol del usuario
                   generarMenu($rol);
                   ?>
-                  <?php
-
-   
+                  <?php 
 if(isset($_GET['cerrar_sesion'])) {
         // Eliminar las cookies de sesión
         if (ini_get("session.use_cookies")) {
