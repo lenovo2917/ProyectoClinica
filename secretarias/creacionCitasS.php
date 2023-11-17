@@ -93,64 +93,80 @@ session_start();
                         <div class="row ">
                             <div class="col-12">
                                 <div class="row mb-3">
-                                    <label for="" class=" col-1 col-form-label">Paciente:</label>
-                                    <div class="col-5 text-start">
-                                        <input type="text" class="form-control" name="nombrePaciente" id="">
+                                    <label for="" class=" col-3 col-form-label">Ingrese el nombre:</label>
+                                    <div class="col-7 text-center border-bottom border-secondary">
+                                        <input type="text" class="form-control-plaintext" name="nombrePaciente" id="">
                                     </div>
-                                    <button class="col-1"  id="buscarP" >Buscar</button>
-                                    <label for="" class=" col-2 col-form-label text-end">Fecha de
-                                        cita:</label>
-                                    <div class="col-3 text-end">
-                                        <input type="date" class="form-control" id="" value="12/10/2023">
+                                    <div class="col-2 text-end">
+                                        <button class="" id="buscarP">Buscar</button>
                                     </div>
                                     <div class="col-12 text-center" id="mensajeError">
 
                                     </div>
                                 </div>
                             </div>
-                            <form action="" class="form" method="post">
+                            <form action="../php/crearCitaS.php" class="form" method="post">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 mt-4">
                                             <h4 class="">Datos del paciente:</h4>
                                         </div>
                                         <div class="row py-2">
-                                            <label for="" class=" py-2 col-1 col-form-label">Paciente:</label>
-                                            <div class="border-bottom border-secondary col-5 text-start">
-                                                <input type="text" readonly id="nombrePacienteF" class="form-control-plaintext">
+                                            <label for="" class=" py-2 col-2 col-form-label">Paciente:</label>
+                                            <div class="border-bottom border-secondary col-4 text-start">
+                                                <input type="text" readonly id="nombrePacienteF" name="nombrePacienteF"
+                                                    class="form-control-plaintext">
                                             </div>
                                             <label for="" class=" col-1 col-form-label">CURP:</label>
-                                            <div class="border-bottom border-secondary col-5 text-start">
-                                                <input type="text" readonly id="curpPacienteF" class="form-control-plaintext">
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="row py-2">
-                                            <label for="" class=" col-1 col-form-label">Sintomas:</label>
-                                            <div class="border-bottom border-secondary col-4 text-start">
-                                                <input type="text" id="sintomasPacienteF" class="form-control-plaintext">
-                                            </div>
-                                            <label for="" class="col-1 col-form-label">Alergias:</label>
-                                            <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="text" readonly id="alergiasPacienteF" class="form-control-plaintext">
+                                            <div class="border-bottom border-secondary col-2 text-start">
+                                                <input type="text" readonly id="curpPacienteF" name="curpPacienteF"
+                                                    class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-2 col-form-label text-end">tipo de sangre:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="text" readonly id="sangrePacienteF" class="form-control-plaintext">
+                                                <input type="text" readonly id="sangrePacienteF" name="sangrePacienteF"
+                                                    class="form-control-plaintext">
                                             </div>
-                                            <label for="" class="col mt-1 col-form-label text-center">Descripcion:</label>
-                                            <div class="border-bottom border-secondary col-12 text-start">
-                                                <input type="text" id="descripcionPacienteF" class="form-control-plaintext">
+                                        </div>
+                                        <div class="row py-2">
+                                            <label for="" class="col-2 col-form-label">Alergias:</label>
+                                            <div class="border-bottom border-secondary col-4 text-start">
+                                                <input type="text" readonly id="alergiasPacienteF"
+                                                    name="alergiasPacienteF" class="form-control-plaintext">
+                                            </div>
+                                            <label for="" class="col-1 col-form-label">Fecha:</label>
+                                            <div class="border-bottom border-secondary col-3 text-start">
+                                                <input type="date" id="fechaPacienteF" name="fechaPacienteF"
+                                                    class="form-control-plaintext">
+                                            </div>
+                                            <label for="" class="col-1 col-form-label">Hora:</label>
+                                            <div class="border-bottom border-secondary col-1 text-start">
+                                                <input type="time" id="horaPacienteF" name="horaPacienteF"
+                                                    class="form-control-plaintext">
+                                            </div>
+                                        </div>
+                                        <div class="row py-2">
+                                            <label for="" class=" col-2 col-form-label">Sintomas:</label>
+                                            <div class="border-bottom border-secondary col-10 text-start">
+                                                <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
+                                                    class="form-control-plaintext">
+                                            </div>
+                                        </div>
+                                        <div class="row py-2">
+                                            <label class="col-2 mt-1 col-form-label">Descripcion:</label>
+                                            <div class="border-bottom border-secondary col-10 text-start">
+                                                <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
+                                                    class="form-control-plaintext">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 text-end">
-                                    <input type="submit" value="Crear cita">
+                                    <input type="submit" name="crearCitaS" value="Crear cita">
                                 </div>
                             </form>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -169,7 +185,7 @@ session_start();
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
-    <script src="../js/buscarPaciente.js"></script>    
+    <script src="../js/buscarPaciente.js"></script>
 
 </body>
 
