@@ -73,11 +73,13 @@ if(empty($_SESSION["NombreCompleto"])) {
                     exit();
                 } else if(!isset($_SESSION['sesion_cerrada'])) {
                   echo '
-                  <li><a href="login.php?cerrar_sesion=true" class="login-button" type="button" onclick="return confirm(\'Seguro que quieres salir?\')" 
+                  <ul class="nav-links">
+                  <li ><a href="login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'Seguro que quieres salir?\')" 
                   style="color: white;">
-                  Cerrar sesión
+                  Cerrar
                 </a>
-              </li>';
+              </li>
+              </ul>';
                 }else {   
             }
             unset($_SESSION['sesion_cerrada']);
