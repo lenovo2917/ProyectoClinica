@@ -21,9 +21,6 @@ function generarMenu($rolUsuario) {
         echo '<li><a href="admin/creacionUsuarios.html">Crear usuario</a></li>';
         echo '<li><a href="admin/consultaUsuariosA.html">Usuarios</a></li>';
         echo '<li><button class="login-button" style="color: white;">Admin</button></li>';
-<<<<<<< HEAD
-=======
->>>>>>> 16e367c7d5f84a87af89b905867d98144e613e28
 >>>>>>> a5be06d253891c35d10d6bf825d5ae1e35856628
 >>>>>>> c6fae43364db1ab62a2592f271039c208436fc3f
     }
