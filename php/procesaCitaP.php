@@ -1,10 +1,9 @@
 <?php
-session_start();
-
+include('../php/controlador.php');
 // Verifica si el usuario ha iniciado sesión como paciente
-if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
+if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     // Accede al nombre completo del paciente
-    $nombreCompletoP = $_SESSION["NombreCompletoP"];
+    $nombreCompletoP = $_SESSION["NombreCompleto"];
 } else {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
     header("Location: login.php");
@@ -12,7 +11,6 @@ if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
 }
 
 if (isset($_POST['crear_cita'])) {
-include 'acceso.php';
 // Recoger los datos del formulario
 $fecha = $_POST['fecha'];
 $hora = $_POST['hora'];
