@@ -38,7 +38,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                 <div class="logo" style="display: flex;align-items: center;">
                   <span
                     style="color:#000000; font-size:26px; font-weight:bold; letter-spacing: 1px;margin-left: 20px;">MEDICATEC</span>
-                  <span style="padding: 0.5rem;"><img src="./img/cora2.png" alt="Descripción de la imagen"></span>
+                  <span style="padding: 0.5rem;"><img src="./img/cora2.png" alt="Descripción de la imagen"><a href="/Blog_Medico.php"></a></span>
                 </div>
                 <div class="hamburger">
                   <div class="line1"></div>
