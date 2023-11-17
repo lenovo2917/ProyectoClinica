@@ -1,15 +1,13 @@
 <?php
-session_start();
-
+include('../php/controlador.php');
 // Verifica si el usuario ha iniciado sesión como paciente
-if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
+if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     // Accede al nombre completo del paciente
-    $nombreCompletoP = $_SESSION["NombreCompletoP"];
+    $nombreCompletoP = $_SESSION["NombreCompleto"];
 } else {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
     header("Location: login.php");
     exit();
-    //chi
 }
 ?>
 
@@ -52,9 +50,7 @@ if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
                                 </div>
                                 <ul class="nav-links">
                                     <li><a href="../Blog_Medico.php?rol=paciente">Inicio</a></li>
-                                    <li><a href="consultaCitasP.html">Consultar citas</a></li>
-                                    <li><a class="login-button" type="button" style="color: white;" href="login.html">Login</a>
-                                    </li>
+                                    <li><a href="consultaCitasP.php">Consultar citas</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -65,7 +61,13 @@ if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-    
+    <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
+          if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
+          // Accede al nombre completo del paciente
+          $nombreCompletoP = $_SESSION["NombreCompleto"];
+          echo $nombreCompletoP;
+           } ?>!
+    </h4>
     <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agendar nueva cita</h1>
 
     <form id="citaForm" action="../php/procesaCitaP.php" method="post">
