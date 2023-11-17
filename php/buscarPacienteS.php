@@ -15,7 +15,7 @@ if ($resultado->num_rows > 0) {
     echo json_encode($fila);
 } else {
     // Enviar un mensaje si no se encontraron resultados
-    echo json_encode(['mensaje' => 'Paciente no encontrado']);
+    echo json_encode(['mensaje' => 'Paciente: '. $nombrePaciente .' no encontrado']);
 }
 
 // Cerrar la conexión

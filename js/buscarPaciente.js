@@ -19,13 +19,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Verificar si se encontró al paciente
                 if (respuesta.hasOwnProperty('mensaje')) {
+                    var mensajeContainer = document.getElementById('mensajeError');
+                    mensajeContainer.innerHTML = '<div class="alert alert-warning" role="alert">' + respuesta.mensaje + '</div>';
                     alert(respuesta.mensaje); // Mostrar mensaje si el paciente no se encontró
                 } else {
                     // Llenar los campos del formulario con los datos del paciente
-                    document.querySelector('[name="nombrePacienteF"]').value = respuesta.NombreCompletoP;
-                    document.querySelector('curpPacienteF').value = respuesta.CURPP;
-                    document.querySelector('alergiasPacienteF').value = respuesta.alergiasP;
-                    document.querySelector('sangrePacienteF').value = respuesta.tipoSangreP;
+                    document.getElementById('nombrePacienteF').value = respuesta.NombreCompletoP;
+                    document.getElementById('curpPacienteF').value = respuesta.CURPP;
+                    document.getElementById('alergiasPacienteF').value = respuesta.alergiasP;
+                    document.getElementById('sangrePacienteF').value = respuesta.tipoSangreP;
                     // Otros campos de acuerdo a tu estructura de tabla
                     // ...
                 }

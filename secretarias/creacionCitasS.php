@@ -103,6 +103,9 @@ session_start();
                                     <div class="col-3 text-end">
                                         <input type="date" class="form-control" id="" value="12/10/2023">
                                     </div>
+                                    <div class="col-12 text-center" id="mensajeError">
+
+                                    </div>
                                 </div>
                             </div>
                             <form action="" class="form" method="post">
@@ -114,41 +117,39 @@ session_start();
                                         <div class="row py-2">
                                             <label for="" class=" py-2 col-1 col-form-label">Paciente:</label>
                                             <div class="border-bottom border-secondary col-5 text-start">
-                                                <input type="text" readonly name="nombrePacienteF" class="form-control-plaintext">
+                                                <input type="text" readonly id="nombrePacienteF" class="form-control-plaintext">
                                             </div>
                                             <label for="" class=" col-1 col-form-label">CURP:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="text" readonly name="curpPacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" readonly id="curpPacienteF" class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Edad:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="text" name="edadPacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" id="edadPacienteF" class="form-control-plaintext">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label for="" class=" col-1 col-form-label">Sintomas:</label>
                                             <div class="border-bottom border-secondary col-4 text-start">
-                                                <input type="text" name="sintmasPacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" id="sintmasPacienteF" class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Alergias:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="text" readonly name="alergiasPacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" readonly id="alergiasPacienteF" class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-2 col-form-label text-end">tipo de sangre:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="text" readonly name="sangrePacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" readonly id="sangrePacienteF" class="form-control-plaintext">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 text-end">
+                                    <input type="submit" value="Crear cita">
+                                </div>
                             </form>
-
-                            
-
                         </div>
-                        <div class=" col-12 text-end">
-                            <input type="submit" value="Crear cita">
-                        </div>
+                        
                     </div>
                 </div>
             </div>
