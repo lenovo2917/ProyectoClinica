@@ -1,9 +1,10 @@
 <?php
+include('acceso.php');
 // Obtener el nombre del paciente desde la solicitud POST
 $nombrePaciente = $_POST['nombrePaciente'];
 
 // Consulta SQL para buscar al paciente
-$consulta = "SELECT * FROM pacientes WHERE nombre = '$nombrePaciente'";
+$consulta = "SELECT * FROM pacientes WHERE nombreCompletoP = '$nombrePaciente'";
 
 $resultado = $conexion->query($consulta);
 
