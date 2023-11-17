@@ -1,7 +1,7 @@
 <?php
 function generarMenu($rolUsuario) {
     if ($rolUsuario === "paciente") {
-        echo '<ul>'
+        echo '<ul class="nav-links">'
         '<li><a href="pacientes/creaCitasP.html">Crear cita</a></li>'
         '<li><a href="pacientes/consultaCitasP.php">Consultar citas</a></li>'
         '<li><a class="login-button" type="button" style="color: white;">Paciente</a></li>'
