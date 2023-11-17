@@ -9,6 +9,7 @@ if(isset($_SESSION["NombreCompletoP"]) && $_SESSION["Rol"] === 'paciente') {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
     header("Location: login.php");
     exit();
+    //chi
 }
 ?>
 
