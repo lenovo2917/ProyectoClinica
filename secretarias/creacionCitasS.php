@@ -22,6 +22,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
     <link rel="stylesheet" type="text/css" href="../css/secretarias.css">
     <link rel="stylesheet" type="text/css" href="../css/Blog.css">
+    
 </head>
 
 <body>
@@ -97,12 +98,13 @@ session_start();
                                     <div class="col-7 text-center border-bottom border-secondary">
                                         <input type="text" class="form-control-plaintext" name="nombrePaciente" id="">
                                     </div>
-                                    <div class="col-2 text-end">
+                                    <div class="col-2 text-end mt-2">
                                         <button class="" id="buscarP">Buscar</button>
                                     </div>
                                     <div class="col-12 text-center" id="mensajeError">
 
                                     </div>
+                                    <div class="col-12 text-center" id="mensajeResultado"></div>
                                 </div>
                             </div>
                             <form action="../php/crearCitaS.php" class="form" method="post">
@@ -166,7 +168,6 @@ session_start();
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
