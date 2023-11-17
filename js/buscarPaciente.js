@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Verificar si se encontró al paciente
                 if (respuesta.hasOwnProperty('mensaje')) {
                     var mensajeContainer = document.getElementById('mensajeError');
-                    mensajeContainer.innerHTML = '<div class="alert alert-warning" role="alert">' + respuesta.mensaje + '</div>';
-                    alert(respuesta.mensaje); // Mostrar mensaje si el paciente no se encontró
+                    mensajeContainer.innerHTML = '<div class="mt-4 alert alert-warning" role="alert">' + respuesta.mensaje + '</div>';
+                    
                 } else {
                     // Llenar los campos del formulario con los datos del paciente
                     document.getElementById('nombrePacienteF').value = respuesta.NombreCompletoP;

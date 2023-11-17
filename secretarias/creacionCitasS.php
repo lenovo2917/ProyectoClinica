@@ -120,18 +120,15 @@ session_start();
                                                 <input type="text" readonly id="nombrePacienteF" class="form-control-plaintext">
                                             </div>
                                             <label for="" class=" col-1 col-form-label">CURP:</label>
-                                            <div class="border-bottom border-secondary col-3 text-start">
+                                            <div class="border-bottom border-secondary col-5 text-start">
                                                 <input type="text" readonly id="curpPacienteF" class="form-control-plaintext">
                                             </div>
-                                            <label for="" class="col-1 col-form-label">Edad:</label>
-                                            <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="text" id="edadPacienteF" class="form-control-plaintext">
-                                            </div>
+                                            
                                         </div>
                                         <div class="row py-2">
                                             <label for="" class=" col-1 col-form-label">Sintomas:</label>
                                             <div class="border-bottom border-secondary col-4 text-start">
-                                                <input type="text" id="sintmasPacienteF" class="form-control-plaintext">
+                                                <input type="text" id="sintomasPacienteF" class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Alergias:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
@@ -140,6 +137,10 @@ session_start();
                                             <label for="" class="col-2 col-form-label text-end">tipo de sangre:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
                                                 <input type="text" readonly id="sangrePacienteF" class="form-control-plaintext">
+                                            </div>
+                                            <label for="" class="col mt-1 col-form-label text-center">Descripcion:</label>
+                                            <div class="border-bottom border-secondary col-12 text-start">
+                                                <input type="text" id="descripcionPacienteF" class="form-control-plaintext">
                                             </div>
                                         </div>
                                     </div>
