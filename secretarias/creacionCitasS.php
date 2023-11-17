@@ -97,7 +97,7 @@ session_start();
                                     <div class="col-5 text-start">
                                         <input type="text" class="form-control" name="nombrePaciente" id="">
                                     </div>
-                                    <button class="col-1"  id="buscarPaciente" >Buscar</button>
+                                    <button class="col-1"  id="buscarP" >Buscar</button>
                                     <label for="" class=" col-2 col-form-label text-end">Fecha de
                                         cita:</label>
                                     <div class="col-3 text-end">
@@ -114,11 +114,11 @@ session_start();
                                         <div class="row py-2">
                                             <label for="" class=" py-2 col-1 col-form-label">Paciente:</label>
                                             <div class="border-bottom border-secondary col-5 text-start">
-                                                <input type="text" name="nombrePacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" readonly name="nombrePacienteF" class="form-control-plaintext">
                                             </div>
                                             <label for="" class=" col-1 col-form-label">CURP:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="text" name="curpPacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" readonly name="curpPacienteF" class="form-control-plaintext" id="">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Edad:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
@@ -132,28 +132,18 @@ session_start();
                                             </div>
                                             <label for="" class="col-1 col-form-label">Alergias:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="text" name="alergiasPacienteF" class="form-control-plaintext" id="">
+                                                <input type="text" readonly name="alergiasPacienteF" class="form-control-plaintext" id="">
                                             </div>
                                             <label for="" class="col-2 col-form-label text-end">tipo de sangre:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
-                                                <select class=" form-control-plaintext"
-                                                    aria-label="Default select example" name="sangrePacienteF">
-                                                    <option value="A+">A+</option>
-                                                    <option value="A-">A-</option>
-                                                    <option value="B+">B+</option>
-                                                    <option value="B-">B-</option>
-                                                    <option value="AB+">AB+</option>
-                                                    <option value="AB-">AB-</option>
-                                                    <option value="O+">O+</option>
-                                                    <option value="O-">O-</option>
-                                                </select>
+                                                <input type="text" readonly name="sangrePacienteF" class="form-control-plaintext" id="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
 
-                            <script src="buscarPaciente.js"></script>
+                            
 
                         </div>
                         <div class=" col-12 text-end">
@@ -177,8 +167,7 @@ session_start();
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
-    <script src="../js/creaCitas.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/buscarPaciente.js"></script>    
 
 </body>
 
