@@ -162,7 +162,7 @@
                             </div>
 
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
-                                <a href="../secretarias/muestraPacientesS.html" type="button">  
+                                <a href="../secretarias/muestraPacientesS.php   " type="button">  
                                     <button type="button"> <i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
                                 </a>
                             </div>

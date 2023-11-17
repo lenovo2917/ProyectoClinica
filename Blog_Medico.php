@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(empty($_SESSION["NombreCompleto"])) {
+  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+} 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -32,7 +38,7 @@
                 <div class="logo" style="display: flex;align-items: center;">
                   <span
                     style="color:#000000; font-size:26px; font-weight:bold; letter-spacing: 1px;margin-left: 20px;">MEDICATEC</span>
-                  <span style="padding: 0.5rem;"><img src="./img/cora2.png" alt="Descripción de la imagen"></span>
+                  <span style="padding: 0.5rem;"><img src="./img/cora2.png" alt="Descripción de la imagen"><a href="/Blog_Medico.php"></a></span>
                 </div>
                 <div class="hamburger">
                   <div class="line1"></div>
@@ -40,19 +46,44 @@
                   <div class="line3"></div>
                 </div>
                 <ul class="nav-links">
-                  <li><a href="Blog_Medico.html">Inicio</a></li>
                   <?php 
-                  // Recupera el valor de rol de la URL
-                  $rol = isset($_GET['rol']) ? $_GET['rol'] : '';
+                 $rol=$_SESSION['Rol'];
                   // Incluye barraNavegacion.php antes de llamar a la función generarMenu
                   include('php/barraNavegacion.php');
                   
                   // Llama a la función generarMenu con el rol del usuario
                   generarMenu($rol);
                   ?>
-
-                  <li><a class="login-button" type="button" style="color: white;" href="login.php">Login</a>
-                  </li>
+                  <?php
+                  if(isset($_GET['cerrar_sesion'])) {
+                          // Eliminar las cookies de sesión
+                          if (ini_get("session.use_cookies")) {
+                              $params = session_get_cookie_params();
+                              setcookie(session_name(), '', time() - 42000,
+                                  $params["path"], $params["domain"],
+                                  $params["secure"], $params["httponly"]
+                              );
+                          }
+                    // Destruir la sesión
+                    session_unset();
+                    session_destroy();
+                    $_SESSION = array();
+                    // Redirigir a la página de inicio de sesión
+                    header("Location: login.php");
+                    exit();
+                } else if(!isset($_SESSION['sesion_cerrada'])) {
+                  echo '
+                  <ul class="nav-links">
+                  <li><a href="login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'Seguro que quieres salir?\')" 
+                  style="color: white;">
+                  Cerrar Sesión </a>
+              </li>
+              </ul>';
+                }else {   
+            }
+            unset($_SESSION['sesion_cerrada']);
+            ?>
+                  
                 </ul>
               </nav>
             </div>
