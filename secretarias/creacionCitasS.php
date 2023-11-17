@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) && empty($_SESSION["NombreCompletoD"])) {
-  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+ 
 } 
 ?>
 <!DOCTYPE html>
@@ -44,6 +44,9 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                         <div class="line3"></div>
                     </div>
                     <?php 
+                        if(isset($_SESSION["NombreCompleto"])){
+                            echo 'NombreCompleto';
+                        }
                         $rol=$_SESSION['Rol'];
                         // Incluye barraNavegacion.php antes de llamar a la función generarMenu
                         include('../php/barraNavegacion.php');
@@ -67,10 +70,17 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                             <div class="col-4 ps-5 text-start">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h4>Secretaria:</h5>
+                                        <h4>Secretaria:</h4>
                                     </div>
                                     <div class="col-12">
-                                        <h4>Ana Lucia Garcia Gomez</h5>
+                                        <h4>
+                                        <?php
+                                        if (isset($_SESSION["NombreCompleto"])) {
+                                            $nombreUsuario = $_SESSION["NombreCompleto"];
+                                            echo "Bienvenido, $nombreUsuario!";
+                                        }    
+                                        ?>   
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +95,7 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                     </div>
 
                     <div class="col-12 px-5">
-                        <form class="form" method="post">
+                        <form action="" class="form" method="post">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="row mb-3">
@@ -96,7 +106,7 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                                         </div>
                                         <label for="" class=" col-2 col-form-label text-end">Fecha de
                                             cita:</label>
-                                        <div class="col-2 text-end">
+                                        <div class="col-3 text-end">
                                             <input type="date" class="form-control" id="" value="12/10/2023">
                                         </div>
                                     </div>
