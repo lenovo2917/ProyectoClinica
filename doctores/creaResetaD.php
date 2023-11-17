@@ -491,7 +491,6 @@
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
     <script src="../js/receta.js"></script>
     <script src="../js/Crear_Receta.js"></script>
     <script src="../js/BusquedaPaciente.js"></script>
