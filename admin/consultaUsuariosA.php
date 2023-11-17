@@ -19,6 +19,26 @@
 
 <body>
 
+    <style>
+        nav {
+            position: fixed;
+            z-index: 1000; /* Asegura que la barra de navegación esté en la parte superior */
+        }
+
+        .container {
+            margin-top: 80px; /* Ajusta el margen superior del contenido para dar espacio a la barra de navegación */
+        }
+        /* Agrega estilos CSS para el pie de página */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40; /* Color de fondo del pie de página */
+            color: white; /* Color del texto del pie de página */
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
     <!--Header header-->
     <header>
         <div class="container-fluid-lg mb-5">
@@ -55,7 +75,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="container-fluid formato">
+                <div class="container-fluid formato mt-3 mb-3">
                     <div class="col-12">
                         <div class="row align-items-center">
                             <div class="col-3 text-start">
