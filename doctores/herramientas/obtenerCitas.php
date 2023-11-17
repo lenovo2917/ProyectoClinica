@@ -17,7 +17,7 @@ if ($resultPaciente->num_rows > 0) {
     $IDP = $rowPaciente['IDP'];
 
     // Consulta SQL para obtener las citas del paciente
-    $sqlSelectCitas = "SELECT IDC, fechaC, HoraC, sintomasC, diagnosticoC, descripcionC, ESTATUS FROM citas WHERE IDP = $IDP";
+    $sqlSelectCitas = "SELECT IDC, fechaC, HoraC, sintomasC, diagnosticoC, descripcionC FROM citas WHERE IDP = $IDP AND ESTATUS = 'Aceptada'";
     $resultCitas = $dp->query($sqlSelectCitas);
 
     if ($resultCitas->num_rows > 0) {
@@ -30,11 +30,11 @@ if ($resultPaciente->num_rows > 0) {
             $sintomasCita = $rowCita['sintomasC'];
             $diagnosticoCita = $rowCita['diagnosticoC'];
             $descripcionCita = $rowCita['descripcionC'];
-            $estatusCita = $rowCita['ESTATUS'];
+           
 
             // Construir el HTML de cada opción de cita
            
-            $htmlCitas .= "<li><a class='dropdown-item' href='#' data-idc='$idCita'>$fechaCita - $horaCita - $estatusCita</a></li>";
+            $htmlCitas .= "<li><a class='dropdown-item' href='#' data-idc='$idCita'>$fechaCita - $horaCita - </a></li>";
 
         }
 

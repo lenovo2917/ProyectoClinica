@@ -74,7 +74,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                 } else if(!isset($_SESSION['sesion_cerrada'])) {
                   echo '
                   <ul class="nav-links">
-                  <li><a href="login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'Seguro que quieres salir?\')" 
+                  <li><a href="login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
                   style="color: white;">
                   Cerrar Sesión </a>
               </li>
@@ -95,7 +95,7 @@ if(empty($_SESSION["NombreCompleto"])) {
         <div class="container">
           <header class="showcase">
             <h1 class="estilo-independiente">La Transformación a llegado</h1>
-            <a href="../pacientes/creaCitasP.html" class="">
+            <a href="pacientes/creaCitasP.php" class="">
               Pide una cita <i class="fas fa-chevron-right"></i>
             </a>
 
