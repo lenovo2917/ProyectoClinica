@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) && empty($_SESSION["NombreCompletoD"])) {
+if(empty($_SESSION["NombreCompleto"])) {
   header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
 } 
 ?>
