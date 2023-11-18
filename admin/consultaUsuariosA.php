@@ -19,6 +19,26 @@
 
 <body>
 
+    <style>
+        nav {
+            position: fixed;
+            z-index: 1000; /* Asegura que la barra de navegación esté en la parte superior */
+        }
+
+        .container {
+            margin-top: 80px; /* Ajusta el margen superior del contenido para dar espacio a la barra de navegación */
+        }
+        /* Agrega estilos CSS para el pie de página */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40; /* Color de fondo del pie de página */
+            color: white; /* Color del texto del pie de página */
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
     <!--Header header-->
     <header>
         <div class="container-fluid-lg mb-5">
@@ -55,7 +75,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="container-fluid formato">
+                <div class="container-fluid formato mt-3 mb-3">
                     <div class="col-12">
                         <div class="row align-items-center">
                             <div class="col-3 text-start">
@@ -103,40 +123,39 @@
                                 </td>
                             </tr>-->
                             <?php
-                            
-                            include '../php/acceso.php';
+                                include '../php/acceso.php';
 
-                            // Muestra los resultados de la consulta (DOCTORES)
-                            $sqlD = "SELECT * FROM doctores";
-                            $resultD = $dp->query($sqlD);
+                                // Muestra los resultados de la consulta (DOCTORES)
+                                $sqlD = "SELECT * FROM doctores";
+                                $resultD = $dp->query($sqlD);
 
-                            if ($resultD->num_rows > 0) {
-                                while ($rowD = $resultD->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . $rowD["NombreCompletoD"] . "</td>";
-                                    echo "<td>" . $rowD["CURPD"] . "</td>";
-                                    echo "<td>" . $rowD["CorreoD"] . "</td>";
-                                    echo "<td>" . $rowD["EstatusD"] . "</td>";
-                                    echo "<td>";
-                                    echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
-                                    echo '<a href="modificaUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Modificar</button></a>';
-                                    echo '&nbsp;';  // Agrega un espacio en blanco entre los botones
-                                    echo '<a href="eliminaUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Borrar</button></a>';
-                                    echo '&nbsp;';  // Agrega otro espacio en blanco entre los botones
-                                    echo '<a href="detallesUsuariosA.php?id=' . $rowD["IDD"] . '" type="button"><button>Detalles</button></a>';
-                                    echo '</div>';
-                                    echo "</td>";
-                                    echo "</tr>";
+                                if ($resultD->num_rows > 0) {
+                                    while ($rowD = $resultD->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . $rowD["NombreCompletoD"] . "</td>";
+                                        echo "<td>" . $rowD["CURPD"] . "</td>";
+                                        echo "<td>" . $rowD["CorreoD"] . "</td>";
+                                        echo "<td>" . $rowD["EstatusD"] . "</td>";
+                                        echo "<td>";
+                                        echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
+                                        echo '<a href="modificaUsuariosA.php?idDoctor=' . $rowD["IDD"] . '" type="button"><button>Modificar</button></a>';
+                                        echo '&nbsp;';  // Agrega un espacio en blanco entre los botones
+                                        echo '<a href="eliminaUsuariosA.php?idDoctor=' . $rowD["IDD"] . '" type="button"><button>Borrar</button></a>';
+                                        echo '&nbsp;';  // Agrega otro espacio en blanco entre los botones
+                                        echo '<a href="detallesUsuariosA.php?idDoctor=' . $rowD["IDD"] . '" type="button"><button>Detalles</button></a>';
+                                        echo '</div>';
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='5'>No hay usuarios (DOCTORES)</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='5'>No hay usuarios (DOCTORES)</td></tr>";
-                            }
-                            
                             ?>
                         
                             <tr>
                                 <th colspan="5" class="text-center">SECRETARIOS</th>
                             </tr>
+
                             <tr>
                                 <th>Nombre</th>
                                 <th>CURP</th>
@@ -146,34 +165,33 @@
                             </tr>
 
                             <?php
-                            include '../php/acceso.php';
+                                include '../php/acceso.php';
 
-                            // Muestra los resultados de la consulta (SECRETARIOS)
-                            $sqlS = "SELECT * FROM secretarios";
-                            $resultS = $dp->query($sqlS);
+                                // Muestra los resultados de la consulta (SECRETARIOS)
+                                $sqlS = "SELECT * FROM secretarios";
+                                $resultS = $dp->query($sqlS);
 
-                            if ($resultS->num_rows > 0) {
-                                while ($rowS = $resultS->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . $rowS["NombreCompletoS"] . "</td>";
-                                    echo "<td>" . $rowS["CURPS"] . "</td>";
-                                    echo "<td>" . $rowS["CorreoS"] . "</td>";
-                                    echo "<td>" . $rowS["EstatusS"] . "</td>";
-                                    echo "<td>";
-                                    echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
-                                    echo '<a href="modificaUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Modificar</button></a>';
-                                    echo '&nbsp;';  // Agrega un espacio en blanco entre los botones
-                                    echo '<a href="eliminaUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Borrar</button></a>';
-                                    echo '&nbsp;';  // Agrega otro espacio en blanco entre los botones
-                                    echo '<a href="detallesUsuariosA.php?id=' . $rowS["IDS"] . '" type="button"><button>Detalles</button></a>';
-                                    echo '</div>';
-                                    echo "</td>";
-                                    echo "</tr>";
+                                if ($resultS->num_rows > 0) {
+                                    while ($rowS = $resultS->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . $rowS["NombreCompletoS"] . "</td>";
+                                        echo "<td>" . $rowS["CURPS"] . "</td>";
+                                        echo "<td>" . $rowS["CorreoS"] . "</td>";
+                                        echo "<td>" . $rowS["EstatusS"] . "</td>";
+                                        echo "<td>";
+                                        echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
+                                        echo '<a href="modificaUsuariosA.php?idSecretario=' . $rowS["IDS"] . '" type="button"><button>Modificar</button></a>';
+                                        echo '&nbsp;';  // Agrega un espacio en blanco entre los botones
+                                        echo '<a href="eliminaUsuariosA.php?idSecretario=' . $rowS["IDS"] . '" type="button"><button>Borrar</button></a>';
+                                        echo '&nbsp;';  // Agrega otro espacio en blanco entre los botones
+                                        echo '<a href="detallesUsuariosA.php?idSecretario=' . $rowS["IDS"] . '" type="button"><button>Detalles</button></a>';
+                                        echo '</div>';
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='5'>No hay usuarios (SECRETARIOS)</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='5'>No hay usuarios (SECRETARIOS)</td></tr>";
-                            }
-                            
                             ?>
                         </table>
                     </div>

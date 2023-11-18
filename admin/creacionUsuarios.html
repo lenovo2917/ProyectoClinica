@@ -19,7 +19,29 @@
 
     <link rel="shortcut icon" href="../img/web.png" type="img">
 </head>
+
 <body>
+    <style>
+        nav {
+            position: fixed;
+            z-index: 1000; /* Asegura que la barra de navegación esté en la parte superior */
+        }
+
+        .container {
+            margin-top: 80px; /* Ajusta el margen superior del contenido para dar espacio a la barra de navegación */
+        }
+        /* Agrega estilos CSS para el pie de página */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40; /* Color de fondo del pie de página */
+            color: white; /* Color del texto del pie de página */
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+
     <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12">
@@ -43,7 +65,7 @@
                                     <li><a href="../Blog_Medico.php?rol=admin">Inicio</a></li>
                                     <li><a href="consultaUsuariosA.html">Consultar pacientes</a></li>
                                     <li><a class="login-button" type="button" style="color: white;">Admin</a></li>
-                                  </ul>
+                                </ul>
                             </nav>
                         </div>
                     </div>
@@ -55,9 +77,9 @@
                     <div class="row ">
                         <div class="col-12">
                             <div class="row align-items-center">
-                                <div class="col-3 text-start">      
-                                    <img src="../img/LOGO.png"
-                                        style="width: 200px; height: 190px;" alt="Descripción de la imagen">
+                                <div class="col-3 text-start">
+                                    <img src="../img/LOGO.png" style="width: 200px; height: 190px;"
+                                        alt="Descripción de la imagen">
                                 </div>
                                 <div class="col-6 ">
                                     <h1><i class="fa-solid fa-users"></i> Creación de Usuarios</h1>
@@ -71,7 +93,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>   
+                        </div>
                         <div class="col-8" style="text-align: left;">
                             <label class="form-label">Nombre Completo:</label>
                             <input class="form-control" type="text" placeholder="Nombre Completo *" required />
@@ -97,23 +119,24 @@
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Correo:</label>
-                            <input class="form-control" type="email" placeholder="ejemplo@gmail.com" required maxlength="8"
-                                title="ejemplo@gmail.com" />
+                            <input class="form-control" type="email" placeholder="ejemplo@gmail.com" required
+                                maxlength="8" title="ejemplo@gmail.com" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Contraseña:</label>
-                            <input class="form-control" type="password" placeholder="Contraseña *" required maxlength="8"
-                                title="**" />
+                            <input class="form-control" type="password" placeholder="Contraseña *" required
+                                maxlength="8" title="**" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Alergias:</label>
                             <input class="form-control" type="text" placeholder="Alergias" maxlength="20"
                                 title="Sea especifico" />
-                        </div>        
+                        </div>
                         <div class="col-4" style="text-align: left;">
                             <div class="form-group">
                                 <label class="form-label">Tipo de sangre:</label>
-                                <select name="tipo-sangre" id="tipo-sangre" required class="formato2" style="width: 100%;">
+                                <select name="tipo-sangre" id="tipo-sangre" required class="formato2"
+                                    style="width: 100%;">
                                     <option value="" disabled selected>Tipo de sangre *</option>
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
@@ -166,13 +189,9 @@
             </div>
 
             <!--footer-->
-            <div class="container-fluid-lg ">
-                <footer class="bg-dark text-center py-5 mt-5">
-                    <div class="row">
-                        <p style="color: white;">&copy; 2023 Medicatec</p>
-                    </div>
-                </footer>
-            </div>
+            <footer class="bg-dark text-white text-center py-3">
+                <p style="font-family: 'Rubik'; color: white;">&copy; 2023 Medicatec</p>
+            </footer>
         </div>
     </div>
 
