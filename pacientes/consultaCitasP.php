@@ -116,9 +116,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
               <th><?php echo $fila['HoraC'] ?></th>
               <th><?php echo $fila['ESTATUS'] ?></th>
               <td>
-    <a href="../pacientes/actualizaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
-    <a href="../pacientes/eliminaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
+    <?php echo "<a href='actualizaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
+    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Actualizar</a>";?>
+    
+    <a href="eliminaCitasP.php" style="background-color: #176b87; color: #fff;  text-decoration: none;
     margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
     </td>
             </tr>
@@ -127,6 +128,9 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             ?>
           </tbody>
         </table>
+        <?php
+        $conexion->close();
+        ?>
       </div>
       <div class="container">
         <div class="col-md-2">

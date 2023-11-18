@@ -37,10 +37,8 @@ while ($fila = $resultado->fetch_assoc()) {
     $html .= '<th>' . $fila['HoraC'] . '</th>';
     $html .= '<th>' . $fila['ESTATUS'] . '</th>';
     $html .= '<td>
-    <a href="../pacientes/actualizaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
-    <a href="../pacientes/eliminaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
+        <a href="../pacientes/actualizaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
+        <a href="../pacientes/eliminaCitasP.php" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
     </td>';
     $html .= '</tr>';
 }
