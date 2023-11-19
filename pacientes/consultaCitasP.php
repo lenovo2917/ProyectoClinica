@@ -70,7 +70,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
       <div class="container mt-5 row border border-1 border-secondary border-opacity-50 rounded-1"
         style="margin-top: 20%; background-color: #e4e4e4; padding: 50px;">
         <h1 class="display-4" style="color: black; font-size: 36px; font-family: 'DM Serif Display';">Consulta de
-          citas<img src="../img/ct.png" alt="img" style="width: 180px; height: 170px; float: right;"></h1>
+          citas del paciente: <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px; float: right;"></h1>
           <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
           if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           // Accede al nombre completo del paciente
@@ -116,9 +116,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
               <th><?php echo $fila['HoraC'] ?></th>
               <th><?php echo $fila['ESTATUS'] ?></th>
               <td>
-    <a href="../pacientes/actualizaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
-    <a href="../pacientes/eliminaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
+    <?php echo "<a href='actualizaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
+    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Actualizar</a>";?>
+    
+    <a href="eliminaCitasP.php" style="background-color: #176b87; color: #fff;  text-decoration: none;
     margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
     </td>
             </tr>
@@ -127,6 +128,9 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             ?>
           </tbody>
         </table>
+        <?php
+        $conexion->close();
+        ?>
       </div>
       <div class="container">
         <div class="col-md-2">

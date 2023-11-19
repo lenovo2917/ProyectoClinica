@@ -23,12 +23,49 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <!--ESTILOS CSS-->
-    <link rel="shortcut icon" href="../img/web.png" type="img">
+    <link rel="shortcut icon" href="/img/web.png" type="img">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
-    <link rel="stylesheet" type="text/css" href="../css/creaCitas.css">
+    <link rel="stylesheet" type="text/css" href="../css/actualizaCitas.css">
+    
 </head>
 <body>
+    <?php
+         $conexion = new mysqli('localhost', 'root', '', 'medicatec_2023');
+
+         if(isset($_POST['enviar'])){
+            $id=$_POST['id'];
+            $fecha=$_POST['fecha'];
+            $hora=$_POST['hora'];
+            $sintomas=$_POST['sintomas'];
+            $descripcion=$_POST['descripcion'];
+
+            $sql="UPDATE citas set fechaC='".$fecha."', HoraC='".$hora."', sintomasC='".$sintomas."', descripcionC='".$descripcion."' WHERE IDC='".$id."'";
+            $resultado = $conexion->query($sql);
+            if($resultado){
+                echo "<script language='JavaScript'>
+                alert('La cita fue actualizada exitosamente.');
+                location.assign('consultaCitasP.php');
+                </script>";
+            }else{
+                echo "<script language='JavaScript'>
+                alert('La cita no se pudo actualizar.');
+                location.assign('consultaCitasP.php');
+                </script>";
+            }
+
+         }else{
+            $id=$_GET['IDC'];
+            $sql="SELECT * FROM citas where IDC='".$id."'";
+            $resultado = $conexion->query($sql);
+
+            $fila=$resultado->fetch_assoc();
+            $fecha=$fila["fechaC"];
+            $hora=$fila["HoraC"];
+            $sintomas=$fila["sintomasC"];
+            $descripcion=$fila["descripcionC"];
+         }
+    ?>
 <div class="container-fluid-lg" style="background-color: #eeeeee;">
         <div class="row">
             <div class="col-12">
@@ -40,8 +77,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                                 <div class="logo" style="display: flex;align-items: center;">
                                     <span
                                         style="color:#000000; font-size:26px; font-weight:bold; letter-spacing: 1px;margin-left: 20px;">MEDICATEC</span>
-                                    <span style="padding: 0.5rem;"> <img src="../img/cora2.png"
-                                            alt="Desc"></span>
+                                    <span style="padding: 0.5rem;"><img src="../img/cora2.png"
+                                            alt="Descripción de la imagen"></span>
                                 </div>
                                 <div class="hamburger">
                                     <div class="line1"></div>
@@ -61,33 +98,25 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-    <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
-          if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
-          // Accede al nombre completo del paciente
-          $nombreCompletoP = $_SESSION["NombreCompleto"];
-          echo $nombreCompletoP;
-           } ?>!
-    </h4>
-    <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agende una nueva cita:</h1>
+            <h1><img src="../img/mod.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Modifique los datos de su cita:</h1>
 
-    <form id="citaForm" action="../php/procesaCitaP.php" method="post">
+    <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post"> 
         <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
-        <label for="fecha">Fecha de Cita:</label>
-        <input type="date" id="fecha" name="fecha" required><br>
-
-        <label for="hora">Hora cita:</label>
-        <input type="time" id="hora" name="hora" required><br>
-
+        <input type="hidden" name="id" value="<?php echo $id;?>">
+        <label for="fecha">Fecha de cita:</label>
+        <input type="date" id="fecha" name="fecha" value="<?php echo $fecha; ?>" required><br>
+        <label for="fecha">Hora de cita:</label>
+        <input type="time" id="hora" name="hora" value="<?php echo $hora;?>" required><br>
+        
+        
         <label for="sintomas">Síntomas:</label>
-        <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas" required></textarea><br>
+        <textarea id="sintomas" name="sintomas" rows="4" required><?php echo htmlspecialchars($sintomas);?></textarea><br>
 
         <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Ingrese descripción de padecimiento"></textarea><br>
+        <textarea id="descripcion" name="descripcion" rows="4" required><?php echo htmlspecialchars($descripcion);?></textarea><br>
 
-        <input type="submit" name="crear_cita" value="Realizar cita">
-        <input type="reset" value="Borrar" style="background-color: #176b87; color: #fff; padding-top: 8px;
-        margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 5%; text-decoration: none;">
-        <a class="b" href="../Blog_Medico.php?rol=paciente" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
+        <input type="submit" name="enviar" value="Modificar cita">
+        <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
         margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
     </form>
     </div>
@@ -103,7 +132,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         </div>
     </div>
 
-    <script src="../js/creaCitas.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/actualizaCitas.js"></script>
+    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+
 </body>
 </html>
