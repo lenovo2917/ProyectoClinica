@@ -35,24 +35,29 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
         $row1 = $result1->fetch_assoc();
         $_SESSION["NombreCompleto"] = $nombre;
         $_SESSION["Rol"] = 'paciente';
+        $_SESSION["ID"] = $row1['IDP']; 
         header("Location: Blog_Medico.php"); // Redirigir al paciente
         exit();
     } elseif ($result2->num_rows === 1) {
         $row2 = $result2->fetch_assoc();
         $_SESSION["NombreCompleto"] =$nombre;
         $_SESSION["Rol"] = 'secretario';
+        $_SESSION["IDS"] = $row2['IDS'];
+        $_SESSION["IDD"] = $row2['IDD']; 
         header("Location: Blog_Medico.php"); // Redirigir al secretario
         exit();
     } elseif ($result3->num_rows === 1) {
         $row3 = $result3->fetch_assoc();
         $_SESSION["NombreCompleto"] =$nombre;
         $_SESSION["Rol"] = 'doctor';
+        $_SESSION["ID"] = $row3['IDD']; 
         header("Location: doctores/IndexDoctores.html"); // Redirigir al doctor
         exit();
     } else if ($result4->num_rows === 1) {
         $row4 = $result4->fetch_assoc();
         $_SESSION["NombreCompleto"] =$nombre;
         $_SESSION["Rol"] = 'admin';
+        $_SESSION["ID"] = $row4['IDA']; 
         header("Location: Blog_Medico.php"); // Redirigir al doctor
         exit();
     }{

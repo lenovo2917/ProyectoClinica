@@ -18,6 +18,7 @@ $(document).ready(function () {
         console.log('Diagnóstico:', diagnostico);
         console.log('Medicamento:', medicamento);
         console.log('Instrucciones de Uso:', intruccionUsoR);
+        console.log('ID de la cita seleccionada:', IDC);
 
         // Llena el modal con los datos
         $('#datosReceta').html(`
@@ -35,32 +36,28 @@ $(document).ready(function () {
     });
 
     // Variable para almacenar el ID de la cita seleccionada
-    var IDCSeleccionada;
+    var IDC;
 
     // Cuando se hace clic en una cita del menú desplegable
     $('#citasDropdown').on('click', 'a', function () {
         // Captura el ID de la cita
-        IDCSeleccionada = $(this).data('idc');
+        IDC = $(this).data('idc');
 
         // Muestra el ID de la cita en la consola
-        console.log('ID de la cita seleccionada:', IDCSeleccionada);
+        console.log('ID de la cita seleccionada:', IDC);
     });
 
     // Cuando se haga clic en el botón "Agregar al expediente"...
     $('#agregarExpediente').on('click', function () {
         // Asegúrate de que el ID de la cita seleccionada esté disponible aquí
-        if (IDCSeleccionada !== undefined) {
+        if (IDC !== undefined) {
             // Agrega el ID de la cita al formulario antes de enviar la solicitud AJAX
-            $('#recetaForm').append('<input type="hidden" name="IDC" value="' + IDCSeleccionada + '">');
+            $('#recetaForm').append('<input type="hidden" name="IDC" value="' + IDC + '">');
 
-            // Captura los datos del formulario
-            var nombre = $('#nombre').val();
-            var apellidoP = $('#apellidoP').val();
-            var apellidoM = $('#apellidoM').val();
 
             // Hace una solicitud AJAX a "insertarReceta.php"
             $.ajax({
-                url: '../doctores/herramientas/insertarReceta.php',
+                url: '../doctores/herramientas/InsertaR.php',
                 type: 'post',
                 data: $('#recetaForm').serialize(), // Envía todo el formulario, incluyendo el nuevo campo oculto
                 success: function (response) {
