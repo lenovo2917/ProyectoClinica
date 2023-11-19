@@ -1,20 +1,24 @@
 <?php
+// Incluye el acceso a la base de datos
 include 'acceso.php';
 
-// Recupera los datos del formulario
-$userID = $_SESSION["idp"];
-$nombreP = $_SESSION["NombreCompletoP"]; // Asegúrate de que este nombre coincide con el atributo name en tu campo de entrada
+// Recupera el ID del paciente de la sesión
+$name = $_SESSION["NombreCompletoP"];
 
-// Actualiza el nombre en la base de datos
-$sqlUpdate = "UPDATE pacientes SET NombreCompletoP = '$nombreP' WHERE IDP = $userID";
-$resultUpdate = $dp->query($sqlUpdate);
+// Consulta para obtener todos los campos del paciente
+$sqlSelect = "SELECT * FROM pacientes WHERE NombreCompletoP = $name";
 
-// Verifica si la actualización fue exitosa
-if ($resultUpdate) {
-    // Redirige al índice después de la modificación
-    header("Location: ../secretarios/consultaPacientesS.php");
-    exit();
+// Ejecuta la consulta
+$resultSelect = $dp->query($sqlSelect);
+
+// Verifica si se encontraron resultados
+if ($resultSelect && $resultSelect->num_rows > 0) {
+    $row = $resultSelect->fetch_assoc();
+    // Devuelve los datos como un objeto JSON para ser utilizados en JavaScript
+    echo json_encode($row);
 } else {
-    echo "Error al actualizar al paciente";
+    // Si no se encontraron datos, devuelve un mensaje de error o un objeto vacío
+    echo json_encode(array("error" => "No se encontraron datos del paciente"));
 }
 ?>
+
