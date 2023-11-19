@@ -67,8 +67,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         </div>
       </div>
       <!--Main o contenido-->
-      <div class="container mt-5 row border border-1 border-secondary border-opacity-50 rounded-1"
-        style="margin-top: 20%; background-color: #e4e4e4; padding: 50px;">
+      <div class="container mt-5 rowborder-secondary border-opacity-50 rounded-1"
+        style="margin-top: 20%; background-color: #e4e4e4; padding: 50px; margin-left: 1%;">
         <h1 class="display-4" style="color: black; font-size: 36px; font-family: 'DM Serif Display';">Consulta de
           citas del paciente: <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px; float: right;"></h1>
           <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
@@ -137,7 +137,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           <div class="form-group">
             
             <a href="../Blog_Medico.php?rol=paciente" style="background-color: #176b87; color: #fff; float: left; text-decoration: none;
-            margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Salir</a>
+            margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Regresar</a>
           </div>
         </div>
       </div>
