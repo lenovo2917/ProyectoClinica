@@ -214,7 +214,7 @@
                                                                     echo "<td>" . $row['ESTATUS'] . "</td>";
                                                                     echo '<td class="text-center">';
                                                                    
-                                                                    echo '<button class="btn-Cancelar" data-id="' . $row['IDC'] . '">Cancelar</button>';
+                                                                    echo '<button class="btn-modificar" data-id="' . $row['IDC'] . '">Modificar</button>';
                                                                     
                                                                     echo '</td>';
                                                                     echo "</tr>";
