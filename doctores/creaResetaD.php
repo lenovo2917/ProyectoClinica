@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <?php include '../php/acceso.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,16 +36,21 @@
                                         style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
                                     <span style="padding: 0.5rem;"><img src="../img/cora2.png"
                                             alt="Descripción de la imagen"></span>
-                                </div>
-                                <div class="doctor-info"
-                                    style="display: flex; align-items: center; margin-right: 20px;">
-                                    <span
-                                        style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Nombre
-                                        del Doctor</span>
-                                    <span style="margin-right: 10px;">
-                                        <i class="fas fa-user-md fa-2x"></i>
-                                    </span>
-                                </div>
+                                            <?php
+                        if ($_SESSION["Rol"] === 'doctor') {
+                            echo '<a href="logout.php" style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Salir</a>';
+                        }
+                        ?>
+                    </div>
+                    
+                    <div class="doctor-info" style="display: flex; align-items: center; margin-right: 20px;">
+                        <?php
+                        if ($_SESSION["Rol"] === 'doctor') {
+                            echo '<span style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Bienvenido Doctor/a ' . $_SESSION["NombreCompleto"] . '</span>';
+                            echo '<span style="margin-right: 10px;"><i class="fas fa-user-md fa-2x"></i></span>';
+                        }
+                        ?>
+                    </div>
                             </nav>
                         </div>
                     </div>
@@ -170,7 +178,7 @@
                         <!-- Tab 1: Crear Receta Médica -->
                         <div class="tab-pane fade show active" id="receta" role="tabpanel" aria-labelledby="receta-tab">
                             <div class="navbar">
-                                <a href="./IndexDoctores.html">
+                                <a href="./IndexDoctores.php">
                                     <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
                                 <h2>Formulario para Crear Receta Médica</h2>
