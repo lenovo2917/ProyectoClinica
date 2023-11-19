@@ -68,9 +68,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           echo $nombreCompletoP;
            } ?>!
     </h4>
-    <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agendar nueva cita</h1>
+    <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agende una nueva cita:</h1>
 
     <form id="citaForm" action="../php/procesaCitaP.php" method="post">
+        <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
         <label for="fecha">Fecha de Cita:</label>
         <input type="date" id="fecha" name="fecha" required><br>
 
@@ -84,10 +85,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         <textarea id="descripcion" name="descripcion" rows="4" placeholder="Ingrese descripción de padecimiento"></textarea><br>
 
         <input type="submit" name="crear_cita" value="Realizar cita">
-        <input type="reset" value="Limpiar" style="background-color: #176b87; color: #fff; padding-top: 8px;
-        margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 6%; text-decoration: none;">
+        <input type="reset" value="Borrar" style="background-color: #176b87; color: #fff; padding-top: 8px;
+        margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 5%; text-decoration: none;">
         <a class="b" href="../Blog_Medico.php?rol=paciente" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-        margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; height: 6%; text-decoration: none;">Regresar</a>
+        margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
     </form>
     </div>
 

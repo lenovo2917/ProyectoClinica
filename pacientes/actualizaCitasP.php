@@ -98,17 +98,17 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-            <h1><img src="../img/mod.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Modificación de citas</h1>
+            <h1><img src="../img/mod.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Modifique los datos de su cita:</h1>
 
-    <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post">
+    <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post"> 
+        <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
         <input type="hidden" name="id" value="<?php echo $id;?>">
-
         <label for="fecha">Fecha de cita:</label>
         <input type="date" id="fecha" name="fecha" value="<?php echo $fecha; ?>" required><br>
-
         <label for="fecha">Hora de cita:</label>
         <input type="time" id="hora" name="hora" value="<?php echo $hora;?>" required><br>
-
+        
+        
         <label for="sintomas">Síntomas:</label>
         <textarea id="sintomas" name="sintomas" rows="4" required><?php echo htmlspecialchars($sintomas);?></textarea><br>
 
@@ -117,7 +117,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
         <input type="submit" name="enviar" value="Modificar cita">
         <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-        margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; height: 6%; text-decoration: none;">Regresar</a>
+        margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
     </form>
     </div>
 
