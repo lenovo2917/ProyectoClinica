@@ -252,9 +252,11 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <!-- Columna 1: Datos del paciente -->
-                                        <!--ESTO TENDRA PHP Y SCRIPT PARA QUE SE LLENE AUTOMATICAMENTE SEGUN LA BASE DE DATOS-->
+                                        
                                         <div class="col-md-6">
+                                            
                                             <h3>Datos del Paciente</h3>
+                                            <hr/>
                                             <p>
                                                 <i class="fa-solid fa-user fa-lg"></i>
                                                 Nombre del Paciente: <span id="nombreAut">. . .</span>
@@ -271,19 +273,20 @@
                                                 <i class="fa-solid fa-virus"></i>
                                                 Alergias: <span id="alergiasAut">. . .</span>
                                             </p>
-
+                                            
                                             <h3>Recetas Médicas</h3>
+                                            <hr/>
                                             <!-- Tabla de recetas médicas (se generará con datos de la base de datos) -->
-                                            <!-- Agrega un nuevo contenedor para mostrar la información -->
+                                           
                                             <div id="informacionAdicional">
-                                                <h2>Información Adicional</h2>
+                                              
                                                 <table class="table table-striped table-hover"
                                                     id="tablaInformacionAdicional">
                                                     <thead>
                                                         <tr>
                                                             <th>Fecha de la receta medica</th>
                                                             <th>Diagnóstico:</th>
-                                                            <th>Notas Médicas</th>
+                                                            <th>Medicamento</th>
                                                             <th>Instruccion de uso</th>
                                                         </tr>
                                                     </thead>
@@ -295,57 +298,12 @@
 
 
                                         </div>
-
                                         <div class="col-md-6">
-                                            <h3>Receta Medica</h3>
-                                            <textarea class="form-control" rows="10"></textarea>
-
-
-                                            <!-- Subtítulo para Diagnóstico y Temporalidad -->
-                                            <div class="row align-items-center">
-                                                <div class="col-md-11">
-                                                    <h4 class="d-inline">Diagnosticos:</h4>
-                                                </div>
-
-                                                <!-- Columna 2: Botón (+) para agregar diagnósticos -->
-                                                <div class="col-md-1 text-right">
-                                                    <button onclick="guardarCambios()"
-                                                        style="border: none; background: none; cursor: pointer;">
-                                                        <i class="fa-solid fa-folder-plus fa-xl"
-                                                            style="color: #004bcc;"></i>
-                                                    </button>
-
-
-
-
-                                                </div>
-                                            </div>
-
-                                            <!-- Diagnóstico y Temporalidad en la misma fila -->
-                                            <div class="row align-items-center">
-                                                <!-- Columna 1: Diagnóstico -->
-                                                <div class="col-md-5">
-                                                    <label for="Diagnostico">Diagnóstico:</label>
-                                                    <input type="text" class="form-control" id="Diagnostico">
-                                                </div>
-
-                                                <!-- Columna 2: Temporalidad -->
-                                                <div class="col-md-5">
-                                                    <label for="Medicamento">Medicamento</label>
-                                                    <input type="text" class="form-control" id="Medicamento">
-                                                </div>
-
-
-
-                                                <label for="notaConsulta">Nota de la Consulta:</label>
-                                                <textarea id="notaCompleta" class="form-control"
-                                                    rows="2">Contenido de la nota médica</textarea>
-
-
-
-
-                                            </div>
+                                            <h3>Expediente Medico</h3>
+                                            <div id="areaTextoReceta" class="table-responsive"></div>
                                         </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
