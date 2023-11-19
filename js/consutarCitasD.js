@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Agregar un evento de clic a los botones "Aceptar" por su clase
     document.addEventListener("click", function(event) {
+
         if (event.target.classList.contains("btn-aceptar")) {
             // Obtener el IDC de la cita desde el atributo data-id
             const citaID = event.target.getAttribute("data-id");
@@ -35,6 +36,27 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch("../doctores/herramientas/actualizar_cita.php", {
                 method: "POST",
                 body: JSON.stringify({ citaID: citaID, estatus: "rechazada" }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Actualizar el estado en la tabla o realizar otras acciones necesarias
+                    event.target.disabled = true; // Deshabilitar el botón después de aceptar
+                } else {
+                    // Manejar errores si es necesario
+                    alert("Error al aceptar la cita.");
+                }
+            });
+        } else if (event.target.classList.contains("btn-Cancelar")) {
+            // Obtener el IDC de la cita desde el atributo data-id
+            const citaID = event.target.getAttribute("data-id");
+
+            fetch("../doctores/herramientas/actualizar_cita.php", {
+                method: "POST",
+                body: JSON.stringify({ citaID: citaID, estatus: "Cancelada" }),
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -116,4 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Envía el formulario para volver a cargar todas las citas sin filtros
         document.querySelector('form').submit();
     });
+
+   
 });
