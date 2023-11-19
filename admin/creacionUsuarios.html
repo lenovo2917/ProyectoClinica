@@ -73,7 +73,7 @@
             </div>
             <!--Main o contenido-->
             <div class="container-fluid formato mt-5 mb-2">
-                <form class="form" method="post">
+                <form class="form" method="post" action="../php/crearUsuariosA.php">
                     <div class="row ">
                         <div class="col-12">
                             <div class="row align-items-center">
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label class="form-label">Rol:</label>
-                                    <select name="tipo-rol" id="rolID" required class="formato2" style="width: 100%;">
+                                    <select name="rolUsuario" id="rolID" required class="formato2" style="width: 100%;">
                                         <option value="" disabled selected>Tipo de rol *</option>
                                         <option value="tipoDoctor">Doctor</option>
                                         <option value="tipoSecretaria">Secretaria</option>
@@ -94,48 +94,48 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8" style="text-align: left;">
+                        <div class="col-4" style="text-align: left;">
                             <label class="form-label">Nombre Completo:</label>
-                            <input class="form-control" type="text" placeholder="Nombre Completo *" required />
+                            <input class="form-control" type="text" name="nombreCompleto" placeholder="Nombre Completo *" required />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">CURP:</label>
-                            <input class="form-control" type="text" placeholder="CURP *" required maxlength="18"
+                            <input class="form-control" type="text" name="CURPUsuario" placeholder="CURP *" required maxlength="18"
                                 title="Ingrese correctamente su CURP" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Fecha de Nacimiento:</label>
-                            <input class="form-control" type="date" placeholder="Fecha de Nacimiento *" required />
+                            <input class="form-control" type="date" name="fNUsuario" placeholder="Fecha de Nacimiento *" required />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Cedula:</label>
-                            <input class="form-control" type="text" placeholder="Cedula" maxlength="20"
+                            <input class="form-control" type="text" name="cedulaUsuario" placeholder="Cedula" maxlength="20"
                                 title="Sea especifico" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Télefono:</label>
-                            <input class="form-control" type="tel" placeholder="Teléfono" maxlength="10"
+                            <input class="form-control" type="tel" name="telefonoUsuario" placeholder="Teléfono" maxlength="10"
                                 title="Ingrese un formato válido (xxx-xxx-xxxx)" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Correo:</label>
-                            <input class="form-control" type="email" placeholder="ejemplo@gmail.com" required
+                            <input class="form-control" type="email" name="correoUsuario" placeholder="ejemplo@gmail.com" required
                                 maxlength="8" title="ejemplo@gmail.com" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Contraseña:</label>
-                            <input class="form-control" type="password" placeholder="Contraseña *" required
+                            <input class="form-control" type="password" name="contrasenaUsuario" placeholder="Contraseña *" required
                                 maxlength="8" title="**" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">Alergias:</label>
-                            <input class="form-control" type="text" placeholder="Alergias" maxlength="20"
+                            <input class="form-control" type="text" name="alergiasUsuario" placeholder="Alergias" maxlength="20"
                                 title="Sea especifico" />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <div class="form-group">
                                 <label class="form-label">Tipo de sangre:</label>
-                                <select name="tipo-sangre" id="tipo-sangre" required class="formato2"
+                                <select name="tipoSangreUsuario" required class="formato2"
                                     style="width: 100%;">
                                     <option value="" disabled selected>Tipo de sangre *</option>
                                     <option value="A+">A+</option>
@@ -152,7 +152,7 @@
                         <div class="col-4" style="text-align: left;">
                             <div class="form-group">
                                 <label class="form-label">Género:</label>
-                                <select name="genero" id="genero" class="formato2" style="width: 100%;">
+                                <select name="generoUsuario" class="formato2" style="width: 100%;">
                                     <option value="" disabled selected>Género</option>
                                     <option value="F">F</option>
                                     <option value="M">M</option>
@@ -163,7 +163,7 @@
                         <div class="col-4" style="text-align: left;">
                             <div class="form-group">
                                 <label class="form-label">Estatus:</label>
-                                <select name="estatus" id="estatus" class="formato2" style="width: 100%;">
+                                <select name="estatusUsuario" class="formato2" style="width: 100%;">
                                     <option value="" disabled selected>Estatus</option>
                                     <option value="Activo">Activo</option>
                                     <option value="Inactivo">Inactivo</option>
