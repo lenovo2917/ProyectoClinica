@@ -232,7 +232,13 @@
 
                         <!-- Tab 2: Expedientes de Paciente -->
                         <div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
-                            <h2>Expedientes de Paciente</h2>
+                            <div class="navbar">
+                                <a href="./IndexDoctores.html">
+                                    <i class="fa-solid fa-arrow-left fa-lg"></i>
+                                </a>
+                                <h2>Expedientes de Paciente</h2>
+                            </div>
+                           
                             <div class="row">
                                 <!-- Fila 1: Barra de búsqueda -->
 
