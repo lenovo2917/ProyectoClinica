@@ -231,21 +231,28 @@
                                                     aria-label="Cerrar"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Selecciona al nuevo médico para el paciente:</p>
-                                                <select id="doctorSelect" class="form-select">
-                                                    <option value="">Seleccione un médico</option>
-                                                    <?php
-                                                    // Realiza una consulta para obtener los médicos disponibles de la especialidad "Medico General"
-                                                    include '../php/acceso.php';
-                                    
-                                                    $query = "SELECT IDD, NombreCompletoD FROM doctores WHERE EspecialidadD = 'Medico General' AND EstatusD = 'Activo'";
-                                                    $result = mysqli_query($dp, $query);
-                                    
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                        echo '<option value="' . $row['IDD'] . '">' . $row['NombreCompletoD'] . '</option>';
-                                                    }
-                                    
-                                                    ?>
+
+                                                <label for="fechaCita">Fecha de la Cita</label>
+                                                <input type="date" class="form-control" id="fechaCita" name="fechaCita" required>
+
+
+
+
+                                                <label for="especialidadCita">Especialidad</label>
+                                                <select class="form-select" id="especialidadCita" name="especialidadCita" aria-label="Especialidad select menu" required>
+                                                    <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
+                                                </select>
+
+                                                <label for="doctorCita">Doctor</label>
+                                                <select class="form-select" id="doctorCita" name="doctorCita" aria-label="Doctor select menu" required>
+                                                    <!-- Las opciones de doctores se cargarán dinámicamente aquí -->
+                                                </select>
+
+                                                
+
+                                                <label for="horaCita">Hora de la Cita</label>
+                                                <select class="form-select" id="horaCita" name="horaCita" required>
+                                                    <!-- Las opciones de horas disponibles se cargarán dinámicamente aquí -->
                                                 </select>
                                             </div>
                                             <div class="modal-footer">
@@ -279,16 +286,17 @@
     </div>
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.js"></script>
-    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/BusquedaEspecialidad.js"></script>
     <script src="../js/consutarCitasD.js"></script>
-    
+    <script src="../js/FechaCalendario.js"></script>   <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
+  
 
-    <script src="../js/creaCitas.js"></script>
-    <script src="../js/main.js"></script>
-   
+
+  
+    
     
         
 

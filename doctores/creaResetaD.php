@@ -460,6 +460,8 @@
     <script src="../js/BusquedaPaciente.js"></script>
     <script src="../js/BusquedaCitas"></script>
     <script src="../js/BusquedaEspecialidad.js"></script>
+    <script src="../js/FechaCalendario.js"></script>   <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
+
 
 
 </body>

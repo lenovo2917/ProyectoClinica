@@ -78,21 +78,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Adjuntar un evento de clic al botón "Guardar Cambios"
             document.getElementById('guardarCambios').addEventListener('click', function () {
-                const doctorID = document.getElementById('doctorSelect').value;
-                if (doctorID) {
+                const fechaCita = document.getElementById('fechaCita').value;
+        const especialidadCita = document.getElementById('especialidadCita').value;
+        const doctorCita = document.getElementById('doctorCita').value;
+        const horaCita = document.getElementById('horaCita').value;
+
+        // Mostrar los datos antes de enviar la solicitud
+        console.log("Cita ID:", citaID);
+        console.log("Fecha de la Cita:", fechaCita);
+        console.log("Especialidad de la Cita:", especialidadCita);
+        console.log("Doctor de la Cita:", doctorCita);
+        console.log("Hora de la Cita:", horaCita);
+
+                if (doctorCita) {
                     // Realizar una solicitud al servidor para trasladar al paciente
                     $.ajax({
                         method: 'POST',
                         url: '../doctores/herramientas/trasladar_paciente.php',
                         data: {
                             citaID: citaID,
-                            doctorID: doctorID
+                            fechaCita: fechaCita,
+                            especialidadCita: especialidadCita,
+                            doctorCita: doctorCita,
+                            horaCita: horaCita
                         },
                         success: function (response) {
                             console.log("Clic en Guardar Cambios");
                             console.log("Respuesta del servidor: " + response);
-                            // Puedes agregar más lógica aquí si es necesario
-                            // $('#miModal').modal('hide');
+                            ;// Puedes agregar más lógica aquí si es necesario
+                            // $('#miModal').modal('hide')
                             $('.modal-body').html('<p>Cambios realizados</p>'); // Agrega un mensaje en el modal
                         },
                         error: function () {
