@@ -133,16 +133,15 @@ if(empty($_SESSION["NombreCompleto"])) {
                                             nombre:</label>
                                         <div class="col-5 text-start">
                                             <input type="text" class="form-control" id="nombrePaciente"
-                                                name="nombrePaciente" placeholder="Nombre del paciente">
-                                            <div class="alert alert-danger d-none" id="nombrePacienteError">
-                                                Por favor, ingrese el nombre del paciente.
-                                            </div>
+                                                name="nombrePaciente" required>
+                                                <div class="invalid-feedback">Campo obligatorio *</div>
 
                                         </div>
+                                        <div class="invalid-feedback">Campo obligatorio *</div>
 
                                         <div class="col-1">
-                                            <button type="submit" class="btn my-custom-button"
-                                                id="buscarButton">Buscar</button>
+                                            <button id="buscarButton" type="submit" class="btn my-custom-button"
+                                                >Buscar</button>
 
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
