@@ -69,6 +69,7 @@
             FROM pacientes WHERE IDP = $idP";
         } else {
             echo "Id de paciente no proporcionado";
+
             exit; // Terminar la ejecución si no se proporciona un ID de usuario válido
         }
 
@@ -132,7 +133,7 @@
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Correo:</label>
                                 <input class="form-control" type="email" placeholder="ejemplo@gmail.com" required
-                                    maxlength="8" title="ejemplo@gmail.com" name="correoPaciente" value ="<?php echo isset(
+                                     title="ejemplo@gmail.com" name="correoPaciente" value ="<?php echo isset(
                                     $rowPaciente["correoP"]) ? $rowPaciente["correoP"] : ''; ?>" required />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
@@ -142,27 +143,27 @@
                                     maxlength="8" placeholder="********" />
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Capacidades diferentes:</label>
-                                <!--<input class="form-control" type="text" placeholder="Capacidades diferentes" maxlength="20"
-                                title="Sea especifico" />-->
-                                <textarea id="capacidades" 
-                                    placeholder="Capacidades diferentes...." name="capacidadesPaciente" value ="<?php echo isset(
-                                    $rowPaciente["capacidadesP"]) ? $rowPaciente["capacidadesP"] : ''; ?>" required ></textarea>
-                            </div>
-                            <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Alergias:</label>
-                                <!--<input class="form-control" type="text" placeholder="Alergias" maxlength="20"
-                                title="Sea especifico" />-->
-                                <textarea id="alergias" placeholder="Alergias...."name="alergiasPaciente" value ="<?php echo isset(
-                                    $rowPaciente["alergiasP"]) ? $rowPaciente["alergiasP"] : ''; ?>" required ></textarea>
-                            </div>
-                            <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Enfermedades patológicas:</label>
-                                <!--<input class="form-control" type="text" placeholder="Enfermedades patológicas" maxlength="20"
-                                title="Sea especifico" />-->
-                                <textarea id="enfermedades" name="enfermedadesPaciente" placeholder="Enfermedades patológicas...." value ="<?php echo isset(
-                                    $rowPaciente["enfermedadesP"]) ? $rowPaciente["enfermedadesP"] : ''; ?>" required ></textarea>
-                            </div>
+    <label class="form-label">Capacidades diferentes:</label>
+    <!--<input class="form-control" type="text" placeholder="Capacidades diferentes" maxlength="20"
+    title="Sea especifico" />-->
+    <input class="form-control" type="text" id="capacidades" 
+        placeholder="Capacidades diferentes...." name="capacidadesPaciente" value ="<?php echo isset(
+        $rowPaciente["capacidadesP"]) ? $rowPaciente["capacidadesP"] : ''; ?>" required />
+</div>
+<div class="col-4" style="text-align: left; padding: 1rem;">
+    <label class="form-label">Alergias:</label>
+    <!--<input class="form-control" type="text" placeholder="Alergias" maxlength="20"
+    title="Sea especifico" />-->
+    <input class="form-control" type="text" id="alergias" placeholder="Alergias...."name="alergiasPaciente" value ="<?php echo isset(
+        $rowPaciente["alergiasP"]) ? $rowPaciente["alergiasP"] : ''; ?>" required />
+</div>
+<div class="col-4" style="text-align: left; padding: 1rem;">
+    <label class="form-label">Enfermedades patológicas:</label>
+    <!--<input class="form-control" type="text" placeholder="Enfermedades patológicas" maxlength="20"
+    title="Sea especifico" />-->
+    <input class="form-control" type="text" id="enfermedades" name="enfermedadesPaciente" placeholder="Enfermedades patológicas...." value ="<?php echo isset(
+        $rowPaciente["enfermedadesP"]) ? $rowPaciente["enfermedadesP"] : ''; ?>" required />
+</div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
                                 <div class="form-group">
                                     <label class="form-label">Tipo de sangre:</label>
