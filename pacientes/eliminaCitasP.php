@@ -1,16 +1,3 @@
-<?php
-include('../php/controlador.php');
-// Verifica si el usuario ha iniciado sesión como paciente
-if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
-    // Accede al nombre completo del paciente
-    $nombreCompletoP = $_SESSION["NombreCompleto"];
-} else {
-    // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
-    header("Location: login.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +13,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
-    <link rel="stylesheet" type="text/css" href="../css/creaCitas.css">
+    <link rel="stylesheet" type="text/css" href="../css/eliminaCitas.css">
 </head>
 <body>
 <div class="container-fluid-lg" style="background-color: #eeeeee;">
@@ -40,8 +27,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                                 <div class="logo" style="display: flex;align-items: center;">
                                     <span
                                         style="color:#000000; font-size:26px; font-weight:bold; letter-spacing: 1px;margin-left: 20px;">MEDICATEC</span>
-                                    <span style="padding: 0.5rem;"> <img src="../img/cora2.png"
-                                            alt="Desc"></span>
+                                    <span style="padding: 0.5rem;"><img src="../img/cora2.png"
+                                            alt="Descripción de la imagen"></span>
                                 </div>
                                 <div class="hamburger">
                                     <div class="line1"></div>
@@ -50,7 +37,9 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                                 </div>
                                 <ul class="nav-links">
                                     <li><a href="../Blog_Medico.php?rol=paciente">Inicio</a></li>
-                                    <li><a href="consultaCitasP.php">Consultar citas</a></li>
+                                    <li><a href="creaCitasP.html">Crear cita</a></li>
+                                    <li><a href="consultaCitasP.html">Consultar citas</a></li>
+                                    
                                 </ul>
                             </nav>
                         </div>
@@ -61,34 +50,37 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-    <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
-          if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
-          // Accede al nombre completo del paciente
-          $nombreCompletoP = $_SESSION["NombreCompleto"];
-          echo $nombreCompletoP;
-           } ?>!
-    </h4>
-    <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agende una nueva cita:</h1>
+            <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Eliminar cita</h1>
 
-    <form id="citaForm" action="../php/procesaCitaP.php" method="post">
-        <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
+    <form id="citaForm" action="procesar_cita.php" method="post">
         <label for="fecha">Fecha de Cita:</label>
         <input type="date" id="fecha" name="fecha" required><br>
 
-        <label for="hora">Hora cita:</label>
-        <input type="time" id="hora" name="hora" required><br>
 
         <label for="sintomas">Síntomas:</label>
-        <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas" required></textarea><br>
+        <textarea id="sintomas" name="sintomas" rows="4" required></textarea><b|r>
 
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Ingrese descripción de padecimiento"></textarea><br>
+        <label for="diagnostico">Descripción:</label>
+        <textarea id="diagnostico" name="diagnostico" rows="4" required></textarea><br>
 
-        <input type="submit" name="crear_cita" value="Realizar cita">
-        <input type="reset" value="Borrar" style="background-color: #176b87; color: #fff; padding-top: 8px;
-        margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 5%; text-decoration: none;">
-        <a class="b" href="../Blog_Medico.php?rol=paciente" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-        margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
+        <label for="alergias">Alergias:</label>
+        <input type="text" id="alergias" name="alergias"><br>
+
+        <label for="tipo_sangre">Tipo de Sangre:</label>
+        <select id="tipo_sangre" name="tipo_sangre">
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>|
+            <option value="O-">O-</option>
+        </select><br>
+
+        <input type="submit" value="Eliminar cita">
+        <a href="consultaCitasP.html" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
+        margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; height: 6%; text-decoration: none;">Regresar</a>
     </form>
     </div>
 
@@ -103,7 +95,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         </div>
     </div>
 
-    <script src="../js/creaCitas.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/eliminaCitas.js"></script>
+    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+
 </body>
 </html>

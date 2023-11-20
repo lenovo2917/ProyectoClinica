@@ -51,7 +51,7 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
         $_SESSION["NombreCompleto"] =$nombre;
         $_SESSION["Rol"] = 'doctor';
         $_SESSION["ID"] = $row3['IDD']; 
-        header("Location: doctores/IndexDoctores.html"); // Redirigir al doctor
+        header("Location: doctores/IndexDoctores.php"); // Redirigir al doctor
         exit();
     } else if ($result4->num_rows === 1) {
         $row4 = $result4->fetch_assoc();

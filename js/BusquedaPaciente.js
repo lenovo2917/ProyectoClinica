@@ -1,9 +1,75 @@
+function mostrarReceta(receta) {
+    var areaTextoReceta = document.getElementById('areaTextoReceta');
+
+    if (receta) {
+        // Construir la tabla con los datos de la receta
+        var tablaReceta = '<table class="table table-bordered" style="max-width: 100%;">';
+        tablaReceta += '<tr><th>ID Expediente</th><th>ID Paciente</th><th>Nombre Paciente</th><th>Fecha Receta</th><th>Medicamento</th><th>Instrucciones</th><th>ID Doctor</th><th>Nombre Doctor</th><th>Especialidad Doctor</th><th>Fecha Cita</th><th>Diagnóstico</th></tr>';
+        tablaReceta += '<tr>';
+        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.idE + '</td>';
+        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.IDP + '</td>';
+        tablaReceta += '<td>' + receta.NombreCompletoP + '</td>';
+        tablaReceta += '<td>' + receta.fechaR + '</td>';
+        tablaReceta += '<td>' + receta.medicamentoR + '</td>';
+        tablaReceta += '<td>' + receta.intruccionUsoR + '</td>';
+        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.IDDoctor + '</td>';
+        tablaReceta += '<td>' + receta.NombreDoctor + '</td>';
+        tablaReceta += '<td>' + receta.EspecialidadDoctor + '</td>';
+        tablaReceta += '<td>' + receta.fechaCita + '</td>';
+        tablaReceta += '<td>' + receta.diagnosticoC + '</td>';
+        tablaReceta += '</tr>';
+        tablaReceta += '</table>';
+
+        // Establecer el contenido de la tabla en el área correspondiente
+       // Añadir la clase table-responsive
+areaTextoReceta.innerHTML = '<div class="table-responsive">' + tablaReceta + '</div>';
+
+    } else {
+        areaTextoReceta.innerHTML = 'No se encontraron datos de receta.';
+    }
+}
+
+
+
+
+
+// Función para visualizar la receta médica
+function verNota(idReceta) {
+    var xhrReceta = new XMLHttpRequest();
+    xhrReceta.open('POST', '../doctores/herramientas/verReceta.php', true);
+    xhrReceta.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xhrReceta.onreadystatechange = function () {
+        if (xhrReceta.readyState == 4) {
+            if (xhrReceta.status == 200) {
+                try {
+                    console.log(xhrReceta.responseText);
+                    var respuestaReceta = JSON.parse(xhrReceta.responseText);
+
+                    if (respuestaReceta.error) {
+                        console.error('Error en la respuesta del servidor (Ver Receta):', respuestaReceta.error);
+                    } else {
+                        // Actualizar la sección de Receta Medica con la información de la receta
+                        mostrarReceta(respuestaReceta.data);
+                    }
+                } catch (error) {
+                    console.error('Error al parsear la respuesta JSON (Ver Receta):', error);
+                }
+            } else {
+                console.error('Error en la solicitud. Código de estado (Ver Receta):', xhrReceta.status);
+            }
+        }
+    };
+
+    xhrReceta.send('idReceta=' + encodeURIComponent(idReceta));
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.btn-custom').addEventListener('click', function () {
         var nombrePaciente = document.getElementById('nombrePaciente').value;
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', './herramientas/busquedaPaciente.php', true);
+        xhr.open('POST', '../doctores/herramientas/busquedaPaciente.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
         xhr.onreadystatechange = function () {
@@ -36,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.send('buscar=true&nombrePaciente=' + encodeURIComponent(nombrePaciente));
     });
 });
-var idR;
+
 // Función para calcular la edad a partir de la fecha de nacimiento
 function calcularEdad(fechaNacimiento) {
     // Lógica para calcular la edad (puedes implementar esto según tus necesidades)
@@ -52,11 +118,10 @@ function calcularEdad(fechaNacimiento) {
 
     return edad;
 }
-
 // Función para actualizar la tabla de recetas en la sección de información adicional
 function actualizarTablaRecetas(nombrePaciente) {
     var xhrRecetas = new XMLHttpRequest();
-    xhrRecetas.open('POST', './herramientas/busquedaRecetas.php', true);
+    xhrRecetas.open('POST', '../doctores/herramientas/busquedaRecetas.php', true);
     xhrRecetas.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhrRecetas.onreadystatechange = function () {
@@ -83,7 +148,7 @@ function actualizarTablaRecetas(nombrePaciente) {
 
     xhrRecetas.send('nombrePaciente=' + encodeURIComponent(nombrePaciente));
 }
-// Modificar la función actualizarTablaInformacionAdicional
+// Función para actualizar la tabla de recetas en la sección de información adicional
 function actualizarTablaInformacionAdicional(data) {
     var cuerpoTabla = document.getElementById('cuerpoTablaInformacionAdicional');
 
@@ -96,63 +161,12 @@ function actualizarTablaInformacionAdicional(data) {
         fila.innerHTML =
             '<td>' + receta.FechaReceta + '</td>' +
             '<td>' + receta.Diagnostico + '</td>' +
-            '<td>' + receta.NotasMedicas + '</td>' +
+            '<td>' + receta.Medicamento + '</td>' +
             '<td>' + receta.InstruccionUso + '</td>' +
             '<td><button class="btn btn-custom" onclick="verNota(' + receta.idR + ')">Ver Nota</button></td>';
 
         cuerpoTabla.appendChild(fila);
     });
 }
-function verNota(idR) {
-    // Almacenar el idR en la variable global
-    idRActual = idR;
 
-    console.log('Clic en "Ver Nota" para la receta con idR:', idR);
 
-    $.ajax({
-        url: './herramientas/obtenerNota.php',
-        method: 'POST',
-        data: { idR: idR },
-        success: function (data) {
-            // Mostrar la nota en un cuadro de texto editable
-            
-            $('#notaCompleta').val(data.notaConsulta);
-            $('#Diagnostico').val(data.Diagnostico);
-            $('#Medicamento').val(data.medicamento);
-        },
-        error: function (error) {
-            console.error('Error al obtener la nota:', error);
-        }
-    });
-}
-function guardarCambios() {
-    // Utilizar la variable global idRActual en lugar de idR
-    var nuevaNota = document.getElementById('notaCompleta').value;
-    var nuevoDiagnostico = document.getElementById('Diagnostico').value;
-    var nuevoMedicamento = document.getElementById('Medicamento').value;
-
-    // Enviar la nueva nota al servidor para actualizar la base de datos
-    $.ajax({
-        url: './herramientas/guardarCambiosNota.php',
-        method: 'POST',
-        data: { 
-            idR: idRActual, 
-            notaConsulta: nuevaNota,
-            Diagnostico: nuevoDiagnostico,
-            medicamento: nuevoMedicamento
-        }, 
-        success: function (data) {
-            // Manejar la respuesta del servidor
-            if (data.success) {
-                // Mostrar mensaje de éxito
-                alert('Cambios guardados con éxito');
-            } else {
-                // Manejar error si es necesario
-                console.error('Error al guardar cambios:', data.error);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error al guardar cambios:', error);
-        }
-    });
-}

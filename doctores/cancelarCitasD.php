@@ -81,22 +81,22 @@ session_start();
                         <div class="row align-items-center">
                             <div class="col-md-2">
                                 <a href="./IndexDoctores.php">
-                                <i class="fa-solid fa-arrow-left fa-lg"></i>
+                                    <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
-                              
+
                             </div>
                             <div class="col-md-8">
-                                <h2>Consulta citas</h2>
+                                <h2>Cancelación de citas</h2>
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-secondary" id="limpiarFiltrosButton">
-                                    <i class="bi bi-trash" ></i>
+                                    <i class="bi bi-trash"></i>
                                 </button>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                     <div class="col-12 px-5">
                         <form class="form" method="post">
                             <div class="row ">
@@ -104,16 +104,18 @@ session_start();
                                     <div class="row mb-1">
                                         <label for="nombrePaciente" class="col-2 col-form-label">Buscar por
                                             nombre:</label>
-                                            <div class="col-5 text-start">
-                                                <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" placeholder="Nombre del paciente">
-                                                <div class="alert alert-danger d-none" id="nombrePacienteError">
-                                                    Por favor, ingrese el nombre del paciente.
-                                                </div>
-                                                
-                                            </div>                                            
+                                        <div class="col-5 text-start">
+                                            <input type="text" class="form-control" id="nombrePaciente"
+                                                name="nombrePaciente" placeholder="Nombre del paciente">
+                                            <div class="alert alert-danger d-none" id="nombrePacienteError">
+                                                Por favor, ingrese el nombre del paciente.
+                                            </div>
+
+                                        </div>
 
                                         <div class="col-1">
-                                            <button type="submit" class="btn my-custom-button" id="buscarButton">Buscar</button>
+                                            <button type="submit" class="btn my-custom-button"
+                                                id="buscarButton">Buscar</button>
 
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
@@ -159,122 +161,87 @@ session_start();
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php
-                                                    include '../php/acceso.php';
-                                                    
-                                                    $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
-                                                              LEFT JOIN pacientes p ON c.IDP = p.IDP";
-                                                    
-                                                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                        $query .= " WHERE 1"; // Agregar una condición que siempre sea verdadera
-                                                    
-                                                        $nombrePaciente = $_POST['nombrePaciente'];
+
+                                                      
+                                                <?php
+                                                include '../php/acceso.php';
+                                                
+                                                $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS 
+                                                          FROM citas c
+                                                          LEFT JOIN pacientes p ON c.IDP = p.IDP
+                                                          WHERE c.ESTATUS = 'Aceptada'";
+                                                
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    $query .= " AND 1";  // Continúa con la cláusula WHERE para agregar condiciones adicionales
+                                                
+                                                    $nombrePaciente = $_POST['nombrePaciente'];
+                                                    $mesSeleccionado = $_POST['mes'];
+                                                
+                                                    if (!empty($nombrePaciente)) {
+                                                        $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
+                                                    }
+                                                
+                                                    if (isset($_POST['mes'])) {
                                                         $mesSeleccionado = $_POST['mes'];
-                                                    
-                                                        if (!empty($nombrePaciente)) {
-                                                            $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
-                                                        }
-                                                    
-                                                        if (isset($_POST['mes'])) {
-                                                            $mesSeleccionado = $_POST['mes'];
-                                                    
-                                                            // Mapea el nombre del mes al número de mes
-                                                            $meses = [
-                                                                'enero' => '01',
-                                                                'febrero' => '02',
-                                                                'marzo' => '03',
-                                                                'abril' => '04',
-                                                                'mayo' => '05',
-                                                                'junio' => '06',
-                                                                'julio' => '07',
-                                                                'agosto' => '08',
-                                                                'septiempre' => '09',
-                                                                'octubre' => '10',
-                                                                'noviembre' => '11',
-                                                                'diciembre' => '12'
-                                                            ];
-                                                    
-                                                            if (isset($meses[$mesSeleccionado])) {
-                                                                $mesNumero = $meses[$mesSeleccionado];
-                                                                $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
-                                                            } else {
-                                                                
-                                                            }
+                                                
+                                                        // Mapea el nombre del mes al número de mes
+                                                        $meses = [
+                                                            'enero' => '01',
+                                                            'febrero' => '02',
+                                                            'marzo' => '03',
+                                                            'abril' => '04',
+                                                            'mayo' => '05',
+                                                            'junio' => '06',
+                                                            'julio' => '07',
+                                                            'agosto' => '08',
+                                                            'septiempre' => '09',
+                                                            'octubre' => '10',
+                                                            'noviembre' => '11',
+                                                            'diciembre' => '12'
+                                                        ];
+                                                
+                                                        if (isset($meses[$mesSeleccionado])) {
+                                                            $mesNumero = $meses[$mesSeleccionado];
+                                                            $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
+                                                        } else {
+                                                            // Manejo del caso donde el mes no está definido
                                                         }
                                                     }
-                                                    
-                                                    // Ejecutar la consulta
-                                                    $result = mysqli_query($dp, $query);
-                                                    
-                                                    
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                                    echo "<tr>";
+                                                }
+                                                
+                                                // Ejecutar la consulta
+                                                $result = mysqli_query($dp, $query);
+                                                
+                                                while ($row = mysqli_fetch_assoc($result)) {
+
+
+                                               
+                                                   
                                                                     echo "<td>" . $row['IDC'] . "</td>";
                                                                     echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
                                                                     echo "<td>" . $row['fechaC'] . "</td>";
                                                                     echo "<td>" . $row['ESTATUS'] . "</td>";
                                                                     echo '<td class="text-center">';
-                                                                    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-                                                                    echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
-                                                                    echo '  <button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">
-                                                                    Trasladar
-                                                                </button>
-                                                                    ';
+                                                                   
+                                                                    echo '<button class="btn-Cancelar" data-id="' . $row['IDC'] . '">Cancelar</button>';
+                                                                    
                                                                     echo '</td>';
                                                                     echo "</tr>";
                                                                 }
                                                                 ?>
- 
+
+
                                                 </tbody>
                                             </table>
-                                        </div>
-                                         </div>
-                                </div>
 
-                                <div class="modal" tabindex="-1" id="miModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Trasladar paciente</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Cerrar"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <label for="fechaCita">Fecha de la Cita</label>
-                                                <input type="date" class="form-control" id="fechaCita" name="fechaCita" required>
-
-
-
-
-                                                <label for="especialidadCita">Especialidad</label>
-                                                <select class="form-select" id="especialidadCita" name="especialidadCita" aria-label="Especialidad select menu" required>
-                                                    <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
-                                                </select>
-
-                                                <label for="doctorCita">Doctor</label>
-                                                <select class="form-select" id="doctorCita" name="doctorCita" aria-label="Doctor select menu" required>
-                                                    <!-- Las opciones de doctores se cargarán dinámicamente aquí -->
-                                                </select>
-
-                                                
-
-                                                <label for="horaCita">Hora de la Cita</label>
-                                                <select class="form-select" id="horaCita" name="horaCita" required>
-                                                    <!-- Las opciones de horas disponibles se cargarán dinámicamente aquí -->
-                                                </select>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cerrar</button>
-                                                    <button type="button" class="btn my-custom-buttonr" id="guardarCambios">Guardar Cambios</button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="col-1">
-                                   
-                                    
+
+                              
+                                <div class="col-1">
+
+
                                 </div>
                             </div>
                         </form>
@@ -293,26 +260,17 @@ session_start();
             </div>
         </footer>
     </div>
+<!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="../bootstrap/js/bootstrap.js"></script>
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../js/consutarCitasD.js"></script>
 
-    <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-    <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../js/BusquedaEspecialidad.js"></script>
-    <script src="../js/consutarCitasD.js"></script>
-    <script src="../js/FechaCalendario.js"></script>   <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
-  
-
-
-  
-    
-    
-        
-
-</body>
 
 
 
 </body>
+
 
 </html>

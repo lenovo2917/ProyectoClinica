@@ -16,7 +16,6 @@ $fecha = $_POST['fecha'];
 $hora = $_POST['hora'];
 $sintomas = $_POST['sintomas'];
 $descripcion = $_POST['descripcion'];
-$alergias = $_POST['alergias'];
 
 //Preparar la consulta
 $queryObtenerIDP = $dp->prepare("SELECT IDP FROM pacientes WHERE NombreCompletoP = ?");
@@ -40,9 +39,15 @@ if ($resultObtenerIDP->num_rows === 1) {
 
     // Verifica si la inserción fue exitosa
     if ($sql->affected_rows > 0) {
-        echo "Cita creada exitosamente.";
+        echo "<script language='JavaScript'>
+        alert('La cita fue creada exitosamente.');
+        location.assign('../Blog_Medico.php?rol=paciente');
+        </script>";
     } else {
-        echo "Error al crear la cita: " . $sql->error;
+        echo "<script language='JavaScript'>
+        alert('La cita no pudo ser creada.');
+        location.assign('../Blog_Medico.php?rol=paciente');
+        </script>";
     }
 
     // Cierra la consulta de inserción

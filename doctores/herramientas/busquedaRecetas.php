@@ -7,13 +7,12 @@ if (isset($_POST['nombrePaciente'])) {
     $consulta = "SELECT
     r.fechaR AS FechaReceta,
     c.diagnosticoC AS Diagnostico,
-    e.notaConsulta AS NotasMedicas,
     r.intruccionUsoR AS InstruccionUso,
+    r.medicamentoR AS Medicamento, 
     r.idR AS idR
 FROM pacientes p
 JOIN citas c ON p.IDP = c.IDP
 LEFT JOIN recetas r ON c.IDC = r.IDC
-LEFT JOIN expediente e ON c.IDC = e.IDC
 WHERE p.NombreCompletoP = '$nombrePaciente'
     AND c.ESTATUS = 'finalizada'";
 
