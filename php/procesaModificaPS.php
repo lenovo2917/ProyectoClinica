@@ -25,25 +25,25 @@ echo "Nombre Paciente: $nombrePaciente<br>";
 // Verifica si el ID pertenece a un doctor o a un secretario
 if (is_numeric($idP)) {
     $sqlCheckPaciente = "SELECT * FROM pacientes WHERE IDP = $idP";
-    $resultCheckPaciente = $dp->query($sqlCheckDoctor);
+    $resultCheckPaciente = $dp->query($sqlCheckPaciente);
 
     if ($resultCheckPaciente === false) {
         echo "Error en la consulta para pacientes: " . $dp->error;
     } elseif ($resultCheckPaciente->num_rows > 0) {
         // Actualiza el nombre en la tabla de doctores
         $sqlUpdatePaciente = "UPDATE pacientes SET 
-            NombreCompletoP = '$nombreUsuario',
-            CURPP = '$CURPUsuario',
-            fechaP = '$fechaNacimientoUsuario',
-            Estatus = '$estatusUsuario',
-            enfermedadesP = '$cedulaUsuario',
-            capacidadesP = '$capacidadesPaciente',
-            telefonoP = '$telefonoUsuario',
-            CorreoP = '$correoUsuario',
-            ContrasenaP = '$contrasenaUsuario',
-            alergiasP = '$alergiasUsuario',
-            generoP = '$generoUsuario',
-            tipoSangreP = '$tipoSangreUsuario'
+            NombreCompletoP = '$nombrePaciente',
+            CURPP = '$CURPPaciente',
+            fechaP = '$fechaNacimientoPaciente',
+            Estatus = '$estatusPaciente',
+            enfermedadesP = '$enfermedadesPaciente',
+            capacidadesdiferentesP = '$capacidadesPaciente',
+            telefonoP = '$telefonoPaciente',
+            CorreoP = '$correoPaciente',
+            ContrasenaP = '$contrasenaPaciente',
+            alergiasP = '$alergiasPaciente',
+            generoP = '$generoPaciente',
+            tipoSangreP = '$tipoSangrePaciente'
         WHERE IDP = $idP";
 
         $resultUpdatePaciente = $dp->query($sqlUpdatePaciente);
@@ -55,8 +55,6 @@ if (is_numeric($idP)) {
             header("Location: ../secretarias/consultaPacientesS.php");
             exit();
         }
-    } else {
-        echo "ID de paciente no válido";
     }
 }
 ?>
