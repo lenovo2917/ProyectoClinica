@@ -33,11 +33,12 @@ if(empty($_SESSION["NombreCompleto"])) {
     <div class="container-fluid-lg mb-4">
         <div class="row">
             <div class="col-12">
-            <nav style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="logo">
-                    <span
-                        style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
-                    <span style="padding: 0.5rem;"><img src="../img/cora2.png" alt="Descripción de la imagen"></span>
+                <nav style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="logo">
+                        <span
+                            style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
+                        <span style="padding: 0.5rem;"><img src="../img/cora2.png"
+                                alt="Descripción de la imagen"></span>
                     </div>
                     <div class="doctor-info" style="display: flex; align-items: center; margin-right: 20px;">
                         <?php
@@ -48,7 +49,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         ?>
                     </div>
 
-                     <?php
+                    <?php
                        if(isset($_GET['cerrar_sesion'])) {
                         // Eliminar las cookies de sesión
                         if (ini_get("session.use_cookies")) {
@@ -77,7 +78,7 @@ if(empty($_SESSION["NombreCompleto"])) {
           }
           unset($_SESSION['sesion_cerrada']);
                         ?>
-                    </nav>
+                </nav>
             </div>
         </div>
     </div>
@@ -107,39 +108,40 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <div class="row align-items-center">
                             <div class="col-md-2">
                                 <a href="./IndexDoctores.php">
-                                <i class="fa-solid fa-arrow-left fa-lg"></i>
+                                    <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
-                              
+
                             </div>
                             <div class="col-md-8">
                                 <h2>Consulta citas</h2>
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-secondary" id="limpiarFiltrosButton">
-                                    <i class="bi bi-trash" ></i>
+                                    <i class="bi bi-trash"></i>
                                 </button>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                     <div class="col-12 px-5">
-                        <form class="form" method="post">
+                        <form class="needs-validation" novalidate method="post">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="row mb-1">
                                         <label for="nombrePaciente" class="col-2 col-form-label">Buscar por
                                             nombre:</label>
-                                            <div class="col-5 text-start">
-                                                <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" placeholder="Nombre del paciente">
-                                                <div class="alert alert-danger d-none" id="nombrePacienteError">
-                                                    Por favor, ingrese el nombre del paciente.
-                                                </div>
-                                                
-                                            </div>                                            
+                                        <div class="col-5 text-start">
+                                            <input type="text" class="form-control" id="nombrePaciente"
+                                                name="nombrePaciente" required>
+                                                <div class="invalid-feedback">Campo obligatorio *</div>
+
+                                        </div>
+                                        <div class="invalid-feedback">Campo obligatorio *</div>
 
                                         <div class="col-1">
-                                            <button type="submit" class="btn my-custom-button" id="buscarButton">Buscar</button>
+                                            <button id="buscarButton" type="submit" class="btn my-custom-button"
+                                                >Buscar</button>
 
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
@@ -250,63 +252,85 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                                     echo "</tr>";
                                                                 }
                                                                 ?>
- 
+
                                                 </tbody>
                                             </table>
                                         </div>
-                                         </div>
-                                </div>
-
-                                <div class="modal" tabindex="-1" id="miModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Trasladar paciente</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Cerrar"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <label for="fechaCita">Fecha de la Cita</label>
-                                                <input type="date" class="form-control" id="fechaCita" name="fechaCita" required>
-
-
-
-
-                                                <label for="especialidadCita">Especialidad</label>
-                                                <select class="form-select" id="especialidadCita" name="especialidadCita" aria-label="Especialidad select menu" required>
-                                                    <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
-                                                </select>
-
-                                                <label for="doctorCita">Doctor</label>
-                                                <select class="form-select" id="doctorCita" name="doctorCita" aria-label="Doctor select menu" required>
-                                                    <!-- Las opciones de doctores se cargarán dinámicamente aquí -->
-                                                </select>
-
-                                                
-
-                                                <label for="horaCita">Hora de la Cita</label>
-                                                <select class="form-select" id="horaCita" name="horaCita" required>
-                                                    <!-- Las opciones de horas disponibles se cargarán dinámicamente aquí -->
-                                                </select>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cerrar</button>
-                                                    <button type="button" class="btn my-custom-buttonr" id="guardarCambios">Guardar Cambios</button>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-                                 <div class="col-1">
-                                   
-                                    
+
+                              
+                                <div class="col-1">
+
+
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="miModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="needs-validation" novalidate>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Trasladar paciente</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="fechaCita" class="form-label">Fecha de la Cita
+                                *</label>
+                            <input type="date" class="form-control" id="fechaCita"
+                                name="fechaCita" required>
+                            <div class="invalid-feedback">Campo obligatorio *</div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="especialidadCita" class="form-label">Especialidad
+                                *</label>
+                            <select class="form-select" id="especialidadCita"
+                                name="especialidadCita"
+                                aria-label="Especialidad select menu" required>
+                                <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
+                            </select>
+                            <div class="invalid-feedback">Campo obligatorio *</div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="doctorCita" class="form-label">Doctor *</label>
+                            <select class="form-select" id="doctorCita" name="doctorCita"
+                                aria-label="Doctor select menu" required>
+                                <!-- Las opciones de doctores se cargarán dinámicamente aquí -->
+                            </select>
+                            <div class="invalid-feedback">Campo obligatorio *</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horaCita" class="form-label">Hora de la Cita
+                                *</label>
+                            <select class="form-select" id="horaCita" name="horaCita"
+                                required>
+                                <!-- Las opciones de horas disponibles se cargarán dinámicamente aquí -->
+                            </select>
+                            <div class="invalid-feedback">Campo obligatorio *</div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Cerrar</button>
+                        <button id="guardarCambios type=" submit
+                            class="btn btn-custom">Guardar Cambios</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -326,14 +350,16 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/BusquedaEspecialidad.js"></script>
     <script src="../js/consutarCitasD.js"></script>
-    <script src="../js/FechaCalendario.js"></script>   <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
-  
+    <script src="../js/FechaCalendario.js"></script>
+    <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
+    <script src="../js/ValidacionesCampos.js"></script>
 
 
-  
-    
-    
-        
+
+
+
+
+
 
 </body>
 

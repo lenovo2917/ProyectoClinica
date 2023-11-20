@@ -45,6 +45,43 @@
             </div>
         </div>
     </header>
+    <?php
+        include '../php/acceso.php';
+
+        // Muestra los resultados de la consulta (Pacientes)
+        // Obtener el ID del paciente
+        $idP = isset($_GET["idPaciente"]) ? $_GET["idPaciente"] : null;
+
+        if (!empty($idP)) {
+            $sql = "SELECT 
+                NombreCompletoP as nombreP, 
+                CURPP as CURPP, 
+                fechaP as fNP,
+                enfermedadesP as enfermedadesP,
+                capacidadesdiferentesP as capacidadesP,  
+                Estatus as estatusP,
+                telefonoP as telefonoP,
+                correoP as correoP,
+                ContrasenaP as contrasenaP,
+                alergiasP as alergiasP,
+                generoP as generoP,
+                tipoSangreP as tipoSangreP
+            FROM pacientes WHERE IDP = $idP";
+        } else {
+            echo "Id de paciente no proporcionado";
+
+            exit; // Terminar la ejecución si no se proporciona un ID de usuario válido
+        }
+
+        $result = $dp->query($sql);
+
+        if ($result->num_rows > 0) {
+            // Imprime el nombre del usuario
+            $rowPaciente = $result->fetch_assoc();
+        } else {
+            echo "Paciente no encontrado";
+        }
+    ?>
     
     <!--Main o contenido-->
     <div class="container">
@@ -52,7 +89,7 @@
         <div class="row">
             <div class="col">
                 <div class="container-fluid formato mt-5 mb-2">
-                    <form class="form" method="post" action="procesaModificaPS.php">
+                    <form class="form" method="post" action="../php/procesaModificaPS.php">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row align-items-center">
@@ -69,95 +106,104 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="idPaciente" value="<?php echo $idP; ?>"> <!--Estos id son para que los tome procesaModificaUA.php y sepa qué usuario tomar-->
 
                             <div class="col-6" style="text-align: left;padding: 1rem;">
                                 <label class="form-label">Nombre Completo:</label>
-                                <input class="form-control" type="text" placeholder="Nombre Completo *" required />
+                                <input class="form-control" type="text" placeholder="Nombre Completo *" name="nombrePaciente" value="<?php echo isset(
+                                    $rowPaciente["nombreP"]) ? $rowPaciente["nombreP"] : ''; ?>" required />
                             </div>
                             <div class="col-6" style="text-align: left; padding: 1rem;" >
                                 <label class="form-label">CURP:</label>
                                 <input class="form-control" type="text" placeholder="CURP *" required maxlength="18"
-                                    title="Ingrese correctamente su CURP" />
+                                    title="Ingrese correctamente su CURP" name="CURPPaciente" value ="<?php echo isset(
+                                    $rowPaciente["CURPP"]) ? $rowPaciente["CURPP"] : ''; ?>" required />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Fecha de Nacimiento:</label>
-                                <input class="form-control" name="fechaNacimiento" type="date" placeholder="Fecha de Nacimiento *" required />
+                                <input class="form-control" type="date" placeholder="Fecha de Nacimiento *" name="fNPaciente" value ="<?php echo isset(
+                                    $rowPaciente["fNP"]) ? $rowPaciente["fNP"] : ''; ?>" required />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Télefono:</label>
                                 <input class="form-control" type="tel" placeholder="Teléfono" maxlength="10"
-                                    title="Ingrese un formato válido (xxx-xxx-xxxx)" />
+                                    title="Ingrese un formato válido (xxx-xxx-xxxx)" name="telefonoPaciente" value ="<?php echo isset(
+                                    $rowPaciente["telefonoP"]) ? $rowPaciente["telefonoP"] : ''; ?>" required />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Correo:</label>
                                 <input class="form-control" type="email" placeholder="ejemplo@gmail.com" required
-                                    maxlength="8" title="ejemplo@gmail.com" />
+                                     title="ejemplo@gmail.com" name="correoPaciente" value ="<?php echo isset(
+                                    $rowPaciente["correoP"]) ? $rowPaciente["correoP"] : ''; ?>" required />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Contraseña:</label>
-                                <input class="form-control" type="password" placeholder="Contraseña *" required
-                                    maxlength="8" title="**" />
+                                <input class="form-control" type="password" placeholder="Contraseña *" name="contrasenaPaciente" value ="<?php echo isset(
+                                    $rowPaciente["contrasenaP"]) ? $rowPaciente["contrasenaP"] : ''; ?>" required
+                                    maxlength="8" placeholder="********" />
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Capacidades diferentes:</label>
-                                <!--<input class="form-control" type="text" placeholder="Capacidades diferentes" maxlength="20"
-                                title="Sea especifico" />-->
-                                <textarea id="capacidades" name="capacidades"
-                                    placeholder="Capacidades diferentes...."></textarea>
-                            </div>
-                            <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Alergias:</label>
-                                <!--<input class="form-control" type="text" placeholder="Alergias" maxlength="20"
-                                title="Sea especifico" />-->
-                                <textarea id="alergias" name="alergias" placeholder="Alergias...."></textarea>
-                            </div>
-                            <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Enfermedades patológicas:</label>
-                                <!--<input class="form-control" type="text" placeholder="Enfermedades patológicas" maxlength="20"
-                                title="Sea especifico" />-->
-                                <textarea id="enfermedades" name="enfermedades" placeholder="Enfermedades patológicas...."></textarea>
-                            </div>
+    <label class="form-label">Capacidades diferentes:</label>
+    <!--<input class="form-control" type="text" placeholder="Capacidades diferentes" maxlength="20"
+    title="Sea especifico" />-->
+    <input class="form-control" type="text" id="capacidades" 
+        placeholder="Capacidades diferentes...." name="capacidadesPaciente" value ="<?php echo isset(
+        $rowPaciente["capacidadesP"]) ? $rowPaciente["capacidadesP"] : ''; ?>" required />
+</div>
+<div class="col-4" style="text-align: left; padding: 1rem;">
+    <label class="form-label">Alergias:</label>
+    <!--<input class="form-control" type="text" placeholder="Alergias" maxlength="20"
+    title="Sea especifico" />-->
+    <input class="form-control" type="text" id="alergias" placeholder="Alergias...."name="alergiasPaciente" value ="<?php echo isset(
+        $rowPaciente["alergiasP"]) ? $rowPaciente["alergiasP"] : ''; ?>" required />
+</div>
+<div class="col-4" style="text-align: left; padding: 1rem;">
+    <label class="form-label">Enfermedades patológicas:</label>
+    <!--<input class="form-control" type="text" placeholder="Enfermedades patológicas" maxlength="20"
+    title="Sea especifico" />-->
+    <input class="form-control" type="text" id="enfermedades" name="enfermedadesPaciente" placeholder="Enfermedades patológicas...." value ="<?php echo isset(
+        $rowPaciente["enfermedadesP"]) ? $rowPaciente["enfermedadesP"] : ''; ?>" required />
+</div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
                                 <div class="form-group">
                                     <label class="form-label">Tipo de sangre:</label>
-                                    <select name="tipo-sangre" id="tipo-sangre" required class="formato2"
+                                    <select name="tipoSangrePaciente" id="tipo-sangre" required class="formato2"
                                         style="width: 100%;">
                                         <option value="" disabled selected>Tipo de sangre *</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
+                                        <option value="A+" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "A+" ? 'selected' : ''; ?>>A+</option>
+                                        <option value="A-" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "A-" ? 'selected' : ''; ?>>A-</option>
+                                        <option value="B+" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "B+" ? 'selected' : ''; ?>>B+</option>
+                                        <option value="B-" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "B-" ? 'selected' : ''; ?>>B-</option>
+                                        <option value="O+" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "O+" ? 'selected' : ''; ?>>O+</option>
+                                        <option value="O-" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "O-" ? 'selected' : ''; ?>>O-</option>
+                                        <option value="AB+" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "AB+" ? 'selected' : ''; ?>>AB+</option>
+                                        <option value="AB-" <?php echo isset($rowPaciente["tipoSangreP"]) && $rowPaciente["tipoSangreP"] == "AB-" ? 'selected' : ''; ?>>AB-</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
                                 <div class="form-group">
                                     <label class="form-label">Género:</label>
-                                    <select name="genero" id="genero" class="formato2" style="width: 100%;">
-                                        <option value="" disabled selected>Género</option>
-                                        <option value="F">F</option>
-                                        <option value="M">M</option>
-                                        <option value="Otro">Otro</option>
+                                    <select name="generoPaciente" id="genero" class="formato2" style="width: 100%;">
+                                    <option value="F" <?php echo isset($rowPaciente["generoP"]) && $rowPaciente["generoP"] == "F" ? 'selected' : ''; ?>>F</option>
+                                        <option value="M" <?php echo isset($rowPaciente["generoP"]) && $rowPaciente["generoP"] == "M" ? 'selected' : ''; ?>>M</option>
+                                        <option value="Otro" <?php echo isset($rowPaciente["generoP"]) && $rowPaciente["generoP"] == "Otro" ? 'selected' : ''; ?>>Otro</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
                                 <div class="form-group">
                                     <label class="form-label">Estatus:</label>
-                                    <select name="estatus" id="estatus" class="formato2" style="width: 100%;">
-                                        <option value="" disabled selected>Estatus</option>
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
+                                    <select name="estatusPaciente" id="estatus" class="formato2" style="width: 100%;">
+                                    <option value="" disabled selected>Estatus</option>
+                                        <option value="Activo" <?php echo isset($rowPaciente["estatusP"]) && $rowPaciente["estatusP"] == "Activo" ? 'selected' : ''; ?>>Activo</option>
+                                        <option value="Inactivo" <?php echo isset($rowPaciente["estatusP"]) && $rowPaciente["estatusP"] == "Inactivo" ? 'selected' : ''; ?>>Inactivo</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4"></div>
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
-                                <button type="submit"  name="modifica_paciente" type="button"><i class="fa-solid fa-file-arrow-down" style="color: #ffffff;"></i> Modificar Paciente</button>
+                                <button type="submit" type="button"><i class="fa-solid fa-file-arrow-down" style="color: #ffffff;"></i> Modificar Paciente</button>
                             </div>
 
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
@@ -186,8 +232,6 @@
      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../js/creaCitas.js"></script>
     <script src="../main.js"></script>
-
-   
-
+    
 </body>
 </html>

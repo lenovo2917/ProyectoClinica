@@ -38,7 +38,7 @@
                             <div class="line3"></div>
                         </div>
                         <ul class="nav-links">
-                            <li><a href="../Blog_Medico.html">Inicio</a></li>
+                            <li><a href="../doctores/IndexDoctores.php">Inicio</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -49,7 +49,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="container-fluid formato">
+                <div class="container-fluid formato mt-5 mb-2">
                     <div class="col-12">
                         <div class="row align-items-center">
                             <div class="col-3 text-start">
@@ -66,117 +66,66 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <table class="table table-striped" style="vertical-align: middle;">
+                    <table class="table table-striped" style="vertical-align: middle;">
                             <tr>
                                 <th>Nombre</th>
                                 <th>CURP</th>
-                                <th>Email</th>
+                                <th>Correo</th>
                                 <th>Estatus</th>
                                 <th>Opciones</th>
                             </tr>
-                            <tr>
-                                <td>Juan Pérez</td>
-                                <td>ABC123456XYZ78901</td>
-                                <td>juanperez@example.com</td>
-                                <td>Activo</td>
-                                <td>
-                                <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaPacientesD.php" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaPacientesD.php" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="consultaPacientesD.php" type="button">
-                                            <button>Consultar</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Maria López</td>
-                                <td>DEF789012UVW34567</td>
-                                <td>marialopez@example.com</td>
-                                <td>Inactivo</td>
-                                <td>
-                                <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaPacientesD.php" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaPacientesD.php" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="consultaPacientesD.php" type="button">
-                                            <button>Consultar</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Rodríguez</td> <!--asdasdasd-->
-                                <td>GHI456789RST01234</td>
-                                <td>carlosrodriguez@example.com</td>
-                                <td>Activo</td>
-                                <td>
-                                <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaPacientesD.php" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaPacientesD.php" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="consultaPacientesD.php" type="button">
-                                            <button>Consultar</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ana García</td>
-                                <td>JKL901234MNO56789</td>
-                                <td>anagarcia@example.com</td>
-                                <td>Inactivo</td>
-                                <td>
-                                <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaPacientesD.php" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaPacientesD.php" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="consultaPacientesD.php" type="button">
-                                            <button>Consultar</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Luis Martínez</td>
-                                <td>PQR678901XYZ23456</td>
-                                <td>luismartinez@example.com</td>
-                                <td>Activo</td>
-                                <td>
-                                <div class="gap-2 mx-auto form" style="padding: 1rem;">
-                                        <a href="modificaPacientesD.php" type="button">
-                                            <button>Modificar</button>
-                                        </a>
-                                        <a href="eliminaPacientesD.php" type="button">
-                                            <button>Borrar</button>
-                                        </a>
-                                        <a href="consultaPacientesD.php" type="button">
-                                            <button>Consultar</button>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php
+                            // Incluye el archivo de conexión
+                            include '../php/acceso.php';
+                            // Realizar la consulta para obtener los registros de pacientes dependiendo de la secretaria
+                            //$IDS = $_SESSION['IDS'];
+                            $sql = "SELECT * FROM pacientes";
+                            $result = $dp->query($sql);
+                            
+                            if (!$result) {
+                                die("Error en la consulta: " . $dp->error);
+                            }
+                            
+
+                            // Imprimir los registros en la tabla
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td >" . $row['NombreCompletoP'] . "</td>";
+                                    echo "<td>" . $row['CURPP'] . "</td>";
+                                    echo "<td>" . $row['correoP'] . "</td>";
+                                    echo "<td>" . $row['Estatus'] . "</td>";
+                                    echo "<td>";
+                                    echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
+                                    echo '<a href="modificaPacientesD.php?idPaciente=' . $row["IDP"] . '" type="button" "><button >Modificar</button></a>';
+                                    echo '&nbsp;';  
+                                    echo '<a href="eliminaPacientesD.php?idPaciente=' . $row["IDP"] . '" type="button"><button >Borrar</button></a>';
+                                    echo '&nbsp;'; 
+                                    echo '<a href="consultaPacientesD.php?idPaciente=' . $row["IDP"] . '" type="button"><button >Consultar</button></a>';
+                                    echo '&nbsp;'; 
+                                    echo '</div>';
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>No hay pacientes registrados.</td></tr>";
+                            }
+
+                            // Cerrar la conexión a la base de datos
+                            $dp->close();
+                            ?>
                         </table>
+
                         <div class="d-grid gap-2 col-6 mx-auto form" style="padding: 1rem;">
-                            <a href="IndexDoctores.html"> 
-                                <button type="button"><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
+                            <a href="../doctores/IndexDoctores.php?"> 
+                                <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
                             </a>
                         </div>
-                    </div>
+                         
                 </div>
+                    
+                </div>
+                
             </div>
         </div>
     </div>

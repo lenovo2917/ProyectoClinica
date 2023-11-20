@@ -77,10 +77,9 @@
                             <?php
                             // Incluye el archivo de conexión
                             include '../php/acceso.php';
-                            session_start();
                             // Realizar la consulta para obtener los registros de pacientes dependiendo de la secretaria
                             //$IDS = $_SESSION['IDS'];
-                            $sql = "SELECT NombreCompletoP, CURPP, correoP, Estatus FROM pacientes";
+                            $sql = "SELECT * FROM pacientes";
                             $result = $dp->query($sql);
                             
                             if (!$result) {
@@ -92,17 +91,18 @@
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['NombreCompletoP'] . "</td>";
+                                    echo "<td >" . $row['NombreCompletoP'] . "</td>";
                                     echo "<td>" . $row['CURPP'] . "</td>";
                                     echo "<td>" . $row['correoP'] . "</td>";
                                     echo "<td>" . $row['Estatus'] . "</td>";
                                     echo "<td>";
                                     echo '<div class="gap-2 mx-auto form" style="padding: 1rem;">';
-                                    echo '<a href="modificaPacientesS.php?id=' . $row["CURPP"] . '" type="button" onclick="cargarDatos()"><button>Modificar</button></a>';
+                                    echo '<a href="modificaPacientesS.php?idPaciente=' . $row["IDP"] . '" type="button" "><button >Modificar</button></a>';
                                     echo '&nbsp;';  
-                                    echo '<a href="eliminaPacientesS.php?id=' . $row["CURPP"] . '" type="button"><button onclick="cargarDatos()">Borrar</button></a>';
+                                    echo '<a href="eliminaPacientesS.php?idPaciente=' . $row["IDP"] . '" type="button"><button >Borrar</button></a>';
                                     echo '&nbsp;'; 
-                                    echo '<a href="consultaPacientesS.php?id=' . $row["CURPP"] . '" type="button"><button onclick="cargarDatos()">Consultar</button></a>';
+                                    echo '<a href="consultaPacientesS.php?idPaciente=' . $row["IDP"] . '" type="button"><button >Consultar</button></a>';
+                                    echo '&nbsp;'; 
                                     echo '</div>';
                                     echo "</td>";
                                     echo "</tr>";
@@ -140,23 +140,6 @@
             </div>
         </footer>
     </div>
-
-    <script>
-function cargarDatos() {
-    // Realiza la solicitud al servidor para obtener los datos del paciente
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            // Si la solicitud fue exitosa, actualiza el formulario con los datos recibidos
-            var data = JSON.parse(this.responseText);
-            document.getElementById("nombreP").value = data.NombreCompletoP;
-            // Actualiza los demás campos del formulario con los datos recibidos
-        }
-    };
-    xhr.open("GET", "procesaModificaPS.php", true); // Asegúrate de ajustar la ruta correcta al archivo PHP
-    xhr.send();
-}
-</script>
     
          <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
          <script src="../bootstrap/js/bootstrap.esm.min.js"></script>

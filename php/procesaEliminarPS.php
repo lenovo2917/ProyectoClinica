@@ -1,21 +1,24 @@
 <?php
 include 'acceso.php';
 
-// Recupera los datos del formulario o sesión
-$userID = $_SESSION["NombreCompletoP"];
+// Recupera los datos del formulario
+$idP = isset($_POST["idPaciente"]) ? $_POST["idPaciente"] : null;
+// Resto de variables
 
-// Sentencia SQL para eliminar el registro
-$sqlDelete = "DELETE FROM pacientes WHERE IDP = $userID";
+// Verifica si el ID pertenece a un paciente
+if (is_numeric($idP)) {
+    // Actualiza el campo activo en la tabla de pacientes a 0 para realizar el borrado lógico
+    $sqlUpdatePaciente = "UPDATE pacientes SET Estatus = 0 WHERE IDP = $idP";
 
-// Ejecuta la sentencia SQL
-$resultDelete = $dp->query($sqlDelete);
+    $resultUpdatePaciente = $dp->query($sqlUpdatePaciente);
 
-// Verifica si la eliminación fue exitosa
-if ($resultDelete) {
-    // Redirige a la página después de la eliminación
-    header("Location: ../secretarios/consultaPacientesS.php");
-    exit();
-} else {
-    echo "Error al eliminar al paciente";
+    if ($resultUpdatePaciente === false) {
+        echo "Error al realizar el borrado lógico del paciente: " . $dp->error;
+    } else {
+        // Redirige al índice después de la modificación
+        header("Location: ../secretarias/muestraPacientesS.php");
+        exit();
+    }
 }
 ?>
+

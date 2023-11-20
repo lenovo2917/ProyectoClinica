@@ -2,9 +2,6 @@
 include 'acceso.php';
 
 // Recupera los datos del formulario
-
-
-
 $idP = isset($_POST["idPaciente"]) ? $_POST["idPaciente"] : null;
 $nombrePaciente = isset($_POST["nombrePaciente"]) ? $_POST["nombrePaciente"] : null;
 $CURPPaciente = isset($_POST["CURPPaciente"]) ? $_POST["CURPPaciente"] : null;
@@ -52,11 +49,9 @@ if (is_numeric($idP)) {
             echo "Error al actualizar al paciente : " . $dp->error;
         } else {
             // Redirige al índice después de la modificación
-            header("Location: ../secretarias/muestraPacientesS.php");
+            header("Location: ../doctores/muestraPacientesD.php");
             exit();
         }
     }
 }
 ?>
-
-
