@@ -1,4 +1,4 @@
-// JavaScript para mostrar un mensaje de éxito después de enviar el formulario
+// JavaScript para deshabilitar el envío del formulario si hay campos no válidos
 (function () {
     'use strict'
   
@@ -17,7 +17,7 @@
             var successMessage = document.createElement('div')
             successMessage.className = 'alert alert-success'
             successMessage.role = 'alert'
-            successMessage.innerHTML = '¡Cambios guardados con éxito!'
+            successMessage.innerHTML = 'Campos validados correctamente!'
             form.appendChild(successMessage)
           }
   
