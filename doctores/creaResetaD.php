@@ -469,7 +469,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <button id="btnGenerarCita" type="submit"
-                                                        class="btn btn-custom">Generar Citaa</button>
+                                                        class="btn btn-custom">Generar Cita</button>
                                                 </div>
                                             </div>
                                         </div>

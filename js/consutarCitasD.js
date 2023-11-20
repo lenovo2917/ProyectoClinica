@@ -114,9 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             // Puedes manejar errores aquí si es necesario
                         }
                     });
-                } else {
-                    console.log('Por favor, seleccione un médico antes de guardar los cambios.');
-                    // Puedes mostrar mensajes de error aquí si es necesario
                 }
             });
         }
