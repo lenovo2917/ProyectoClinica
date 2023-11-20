@@ -133,7 +133,7 @@
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Correo:</label>
                                 <input class="form-control" type="email" placeholder="ejemplo@gmail.com" required
-                                    maxlength="8" title="ejemplo@gmail.com" name="correoPaciente" value ="<?php echo isset(
+                                     title="ejemplo@gmail.com" name="correoPaciente" value ="<?php echo isset(
                                     $rowPaciente["correoP"]) ? $rowPaciente["correoP"] : ''; ?>" required />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
