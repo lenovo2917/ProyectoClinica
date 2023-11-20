@@ -17,8 +17,8 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@5 00&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/fontawesome.css"rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/fontawesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css" rel="stylesheet">
     <!--ESTILOS CSS-->
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
@@ -35,7 +35,8 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                     <div class="logo" style="display: flex;align-items: center;">
                         <span
                             style="color:#000000; font-size:26px; font-weight:bold; letter-spacing: 1px;margin-left: 20px;">MEDICATEC</span>
-                        <span style="padding: 0.5rem;"><img src="../img/cora2.png" alt="Descripción de la imagen"></span>
+                        <span style="padding: 0.5rem;"><img src="../img/cora2.png"
+                                alt="Descripción de la imagen"></span>
                     </div>
                     <div class="hamburger">
                         <div class="line1"></div>
@@ -121,57 +122,23 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                                 </div>
                                 <div class="col-12">
                                     <div class=" row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
-                                        style="background-color: white ">
+                                        id="listaPacientes" style="background-color: white ">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th class="col-1">#</th>
-                                                    <th class="col-5">Paciente</th>
+                                                    <th class="col-4">Paciente</th>
                                                     <th class="col-2">Fecha</th>
+                                                    <th class="col-1">Hora</th>
                                                     <th class="col-1">Estado</th>
                                                     <th class="col-3">Opciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Jorge Damian Reyes Hernandez</td>
-                                                    <td>15/10/2023</td>
-                                                    <td>Aceptada</td>
-                                                    <td class="text-center">
-                                                        <input type="button" class="" value="Aceptar">
-                                                        <input type="button" class="" value="Rechazar">
-                                                        <input type="button" class="" value="Trasladar">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Fernando Ortiz de la Rosa</td>
-                                                    <td>17/10/2023</td>
-                                                    <td>En espera</td>
-                                                    <td class="text-center">
-                                                        <input type="button" class="" value="Aceptar">
-                                                        <input type="button" class="" value="Rechazar">
-                                                        <input type="button" class="" value="Trasladar">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Mario Velazques Martinez</td>
-                                                    <td>20/10/2023</td>
-                                                    <td>Aceptada</td>
-                                                    <td class="text-center">
-                                                        <input type="button" class="" value="Aceptar">
-                                                        <input type="button" class="" value="Rechazar">
-                                                        <input type="button" class="" value="Trasladar">
-                                                    </td>
-                                                </tr>
+                                            <tbody id="tbodyPacientes">
+                                                
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                                <div class="col-1">
-
                                 </div>
                             </div>
                         </form>
@@ -191,11 +158,13 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
             </div>
         </footer>
     </div>
-    
-         <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-         <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
-    <script src="../js/creaCitas.js"></script>
+
+    <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
+    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../js/consultarCitasS.js"></script>
     <script src="../js/main.js"></script>
 
 </body>
+
 </html>
