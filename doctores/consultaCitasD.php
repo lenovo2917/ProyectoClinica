@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(empty($_SESSION["NombreCompleto"])) {
+  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+} 
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,19 +33,12 @@ session_start();
     <div class="container-fluid-lg mb-4">
         <div class="row">
             <div class="col-12">
-                <nav style="display: flex; justify-content: space-between; align-items: center;">
-                    <div class="logo">
-                        <span
-                            style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
-                        <span style="padding: 0.5rem;"><img src="../img/cora2.png"
-                                alt="Descripción de la imagen"></span>
-                                <?php
-                        if ($_SESSION["Rol"] === 'doctor') {
-                            echo '<a href="logout.php" style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Salir</a>';
-                        }
-                        ?>
+            <nav style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="logo">
+                    <span
+                        style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
+                    <span style="padding: 0.5rem;"><img src="../img/cora2.png" alt="Descripción de la imagen"></span>
                     </div>
-                    
                     <div class="doctor-info" style="display: flex; align-items: center; margin-right: 20px;">
                         <?php
                         if ($_SESSION["Rol"] === 'doctor') {
@@ -51,7 +47,37 @@ session_start();
                         }
                         ?>
                     </div>
-                </nav>
+
+                     <?php
+                       if(isset($_GET['cerrar_sesion'])) {
+                        // Eliminar las cookies de sesión
+                        if (ini_get("session.use_cookies")) {
+                            $params = session_get_cookie_params();
+                            setcookie(session_name(), '', time() - 42000,
+                                $params["path"], $params["domain"],
+                                $params["secure"], $params["httponly"]
+                            );
+                        }
+                  // Destruir la sesión
+                  session_unset();
+                  session_destroy();
+                  $_SESSION = array();
+                  // Redirigir a la página de inicio de sesión
+                  header("Location:../login.php");
+                  exit();
+              } else if(!isset($_SESSION['sesion_cerrada'])) {
+                echo '
+                <ul class="nav-links">
+                <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                style="color: white;">
+                Cerrar Sesión </a>
+            </li>
+            </ul>';
+              }else {   
+          }
+          unset($_SESSION['sesion_cerrada']);
+                        ?>
+                    </nav>
             </div>
         </div>
     </div>
