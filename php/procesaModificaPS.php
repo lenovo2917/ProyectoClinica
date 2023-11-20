@@ -1,24 +1,64 @@
 <?php
-// Incluye el acceso a la base de datos
 include 'acceso.php';
 
-// Recupera el ID del paciente de la sesión
-$name = $_SESSION["NombreCompletoP"];
+// Recupera los datos del formulario
 
-// Consulta para obtener todos los campos del paciente
-$sqlSelect = "SELECT * FROM pacientes WHERE NombreCompletoP = $name";
 
-// Ejecuta la consulta
-$resultSelect = $dp->query($sqlSelect);
 
-// Verifica si se encontraron resultados
-if ($resultSelect && $resultSelect->num_rows > 0) {
-    $row = $resultSelect->fetch_assoc();
-    // Devuelve los datos como un objeto JSON para ser utilizados en JavaScript
-    echo json_encode($row);
-} else {
-    // Si no se encontraron datos, devuelve un mensaje de error o un objeto vacío
-    echo json_encode(array("error" => "No se encontraron datos del paciente"));
+$idP = isset($_POST["idPaciente"]) ? $_POST["idPaciente"] : null;
+$nombrePaciente = isset($_POST["nombrePaciente"]) ? $_POST["nombrePaciente"] : null;
+$CURPPaciente = isset($_POST["CURPPaciente"]) ? $_POST["CURPPaciente"] : null;
+$fechaNacimientoPaciente = isset($_POST["fNPaciente"]) ? $_POST["fNPaciente"] : null;
+$estatusPaciente = isset($_POST["estatusUsuario"]) ? $_POST["estatusUsuario"] : null;
+$enfermedadesPaciente = isset($_POST["enfermedadesPaciente"]) ? $_POST["enfermedadesPaciente"] : null;
+$telefonoPaciente = isset($_POST["telefonoPaciente"]) ? $_POST["telefonoPaciente"] : null;
+$correoPaciente = isset($_POST["correoPaciente"]) ? $_POST["correoPaciente"] : null;
+$contrasenaPaciente = isset($_POST["contrasenaPaciente"]) ? $_POST["contrasenaPaciente"] : null;
+$alergiasPaciente = isset($_POST["alergiasPaciente"]) ? $_POST["alergiasPaciente"] : null;
+$generoPaciente = isset($_POST["generoPaciente"]) ? $_POST["generoPaciente"] : null;
+$capacidadesPaciente = isset($_POST["capacidadesPaciente"]) ? $_POST["capacidadesPaciente"] : null;
+$tipoSangrePaciente = isset($_POST["tipoSangrePaciente"]) ? $_POST["tipoSangrePaciente"] : null;
+
+echo "ID Paciente: $idP<br>";
+echo "Nombre Paciente: $nombrePaciente<br>";
+
+// Verifica si el ID pertenece a un doctor o a un secretario
+if (is_numeric($idP)) {
+    $sqlCheckPaciente = "SELECT * FROM pacientes WHERE IDP = $idP";
+    $resultCheckPaciente = $dp->query($sqlCheckDoctor);
+
+    if ($resultCheckPaciente === false) {
+        echo "Error en la consulta para pacientes: " . $dp->error;
+    } elseif ($resultCheckPaciente->num_rows > 0) {
+        // Actualiza el nombre en la tabla de doctores
+        $sqlUpdatePaciente = "UPDATE pacientes SET 
+            NombreCompletoP = '$nombreUsuario',
+            CURPP = '$CURPUsuario',
+            fechaP = '$fechaNacimientoUsuario',
+            Estatus = '$estatusUsuario',
+            enfermedadesP = '$cedulaUsuario',
+            capacidadesP = '$capacidadesPaciente',
+            telefonoP = '$telefonoUsuario',
+            CorreoP = '$correoUsuario',
+            ContrasenaP = '$contrasenaUsuario',
+            alergiasP = '$alergiasUsuario',
+            generoP = '$generoUsuario',
+            tipoSangreP = '$tipoSangreUsuario'
+        WHERE IDP = $idP";
+
+        $resultUpdatePaciente = $dp->query($sqlUpdatePaciente);
+
+        if ($resultUpdatePaciente === false) {
+            echo "Error al actualizar al paciente : " . $dp->error;
+        } else {
+            // Redirige al índice después de la modificación
+            header("Location: ../secretarias/consultaPacientesS.php");
+            exit();
+        }
+    } else {
+        echo "ID de paciente no válido";
+    }
 }
 ?>
+
 
