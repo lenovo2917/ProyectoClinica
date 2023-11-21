@@ -1,8 +1,8 @@
 <?php
 include 'acceso.php';
 
-$query = "SELECT * FROM pacientes_citas_vista";
-$result = $conn->query($query);
+$query = "SELECT * FROM pacientes_citas_vista WHERE NombreCompletoP LIKE '%$nombrePaciente%' AND MONTH(fechaC) = MONTH('$mesCita')";
+$result = $dp->query($query);
 
 $data = array();
 
@@ -11,7 +11,10 @@ if ($result->num_rows > 0) {
         $data[] = $row;
     }
 }
+
+header('Content-Type: application/json');  // Establece el encabezado JSON
 echo json_encode($data);
 
-$conn->close();
+$dp->close();
 ?>
+

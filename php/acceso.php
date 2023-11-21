@@ -9,9 +9,4 @@ $dp->set_charset("utf8");
 if ($dp->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
-//Que tal como estan
-//hola yo soy antonio y me gustan las uvas :DDDDDDDD
-//hola yo soy antonio
-//soy hola yo rogelio
-//ahhh una lesbiana
 ?>
