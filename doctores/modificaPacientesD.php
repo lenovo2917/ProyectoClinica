@@ -38,7 +38,7 @@
                             <div class="line3"></div>
                         </div>
                         <ul class="nav-links">
-                            <li><a href="../Blog_Medico.php">Inicio</a></li>
+                            <li><a href="../doctores/IndexDoctores.php">Inicio</a></li>
                           </ul>
                     </nav>
                 </div>
@@ -192,14 +192,14 @@
                                 </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <div class="form-group">
+                                                           <!--      <div class="form-group">
                                     <label class="form-label">Estatus:</label>
                                     <select name="estatusPaciente" id="estatus" class="formato2" style="width: 100%;">
                                     <option value="" disabled selected>Estatus</option>
                                         <option value="Activo" <?php echo isset($rowPaciente["estatusP"]) && $rowPaciente["estatusP"] == "Activo" ? 'selected' : ''; ?>>Activo</option>
                                         <option value="Inactivo" <?php echo isset($rowPaciente["estatusP"]) && $rowPaciente["estatusP"] == "Inactivo" ? 'selected' : ''; ?>>Inactivo</option>
                                     </select>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="col-4"></div>
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
