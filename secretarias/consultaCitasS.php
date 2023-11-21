@@ -14,9 +14,10 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@5 00&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/fontawesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css" rel="stylesheet">
+    
     <!--ESTILOS CSS-->
+    <link rel="stylesheet" href="../fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../fontawesome/css/all.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
@@ -132,7 +133,6 @@ session_start();
                                                 </tr>
                                             </thead>
                                             <tbody id="tbodyPacientes">
-                                                
                                             </tbody>
                                         </table>
                                     </div>

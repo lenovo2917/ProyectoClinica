@@ -19,7 +19,7 @@ $(document).ready(function () {
             // Si ambos están vacíos, consulta todas las citas
             $.ajax({
                 url: '../php/obtenerCitasS.php',
-                type: 'GET', // Cambiado a GET
+                type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     mostrarDatos(data);
@@ -32,7 +32,7 @@ $(document).ready(function () {
             // Si al menos uno de los campos tiene valor, realiza la búsqueda
             $.ajax({
                 url: '../php/obtenerCitasS.php',
-                type: 'GET',
+                type: 'POST',
                 data: { nombre: nombrePaciente, mes: mesCita },
                 dataType: 'json',
                 success: function (data) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
         $.each(data, function (index, paciente) {
             var row = '<tr>' +
-                '<td>' + paciente.NombreCompletoP + '</td>' +
+                '<td>' + paciente.nombreCompletoP + '</td>' +
                 '<td>' + paciente.fechaC + '</td>' +
                 '<td>' + paciente.horaC + '</td>' +
                 '<td>' + paciente.estatus + '</td>' +

@@ -1,20 +1,39 @@
 <?php
 include 'acceso.php';
 
-$query = "SELECT * FROM pacientes_citas_vista WHERE NombreCompletoP LIKE '%$nombrePaciente%' AND MONTH(fechaC) = MONTH('$mesCita')";
-$result = $dp->query($query);
+// Obtener los valores de los campos de filtro
+$nombrePaciente = $_POST['nombre'];
+$mesCita = $_POST['mes'];
 
-$data = array();
+// Inicializar la condición de filtrado
+$condicionFiltro = "pacientes.NombreCompletoP = '$nombreCompletoP'";
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
+// Añadir condiciones solo si se proporcionan valores no vacíos
+if (!empty($nombrePaciente)) {
+    $condicionFiltro .= " AND pacientes.NombreCompletoP LIKE '%$nombrePaciente%'";
 }
 
-header('Content-Type: application/json');  // Establece el encabezado JSON
-echo json_encode($data);
+if (!empty($mesCita)) {
+    $condicionFiltro .= " AND MONTH(citas.fechaC) = $mesCita";
+}
 
+// Consulta SQL con la condición de filtrado
+$sql = "SELECT citas.IDC, citas.fechaC, citas.HoraC, citas.ESTATUS
+        FROM citas
+        JOIN pacientes ON citas.IDP = pacientes.IDP 
+        WHERE $condicionFiltro";
+
+$resultado = $conexion->query($sql);
+
+// Construir el array asociativo con los resultados
+$citas = array();
+while ($fila = $resultado->fetch_assoc()) {
+    $citas[] = $fila;
+}
+
+// Cerrar la conexión
 $dp->close();
-?>
 
+// Enviar los datos al cliente en formato JSON
+echo json_encode($citas);
+?>
