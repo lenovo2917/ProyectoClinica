@@ -14,7 +14,8 @@ if ($fecha < $hoy) {
 }
 
 // Modificar la consulta SQL para incluir el doctor
-$sql = "SELECT HoraDisponible FROM horas_disponibles_view WHERE FechaDisponible = '$fecha' AND EspecialidadID = '$especialidad' AND DoctorID = '$doctor' AND Estado = 'disponible'";
+$sql = "SELECT HoraDisponible FROM horas_disponibles_view WHERE FechaDisponible = '$fecha' AND EspecialidadID = 
+'$especialidad' AND DoctorID = '$doctor' AND Estado = 'disponible'";
 $result = $dp->query($sql);
 
 if ($result->num_rows > 0) {

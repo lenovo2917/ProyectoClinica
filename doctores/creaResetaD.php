@@ -208,58 +208,63 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 <h2>Formulario para Crear Receta Médica</h2>
                             </div>
 
-                            <form id="recetaForm" method="post">
+                            <form id="recetaForm" method="post" class="needs-validation" novalidate>
                                 <div class="form-group">
-                                    <label for="nombre">Nombre del Paciente</label>
+                                    <label for="nombre">Nombre del Paciente *</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre"
                                         placeholder="Nombre" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="apellidoPaterno">Apellido Paterno</label>
+                                    <label for="apellidoPaterno">Apellido Paterno *</label>
                                     <input type="text" class="form-control" id="apellidoP" name="apellidoP"
                                         placeholder="ApellidoP" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el apellido paterno.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="apellidoMaterno">Apellido Materno</label>
+                                    <label for="apellidoMaterno">Apellido Materno *</label>
                                     <input type="text" class="form-control" id="apellidoM" name="apellidoM"
                                         placeholder="ApellidoM" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el apellido materno.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="fecha">Fecha de la Receta</label>
+                                    <label for="fecha">Fecha de la Receta *</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">CITAS</button>
                                             <ul class="dropdown-menu" id="citasDropdown">
-
                                                 <input type="hidden" id="idCita" name="idCita" value="">
-
                                             </ul>
                                         </div>
                                         <input type="date" class="form-control" name="fecha" id="fecha" required>
+                                        <div class="invalid-feedback">Por favor, selecciona una fecha.</div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="diagnostico">Diagnóstico</label>
+                                    <label for="diagnostico">Diagnóstico *</label>
                                     <textarea class="form-control" id="diagnostico" rows="3"
                                         placeholder="Ingrese el diagnóstico" name="diagnostico" required
                                         style="resize: none"></textarea>
+                                    <div class="invalid-feedback">Por favor, ingresa el diagnóstico.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="medicamento">Medicamento Recetado</label>
+                                    <label for="medicamento">Medicamento Recetado *</label>
                                     <input type="text" class="form-control" id="medicamento" name="medicamento"
                                         placeholder="Nombre del medicamento" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el medicamento recetado.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="intruccionUsoR">Instrucciones de Uso</label>
+                                    <label for="intruccionUsoR">Instrucciones de Uso *</label>
                                     <textarea class="form-control" id="intruccionUsoR" rows="8"
                                         placeholder="intruccionUsoR" name="intruccionUsoR" required
                                         style="resize: none"></textarea>
+                                    <div class="invalid-feedback">Por favor, ingresa las instrucciones de uso.</div>
                                 </div>
-                                <button type="button" id="crearReceta" class="btn btn-primary"
+                                <button type="submit" id="crearReceta" class="btn btn-custom"
                                     data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Crear Receta</button>
                             </form>
+
                         </div>
 
                         <!-- Tab 2: Expedientes de Paciente -->
@@ -273,18 +278,25 @@ if(empty($_SESSION["NombreCompleto"])) {
 
                             <div class="row">
                                 <!-- Fila 1: Barra de búsqueda -->
-
-                                <div class="col-md-12" style="margin-bottom: 20px;">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-11">
-                                            <input type="text" class="form-control"
-                                                placeholder="Buscar paciente por nombre" id="nombrePaciente">
-                                        </div>
-                                        <div class="col-md-1">
-                                            <button class="btn btn-custom" type="submit" name="buscar">Buscar</button>
+                                <form class="needs-validation" novalidate>
+                                    <div class="col-md-12" style="margin-bottom: 20px;">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-11">
+                                                <label for="nombrePaciente">Nombre del Paciente * </label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Buscar paciente por nombre" id="nombrePaciente"
+                                                    required>
+                                                <div class="invalid-feedback">Por favor, ingresa el nombre del paciente.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button class="btn btn-custom" type="submit"
+                                                    name="buscar">Buscar</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+
 
                                 <!-- Fila 2: Datos del paciente y nota -->
                                 <div class="col-md-12">
@@ -353,6 +365,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </a>
                                 <h2>Crear Cita Medica</h2>
                             </div>
+
+
+
                             <form class="row g-3 needs-validation" novalidate id="crearCitaForm" method="POST">
                                 <div class="col-md-12">
                                     <div class="row">
@@ -505,7 +520,7 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../js/FechaCalendario.js"></script>
     <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
     <script src="../js/ValidacionesCampos.js"></script>
-  
+
 
 
 
