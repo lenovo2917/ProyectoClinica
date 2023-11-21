@@ -2,28 +2,25 @@
 include 'acceso.php';
 
 // Obtener los valores de los campos de filtro
-$nombrePaciente = $_POST['nombre'];
-$mesCita = $_POST['mes'];
+$nombrePaciente = isset($_POST['nombre']) ? $_POST['nombre'] : null;
+$mesCita = isset($_POST['mes']) ? $_POST['mes'] : null;
 
 // Inicializar la condición de filtrado
-$condicionFiltro = "pacientes.NombreCompletoP = '$nombreCompletoP'";
+$condicionFiltro = "1";
 
 // Añadir condiciones solo si se proporcionan valores no vacíos
 if (!empty($nombrePaciente)) {
-    $condicionFiltro .= " AND pacientes.NombreCompletoP LIKE '%$nombrePaciente%'";
+    $condicionFiltro .= " AND NombreCompletoP LIKE '%$nombrePaciente%'";
 }
 
 if (!empty($mesCita)) {
-    $condicionFiltro .= " AND MONTH(citas.fechaC) = $mesCita";
+    $condicionFiltro .= " AND MONTH(fechaC) = $mesCita";
 }
 
 // Consulta SQL con la condición de filtrado
-$sql = "SELECT citas.IDC, citas.fechaC, citas.HoraC, citas.ESTATUS
-        FROM citas
-        JOIN pacientes ON citas.IDP = pacientes.IDP 
-        WHERE $condicionFiltro";
+$sql = "SELECT * FROM pacientes_citas_vista WHERE $condicionFiltro";
 
-$resultado = $conexion->query($sql);
+$resultado = $dp->query($sql);
 
 // Construir el array asociativo con los resultados
 $citas = array();
