@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Evento de cambio en la fecha
     fechaInput.addEventListener("change", function () {
         obtenerEspecialidades();
-        cargarHorasDisponibles();
+       
     });
 
     // Evento de cambio en la especialidad
@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 // Limpiar y cargar las nuevas opciones en el select de doctores
                 doctorSelect.innerHTML = xhr.responseText;
+
+                cargarHorasDisponibles();
             }
         };
 

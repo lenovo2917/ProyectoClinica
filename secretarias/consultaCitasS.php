@@ -1,9 +1,6 @@
 <!--Creo Antonio-->
 <?php
 session_start();
-if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) && empty($_SESSION["NombreCompletoD"])) {
-  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
-} 
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,13 +14,15 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@5 00&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/fontawesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css" rel="stylesheet">
+    
     <!--ESTILOS CSS-->
+    <link rel="stylesheet" href="../fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../fontawesome/css/all.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
-    <link rel="stylesheet" type="text/css" href="../css/doctores.css">
+    <link rel="stylesheet" type="text/css" href="../css/secretarias.css">
+    <link rel="stylesheet" type="text/css" href="../css/Blog.css">
 </head>
 
 <body style="background-color: #EEEEEE;">
@@ -74,7 +73,7 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                                 </div>
                             </div>
                             <div class="col-4 text-center">
-                                <h2>Consultar citas</h2>
+                                <h3>Consultar citas</h3 >
                             </div>
                             <div class="col-4 text-end">
                                 <img src="../img/LOGO.png" style="width: 180px; height: 170px;"
@@ -87,31 +86,31 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="row mb-1">
-                                        <label for="" class=" col-2 col-form-label">Buscar por nombre:</label>
+                                        <label for="nombre" class="col-2 col-form-label">Buscar por nombre:</label>
                                         <div class="col-5 text-start">
-                                            <input type="text" class="form-control" id=""
-                                                value="Jorge Damian Reyes Hernandez">
+                                            <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" value="">
                                         </div>
-                                        <div class="col-1">
-                                        </div>
-                                        <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
+                                        <div class="col-1"></div>
+                                        <label for="mes" class="text-end col-2 col-form-label">Buscar por mes:</label>
                                         <div class="col-2 text-start">
-                                            <select class="form-select" aria-label="">
-                                                <option value="enero">enero</option>
-                                                <option value="febrero">febrero</option>
-                                                <option value="marzo">marzo</option>
-                                                <option value="abril">abril</option>
-                                                <option value="mayo">mayo</option>
-                                                <option value="junio">junio</option>
-                                                <option value="julio">julio</option>
-                                                <option value="agosto">agosto</option>
-                                                <option value="septiempre">septiempre</option>
-                                                <option value="octubre">octubre</option>
-                                                <option value="noviembre">noviembre</option>
-                                                <option value="diciembre">diciembre</option>
+                                            <select id="mesCita" name="mesCita" class="form-select" aria-label="">
+                                                <option value="">Todos los meses</option>
+                                                <option value="1">enero</option>
+                                                <option value="2">febrero</option>
+                                                <option value="3">marzo</option>
+                                                <option value="4">abril</option>
+                                                <option value="5">mayo</option>
+                                                <option value="6">junio</option>
+                                                <option value="7">julio</option>
+                                                <option value="8">agosto</option>
+                                                <option value="9">septiembre</option>
+                                                <option value="10">octubre</option>
+                                                <option value="11">noviembre</option>
+                                                <option value="12">diciembre</option>
                                             </select>
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 <div class="col-12">
                                     <div class="row my-2">
@@ -126,16 +125,14 @@ if(empty($_SESSION["NombreCompletoP"]) && empty($_SESSION["NombreCompletoS"]) &&
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-1">#</th>
                                                     <th class="col-4">Paciente</th>
-                                                    <th class="col-2">Fecha</th>
+                                                    <th class="col-1">Fecha</th>
                                                     <th class="col-1">Hora</th>
                                                     <th class="col-1">Estado</th>
-                                                    <th class="col-3">Opciones</th>
+                                                    <th class="col-4">Opciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbodyPacientes">
-                                                
                                             </tbody>
                                         </table>
                                     </div>
