@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>  
 <!DOCTYPE html>
 <html>
 
@@ -37,9 +40,14 @@
                             <div class="line2"></div>
                             <div class="line3"></div>
                         </div>
-                        <ul class="nav-links">
-                            <li><a href="../Blog_Medico.php">Inicio</a></li>
-                          </ul>
+                        <?php 
+                        $rol=$_SESSION['Rol'];
+                        // Incluye barraNavegacion.php antes de llamar a la función generarMenu
+                        include('../php/barraNavegacion.php');
+                  
+                        // Llama a la función generarMenu con el rol del usuario
+                        generarMenu($rol);
+                    ?>
                     </nav>
                 </div>
             </div>
@@ -107,6 +115,7 @@
                                 </div>
                             </div>
                             <input type="hidden" name="idPaciente" value="<?php echo $idP; ?>"> <!--Estos id son para que los tome procesaModificaUA.php y sepa qué usuario tomar-->
+
 
                             <div class="col-6" style="text-align: left;padding: 1rem;">
                                 <label class="form-label">Nombre Completo:</label>
@@ -192,18 +201,18 @@
                                 </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <div class="form-group">
+                                                           <!--      <div class="form-group">
                                     <label class="form-label">Estatus:</label>
                                     <select name="estatusPaciente" id="estatus" class="formato2" style="width: 100%;">
                                     <option value="" disabled selected>Estatus</option>
                                         <option value="Activo" <?php echo isset($rowPaciente["estatusP"]) && $rowPaciente["estatusP"] == "Activo" ? 'selected' : ''; ?>>Activo</option>
                                         <option value="Inactivo" <?php echo isset($rowPaciente["estatusP"]) && $rowPaciente["estatusP"] == "Inactivo" ? 'selected' : ''; ?>>Inactivo</option>
                                     </select>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="col-4"></div>
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
-                                <button type="submit" type="button"><i class="fa-solid fa-file-arrow-down" style="color: #ffffff;"></i> Modificar Paciente</button>
+                                <button type="submit" ><i class="fa-solid fa-file-arrow-down" style="color: #ffffff;"></i> Modificar Paciente</button>
                             </div>
 
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
@@ -230,7 +239,6 @@
      <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
      <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="../js/creaCitas.js"></script>
     <script src="../main.js"></script>
     
 </body>

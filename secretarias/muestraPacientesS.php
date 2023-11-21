@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -37,9 +40,14 @@
                             <div class="line2"></div>
                             <div class="line3"></div>
                         </div>
-                        <ul class="nav-links">
-                            <li><a href="../Blog_Medico.php">Inicio</a></li>
-                        </ul>
+                        <?php 
+                        $rol=$_SESSION['Rol'];
+                        // Incluye barraNavegacion.php antes de llamar a la función generarMenu
+                        include('../php/barraNavegacion.php');
+                  
+                        // Llama a la función generarMenu con el rol del usuario
+                        generarMenu($rol);
+                    ?>
                     </nav>
                 </div>
             </div>
@@ -65,6 +73,18 @@
                             </div>
                         </div>
                     </div>
+                 <div class="col-12 text-center">
+                    <?php
+                    // En muestraPacientesD.php
+                   
+                    if(isset($_SESSION['mensaje'])) {
+                        $mensaje = $_SESSION['mensaje'];
+                        echo "<p style='color: red;'>$mensaje</p>";
+                        // Limpiar el mensaje después de mostrarlo
+                        unset($_SESSION['mensaje']);
+                    }
+                    ?>
+                    </div>
                     <div class="col-12">
                     <table class="table table-striped" style="vertical-align: middle;">
                             <tr>
@@ -79,7 +99,7 @@
                             include '../php/acceso.php';
                             // Realizar la consulta para obtener los registros de pacientes dependiendo de la secretaria
                             //$IDS = $_SESSION['IDS'];
-                            $sql = "SELECT * FROM pacientes";
+                            $sql = "SELECT * FROM pacientes where Estatus = 'Activo'";
                             $result = $dp->query($sql);
                             
                             if (!$result) {

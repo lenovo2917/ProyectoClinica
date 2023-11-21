@@ -65,6 +65,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 text-center">
+                    <?php
+                    // En muestraPacientesD.php
+                    session_start();
+                    if(isset($_SESSION['mensaje'])) {
+                      $mensaje = $_SESSION['mensaje'];
+                       echo "<p style='color: red;'>$mensaje</p>";
+                      // Limpiar el mensaje después de mostrarlo
+                        unset($_SESSION['mensaje']);
+                   }
+                    ?>
+                    </div>
+                    
+
                     <div class="col-12">
                     <table class="table table-striped" style="vertical-align: middle;">
                             <tr>
@@ -79,7 +93,7 @@
                             include '../php/acceso.php';
                             // Realizar la consulta para obtener los registros de pacientes dependiendo de la secretaria
                             //$IDS = $_SESSION['IDS'];
-                            $sql = "SELECT * FROM pacientes";
+                            $sql = "SELECT * FROM pacientes where Estatus = 'Activo'";
                             $result = $dp->query($sql);
                             
                             if (!$result) {
