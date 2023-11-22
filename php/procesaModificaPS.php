@@ -53,7 +53,7 @@ if (is_numeric($idP)) {
         } else {
             // Establece un mensaje en la variable de sesión
             session_start();
-            $_SESSION['mensaje1'] = "Los datos del paciente $nombrePaciente se han modificado correctamente";
+            $_SESSION['mensaje1'] = "*Los datos del paciente $nombrePaciente se han modificado correctamente.*";
 
             // Redirige al índice después de la modificación
             header("Location: ../secretarias/muestraPacientesS.php");

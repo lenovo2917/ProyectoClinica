@@ -68,7 +68,7 @@
                     <div class="col-12 text-center">
                     <?php
                     // En muestraPacientesD.php
-                 
+                    session_start();
                     if(isset($_SESSION['mensaje'])) {
                       $mensaje = $_SESSION['mensaje'];
                        echo "<p style='color: red;'>$mensaje</p>";
