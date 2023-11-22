@@ -363,6 +363,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </div>
                             </div>
                         </div>
+
+
+            
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
                             <div class="navbar">
                                 <a href="./IndexDoctores.php">

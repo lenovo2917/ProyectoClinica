@@ -148,6 +148,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 class="btn my-custom-button">Buscar</button>
 
                                         </div>
+
+
+                                    </form>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
                                         <div class="col-2 text-start">
                                             <select class="form-select" aria-label="" name="mes">
@@ -271,7 +274,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
                                 </div>
                             </div>
-                        </form>
+                     
                     </div>
                 </div>
 
