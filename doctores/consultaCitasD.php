@@ -96,8 +96,8 @@ if(empty($_SESSION["NombreCompleto"])) {
                             <div class="col-1">
                             </div>
                             <div class="col-9">
-                                <h4>Doctor: Jesus Ramon de la Cruz Perez</h5>
-                                    <h5>Especialidad: Pediatra</h5>
+                            <p>Doctor/a:<?php echo $_SESSION["NombreCompleto"];?></p>
+                            <p>Especialidad: <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?></p>
                             </div>
                         </div>
                     </div>

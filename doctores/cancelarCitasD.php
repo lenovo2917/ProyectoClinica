@@ -95,8 +95,8 @@ if(empty($_SESSION["NombreCompleto"])) {
                             <div class="col-1">
                             </div>
                             <div class="col-9">
-                                <h4>Doctor: Jesus Ramon de la Cruz Perez</h5>
-                                    <h5>Especialidad: Pediatra</h5>
+                            <p>Doctor/a:<?php echo $_SESSION["NombreCompleto"];?></p>
+                            <p>Especialidad: <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?></p>
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
 
                     <div class="col-12 px-5">
-                        <form class="form" method="post">
+                        <form class="needs-validation" novalidate method="post">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="row mb-1">
@@ -132,16 +132,15 @@ if(empty($_SESSION["NombreCompleto"])) {
                                             nombre:</label>
                                         <div class="col-5 text-start">
                                             <input type="text" class="form-control" id="nombrePaciente"
-                                                name="nombrePaciente" placeholder="Nombre del paciente">
-                                            <div class="alert alert-danger d-none" id="nombrePacienteError">
-                                                Por favor, ingrese el nombre del paciente.
-                                            </div>
+                                                name="nombrePaciente" required>
+                                                <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
 
                                         </div>
+                                        <div class="invalid-feedback">Campo obligatorio *</div>
 
                                         <div class="col-1">
-                                            <button type="submit" class="btn my-custom-button"
-                                                id="buscarButton">Buscar</button>
+                                            <button id="buscarButton" type="submit" class="btn my-custom-button"
+                                                >Buscar</button>
 
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
@@ -291,6 +290,8 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/consutarCitasD.js"></script>
+<script src="../js/ValidacionesCampos.js"></script>
+
 
 
 
