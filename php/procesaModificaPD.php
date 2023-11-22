@@ -2,14 +2,11 @@
 include 'acceso.php';
 
 // Recupera los datos del formulario
-
-
-
 $idP = isset($_POST["idPaciente"]) ? $_POST["idPaciente"] : null;
 $nombrePaciente = isset($_POST["nombrePaciente"]) ? $_POST["nombrePaciente"] : null;
 $CURPPaciente = isset($_POST["CURPPaciente"]) ? $_POST["CURPPaciente"] : null;
 $fechaNacimientoPaciente = isset($_POST["fNPaciente"]) ? $_POST["fNPaciente"] : null;
-
+//$estatusPaciente = isset($_POST["estatusPaciente"]) ? $_POST["estatusPaciente"] : null;
 $enfermedadesPaciente = isset($_POST["enfermedadesPaciente"]) ? $_POST["enfermedadesPaciente"] : null;
 $telefonoPaciente = isset($_POST["telefonoPaciente"]) ? $_POST["telefonoPaciente"] : null;
 $correoPaciente = isset($_POST["correoPaciente"]) ? $_POST["correoPaciente"] : null;
@@ -35,7 +32,6 @@ if (is_numeric($idP)) {
             NombreCompletoP = '$nombrePaciente',
             CURPP = '$CURPPaciente',
             fechaP = '$fechaNacimientoPaciente',
-            
             enfermedadesP = '$enfermedadesPaciente',
             capacidadesdiferentesP = '$capacidadesPaciente',
             telefonoP = '$telefonoPaciente',
@@ -56,11 +52,9 @@ if (is_numeric($idP)) {
             $_SESSION['mensaje'] = "Los datos del paciente $nombrePaciente se han modificado correctamente";
 
             // Redirige al índice después de la modificación
-            header("Location: ../secretarias/muestraPacientesS.php");
+            header("Location: ../doctores/muestraPacientesD.php");
             exit();
         }
     }
 }
 ?>
-
-

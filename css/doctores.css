@@ -46,7 +46,8 @@ form input[type="submit"]:hover {
 
 /* Estilo para los botones Rechazar y Trasladar */
 .btn-rechazar,
-.btn-trasladar {
+.btn-trasladar,
+.btn-Cancelar {
     background-color: #176b87;
     color: #fff;
     border: none;
@@ -58,7 +59,8 @@ form input[type="submit"]:hover {
 }
 
 .btn-rechazar:hover,
-.btn-trasladar:hover {
+.btn-trasladar:hover
+.btn-Cancelar:hover {
     background-color: #0e2941;
     color: #fff;
     
