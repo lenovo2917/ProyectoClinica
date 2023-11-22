@@ -8,7 +8,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     $nombreCompletoP = $_SESSION["NombreCompleto"];
 } else {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 // Verificar la conexión
