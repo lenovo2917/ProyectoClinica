@@ -63,50 +63,58 @@ function verNota(idReceta) {
 
     xhrReceta.send('idReceta=' + encodeURIComponent(idReceta));
 }
-
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.btn-custom').addEventListener('click', function () {
-        var nombrePaciente = document.getElementById('nombrePaciente').value;
+    var form = document.getElementById('searchForm');
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../doctores/herramientas/busquedaPaciente.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    try {
-                        console.log(xhr.responseText);
-                        var respuesta = JSON.parse(xhr.responseText);
+        console.log("Formulario enviado"); // Agrega este mensaje de consola para verificar si se detecta el envío del formulario
 
-                        if (respuesta.error) {
-                            console.error('Error en la respuesta del servidor:', respuesta.error);
-                        } else {
-                            document.getElementById('nombreAut').innerHTML = respuesta.data.nombre;
-                            document.getElementById('edadAut').innerHTML = calcularEdad(respuesta.data.fecha);
-                            document.getElementById('tipoSangreAut').innerHTML = respuesta.data.tipoSangre;
-                            document.getElementById('alergiasAut').innerHTML = respuesta.data.alergias;
+        if (form.checkValidity()) {
+            var nombrePaciente = document.getElementById('nombrePaciente').value;
 
-                            // Llamada a la función para actualizar la tabla con las recetas
-                            actualizarTablaRecetas(nombrePaciente);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../doctores/herramientas/busquedaPaciente.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        try {
+                            console.log(xhr.responseText);
+                            var respuesta = JSON.parse(xhr.responseText);
+
+                            if (respuesta.error) {
+                                console.error('Error en la respuesta del servidor:', respuesta.error);
+                            } else {
+                                document.getElementById('nombreAut').innerHTML = respuesta.data.nombre;
+                                document.getElementById('edadAut').innerHTML = calcularEdad(respuesta.data.fecha);
+                                document.getElementById('tipoSangreAut').innerHTML = respuesta.data.tipoSangre;
+                                document.getElementById('alergiasAut').innerHTML = respuesta.data.alergias;
+
+                                // Llamada a la función para actualizar la tabla con las recetas
+                                actualizarTablaRecetas(nombrePaciente);
+                            }
+                        } catch (error) {
+                            console.error('Error al parsear la respuesta JSON:', error);
                         }
-                    } catch (error) {
-                        console.error('Error al parsear la respuesta JSON:', error);
+                    } else {
+                        console.error('Error en la solicitud. Código de estado:', xhr.status);
                     }
-                } else {
-                    console.error('Error en la solicitud. Código de estado:', xhr.status);
                 }
-            }
-        };
+            };
 
-        xhr.send('buscar=true&nombrePaciente=' + encodeURIComponent(nombrePaciente));
+            xhr.send('buscar=true&nombrePaciente=' + encodeURIComponent(nombrePaciente));
+        } else {
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
     });
 });
 
-// Función para calcular la edad a partir de la fecha de nacimiento
 function calcularEdad(fechaNacimiento) {
-    // Lógica para calcular la edad (puedes implementar esto según tus necesidades)
-    // Aquí un ejemplo simple
     var fechaNac = new Date(fechaNacimiento);
     var hoy = new Date();
     var edad = hoy.getFullYear() - fechaNac.getFullYear();
@@ -118,6 +126,8 @@ function calcularEdad(fechaNacimiento) {
 
     return edad;
 }
+
+
 // Función para actualizar la tabla de recetas en la sección de información adicional
 function actualizarTablaRecetas(nombrePaciente) {
     var xhrRecetas = new XMLHttpRequest();

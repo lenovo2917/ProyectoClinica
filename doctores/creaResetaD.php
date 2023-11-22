@@ -79,6 +79,8 @@ if(empty($_SESSION["NombreCompleto"])) {
             </div>
         </div>
     </div>
+
+
     <div class="container">
         <div class="row">
             <div class="col">
@@ -97,9 +99,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                         </div>
                         <div class="col-lg-4 doctor-info">
                             <h3>Información del Doctor</h3>
-                            <p>Nombre: Dr. Nombre del Doctor</p>
-                            <p>Especialidad: Especialidad del Doctor</p>
-                            <!-- AQUI VA PHP PARA PONER LA INFORMACION DIRECTA DE LA BASE DE DATOS -->
+                            <p>Doctor/a:<?php echo $_SESSION["NombreCompleto"];?></p>
+                            <p>Especialidad: <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?></p>
+                           
                         </div>
                     </div>
 
@@ -278,24 +280,21 @@ if(empty($_SESSION["NombreCompleto"])) {
 
                             <div class="row">
                                 <!-- Fila 1: Barra de búsqueda -->
-                                <form class="needs-validation" novalidate>
-                                    <div class="col-md-12" style="margin-bottom: 20px;">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-11">
-                                                <label for="nombrePaciente">Nombre del Paciente * </label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="Buscar paciente por nombre" id="nombrePaciente"
-                                                    required>
-                                                <div class="invalid-feedback">Por favor, ingresa el nombre del paciente.
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button class="btn btn-custom" type="submit"
-                                                    name="buscar">Buscar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                             <form class="needs-validation" novalidate id="searchForm">
+    <div class="col-md-12" style="margin-bottom: 20px;">
+        <div class="row align-items-center">
+            <div class="col-md-11">
+                <input type="text" class="form-control" placeholder="Buscar paciente por nombre" id="nombrePaciente" required>
+                <div class="invalid-feedback">Por favor, ingresa el nombre del paciente.</div>
+            </div>
+            <div class="col-md-1">
+            <button type="submit"
+                                                        class="btn btn-custom">bUSCAR</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 
 
                                 <!-- Fila 2: Datos del paciente y nota -->
@@ -512,9 +511,10 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/BusquedaPaciente.js"></script>
     <script src="../js/receta.js"></script>
     <script src="../js/Crear_Receta.js"></script>
-    <script src="../js/BusquedaPaciente.js"></script>
+
     <script src="../js/BusquedaCitas"></script>
     <script src="../js/BusquedaEspecialidad.js"></script>
     <script src="../js/FechaCalendario.js"></script>
