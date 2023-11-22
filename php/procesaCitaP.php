@@ -41,12 +41,12 @@ if ($resultObtenerIDP->num_rows === 1) {
     if ($sql->affected_rows > 0) {
         echo "<script language='JavaScript'>
         alert('La cita fue creada exitosamente.');
-        location.assign('consultaCitasP.php');
+        location.assign('../pacientes/consultaCitasP.php');
         </script>";
     } else {
         echo "<script language='JavaScript'>
         alert('La cita no pudo ser creada.');
-        location.assign('consultaCitasP.php');
+        location.assign('../pacientes/consultaCitasP.php');
         </script>";
     }
 
