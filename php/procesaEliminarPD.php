@@ -26,7 +26,7 @@ if (is_numeric($idP)) {
             $_SESSION['mensaje'] = "El paciente $nombrePaciente se ha eliminado correctamente";
 
             // Redirige al índice después de la modificación
-            header("Location: ../secretarias/muestraPacientesS.php");
+            header("Location: ../doctores/muestraPacientesD.php");
             exit();
         }
     }
