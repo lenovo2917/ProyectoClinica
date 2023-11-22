@@ -42,17 +42,6 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
             $sql="UPDATE citas set fechaC='".$fecha."', HoraC='".$hora."', sintomasC='".$sintomas."', descripcionC='".$descripcion."' WHERE IDC='".$id."'";
             $resultado = $conexion->query($sql);
-            if($resultado){
-                echo "<script language='JavaScript'>
-                alert('La cita fue actualizada exitosamente.');
-                location.assign('consultaCitasP.php');
-                </script>";
-            }else{
-                echo "<script language='JavaScript'>
-                alert('La cita no se pudo actualizar.');
-                location.assign('consultaCitasP.php');
-                </script>";
-            }
 
          }else{
             $id=$_GET['IDC'];
@@ -86,9 +75,43 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                                     <div class="line3"></div>
                                 </div>
                                 <ul class="nav-links">
-                                    <li><a href="../Blog_Medico.php?rol=paciente">Inicio</a></li>
-                                    <li><a href="creaCitasP.php">Crear cita</a></li>
-                                    <li><a href="consultaCitasP.php">Consultar citas</a></li>
+                                <?php 
+                 $rol=$_SESSION['Rol'];
+                  // Incluye barraNavegacion.php antes de llamar a la función generarMenu
+                  include('../php/barraNavegacion.php');
+                  
+                  // Llama a la función generarMenu con el rol del usuario
+                  generarMenu($rol);
+                  ?>
+                  <?php
+                  if(isset($_GET['cerrar_sesion'])) {
+                          // Eliminar las cookies de sesión
+                          if (ini_get("session.use_cookies")) {
+                              $params = session_get_cookie_params();
+                              setcookie(session_name(), '', time() - 42000,
+                                  $params["path"], $params["domain"],
+                                  $params["secure"], $params["httponly"]
+                              );
+                          }
+                    // Destruir la sesión
+                    session_unset();
+                    session_destroy();
+                    $_SESSION = array();
+                    // Redirigir a la página de inicio de sesión
+                    header("Location: ../login.php");
+                    exit();
+                } else if(!isset($_SESSION['sesion_cerrada'])) {
+                  echo '
+                  <ul class="nav-links">
+                  <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                  style="color: white;">
+                  Cerrar Sesión </a>
+              </li>
+              </ul>';
+                }else {   
+            }
+            unset($_SESSION['sesion_cerrada']);
+            ?>
                                 </ul>
                             </nav>
                         </div>
@@ -101,7 +124,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <div class="container" style="text-align: center; margin-top: 100px;">
             <h1><img src="../img/mod.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Modifique los datos de su cita:</h1>
 
-    <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post"> 
+    <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post">
+    
+        <div id="mensaje" style="margin-top: 20px;"></div>
+ 
         <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
         <input type="hidden" name="id" value="<?php echo $id;?>">
 
@@ -120,9 +146,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         <input type="submit" name="enviar" value="Modificar cita">
         <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
         margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
+
+        <div id="mensaje" style="margin-top: 20px;"></div>
     </form>
     </div>
-
             <!--footer-->
             <div class="container-fluid-lg py-5">
                 <footer class="bg-dark text-center py-5 mt-5">
@@ -136,6 +163,18 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
     <script src="../js/actualizaCitas.js"></script>
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
-
+    <script>
+    <?php
+    // Verificar si se ha enviado el formulario y se ha modificado la cita
+    if (isset($_POST['enviar'])) {
+        // Verificar si la cita se ha actualizado correctamente
+        if ($resultado) {
+            echo "document.getElementById('mensaje').innerHTML = '<div class=\"alert alert-success\">La cita fue actualizada exitosamente.</div>';";
+        } else {
+            echo "document.getElementById('mensaje').innerHTML = '<div class=\"alert alert-danger\">La cita no se pudo actualizar.</div>';";
+        }
+    }
+    ?>
+</script>
 </body>
 </html>
