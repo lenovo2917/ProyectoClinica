@@ -55,15 +55,7 @@ if (is_numeric($idUsuarioD)) {
             AlergiasD = '$alergiasUsuario',
             GeneroD = '$generoUsuario',
             TipoSangreD = '$tipoSangreUsuario'/*,
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
             IDA = '$IDAUsuario',
             EspecialidadD = '$EspecialidadIDUsuario',*/
         WHERE IDD = $idUsuarioD";
@@ -91,8 +83,8 @@ if (is_numeric($idUsuarioD)) {
         $sqlUpdateSecretario = "UPDATE secretarios SET 
             NombreCompletoS = '$nombreUsuario',
             CURPS = '$CURPUsuario',
-            FechaNacimientoS = '$fechaNacimientoUsuario'/*,
-            EstatusD = '$estatusUsuario',
+            FechaNacimientoS = '$fechaNacimientoUsuario'
+            /*EstatusS = '$estatusUsuario', ///////////////////////////////////////
             TipoSangreD = '$tipoSangreUsuario',
             GeneroD = '$generoUsuario',
             

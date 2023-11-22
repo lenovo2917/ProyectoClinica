@@ -86,17 +86,17 @@
                                 </div>
                                 <div class="col-3">
                                     <label class="form-label">Rol:</label>
-                                    <select name="rolUsuario" id="rolID" required class="formato2" style="width: 100%;">
-                                        <option value="" disabled selected>Tipo de rol *</option>
+                                    <select name="rolUsuario" required class="formato2" style="width: 100%;">
+                                        <option value="" disabled selected>Tipo de rol*</option>
                                         <option value="tipoDoctor">Doctor</option>
-                                        <option value="tipoSecretaria">Secretaria</option>
+                                        <option value="tipoSecretario">Secretario</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4" style="text-align: left;">
+                        <div class="col-8" style="text-align: left;">
                             <label class="form-label">Nombre Completo:</label>
-                            <input class="form-control" type="text" name="nombreCompleto" placeholder="Nombre Completo *" required />
+                            <input class="form-control" type="text" name="nombreUsuario" placeholder="Nombre Completo *" required />
                         </div>
                         <div class="col-4" style="text-align: left;">
                             <label class="form-label">CURP:</label>
@@ -182,7 +182,7 @@
                             <label class="form-label" for="estatus">Estatus Activo:</label>
                             <input type="checkbox" id="estatus" name="estatus" checked disabled>disabled-->
                         <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
-                            <button type="submit" type="button">Crear Usuario</button>
+                            <button type="submit">Crear Usuario</button>
                         </div>
                     </div>
                 </form>

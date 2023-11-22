@@ -1,3 +1,16 @@
+<?php
+include('../php/controlador.php');
+// Verifica si el usuario ha iniciado sesión como paciente
+if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
+    // Accede al nombre completo del paciente
+    $nombreCompletoP = $_SESSION["NombreCompleto"];
+} else {
+    // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
+    header("Location: ../login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +29,38 @@
     <link rel="stylesheet" type="text/css" href="../css/eliminaCitas.css">
 </head>
 <body>
+<?php
+         $conexion = new mysqli('localhost', 'root', '', 'medicatec_2023');
+
+         if(isset($_POST['enviar'])){
+            $id=$_POST['id'];
+
+            $sql="UPDATE citas set ESTATUS='Cancelada' WHERE IDC='".$id."'";
+            $resultado = $conexion->query($sql);
+            if($resultado){
+                echo "<script language='JavaScript'>
+                alert('La cita fue eliminada exitosamente.');
+                location.assign('consultaCitasP.php');
+                </script>";
+            }else{
+                echo "<script language='JavaScript'>
+                alert('La cita no se pudo eliminar.');
+                location.assign('consultaCitasP.php');
+                </script>";
+            }
+
+         }else{
+            $id=$_GET['IDC'];
+            $sql="SELECT * FROM citas where IDC='".$id."'";
+            $resultado = $conexion->query($sql);
+
+            $fila=$resultado->fetch_assoc();
+            $fecha=$fila["fechaC"];
+            $hora=$fila["HoraC"];
+            $sintomas=$fila["sintomasC"];
+            $descripcion=$fila["descripcionC"];
+         }
+    ?>
 <div class="container-fluid-lg" style="background-color: #eeeeee;">
         <div class="row">
             <div class="col-12">
@@ -36,10 +81,43 @@
                                     <div class="line3"></div>
                                 </div>
                                 <ul class="nav-links">
-                                    <li><a href="../Blog_Medico.php?rol=paciente">Inicio</a></li>
-                                    <li><a href="creaCitasP.html">Crear cita</a></li>
-                                    <li><a href="consultaCitasP.html">Consultar citas</a></li>
-                                    
+                                <?php 
+                 $rol=$_SESSION['Rol'];
+                  // Incluye barraNavegacion.php antes de llamar a la función generarMenu
+                  include('../php/barraNavegacion.php');
+                  
+                  // Llama a la función generarMenu con el rol del usuario
+                  generarMenu($rol);
+                  ?>
+                  <?php
+                  if(isset($_GET['cerrar_sesion'])) {
+                          // Eliminar las cookies de sesión
+                          if (ini_get("session.use_cookies")) {
+                              $params = session_get_cookie_params();
+                              setcookie(session_name(), '', time() - 42000,
+                                  $params["path"], $params["domain"],
+                                  $params["secure"], $params["httponly"]
+                              );
+                          }
+                    // Destruir la sesión
+                    session_unset();
+                    session_destroy();
+                    $_SESSION = array();
+                    // Redirigir a la página de inicio de sesión
+                    header("Location: ../login.php");
+                    exit();
+                } else if(!isset($_SESSION['sesion_cerrada'])) {
+                  echo '
+                  <ul class="nav-links">
+                  <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                  style="color: white;">
+                  Cerrar Sesión </a>
+              </li>
+              </ul>';
+                }else {   
+            }
+            unset($_SESSION['sesion_cerrada']);
+            ?>   
                                 </ul>
                             </nav>
                         </div>
@@ -50,37 +128,32 @@
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-            <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Eliminar cita</h1>
+            <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Eliminación de cita:</h1>
 
-    <form id="citaForm" action="procesar_cita.php" method="post">
-        <label for="fecha">Fecha de Cita:</label>
-        <input type="date" id="fecha" name="fecha" required><br>
+    <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post">
+    <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
+    <input type="hidden" name="id" value="<?php echo $id;?>">
 
+    <label for="fecha" >Fecha de cita:</label>
+    <span><?php echo $fecha;?></span>
 
-        <label for="sintomas">Síntomas:</label>
-        <textarea id="sintomas" name="sintomas" rows="4" required></textarea><b|r>
+    <label for="hora" style="margin-top: 40px;">Hora de cita:</label>
+    <span><?php echo $hora;?></span>
 
-        <label for="diagnostico">Descripción:</label>
-        <textarea id="diagnostico" name="diagnostico" rows="4" required></textarea><br>
+    <div style="text-align: center;">
+    <label for="sintomas" style="margin-top: 40px;">Síntomas:</label>
+    <span><?php echo htmlspecialchars($sintomas);?></span>
+    </div>
 
-        <label for="alergias">Alergias:</label>
-        <input type="text" id="alergias" name="alergias"><br>
+    <div style="text-align: center;">
+    <label for="descripcion" style="margin-top: 40px;">Descripción:</label>
+    <span><?php echo htmlspecialchars($descripcion);?></span>
+    </div>
 
-        <label for="tipo_sangre">Tipo de Sangre:</label>
-        <select id="tipo_sangre" name="tipo_sangre">
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>|
-            <option value="O-">O-</option>
-        </select><br>
-
-        <input type="submit" value="Eliminar cita">
-        <a href="consultaCitasP.html" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-        margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; height: 6%; text-decoration: none;">Regresar</a>
+    <input type="submit" name="enviar" value="Eliminar cita" style="background-color: #176b87; color: #fff; padding-top: 8px;
+    margin-top: 100px; margin-right: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">
+    <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
+    margin-top: 100px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">Regresar</a>
     </form>
     </div>
 

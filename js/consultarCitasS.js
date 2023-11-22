@@ -1,4 +1,17 @@
 $(document).ready(function () {
+    // Realizar la solicitud AJAX para obtener las citas al cargar la página
+    $.ajax({
+        url: '../php/obtenerCitasS.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            // Mostrar datos en la tabla
+            mostrarDatos(data);
+        },
+        error: function () {
+            alert('Error al obtener los datos.');
+        }
+    });
     // Llama a buscarCitas cuando el valor del campo de nombre cambia
     $('#nombrePaciente').on('input', function () {
         buscarCitas();
@@ -25,7 +38,8 @@ $(document).ready(function () {
                     mostrarDatos(data);
                 },
                 error: function () {
-                    alert('Error al obtener los datos.');
+                   
+                    
                 }
             });
         } else {
@@ -39,7 +53,7 @@ $(document).ready(function () {
                     mostrarDatos(data);
                 },
                 error: function () {
-                    alert('Error al obtener los datos.');
+                   
                 }
             });
         }
