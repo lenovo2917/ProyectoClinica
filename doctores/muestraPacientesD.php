@@ -68,13 +68,20 @@
                     <div class="col-12 text-center">
                     <?php
                     // En muestraPacientesD.php
-                    session_start();
+                 
                     if(isset($_SESSION['mensaje'])) {
                       $mensaje = $_SESSION['mensaje'];
                        echo "<p style='color: red;'>$mensaje</p>";
                       // Limpiar el mensaje después de mostrarlo
                         unset($_SESSION['mensaje']);
                    }
+
+                   if(isset($_SESSION['mensaje1'])) {
+                    $mensaje = $_SESSION['mensaje1'];
+                     echo "<p style='color: green;'>$mensaje</p>";
+                    // Limpiar el mensaje después de mostrarlo
+                      unset($_SESSION['mensaje1']);
+                 }
                     ?>
                     </div>
                     

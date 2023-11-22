@@ -83,6 +83,13 @@ session_start();
                         // Limpiar el mensaje después de mostrarlo
                         unset($_SESSION['mensaje']);
                     }
+
+                    if(isset($_SESSION['mensaje1'])) {
+                        $mensaje = $_SESSION['mensaje1'];
+                        echo "<p style='color: green;'>$mensaje</p>";
+                        // Limpiar el mensaje después de mostrarlo
+                        unset($_SESSION['mensaje1']);
+                    }
                     ?>
                     </div>
                     <div class="col-12">
