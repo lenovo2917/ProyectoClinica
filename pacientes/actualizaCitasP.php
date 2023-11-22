@@ -103,11 +103,12 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post"> 
         <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
         <input type="hidden" name="id" value="<?php echo $id;?>">
+
         <label for="fecha">Fecha de cita:</label>
         <input type="date" id="fecha" name="fecha" value="<?php echo $fecha; ?>" required><br>
+        
         <label for="fecha">Hora de cita:</label>
         <input type="time" id="hora" name="hora" value="<?php echo $hora;?>" required><br>
-        
         
         <label for="sintomas">Síntomas:</label>
         <textarea id="sintomas" name="sintomas" rows="4" required><?php echo htmlspecialchars($sintomas);?></textarea><br>

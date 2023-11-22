@@ -34,7 +34,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 <?php
      $conexion = new mysqli('localhost', 'root', '', 'medicatec_2023');
      $sql="SELECT * FROM citas
-     JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' ORDER BY citas.fechaC ASC";
+     JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada' ORDER BY citas.fechaC ASC";
      $resultado = $conexion->query($sql);
 ?>
 
@@ -119,8 +119,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <?php echo "<a href='actualizaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
     margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Actualizar</a>";?>
     
-    <a href="eliminaCitasP.php" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
+    <?php echo "<a href='eliminaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
+    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Eliminar</a>";?>
     </td>
             </tr>
             <?php
@@ -128,9 +128,11 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             ?>
           </tbody>
         </table>
+
         <?php
         $conexion->close();
         ?>
+        
       </div>
       <div class="container">
         <div class="col-md-2">

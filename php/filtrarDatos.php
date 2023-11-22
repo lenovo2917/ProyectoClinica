@@ -22,9 +22,8 @@ $iddoctor = $_POST['iddoctor'];
 
 // Añadir condiciones solo si se proporcionan valores no vacíos
 if (!empty($fecha)) {
-    $sql = "SELECT citas.IDC, citas.fechaC, citas.HoraC, citas.ESTATUS FROM citas
-    JOIN pacientes ON citas.IDP = pacientes.IDP 
-    WHERE citas.fechaC = '$fecha' AND pacientes.NombreCompletoP = '$nombreCompletoP'";
+    $sql = "SELECT * FROM citas
+    JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada'";
 
     $resultado = $conexion->query($sql);
 
@@ -38,7 +37,7 @@ while ($fila = $resultado->fetch_assoc()) {
     $html .= '<th>' . $fila['ESTATUS'] . '</th>';
     $html .= '<td>
         <a href="../pacientes/actualizaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
-        <a href="../pacientes/eliminaCitasP.php" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
+        <a href="../pacientes/eliminaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
     </td>';
     $html .= '</tr>';
 }
@@ -53,7 +52,7 @@ echo $html;
 if (!empty($iddoctor)) {
     $sql = "SELECT citas.IDC, doctores.NombreCompletoD, citas.fechaC, citas.HoraC, citas.ESTATUS FROM citas
     JOIN pacientes ON citas.IDP = pacientes.IDP JOIN doctores ON citas.IDD = doctores.IDD
-    WHERE doctores.NombreCompletoD = '$iddoctor' AND pacientes.NombreCompletoP = '$nombreCompletoP'";
+    WHERE doctores.NombreCompletoD = '$iddoctor' AND pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada'";
 
     $resultado = $conexion->query($sql);
 
@@ -66,10 +65,8 @@ while ($fila = $resultado->fetch_assoc()) {
     $html .= '<th>' . $fila['HoraC'] . '</th>';
     $html .= '<th>' . $fila['ESTATUS'] . '</th>';
     $html .= '<td>
-    <a href="../pacientes/actualizaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
-    <a href="../pacientes/eliminaCitasP.html" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
+    <a href="../pacientes/actualizaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
+    <a href="../pacientes/eliminaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
     </td>';
     $html .= '</tr>';
 }
