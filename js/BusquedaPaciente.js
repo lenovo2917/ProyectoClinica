@@ -21,17 +21,13 @@ function mostrarReceta(receta) {
         tablaReceta += '</table>';
 
         // Establecer el contenido de la tabla en el área correspondiente
-       // Añadir la clase table-responsive
-areaTextoReceta.innerHTML = '<div class="table-responsive">' + tablaReceta + '</div>';
+        // Añadir la clase table-responsive
+        areaTextoReceta.innerHTML = '<div class="table-responsive">' + tablaReceta + '</div>';
 
     } else {
         areaTextoReceta.innerHTML = 'No se encontraron datos de receta.';
     }
 }
-
-
-
-
 
 // Función para visualizar la receta médica
 function verNota(idReceta) {
@@ -65,48 +61,83 @@ function verNota(idReceta) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.btn-custom').addEventListener('click', function () {
-        var nombrePaciente = document.getElementById('nombrePaciente').value;
+    var form = document.getElementById('searchForm');
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../doctores/herramientas/busquedaPaciente.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    try {
-                        console.log(xhr.responseText);
-                        var respuesta = JSON.parse(xhr.responseText);
+        console.log("Formulario enviado");
 
-                        if (respuesta.error) {
-                            console.error('Error en la respuesta del servidor:', respuesta.error);
-                        } else {
-                            document.getElementById('nombreAut').innerHTML = respuesta.data.nombre;
-                            document.getElementById('edadAut').innerHTML = calcularEdad(respuesta.data.fecha);
-                            document.getElementById('tipoSangreAut').innerHTML = respuesta.data.tipoSangre;
-                            document.getElementById('alergiasAut').innerHTML = respuesta.data.alergias;
+        if (form.checkValidity()) {
+            var nombrePaciente = document.getElementById('nombrePaciente').value;
 
-                            // Llamada a la función para actualizar la tabla con las recetas
-                            actualizarTablaRecetas(nombrePaciente);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../doctores/herramientas/busquedaPaciente.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        try {
+                            console.log(xhr.responseText);
+                            var respuesta = JSON.parse(xhr.responseText);
+
+                            if (respuesta.error) {
+                                console.error('Error en la respuesta del servidor:', respuesta.error);
+                            } else {
+                                // Actualizar la información del paciente
+                                actualizarDatosPaciente(respuesta.data);
+                            }
+                        } catch (error) {
+                            console.error('Error al parsear la respuesta JSON:', error);
                         }
-                    } catch (error) {
-                        console.error('Error al parsear la respuesta JSON:', error);
+                    } else {
+                        console.error('Error en la solicitud. Código de estado:', xhr.status);
                     }
-                } else {
-                    console.error('Error en la solicitud. Código de estado:', xhr.status);
                 }
-            }
-        };
+            };
 
-        xhr.send('buscar=true&nombrePaciente=' + encodeURIComponent(nombrePaciente));
+            xhr.send('buscar=true&nombrePaciente=' + encodeURIComponent(nombrePaciente));
+        } else {
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
     });
 });
 
-// Función para calcular la edad a partir de la fecha de nacimiento
+function actualizarDatosPaciente(data) {
+    var nombreAutElement = document.getElementById('nombreAut');
+    var edadAutElement = document.getElementById('edadAut');
+    var tipoSangreAutElement = document.getElementById('tipoSangreAut');
+    var alergiasAutElement = document.getElementById('alergiasAut');
+
+    // Deshabilitar elementos si el paciente está inactivo
+    if (data.estado === 'Inactivo') {
+        nombreAutElement.setAttribute('readonly', 'true');
+        edadAutElement.setAttribute('readonly', 'true');
+        tipoSangreAutElement.setAttribute('readonly', 'true');
+        alergiasAutElement.setAttribute('readonly', 'true');
+    } else {
+        // Habilitar los elementos si el paciente no está inactivo
+        nombreAutElement.removeAttribute('readonly');
+        edadAutElement.removeAttribute('readonly');
+        tipoSangreAutElement.removeAttribute('readonly');
+        alergiasAutElement.removeAttribute('readonly');
+    }
+
+
+    // Actualizar valores
+    nombreAutElement.innerHTML = data.nombre;
+    edadAutElement.innerHTML = calcularEdad(data.fecha);
+    tipoSangreAutElement.innerHTML = data.tipoSangre;
+    alergiasAutElement.innerHTML = data.alergias;
+
+    // Llamada a la función para actualizar la tabla con las recetas
+    actualizarTablaRecetas(data.nombre, data.estado);
+}
+
 function calcularEdad(fechaNacimiento) {
-    // Lógica para calcular la edad (puedes implementar esto según tus necesidades)
-    // Aquí un ejemplo simple
     var fechaNac = new Date(fechaNacimiento);
     var hoy = new Date();
     var edad = hoy.getFullYear() - fechaNac.getFullYear();
@@ -118,8 +149,9 @@ function calcularEdad(fechaNacimiento) {
 
     return edad;
 }
+
 // Función para actualizar la tabla de recetas en la sección de información adicional
-function actualizarTablaRecetas(nombrePaciente) {
+function actualizarTablaRecetas(nombrePaciente, estadoPaciente) {
     var xhrRecetas = new XMLHttpRequest();
     xhrRecetas.open('POST', '../doctores/herramientas/busquedaRecetas.php', true);
     xhrRecetas.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -135,7 +167,7 @@ function actualizarTablaRecetas(nombrePaciente) {
                         console.error('Error en la respuesta del servidor:', respuestaRecetas.error);
                     } else {
                         // Actualizar la tabla con las recetas
-                        actualizarTablaInformacionAdicional(respuestaRecetas.data);
+                        actualizarTablaInformacionAdicional(respuestaRecetas.data, estadoPaciente);
                     }
                 } catch (error) {
                     console.error('Error al parsear la respuesta JSON:', error);
@@ -148,8 +180,9 @@ function actualizarTablaRecetas(nombrePaciente) {
 
     xhrRecetas.send('nombrePaciente=' + encodeURIComponent(nombrePaciente));
 }
+
 // Función para actualizar la tabla de recetas en la sección de información adicional
-function actualizarTablaInformacionAdicional(data) {
+function actualizarTablaInformacionAdicional(data, estadoPaciente) {
     var cuerpoTabla = document.getElementById('cuerpoTablaInformacionAdicional');
 
     // Limpiar el cuerpo de la tabla antes de agregar nuevas filas
@@ -163,9 +196,8 @@ function actualizarTablaInformacionAdicional(data) {
             '<td>' + receta.Diagnostico + '</td>' +
             '<td>' + receta.Medicamento + '</td>' +
             '<td>' + receta.InstruccionUso + '</td>' +
-            '<td><button class="btn btn-custom" onclick="verNota(' + receta.idR + ')">Ver Nota</button></td>';
+            '<td><button class="btn btn-custom" onclick="verNota(' + receta.idR + ')" ' + (estadoPaciente === 'Inactivo' ? 'disabled' : '') + '>Ver Nota</button></td>';
 
         cuerpoTabla.appendChild(fila);
     });
 }
-
