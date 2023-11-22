@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(empty($_SESSION["NombreCompleto"])) {
-  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+  header("Location:../login.php"); // Si no hay ninguna sesión activa, redirige al login
 } 
 ?>
 <!DOCTYPE html>
@@ -191,7 +191,8 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                     include '../php/acceso.php';
                                                     
                                                     $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
-                                                              LEFT JOIN pacientes p ON c.IDP = p.IDP";
+                                                    LEFT JOIN pacientes p ON c.IDP = p.IDP
+                                                    WHERE c.IDD = '".$_SESSION["ID"]."'"; 
                                                     
                                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                         $query .= " WHERE 1"; // Agregar una condición que siempre sea verdadera
@@ -233,24 +234,28 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                     
                                                     // Ejecutar la consulta
                                                     $result = mysqli_query($dp, $query);
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        echo "<tr>";
+                                                        echo "<td>" . $row['IDC'] . "</td>";
+                                                        echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
+                                                        echo "<td>" . $row['fechaC'] . "</td>";
+                                                        echo "<td>" . $row['ESTATUS'] . "</td>";
+                                                        echo '<td class="text-center">';
+                                                        
+                                                        if ($row['ESTATUS'] == 'Cancelada' || $row['ESTATUS'] == 'finalizada') {
+                                                            // Si la cita está cancelada o finalizada, deshabilitar todos los botones
+                                                            echo '<button type="button" class="btn btn-trasladar"  " disabled>Aceptar</button>';
+                                                            echo '<button type="button" class="btn btn-trasladar" disabled>Rechazar</button>';
+                                                            echo '<button type="button" class="btn btn-trasladar"  disabled>Trasladar</button>';
+                                                        } else {
+                                                            // Si la cita no está cancelada ni finalizada, habilitar todos los botones
+                                                            echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
+                                                            echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
+                                                            echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
+                                                        }
+                                                        
+                                                    }
                                                     
-                                                    
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                                    echo "<tr>";
-                                                                    echo "<td>" . $row['IDC'] . "</td>";
-                                                                    echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
-                                                                    echo "<td>" . $row['fechaC'] . "</td>";
-                                                                    echo "<td>" . $row['ESTATUS'] . "</td>";
-                                                                    echo '<td class="text-center">';
-                                                                    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-                                                                    echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
-                                                                    echo '  <button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">
-                                                                    Trasladar
-                                                                </button>
-                                                                    ';
-                                                                    echo '</td>';
-                                                                    echo "</tr>";
-                                                                }
                                                                 ?>
 
                                                 </tbody>
@@ -258,7 +263,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         </div>
                                     </div>
                                 </div>
-
+                              
                               
                                 <div class="col-1">
 
@@ -275,7 +280,7 @@ if(empty($_SESSION["NombreCompleto"])) {
     <div class="modal" tabindex="-1" id="miModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form class="needs-validation" novalidate>
+                <form id="miFormulario" class="needs-validation" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title">Trasladar paciente</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -348,8 +353,9 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../js/BusquedaEspecialidad.js"></script>
     <script src="../js/consutarCitasD.js"></script>
+    <script src="../js/BusquedaEspecialidad.js"></script>
+
     <script src="../js/FechaCalendario.js"></script>
     <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
     <script src="../js/ValidacionesCampos.js"></script>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(empty($_SESSION["NombreCompleto"])) {
-  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+    header("Location:../login.php"); // Si no hay ninguna sesión activa, redirige al login
 } 
 ?>
 <!DOCTYPE html>
@@ -192,9 +192,10 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 include '../php/acceso.php';
                                                 
                                                 $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS 
-                                                          FROM citas c
-                                                          LEFT JOIN pacientes p ON c.IDP = p.IDP
-                                                          WHERE c.ESTATUS = 'Aceptada'";
+          FROM citas c
+          LEFT JOIN pacientes p ON c.IDP = p.IDP
+          WHERE c.ESTATUS = 'Aceptada' AND c.IDD = '".$_SESSION["ID"]."'"; // Asegúrate de que la cita pertenezca al doctor que inició sesión y esté aceptada
+
                                                 
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     $query .= " AND 1";  // Continúa con la cláusula WHERE para agregar condiciones adicionales

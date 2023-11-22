@@ -97,9 +97,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                         </div>
                         <div class="col-lg-4 doctor-info">
                             <h3>Información del Doctor</h3>
-
-                            <p>Doctor/a:<?php echo $_SESSION["NombreCompleto"];?></p>
-                            <p>Especialidad: <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?></p>
+                            <p>Nombre: Dr. Nombre del Doctor</p>
+                            <p>Especialidad: Especialidad del Doctor</p>
+                            <!-- AQUI VA PHP PARA PONER LA INFORMACION DIRECTA DE LA BASE DE DATOS -->
                         </div>
                     </div>
 
@@ -212,19 +212,19 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 <div class="form-group">
                                     <label for="nombre">Nombre del Paciente *</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre"
-                                        placeholder="Nombre del paciente *" required>
+                                        placeholder="Nombre" required>
                                     <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidoPaterno">Apellido Paterno *</label>
                                     <input type="text" class="form-control" id="apellidoP" name="apellidoP"
-                                        placeholder="Apellido paterno *" required>
+                                        placeholder="ApellidoP" required>
                                     <div class="invalid-feedback">Por favor, ingresa el apellido paterno.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidoMaterno">Apellido Materno *</label>
                                     <input type="text" class="form-control" id="apellidoM" name="apellidoM"
-                                        placeholder="Apellido materno *" required>
+                                        placeholder="ApellidoM" required>
                                     <div class="invalid-feedback">Por favor, ingresa el apellido materno.</div>
                                 </div>
                                 <div class="form-group">
@@ -244,20 +244,20 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 <div class="form-group">
                                     <label for="diagnostico">Diagnóstico *</label>
                                     <textarea class="form-control" id="diagnostico" rows="3"
-                                        placeholder="Diagnóstico *" name="diagnostico" required
+                                        placeholder="Ingrese el diagnóstico" name="diagnostico" required
                                         style="resize: none"></textarea>
                                     <div class="invalid-feedback">Por favor, ingresa el diagnóstico.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="medicamento">Medicamento Recetado *</label>
                                     <input type="text" class="form-control" id="medicamento" name="medicamento"
-                                        placeholder="Nombre del medicamento *" required>
+                                        placeholder="Nombre del medicamento" required>
                                     <div class="invalid-feedback">Por favor, ingresa el medicamento recetado.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="intruccionUsoR">Instrucciones de Uso *</label>
                                     <textarea class="form-control" id="intruccionUsoR" rows="8"
-                                        placeholder="intrucciones de uso *" name="intruccionUsoR" required
+                                        placeholder="intruccionUsoR" name="intruccionUsoR" required
                                         style="resize: none"></textarea>
                                     <div class="invalid-feedback">Por favor, ingresa las instrucciones de uso.</div>
                                 </div>
@@ -270,7 +270,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <!-- Tab 2: Expedientes de Paciente -->
                         <div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
                             <div class="navbar">
-                                <a href="./IndexDoctores.php">
+                                <a href="./IndexDoctores.html">
                                     <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
                                 <h2>Expedientes de Paciente</h2>
@@ -360,7 +360,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         </div>
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
                             <div class="navbar">
-                                <a href="./IndexDoctores.php">
+                                <a href="./IndexDoctores.html">
                                     <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
                                 <h2>Crear Cita Medica</h2>

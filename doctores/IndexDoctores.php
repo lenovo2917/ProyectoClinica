@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(empty($_SESSION["NombreCompleto"])) {
-  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+    header("Location:../login.php"); // Si no hay ninguna sesión activa, redirige al login
 } 
 ?>
 <!DOCTYPE html>
