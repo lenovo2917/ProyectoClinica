@@ -87,6 +87,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                                 </div>
                                 <ul class="nav-links">
                                     <li><a href="../Blog_Medico.php?rol=paciente">Inicio</a></li>
+                                    <li><a href="creaCitasP.php">Crear cita</a></li>
                                     <li><a href="consultaCitasP.php">Consultar citas</a></li>
                                 </ul>
                             </nav>
@@ -106,7 +107,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
         <label for="fecha">Fecha de cita:</label>
         <input type="date" id="fecha" name="fecha" value="<?php echo $fecha; ?>" required><br>
-        
+
         <label for="fecha">Hora de cita:</label>
         <input type="time" id="hora" name="hora" value="<?php echo $hora;?>" required><br>
         

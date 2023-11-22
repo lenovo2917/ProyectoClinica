@@ -108,7 +108,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           </thead>
           <tbody>
             <?php
-                 while($fila = $resultado->fetch_assoc()){
+                 if ($resultado->num_rows > 0) {
+                 while($fila = $resultado->fetch_assoc()){    
             ?>
             <tr>
               <th><?php echo $fila['IDC'] ?></th>
@@ -116,30 +117,32 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
               <th><?php echo $fila['HoraC'] ?></th>
               <th><?php echo $fila['ESTATUS'] ?></th>
               <td>
-    <?php echo "<a href='actualizaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Actualizar</a>";?>
+                <?php echo "<a href='actualizaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
+                margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Actualizar</a>";?>
     
-    <?php echo "<a href='eliminaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Eliminar</a>";?>
-    </td>
+                <?php echo "<a href='eliminaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
+                margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Eliminar</a>";?>
+              </td>
             </tr>
             <?php
             }
+          } else {
+            echo '<tr><td colspan="5">No se han realizado citas previas.</td></tr>';
+          }
             ?>
           </tbody>
         </table>
-
         <?php
         $conexion->close();
         ?>
-        
+
       </div>
       <div class="container">
         <div class="col-md-2">
           <div class="form-group">
             
             <a href="../Blog_Medico.php?rol=paciente" style="background-color: #176b87; color: #fff; float: left; text-decoration: none;
-            margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Regresar</a>
+            margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 40%; padding: 5px; text-align: center;">Regresar</a>
           </div>
         </div>
       </div>
