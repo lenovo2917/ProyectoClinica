@@ -143,6 +143,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 >Buscar</button>
 
                                         </div>
+
+                          </form>
+                                        
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
                                         <div class="col-2 text-start">
                                             <select class="form-select" aria-label="" name="mes">
@@ -270,7 +273,7 @@ if(empty($_SESSION["NombreCompleto"])) {
 
                                 </div>
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
 

@@ -96,8 +96,12 @@ if(empty($_SESSION["NombreCompleto"])) {
                             <div class="col-1">
                             </div>
                             <div class="col-9">
-                            <p>Doctor/a:<?php echo $_SESSION["NombreCompleto"];?></p>
-                            <p>Especialidad: <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?></p>
+                                <p>Doctor/a:
+                                    <?php echo $_SESSION["NombreCompleto"];?>
+                                </p>
+                                <p>Especialidad:
+                                    <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -134,14 +138,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         <div class="col-5 text-start">
                                             <input type="text" class="form-control" id="nombrePaciente"
                                                 name="nombrePaciente" required>
-                                                <div class="invalid-feedback">Campo obligatorio *</div>
+                                            <div class="invalid-feedback">Campo obligatorio *</div>
 
                                         </div>
                                         <div class="invalid-feedback">Campo obligatorio *</div>
 
                                         <div class="col-1">
-                                            <button id="buscarButton" type="submit" class="btn my-custom-button"
-                                                >Buscar</button>
+                                            <button id="buscarButton" type="submit"
+                                                class="btn my-custom-button">Buscar</button>
 
                                         </div>
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
@@ -188,83 +192,80 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    include '../php/acceso.php';
-                                                    
-                                                    $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
-                                                    LEFT JOIN pacientes p ON c.IDP = p.IDP
-                                                    WHERE c.IDD = '".$_SESSION["ID"]."'"; 
-                                                    
-                                                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                        $query .= " WHERE 1"; // Agregar una condición que siempre sea verdadera
-                                                    
-                                                        $nombrePaciente = $_POST['nombrePaciente'];
-                                                        $mesSeleccionado = $_POST['mes'];
-                                                    
-                                                        if (!empty($nombrePaciente)) {
-                                                            $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
-                                                        }
-                                                    
-                                                        if (isset($_POST['mes'])) {
-                                                            $mesSeleccionado = $_POST['mes'];
-                                                    
-                                                            // Mapea el nombre del mes al número de mes
-                                                            $meses = [
-                                                                'enero' => '01',
-                                                                'febrero' => '02',
-                                                                'marzo' => '03',
-                                                                'abril' => '04',
-                                                                'mayo' => '05',
-                                                                'junio' => '06',
-                                                                'julio' => '07',
-                                                                'agosto' => '08',
-                                                                'septiempre' => '09',
-                                                                'octubre' => '10',
-                                                                'noviembre' => '11',
-                                                                'diciembre' => '12'
-                                                            ];
-                                                    
-                                                            if (isset($meses[$mesSeleccionado])) {
-                                                                $mesNumero = $meses[$mesSeleccionado];
-                                                                $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
-                                                            } else {
-                                                                
-                                                            }
-                                                        }
-                                                    }
-                                                    
-                                                    // Ejecutar la consulta
-                                                    $result = mysqli_query($dp, $query);
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                        echo "<tr>";
-                                                        echo "<td>" . $row['IDC'] . "</td>";
-                                                        echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
-                                                        echo "<td>" . $row['fechaC'] . "</td>";
-                                                        echo "<td>" . $row['ESTATUS'] . "</td>";
-                                                        echo '<td class="text-center">';
-                                                        
-                                                        if ($row['ESTATUS'] == 'Cancelada' || $row['ESTATUS'] == 'finalizada') {
-                                                            // Si la cita está cancelada o finalizada, deshabilitar todos los botones
-                                                            echo '<button type="button" class="btn btn-trasladar"  " disabled>Aceptar</button>';
-                                                            echo '<button type="button" class="btn btn-trasladar" disabled>Rechazar</button>';
-                                                            echo '<button type="button" class="btn btn-trasladar"  disabled>Trasladar</button>';
-                                                        } else {
-                                                            // Si la cita no está cancelada ni finalizada, habilitar todos los botones
-                                                            echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-                                                            echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
-                                                            echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
-                                                        }
-                                                        
-                                                    }
-                                                    
-                                                                ?>
+include '../php/acceso.php';
+
+$query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
+LEFT JOIN pacientes p ON c.IDP = p.IDP
+WHERE c.IDD = '".$_SESSION["ID"]."'";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombrePaciente = $_POST['nombrePaciente'];
+    $mesSeleccionado = $_POST['mes'];
+
+    if (!empty($nombrePaciente)) {
+        $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
+    }
+
+    if (isset($_POST['mes'])) {
+        $mesSeleccionado = $_POST['mes'];
+
+        // Mapea el nombre del mes al número de mes
+        $meses = [
+            'enero' => '01',
+            'febrero' => '02',
+            'marzo' => '03',
+            'abril' => '04',
+            'mayo' => '05',
+            'junio' => '06',
+            'julio' => '07',
+            'agosto' => '08',
+            'septiempre' => '09',
+            'octubre' => '10',
+            'noviembre' => '11',
+            'diciembre' => '12'
+        ];
+
+        if (isset($meses[$mesSeleccionado])) {
+            $mesNumero = $meses[$mesSeleccionado];
+            $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
+        } else {
+            // Handle the case where $mesSeleccionado is not a valid month
+        }
+    }
+}
+
+// Ejecutar la consulta
+$result = mysqli_query($dp, $query);
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['IDC'] . "</td>";
+    echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
+    echo "<td>" . $row['fechaC'] . "</td>";
+    echo "<td>" . $row['ESTATUS'] . "</td>";
+    echo '<td class="text-center">';
+    
+    if ($row['ESTATUS'] == 'Cancelada' || $row['ESTATUS'] == 'finalizada') {
+        // Si la cita está cancelada o finalizada, deshabilitar todos los botones
+        echo '<button type="button" class="btn btn-trasladar"  " disabled>Aceptar</button>';
+        echo '<button type="button" class="btn btn-trasladar" disabled>Rechazar</button>';
+        echo '<button type="button" class="btn btn-trasladar"  disabled>Trasladar</button>';
+    } else {
+        // Si la cita no está cancelada ni finalizada, habilitar todos los botones
+        echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
+        echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
+        echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
+    }
+}
+?>
+
 
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                              
-                              
+
+
                                 <div class="col-1">
 
 
@@ -283,15 +284,13 @@ if(empty($_SESSION["NombreCompleto"])) {
                 <form id="miFormulario" class="needs-validation" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title">Trasladar paciente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Cerrar"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="fechaCita" class="form-label">Fecha de la Cita
                                 *</label>
-                            <input type="date" class="form-control" id="fechaCita"
-                                name="fechaCita" required>
+                            <input type="date" class="form-control" id="fechaCita" name="fechaCita" required>
                             <div class="invalid-feedback">Campo obligatorio *</div>
                         </div>
 
@@ -300,8 +299,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <div class="form-group">
                             <label for="especialidadCita" class="form-label">Especialidad
                                 *</label>
-                            <select class="form-select" id="especialidadCita"
-                                name="especialidadCita"
+                            <select class="form-select" id="especialidadCita" name="especialidadCita"
                                 aria-label="Especialidad select menu" required>
                                 <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
                             </select>
@@ -321,8 +319,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <div class="form-group">
                             <label for="horaCita" class="form-label">Hora de la Cita
                                 *</label>
-                            <select class="form-select" id="horaCita" name="horaCita"
-                                required>
+                            <select class="form-select" id="horaCita" name="horaCita" required>
                                 <!-- Las opciones de horas disponibles se cargarán dinámicamente aquí -->
                             </select>
                             <div class="invalid-feedback">Campo obligatorio *</div>
@@ -330,10 +327,8 @@ if(empty($_SESSION["NombreCompleto"])) {
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">Cerrar</button>
-                        <button id="guardarCambios type=" submit
-                            class="btn btn-custom">Guardar Cambios</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="guardarCambios type=" submit class="btn btn-custom">Guardar Cambios</button>
                     </div>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(empty($_SESSION["NombreCompleto"])) {
-  header("Location: login.php"); // Si no hay ninguna sesión activa, redirige al login
+  header("Location: ../login.php"); // Si no hay ninguna sesión activa, redirige al login
 } 
 ?>
 <?php include '../php/acceso.php'; ?>
@@ -99,9 +99,13 @@ if(empty($_SESSION["NombreCompleto"])) {
                         </div>
                         <div class="col-lg-4 doctor-info">
                             <h3>Información del Doctor</h3>
-                            <p>Doctor/a:<?php echo $_SESSION["NombreCompleto"];?></p>
-                            <p>Especialidad: <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?></p>
-                           
+                            <p>Doctor/a:
+                                <?php echo $_SESSION["NombreCompleto"];?>
+                            </p>
+                            <p>Especialidad:
+                                <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
+                            </p>
+
                         </div>
                     </div>
 
@@ -272,7 +276,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <!-- Tab 2: Expedientes de Paciente -->
                         <div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
                             <div class="navbar">
-                                <a href="./IndexDoctores.html">
+                                <a href="./IndexDoctores.php">
                                     <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
                                 <h2>Expedientes de Paciente</h2>
@@ -280,20 +284,22 @@ if(empty($_SESSION["NombreCompleto"])) {
 
                             <div class="row">
                                 <!-- Fila 1: Barra de búsqueda -->
-                             <form class="needs-validation" novalidate id="searchForm">
-    <div class="col-md-12" style="margin-bottom: 20px;">
-        <div class="row align-items-center">
-            <div class="col-md-11">
-                <input type="text" class="form-control" placeholder="Buscar paciente por nombre" id="nombrePaciente" required>
-                <div class="invalid-feedback">Por favor, ingresa el nombre del paciente.</div>
-            </div>
-            <div class="col-md-1">
-            <button type="submit"
-                                                        class="btn btn-custom">bUSCAR</button>
-            </div>
-        </div>
-    </div>
-</form>
+                                <form class="needs-validation" novalidate id="searchForm">
+                                    <div class="col-md-12" style="margin-bottom: 20px;">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-11">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Buscar paciente por nombre" id="nombrePaciente"
+                                                    required>
+                                                <div class="invalid-feedback">Por favor, ingresa el nombre del paciente.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button type="submit" class="btn btn-custom">Buscar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
 
 
 
@@ -359,7 +365,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         </div>
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
                             <div class="navbar">
-                                <a href="./IndexDoctores.html">
+                                <a href="./IndexDoctores.php">
                                     <i class="fa-solid fa-arrow-left fa-lg"></i>
                                 </a>
                                 <h2>Crear Cita Medica</h2>
