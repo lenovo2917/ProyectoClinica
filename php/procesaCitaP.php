@@ -6,7 +6,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     $nombreCompletoP = $_SESSION["NombreCompleto"];
 } else {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -41,12 +41,12 @@ if ($resultObtenerIDP->num_rows === 1) {
     if ($sql->affected_rows > 0) {
         echo "<script language='JavaScript'>
         alert('La cita fue creada exitosamente.');
-        location.assign('../Blog_Medico.php?rol=paciente');
+        location.assign('consultaCitasP.php');
         </script>";
     } else {
         echo "<script language='JavaScript'>
         alert('La cita no pudo ser creada.');
-        location.assign('../Blog_Medico.php?rol=paciente');
+        location.assign('consultaCitasP.php');
         </script>";
     }
 

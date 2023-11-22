@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $nuevoEstatus = "Aceptada";
         } elseif ($nuevoEstatus === "rechazada") {
             $nuevoEstatus = "Rechazada";
+        }elseif ($nuevoEstatus === "cancelada") {
+            $nuevoEstatus = "Cancelada";
         }
         
         // Realizar la actualización en la base de datos

@@ -6,7 +6,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     $nombreCompletoP = $_SESSION["NombreCompleto"];
 } else {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 ?>
@@ -34,7 +34,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 <?php
      $conexion = new mysqli('localhost', 'root', '', 'medicatec_2023');
      $sql="SELECT * FROM citas
-     JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' ORDER BY citas.fechaC ASC";
+     JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada' ORDER BY citas.fechaC ASC";
      $resultado = $conexion->query($sql);
 ?>
 
@@ -57,8 +57,43 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                   <div class="line3"></div>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="../Blog_Medico.php?rol=paciente">Inicio</a></li>
-                    <li><a href="creaCitasP.php">Crear citas</a></li>
+                <?php 
+                 $rol=$_SESSION['Rol'];
+                  // Incluye barraNavegacion.php antes de llamar a la función generarMenu
+                  include('../php/barraNavegacion.php');
+                  
+                  // Llama a la función generarMenu con el rol del usuario
+                  generarMenu($rol);
+                  ?>
+                  <?php
+                  if(isset($_GET['cerrar_sesion'])) {
+                          // Eliminar las cookies de sesión
+                          if (ini_get("session.use_cookies")) {
+                              $params = session_get_cookie_params();
+                              setcookie(session_name(), '', time() - 42000,
+                                  $params["path"], $params["domain"],
+                                  $params["secure"], $params["httponly"]
+                              );
+                          }
+                    // Destruir la sesión
+                    session_unset();
+                    session_destroy();
+                    $_SESSION = array();
+                    // Redirigir a la página de inicio de sesión
+                    header("Location: ../login.php");
+                    exit();
+                } else if(!isset($_SESSION['sesion_cerrada'])) {
+                  echo '
+                  <ul class="nav-links">
+                  <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                  style="color: white;">
+                  Cerrar Sesión </a>
+              </li>
+              </ul>';
+                }else {   
+            }
+            unset($_SESSION['sesion_cerrada']);
+            ?>
                 </ul>
               </nav>
             </div>
@@ -67,8 +102,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         </div>
       </div>
       <!--Main o contenido-->
-      <div class="container mt-5 row border border-1 border-secondary border-opacity-50 rounded-1"
-        style="margin-top: 20%; background-color: #e4e4e4; padding: 50px;">
+      <div class="container mt-5 rowborder-secondary border-opacity-50 rounded-1"
+        style="margin-top: 20%; background-color: #e4e4e4; padding: 50px; margin-left: 1%;">
         <h1 class="display-4" style="color: black; font-size: 36px; font-family: 'DM Serif Display';">Consulta de
           citas del paciente: <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px; float: right;"></h1>
           <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
@@ -108,7 +143,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           </thead>
           <tbody>
             <?php
-                 while($fila = $resultado->fetch_assoc()){
+                 if ($resultado->num_rows > 0) {
+                 while($fila = $resultado->fetch_assoc()){    
             ?>
             <tr>
               <th><?php echo $fila['IDC'] ?></th>
@@ -116,28 +152,32 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
               <th><?php echo $fila['HoraC'] ?></th>
               <th><?php echo $fila['ESTATUS'] ?></th>
               <td>
-    <?php echo "<a href='actualizaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Actualizar</a>";?>
+                <?php echo "<a href='actualizaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
+                margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Actualizar</a>";?>
     
-    <a href="eliminaCitasP.php" style="background-color: #176b87; color: #fff;  text-decoration: none;
-    margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
-    </td>
+                <?php echo "<a href='eliminaCitasP.php?IDC=".$fila['IDC']."' style='background-color: #176b87; color: #fff;  text-decoration: none;
+                margin-top: 30px;  border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;'>Eliminar</a>";?>
+              </td>
             </tr>
             <?php
             }
+          } else {
+            echo '<tr><td colspan="5">No se han realizado citas previas.</td></tr>';
+          }
             ?>
           </tbody>
         </table>
         <?php
         $conexion->close();
         ?>
+
       </div>
       <div class="container">
         <div class="col-md-2">
           <div class="form-group">
             
             <a href="../Blog_Medico.php?rol=paciente" style="background-color: #176b87; color: #fff; float: left; text-decoration: none;
-            margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Salir</a>
+            margin-top: 30px; margin-left: 40px; border: none; border-radius: 3px; cursor: pointer; width: 40%; padding: 5px; text-align: center;">Regresar</a>
           </div>
         </div>
       </div>

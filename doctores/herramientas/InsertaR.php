@@ -38,8 +38,8 @@ if ($resultPaciente->num_rows > 0) {
             echo json_encode($response);
         } else {
             // Verificar si la cita está en estatus "pendiente"
-            if ($estatusCita !== 'pendiente') {
-                $response = array('success' => false, 'message' => 'La cita no está en estatus "pendiente".');
+            if ($estatusCita !== 'Aceptada') {
+                $response = array('success' => false, 'message' => 'La cita no está en estatus "Aceptada".');
                 echo json_encode($response);
             } else {
                 // Verificar si ya existe una receta para esta cita
