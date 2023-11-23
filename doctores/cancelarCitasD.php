@@ -124,27 +124,13 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
 
                     <div class="col-12 px-5">
-                        <form class="needs-validation" novalidate method="post">
-                            <div class="row ">
-                                <div class="col-12">
-                                    <div class="row mb-1">
-                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por
-                                            nombre:</label>
-                                        <div class="col-5 text-start">
-                                            <input type="text" class="form-control" id="nombrePaciente"
-                                                name="nombrePaciente" required>
-                                                <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
-
+                    <div class="col-12">
+                                    <form class="needs-validation row mb-1" novalidate method="post">
+                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por nombre:</label>
+                                        <div class="col-4 text-start">
+                                            <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" required>
+                                            <div class="invalid-feedback">Campo obligatorio *</div>
                                         </div>
-                                        <div class="invalid-feedback">Campo obligatorio *</div>
-
-                                        <div class="col-1">
-                                            <button id="buscarButton" type="submit" class="btn my-custom-button"
-                                                >Buscar</button>
-
-                                        </div>
-
-                          </form>
                                         
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
                                         <div class="col-2 text-start">
@@ -163,17 +149,21 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 <option value="noviembre">noviembre</option>
                                                 <option value="diciembre">diciembre</option>
                                             </select>
-
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row my-2">
-                                        <div class="col-12 my-2">
-                                            <h5 class="">Pacientes:</h5>
+                                        <div class="col-1">
+                                            <button id="buscarButton" type="submit" class="btn my-custom-button">Buscar</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
+                                <div class="alerta">          
+                <div class="col-12">
+                    <div class="row my-2">
+                        <div class="col-12 my-2">
+                            <h5 class="">Pacientes:</h5>
+                        </div>
+                    </div>
+                </div>
+                </div>
                                 <div class="col-12">
                                     <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
                                         style="background-color: white">
