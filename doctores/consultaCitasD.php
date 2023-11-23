@@ -129,51 +129,38 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
 
                     <div class="col-12 px-5">
-
-                        <form class="needs-validation" novalidate method="post">
-                            <div class="row ">
                                 <div class="col-12">
-                                    <div class="row mb-1">
-                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por
-                                            nombre:</label>
-                                        <div class="col-5 text-start">
-                                            <input type="text" class="form-control" id="nombrePaciente"
-                                                name="nombrePaciente" required>
+                                    <form class="needs-validation row mb-1" novalidate method="post">
+                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por nombre:</label>
+                                        <div class="col-4 text-start">
+                                            <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" required>
                                             <div class="invalid-feedback">Campo obligatorio *</div>
-
                                         </div>
-                                        <div class="invalid-feedback">Campo obligatorio *</div>
-
+                                        
+                                        <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
+                                        <div class="col-2 text-start">
+                                            <select class="form-select" aria-label="" name="mes">
+                                                <option value="">Seleccione un mes</option>
+                                                <option value="enero">enero</option>
+                                                <option value="febrero">febrero</option>
+                                                <option value="marzo">marzo</option>
+                                                <option value="abril">abril</option>
+                                                <option value="mayo">mayo</option>
+                                                <option value="junio">junio</option>
+                                                <option value="julio">julio</option>
+                                                <option value="agosto">agosto</option>
+                                                <option value="septiempre">septiempre</option>
+                                                <option value="octubre">octubre</option>
+                                                <option value="noviembre">noviembre</option>
+                                                <option value="diciembre">diciembre</option>
+                                            </select>
+                                        </div>
                                         <div class="col-1">
-                                            <button id="buscarButton" type="submit"
-                                                class="btn my-custom-button">Buscar</button>
-
+                                            <button id="buscarButton" type="submit" class="btn my-custom-button">Buscar</button>
                                         </div>
-
-
-                        </form>
-
-                        <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
-                        <div class="col-2 text-start">
-                            <select class="form-select" aria-label="" name="mes">
-                                <option value="">Seleccione un mes</option>
-                                <option value="enero">enero</option>
-                                <option value="febrero">febrero</option>
-                                <option value="marzo">marzo</option>
-                                <option value="abril">abril</option>
-                                <option value="mayo">mayo</option>
-                                <option value="junio">junio</option>
-                                <option value="julio">julio</option>
-                                <option value="agosto">agosto</option>
-                                <option value="septiempre">septiempre</option>
-                                <option value="octubre">octubre</option>
-                                <option value="noviembre">noviembre</option>
-                                <option value="diciembre">diciembre</option>
-                            </select>
-
-                        </div>
-                    </div>
-                </div>
+                                    </form>
+                                </div>
+                                
                 <div class="col-12 alerta">
                     <div class="row my-2">
                         <div class="col-12 my-2">
@@ -271,7 +258,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                 </div>
                 <div class="col-1"></div>
             </div>
-        </div>
+        </div class="prueba">
     </div>
     </div>
     </div>
