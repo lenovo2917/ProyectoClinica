@@ -1,10 +1,19 @@
 $(document).ready(function () {
     // Cuando se haga clic en el botón "Crear Receta"...
-    $('#crearReceta').on('click', function () {
+    $('#crearReceta').on('click', function (event) {
+        // Previne el comportamiento predeterminado del formulario
+        event.preventDefault();
+
+        // Ejecuta las validaciones del formulario
+        var form = $('#recetaForm')[0];
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            form.classList.add('was-validated');
+            return;
+        }
+
         // Captura los datos del formulario
         var nombre = $('#nombre').val();
-        var apellidoP = $('#apellidoP').val();
-        var apellidoM = $('#apellidoM').val();
         var fecha = $('#fecha').val();
         var diagnostico = $('#diagnostico').val();
         var medicamento = $('#medicamento').val();
@@ -12,8 +21,6 @@ $(document).ready(function () {
 
         // Imprime los datos en la consola
         console.log('Nombre:', nombre);
-        console.log('Apellido Paterno:', apellidoP);
-        console.log('Apellido Materno:', apellidoM);
         console.log('Fecha:', fecha);
         console.log('Diagnóstico:', diagnostico);
         console.log('Medicamento:', medicamento);
@@ -23,8 +30,6 @@ $(document).ready(function () {
         // Llena el modal con los datos
         $('#datosReceta').html(`
             <tr><td>Nombre:</td><td>${nombre}</td></tr>
-            <tr><td>Apellido Paterno:</td><td>${apellidoP}</td></tr>
-            <tr><td>Apellido Materno:</td><td>${apellidoM}</td></tr>
             <tr><td>Fecha:</td><td>${fecha}</td></tr>
             <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
             <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
@@ -54,8 +59,7 @@ $(document).ready(function () {
             // Agrega el ID de la cita al formulario antes de enviar la solicitud AJAX
             $('#recetaForm').append('<input type="hidden" name="IDC" value="' + IDC + '">');
 
-
-            // Hace una solicitud AJAX a "insertarReceta.php"
+            // Hace una solicitud AJAX directamente
             $.ajax({
                 url: '../doctores/herramientas/InsertaR.php',
                 type: 'post',
