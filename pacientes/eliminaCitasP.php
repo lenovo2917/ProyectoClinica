@@ -6,7 +6,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     $nombreCompletoP = $_SESSION["NombreCompleto"];
 } else {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 ?>
@@ -81,10 +81,43 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                                     <div class="line3"></div>
                                 </div>
                                 <ul class="nav-links">
-                                    <li><a href="../Blog_Medico.php?rol=paciente">Inicio</a></li>
-                                    <li><a href="creaCitasP.html">Crear cita</a></li>
-                                    <li><a href="consultaCitasP.html">Consultar citas</a></li>
-                                    
+                                <?php 
+                 $rol=$_SESSION['Rol'];
+                  // Incluye barraNavegacion.php antes de llamar a la función generarMenu
+                  include('../php/barraNavegacion.php');
+                  
+                  // Llama a la función generarMenu con el rol del usuario
+                  generarMenu($rol);
+                  ?>
+                  <?php
+                  if(isset($_GET['cerrar_sesion'])) {
+                          // Eliminar las cookies de sesión
+                          if (ini_get("session.use_cookies")) {
+                              $params = session_get_cookie_params();
+                              setcookie(session_name(), '', time() - 42000,
+                                  $params["path"], $params["domain"],
+                                  $params["secure"], $params["httponly"]
+                              );
+                          }
+                    // Destruir la sesión
+                    session_unset();
+                    session_destroy();
+                    $_SESSION = array();
+                    // Redirigir a la página de inicio de sesión
+                    header("Location: ../login.php");
+                    exit();
+                } else if(!isset($_SESSION['sesion_cerrada'])) {
+                  echo '
+                  <ul class="nav-links">
+                  <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                  style="color: white;">
+                  Cerrar Sesión </a>
+              </li>
+              </ul>';
+                }else {   
+            }
+            unset($_SESSION['sesion_cerrada']);
+            ?>   
                                 </ul>
                             </nav>
                         </div>
@@ -95,7 +128,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-            <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Eliminar cita</h1>
+            <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Eliminación de cita:</h1>
 
     <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post">
     <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
@@ -107,15 +140,20 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <label for="hora" style="margin-top: 40px;">Hora de cita:</label>
     <span><?php echo $hora;?></span>
 
+    <div style="text-align: center;">
     <label for="sintomas" style="margin-top: 40px;">Síntomas:</label>
     <span><?php echo htmlspecialchars($sintomas);?></span>
+    </div>
 
+    <div style="text-align: center;">
     <label for="descripcion" style="margin-top: 40px;">Descripción:</label>
     <span><?php echo htmlspecialchars($descripcion);?></span>
+    </div>
 
-    <input type="submit" name="enviar" value="Eliminar cita" style="margin-top: 100px;">
+    <input type="submit" name="enviar" value="Eliminar cita" style="background-color: #176b87; color: #fff; padding-top: 8px;
+    margin-top: 100px; margin-right: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">
     <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-    margin-top: 100px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
+    margin-top: 100px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">Regresar</a>
     </form>
     </div>
 

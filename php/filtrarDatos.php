@@ -8,7 +8,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     $nombreCompletoP = $_SESSION["NombreCompleto"];
 } else {
     // Si no ha iniciado sesión como paciente, redirige a la página de inicio de sesión
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 // Verificar la conexión
@@ -16,20 +16,21 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
-// Obtener los valores de los campos de filtro
+//Obtener los valores de los campos del filtro
 $fecha = $_POST['fecha'];
 $iddoctor = $_POST['iddoctor'];
+$encontrados = false; 
 
-// Añadir condiciones solo si se proporcionan valores no vacíos
 if (!empty($fecha)) {
     $sql = "SELECT * FROM citas
     JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada'";
 
     $resultado = $conexion->query($sql);
 
-// Construir el HTML de la tabla con los resultados
+
 $html = '';
 while ($fila = $resultado->fetch_assoc()) {
+    if($fila['fechaC'] == $fecha){
     $html .= '<tr>';
     $html .= '<th>' . $fila['IDC'] . '</th>';
     $html .= '<th>' . $fila['fechaC'] . '</th>';
@@ -37,16 +38,22 @@ while ($fila = $resultado->fetch_assoc()) {
     $html .= '<th>' . $fila['ESTATUS'] . '</th>';
     $html .= '<td>
         <a href="../pacientes/actualizaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
-        <a href="../pacientes/eliminaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
+        <a href="../pacientes/eliminaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
     </td>';
     $html .= '</tr>';
+    $encontrados = true;
+    }
 }
 
-// Cerrar la conexión
+//Cerramos la conexión
 $conexion->close();
 
 // Enviar el HTML de la tabla al cliente
 echo $html;
+}
+
+if (!$encontrados && !empty($fecha)) {
+    echo '<tr><td colspan="5">No se han encontrado resultados.</td></tr>';
 }
 
 if (!empty($iddoctor)) {
@@ -59,6 +66,7 @@ if (!empty($iddoctor)) {
 // Construir el HTML de la tabla con los resultados
 $html = '';
 while ($fila = $resultado->fetch_assoc()) {
+    if($fila['NombreCompletoD'] == $iddoctor){
     $html .= '<tr>';
     $html .= '<th>' . $fila['IDC'] . '</th>';
     $html .= '<th>' . $fila['fechaC'] . '</th>';
@@ -69,6 +77,8 @@ while ($fila = $resultado->fetch_assoc()) {
     <a href="../pacientes/eliminaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
     </td>';
     $html .= '</tr>';
+    $encontrados = true;
+    }
 }
 
 // Cerrar la conexión
@@ -76,5 +86,9 @@ $conexion->close();
 
 // Enviar el HTML de la tabla al cliente
 echo $html;
+}
+
+if (!$encontrados && !empty($iddoctor)) {
+    echo '<tr><td colspan="5">No se han encontrado resultados.</td></tr>';
 }
 ?>

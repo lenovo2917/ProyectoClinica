@@ -2,8 +2,8 @@
 function generarMenu($rolUsuario) {
     if ($rolUsuario === "paciente") {
         echo '<ul class="nav-links">
-        <li><a href="pacientes/creaCitasP.php">Crear cita</a></li>
-        <li><a href="pacientes/consultaCitasP.php">Consultar citas</a></li>
+        <li><a href="/ProyectoClinica/pacientes/creaCitasP.php">Crear cita</a></li>
+        <li><a href="/ProyectoClinica/pacientes/consultaCitasP.php">Consultar citas</a></li>
         <li><button class="login-button" style="color: white;">Paciente</button></li>
         </ul>';
     } elseif ($rolUsuario === "admin") {

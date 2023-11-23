@@ -74,7 +74,8 @@
             $sql = "SELECT 
                 NombreCompletoS as nombreU, 
                 CURPS as CURPU,
-                FechaNacimientoS as fNU
+                FechaNacimientoS as fNU,
+                EstatusS as estatusU ------------------------------------
             FROM secretarios WHERE IDS = $idUsuarioS";
         } else {
             echo "ID de usuario no proporcionado";

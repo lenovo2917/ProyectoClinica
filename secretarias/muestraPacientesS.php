@@ -79,9 +79,16 @@ session_start();
                    
                     if(isset($_SESSION['mensaje'])) {
                         $mensaje = $_SESSION['mensaje'];
-                        echo "<p style='color: red;'>$mensaje</p>";
+                        echo "<div class='alert alert-danger'>$mensaje</div>";
                         // Limpiar el mensaje después de mostrarlo
                         unset($_SESSION['mensaje']);
+                    }
+
+                    if(isset($_SESSION['mensaje1'])) {
+                        $mensaje = $_SESSION['mensaje1'];
+                        echo "<div class='alert alert-success'>$mensaje</div>";
+                        // Limpiar el mensaje después de mostrarlo
+                        unset($_SESSION['mensaje1']);
                     }
                     ?>
                     </div>
@@ -165,6 +172,7 @@ session_start();
          <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
     <script src="../js/creaCitas.js"></script>
     <script src="../main.js"></script>
+    <script src="../js/ValidacionesCampos.js"></script>
 </body>
 
 </html>
