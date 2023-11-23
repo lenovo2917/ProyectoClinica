@@ -1,5 +1,6 @@
 <?php
  include 'acceso.php';
+ 
  $nombre = filter_input(INPUT_POST, 'nombree');
  $contrasena = filter_input(INPUT_POST, 'clave');
  $rol = null;
@@ -41,7 +42,7 @@
    $rol = 'admin';
    header("Location: ../Blog_Medico.php?rol=" . $rol);
    exit();
-  } {
+  }else {
  echo '</h2>Usuario o contraseña incorrecta</h2>';
  echo '<br><a href="login.html">Ir a login</a>';
  }

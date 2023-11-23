@@ -1,3 +1,6 @@
+<?php
+session_start(); // Asegúrate de iniciar la sesión en la página registroP.php
+?>
 <!DOCTYPE html>
 <html>
 
@@ -59,9 +62,20 @@
                                     </div>
                                     <div class="col-3"></div>
                                 </div>
-
                             </div>
-    
+                            
+                            <?php
+if (isset($_SESSION['error_message'])) {
+    $mensaje = $_SESSION['error_message'];
+    echo "<div class='alert alert-danger'>$mensaje</div>";
+    unset($_SESSION['error_message']); // Limpiar el mensaje después de mostrarlo
+}
+if (isset($_SESSION['NO_registrado'])) {
+    $mensaje = $_SESSION['NO_registrado'];
+    echo "<div class='alert alert-danger'>$mensaje</div>";
+    unset($_SESSION['NO_registrado']); // Limpiar el mensaje después de mostrarlo
+}
+?>
                             <div class="col-6" style="text-align: left;padding: 1rem;">
                                 <label class="form-label">Nombre Completo:</label>
                                 <input class="form-control" name="nombre" type="text" placeholder="Nombre Completo *" required />
@@ -82,13 +96,13 @@
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Correo:</label>
-                                <input class="form-control" name="correo" type="email" placeholder="ejemplo@gmail.com" required
+                                <input class="form-control" name="correo" type="email" placeholder="ejemplo@gmail.com" 
                                  title="ejemplo@gmail.com" />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Contraseña:</label>
                                 <input class="form-control" name="contraseña" type="password" placeholder="Contraseña *" required
-                                    maxlength="8" title="**" />
+                                    maxlength="6" title="letra minúscula,mayúscula,número y un carácter especial" />
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
                                 <label class="form-label">Capacidades diferentes:</label>
@@ -111,7 +125,7 @@
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
                                 <div class="form-group">
-                                    <label class="form-label">Tipo de sangre:</label>
+                                    <label  class="form-label">Tipo de sangre:</label>
                                     <select name="tiposangre" id="tipo-sangre" required class="formato2"
                                         style="width: 100%;">
                                         <option value="" disabled selected>Tipo de sangre *</option>
@@ -138,6 +152,7 @@
                                 </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
+                            <input type="hidden" name="estatus" value="activo">
                             <!--<div class="form-group">
                                     <label class="form-label">Estatus:</label>
                                     <select name="estatus" id="estatus" class="formato2" style="width: 100%;">
@@ -168,8 +183,10 @@
                                 <p class="">¿Ya registrado? <a style="color: #176B87;" href="../login.php">Iniciar
                                         sesión</a></p>
                             </div>
+
                         </div>
                     </form>
+
                 </div>
                 <!--footer-->
                 <div class="container-fluid-lg ">

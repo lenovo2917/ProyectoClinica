@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+session_start(); // Asegúrate de iniciar la sesión
+
 include 'acceso.php';
 
 if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {

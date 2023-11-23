@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,16 +45,8 @@
                 </div>
                 <!--Main o contenido-->
                 <!--Main o contenido-->
-                <?php if (isset($_SESSION['mensaje'])): ?>
-    <div class='alert alert-success'><?php echo $_SESSION['mensaje']; ?></div>
-    <?php unset($_SESSION['mensaje']); ?>
-<?php endif; ?>
-
-<!-- Verificar si hay mensaje de error -->
-<?php if (isset($_SESSION['error'])): ?>
-    <div class='alert alert-danger'><?php echo $_SESSION['error']; ?></div>
-    <?php unset($_SESSION['error']); ?>
-<?php endif; ?>
+                
+       
 
             <div class="container-fluid formatoLogin mt-5 mb-2">
                 <form class="form" action="" method="post">
@@ -65,6 +58,12 @@
                 ?>
                     <div class="row">
                         <div class="col-12" style="padding: 2rem;">
+                        <?php
+                        if (isset($_SESSION['registrado'])) {
+                            echo "<div class='col-12 alert alert-success'>".$_SESSION['registrado']."</div>";
+                            unset($_SESSION['registrado']);
+                        }
+                        ?>
                             <h2><i class="fa-solid fa-lock"></i> Login</h2>
                         </div>
                         <div class="col-12">
