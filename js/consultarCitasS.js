@@ -71,9 +71,7 @@ $(document).ready(function () {
                 '<td>' + paciente.horaC + '</td>' +
                 '<td>' + paciente.estatus + '</td>' +
                 '<td class="text-center">' +
-                '<input type="button" class="styled-button" value="Aceptar">' +
-                '<input type="button" class="styled-button" value="Rechazar">' +
-                '<input type="button" class="styled-button" value="Trasladar">' +
+                
                 '</td>' +
                 '</tr>';
 
