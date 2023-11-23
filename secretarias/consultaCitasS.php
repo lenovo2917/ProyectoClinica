@@ -25,7 +25,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="../css/Blog.css">
 </head>
 
-<body style="background-color: #EEEEEE;">
+<body   >
     <!--Header-->
     <div class="container-fluid-lg mb-4">
         <div class="row">
@@ -59,7 +59,7 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="row border border-1 border-secondary border-opacity-50 rounded-1">
+                <div class="row mt-3 border border-1 border-opacity-25 rounded-2" style="background-color: #EEEEEE;">
                     <div class="col-12">
                         <div class="row text-start align-items-center">
                             <div class="col-4 ps-5 text-start">

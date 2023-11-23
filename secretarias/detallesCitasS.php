@@ -22,7 +22,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
     <link rel="stylesheet" type="text/css" href="../css/secretarias.css">
     <link rel="stylesheet" type="text/css" href="../css/Blog.css">
-
+    
 </head>
 
 <body>
@@ -59,7 +59,7 @@ session_start();
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10">
-                <div class="row mt-3 border border-1  border-opacity-25 rounded-2 " style="background-color: #EEEEEE;">
+                <div class="row mt-3 border border-1 border-opacity-25 rounded-2 " style="background-color: #EEEEEE;">
 
                     <div class="col-12">
                         <div class="row text-start align-items-center">
@@ -81,7 +81,7 @@ session_start();
                                 </div>
                             </div>
                             <div class="col-4 text-center">
-                                <h3>Cancelar cita</h3>
+                                <h3>Detalles de la cita</h3>
                             </div>
                             <div class="col-4 text-end">
                                 <img src="../img/LOGO.png" style="width: 180px; height: 170px;"
@@ -109,44 +109,42 @@ session_start();
                                             <label for="" class=" py-2 col-2 col-form-label">Paciente:</label>
                                             <div class="border-bottom border-secondary col-4 text-start">
                                                 <input type="text" readonly id="nombrePacienteF" name="nombrePacienteF"
-                                                    class="form-control-plaintext" value="<?php echo"
-                                                    $nombrePaciente"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$nombrePaciente"?>">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Fecha:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
                                                 <input type="date" readonly id="fechaPacienteF" name="fechaPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo" $fechaCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$fechaCita"?>">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Hora:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
                                                 <input type="time" readonly id="horaPacienteF" name="horaPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo" $horaCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$horaCita"?>">
                                             </div>
                                         </div>
                                         <div class="row py-2">
-
+                                            
                                         </div>
                                         <div class="row py-2">
                                             <label for="" class=" col-2 col-form-label">Sintomas:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
                                                 <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo" $sintomasCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$sintomasCita"?>">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label class="col-2 mt-1 col-form-label">Descripcion:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
                                                 <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo"
-                                                    $descripcionCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$descripcionCita"?>">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 text-center my-4">
-                                    <a href="consultaCitasS.php"><input type="submit" value="Regresar"></a>
-                                </div>
                             </form>
+                            <div class="col-12 text-center my-4">
+                                <a href="consultaCitasS.php"><input type="submit" value="Regresar"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,6 +164,6 @@ session_start();
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
-</body>
 
+</body>
 </html>
