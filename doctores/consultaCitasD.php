@@ -160,13 +160,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         </div>
                                     </form>
                                 </div>
-                                
-                <div class="col-12 alerta">
+                                <div class="alerta">          
+                <div class="col-12">
                     <div class="row my-2">
                         <div class="col-12 my-2">
                             <h5 class="">Pacientes:</h5>
                         </div>
                     </div>
+                </div>
                 </div>
                 <div class="col-12">
                     <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"

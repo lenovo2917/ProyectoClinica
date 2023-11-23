@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener("click", function(event) {
         if (event.target.classList.contains("btn-aceptar")) {
             const citaID = event.target.getAttribute("data-id");
-
+        
             fetch("../doctores/herramientas/actualizar_cita.php", {
                 method: "POST",
                 body: JSON.stringify({ citaID: citaID, estatus: "Aceptada" }),
@@ -14,14 +14,16 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data.success) {
                     event.target.disabled = true;
+                    localStorage.setItem('alert', 'success'); // Almacenar el tipo de alerta
                     location.reload(); // Recargar la página después de aceptar
                 } else {
-                    alert("Error al aceptar la cita.");
+                    localStorage.setItem('alert', 'error'); // Almacenar el tipo de alerta
+                    location.reload(); // Recargar la página después de aceptar
                 }
             });
         } else if (event.target.classList.contains("btn-rechazar")) {
             const citaID = event.target.getAttribute("data-id");
-
+        
             fetch("../doctores/herramientas/actualizar_cita.php", {
                 method: "POST",
                 body: JSON.stringify({ citaID: citaID, estatus: "rechazada" }),
@@ -33,14 +35,16 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data.success) {
                     event.target.disabled = true;
+                    localStorage.setItem('alert', 'rejected'); // Almacenar el tipo de alerta
                     location.reload(); // Recargar la página después de rechazar
                 } else {
-                    alert("Error al rechazar la cita.");
+                    localStorage.setItem('alert', 'error'); // Almacenar el tipo de alerta
+                    location.reload(); // Recargar la página después de rechazar
                 }
             });
         } else if (event.target.classList.contains("btn-Cancelar")) {
             const citaID = event.target.getAttribute("data-id");
-
+        
             fetch("../doctores/herramientas/actualizar_cita.php", {
                 method: "POST",
                 body: JSON.stringify({ citaID: citaID, estatus: "Cancelada" }),
@@ -52,12 +56,14 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data.success) {
                     event.target.disabled = true;
+                    localStorage.setItem('alert', 'cancelled'); // Almacenar el tipo de alerta
                     location.reload(); // Recargar la página después de cancelar
                 } else {
-                    alert("Error al cancelar la cita.");
+                    localStorage.setItem('alert', 'error'); // Almacenar el tipo de alerta
+                    location.reload(); // Recargar la página después de cancelar
                 }
             });
-        } else if (event.target.classList.contains('btn-trasladar')) {
+        }else if (event.target.classList.contains('btn-trasladar')) {
             const citaID = event.target.getAttribute('data-cita-id');
             $('#miModal').modal('show');
 
@@ -103,6 +109,34 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
+  // Al cargar la página
+var alertType = localStorage.getItem('alert'); // Obtener el tipo de alerta
+if (alertType) {
+    var alertMessage;
+    var alertColor;
+    if (alertType === 'success') {
+        alertMessage = '¡Éxito! La cita ha sido aceptada.';
+        alertColor = 'success';
+    } else if (alertType === 'rejected') {
+        alertMessage = 'La cita ha sido rechazada con éxito.';
+        alertColor = 'warning';
+    } else if (alertType === 'cancelled') {
+        alertMessage = 'La cita ha sido cancelada con éxito.';
+        alertColor = 'danger';
+    } else if (alertType === 'error') {
+        alertMessage = 'Error! Hubo un error al procesar la cita.';
+        alertColor = 'danger';
+    }
+    $('.alerta').append(`
+        <div class="alert alert-${alertColor} alert-dismissible fade show" role="alert">
+            <strong>${alertMessage}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `);
+    localStorage.removeItem('alert'); // Eliminar el tipo de alerta del almacenamiento local
+}
+
+
 
     const nombrePacienteInput = document.getElementById('nombrePaciente');
     const limpiarFiltrosButton = document.getElementById('limpiarFiltrosButton');
