@@ -83,11 +83,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         success: function (response) {
                             console.log("Clic en Guardar Cambios");
                             console.log("Respuesta del servidor: " + response);
-                            $('.modal-body').html('<p>Cambios realizados</p>');
-                           
-                        },
+                            $('.modal-body').html(`
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <strong>¡Paciente trasladado correctamente!</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            `);
+                        },                        
                         error: function () {
-                            console.log('Error en la solicitud al servidor.');
+                            $('.modal-body').html(`
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Error al Trasladar, intente nuevamente.</strong> 
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `);
                         }
                     });
                 }
