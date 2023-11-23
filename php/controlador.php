@@ -7,19 +7,19 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
     $password = $_POST["clave"];
 
     // Consulta para pacientes
-    $sql1 = $dp->prepare("SELECT * FROM pacientes WHERE NombreCompletoP=? AND ContrasenaP=?");
+    $sql1 = $dp->prepare("SELECT * FROM pacientes WHERE NombreCompletoP=? AND ContrasenaP=? AND ESTATUS = 'Activo'");
     $sql1->bind_param("ss", $nombre, $password);
     $sql1->execute();
     $result1 = $sql1->get_result();
 
     // Consulta para secretarios
-    $sql2 = $dp->prepare("SELECT * FROM secretarios WHERE NombreCompletoS=? AND ContrasenaS=?");
+    $sql2 = $dp->prepare("SELECT * FROM secretarios WHERE NombreCompletoS=? AND ContrasenaS=? AND ESTATUS = 'Activo'");
     $sql2->bind_param("ss", $nombre, $password);
     $sql2->execute();
     $result2 = $sql2->get_result();
 
     // Consulta para doctores
-    $sql3 = $dp->prepare("SELECT * FROM doctores WHERE NombreCompletoD=? AND ContrasenaD=?");
+    $sql3 = $dp->prepare("SELECT * FROM doctores WHERE NombreCompletoD=? AND ContrasenaD=? AND ESTATUS = 'Activo'");
     $sql3->bind_param("ss", $nombre, $password);
     $sql3->execute();
     $result3 = $sql3->get_result();
