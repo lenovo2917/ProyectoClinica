@@ -59,7 +59,9 @@
                                     </div>
                                     <div class="col-3"></div>
                                 </div>
+
                             </div>
+    
                             <div class="col-6" style="text-align: left;padding: 1rem;">
                                 <label class="form-label">Nombre Completo:</label>
                                 <input class="form-control" name="nombre" type="text" placeholder="Nombre Completo *" required />
@@ -136,7 +138,7 @@
                                 </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
-                                <div class="form-group">
+                            <!--<div class="form-group">
                                     <label class="form-label">Estatus:</label>
                                     <select name="estatus" id="estatus" class="formato2" style="width: 100%;">
                                         <option value="" disabled selected>Estatus</option>
@@ -144,7 +146,8 @@
                                         <option value="Inactivo">Inactivo</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->    
+                            
 
                             <!-- <div class="col-9">
                             <div class="form-group">
@@ -157,6 +160,7 @@
                             <div class="col-12 " style="padding: 0.5rem; text-align: left;">
                             <label class="form-label" for="estatus">Estatus Activo:</label>
                             <input type="checkbox" id="estatus" name="estatus" checked disabled>disabled-->
+                         </div>
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <button type="submit" name="crear_paciente" type="button">Crear</button>
                             </div>

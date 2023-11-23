@@ -22,7 +22,10 @@ $sql = "INSERT INTO pacientes (NombreCompletoP, CURPP, fechaP, enfermedadesP, ge
         VALUES ('$nombreCompleto', '$curp', '$fecha', '$enfermedades', '$genero', '$tipoSangre', '$telefono', '$correo', '$alergias', '$contraseña', '$capacidades', '$estatus')";
 
 if ($dp->query($sql) == TRUE) {
-    echo "Paciente registrado exitosamente.";
+   
+    echo "<div class='alert alert-success'>*El paciente se ha registrado exitosamente.*</div>";
+    header("Location: /ProyectoClinica/login.php");
+    exit();
 } else {
     echo "Error al registrar al paciente: " . $dp->error;
 }
