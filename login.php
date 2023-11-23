@@ -44,6 +44,17 @@
                 </div>
                 <!--Main o contenido-->
                 <!--Main o contenido-->
+                <?php if (isset($_SESSION['mensaje'])): ?>
+    <div class='alert alert-success'><?php echo $_SESSION['mensaje']; ?></div>
+    <?php unset($_SESSION['mensaje']); ?>
+<?php endif; ?>
+
+<!-- Verificar si hay mensaje de error -->
+<?php if (isset($_SESSION['error'])): ?>
+    <div class='alert alert-danger'><?php echo $_SESSION['error']; ?></div>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
             <div class="container-fluid formatoLogin mt-5 mb-2">
                 <form class="form" action="" method="post">
                 <?php
@@ -90,6 +101,7 @@
         <script src="bootstrap/js/bootstrap.esm.min.js"></script>
         <script src="js/creaCitas.js"></script>
         <script src="js/main.js"></script>
+        <script src="../js/ValidacionesCampos.js"></script>
 </body>
 
 </html>

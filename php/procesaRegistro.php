@@ -1,5 +1,6 @@
 
 <?php
+session_start(); // Inicia la sesión si no está iniciada
 if (isset($_POST['crear_paciente'])) {
 include 'acceso.php';
 // Recoger los datos del formulario
@@ -22,12 +23,11 @@ $sql = "INSERT INTO pacientes (NombreCompletoP, CURPP, fechaP, enfermedadesP, ge
         VALUES ('$nombreCompleto', '$curp', '$fecha', '$enfermedades', '$genero', '$tipoSangre', '$telefono', '$correo', '$alergias', '$contraseña', '$capacidades', '$estatus')";
 
 if ($dp->query($sql) == TRUE) {
-   
-    echo "<div class='alert alert-success'>*El paciente se ha registrado exitosamente.*</div>";
+    $_SESSION['mensaje'] = "El paciente se ha registrado exitosamente.";
     header("Location: /ProyectoClinica/login.php");
     exit();
 } else {
-    echo "Error al registrar al paciente: " . $dp->error;
+    $_SESSION['error'] = "Error al registrar al paciente: " . $dp->error;
 }
 
 // Cerrar la conexión a la base de datos

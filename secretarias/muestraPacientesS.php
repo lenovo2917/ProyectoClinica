@@ -172,6 +172,7 @@ session_start();
          <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
     <script src="../js/creaCitas.js"></script>
     <script src="../main.js"></script>
+    <script src="../js/ValidacionesCampos.js"></script>
 </body>
 
 </html>
