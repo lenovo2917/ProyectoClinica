@@ -23,7 +23,7 @@ if (is_numeric($idP)) {
         } else {
             // Establecer el mensaje en una variable de sesión
             session_start();
-            $_SESSION['mensaje'] = "El paciente $nombrePaciente se ha eliminado correctamente";
+            $_SESSION['mensaje'] = "*El paciente $nombrePaciente se ha eliminado correctamente.*";
 
             // Redirige al índice después de la modificación
             header("Location: ../doctores/muestraPacientesD.php");
