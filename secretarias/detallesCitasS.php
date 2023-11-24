@@ -107,18 +107,18 @@ session_start();
                                         </div>
                                         <div class="row py-2">
                                             <label for="" class=" py-2 col-2 col-form-label">Paciente:</label>
-                                            <div class="border-bottom border-secondary col-4 text-start">
+                                            <div class="border-bottom border-secondary col-5 text-start">
                                                 <input type="text" readonly id="nombrePacienteF" name="nombrePacienteF"
                                                     class="form-control-plaintext" value="<?php echo"$nombrePaciente"?>">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Fecha:</label>
-                                            <div class="border-bottom border-secondary col-3 text-start">
+                                            <div class="border-bottom border-secondary col-2 text-start">
                                                 <input type="date" readonly id="fechaPacienteF" name="fechaPacienteF"
                                                     class="form-control-plaintext" value="<?php echo"$fechaCita"?>">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Hora:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="time" readonly id="horaPacienteF" name="horaPacienteF"
+                                                <input type="time" readonly readonly id="horaPacienteF" name="horaPacienteF"
                                                     class="form-control-plaintext" value="<?php echo"$horaCita"?>">
                                             </div>
                                         </div>
@@ -128,14 +128,14 @@ session_start();
                                         <div class="row py-2">
                                             <label for="" class=" col-2 col-form-label">Sintomas:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
+                                                <input type="text" readonly id="sintomasPacienteF" name="sintomasPacienteF"
                                                     class="form-control-plaintext" value="<?php echo"$sintomasCita"?>">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label class="col-2 mt-1 col-form-label">Descripcion:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
+                                                <input type="text" readonly id="descripcionPacienteF" name="descripcionPacienteF"
                                                     class="form-control-plaintext" value="<?php echo"$descripcionCita"?>">
                                             </div>
                                         </div>
@@ -143,15 +143,13 @@ session_start();
                                 </div>
                             </form>
                             <div class="col-12 text-center my-4">
-                                <a href="consultaCitasS.php"><input type="submit" value="Regresar"></a>
+                                <a href="consultaCitasS.php"><input type="button" value="Regresar"></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <!--footer-->
     <div class="container-fluid-lg ">

@@ -1,4 +1,7 @@
 <!--Creo Antonio-->
+<?php
+session_start();
+?>  
 <!DOCTYPE html>
 <html>
 
@@ -15,10 +18,10 @@
     <link rel="shortcut icon" href="../img/web.png" type="img">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
-    <link rel="stylesheet" type="text/css" href="../css/doctores.css">
+    <link rel="stylesheet" type="text/css" href="../css/secretarias.css">
 </head>
 
-<body style="background-color: #EEEEEE;">
+<body>
     <!--Header-->
     <div class="container-fluid-lg mb-4">
         <div class="row">
@@ -48,108 +51,104 @@
 
     <!--Main o contenido-->
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="row">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="row mt-3 border border-1 border-opacity-25 rounded-2 " style="background-color: #EEEEEE;">
+
                     <div class="col-12">
                         <div class="row text-start align-items-center">
-                            <div class="col-12">
-                                <div class="row text-start align-items-center">
-                                    <div class="col-4 ps-5 text-start">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <h4>Secretaria:</h5>
+                            <div class="col-4 ps-5 text-start">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4>Secretaria:</h4>
+                                    </div>
+                                    <div class="col-12">
+                                        <h4>
+                                            <?php
+                                            if (isset($_SESSION["NombreCompleto"])) {
+                                                $nombreUsuario = $_SESSION["NombreCompleto"];
+                                                echo "$nombreUsuario";
+                                            }    
+                                            ?>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <h3>Modificar cita</h3>
+                            </div>
+                            <div class="col-4 text-end">
+                                <img src="../img/LOGO.png" style="width: 180px; height: 170px;"
+                                    alt="Descripción de la imagen">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 px-5">
+                        <div class="row ">
+                            <form action="../php/mo" class="form" method="post">
+                                <?php
+                                    $nombrePaciente = $_GET['D1'];
+                                    $fechaCita = $_GET['D2'];
+                                    $horaCita = $_GET['D3'];
+                                    $sintomasCita = $_GET['D4'];
+                                    $descripcionCita = $_GET['D5'];
+                                ?>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="row mb-4">
+                                            <input hidden type="text" readonly id="IDPaciente" name="IDPaciente"
+                                                class="form-control-plaintext" value="<?php echo"$IDP"?>"> 
+                                            <input hidden type="text" readonly id="IDCita" name="IDCita"
+                                                class="form-control-plaintext" value="<?php echo"$IDC"?>">
+
+                                            <label for="" class="col-2 col-form-label"><h4>Paciente:</h4></label>
+                                            <label for="" class="col-2 col-form-label"><h4><?php echo"$nombrePaciente"?></h4></label>
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <h4 class="">Datos de la cita:</h4>
+                                        </div>
+                                        <div class="row py-2 <!--justify-content-center-->">
+                                            <label for="" class="col-2 col-form-label">Fecha:</label>
+                                            <div class="border-bottom border-secondary col-3 ">
+                                                <input type="date" id="fechaPacienteF" name="fechaPacienteF"
+                                                    class="form-control-plaintext text-center" value="<?php echo"$fechaCita"?>">
                                             </div>
-                                            <div class="col-12">
-                                                <h4>Ana Lucia Garcia Gomez</h5>
+                                            <div class="col-2">
+                                            </div>
+                                            <label for="" class="col-2 col-form-label">Hora:</label>
+                                            <div class="border-bottom border-secondary col-3">
+                                                <input type="time" readonly id="horaPacienteF" name="horaPacienteF"
+                                                    class="form-control-plaintext text-center" value="<?php echo"$horaCita"?>">
+                                            </div>
+                                        </div>
+                                        <div class="row py-2">
+                                            <label for="" class=" col-2 col-form-label">Sintomas:</label>
+                                            <div class="border-bottom border-secondary col-10 text-start">
+                                                <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
+                                                    class="form-control-plaintext" value="<?php echo"$sintomasCita"?>">
+                                            </div>
+                                        </div>
+                                        <div class="row py-2">
+                                            <label class="col-2 mt-1 col-form-label">Descripcion:</label>
+                                            <div class="border-bottom border-secondary col-10 text-start">
+                                                <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
+                                                    class="form-control-plaintext" value="<?php echo"$descripcionCita"?>">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-4 text-center">
-                                        <h2>Modificación de citas</h2>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <img src="../img/LOGO.png" style="width: 180px; height: 170px;"
-                                            alt="Descripción de la imagen">
-                                    </div>
                                 </div>
-                            
+                            </form>
+                            <div class="col-12 text-center my-4">
+                                <a href="consultaCitasS.php"><input type="button" value="Regresar"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-
-                <div class="row border border-1 border-secondary border-opacity-50 rounded-1"  style="background-color: white;">
-                    <div class="col-12 px-5">
-                        <form class="form" method="post">
-                            <div class="row ">
-                                
-                                </div>
-                                <div class="col-12">
-                                    <div class="row my-2">
-                                        <div class="col-12 mt-4">
-                                            <h4 class="">Datos del paciente:</h4>
-                                        </div>
-                                        <input type="hidden" name="idCita" value="<?php echo $idC; ?>">
-                                        <div class="row py-2">
-                                            <label for="" class=" py-2 col-1 col-form-label">Paciente:</label>
-                                            <div class="border-bottom border-secondary col-5 text-start">
-                                                <input type="text" readonly class="form-control-plaintext" id=""
-                                                    value="Jorge Damian Reyes Hernandez" name="nombrePaciente" value="<?php echo isset(
-                                    $rowPaciente["nombreP"]) ? $rowPaciente["nombreP"] : ''; ?>">
-                                            </div>
-                                            <label for="" class=" col-1 col-form-label">CURP:</label>
-                                            <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="text" readonly class="form-control-plaintext" id=""
-                                                name="CURPPaciente" value ="<?php echo isset(
-                                    $rowPaciente["CURPP"]) ? $rowPaciente["CURPP"] : ''; ?>">
-                                            </div>
-                                            <label for="" class="col-1 col-form-label">Edad:</label>
-                                            <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="text" readonly class="form-control-plaintext" id="" name="fNPaciente" value ="<?php echo isset(
-                                    $rowPaciente["fNP"]) ? $rowPaciente["fNP"] : ''; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row py-2">
-                                            <label for="" class=" col-1 col-form-label">Sintomas:</label>
-                                            <div class="border-bottom border-secondary col-4 text-start">
-                                                <input type="text"  class="form-control-plaintext" id="" name="sintomasCita" value ="<?php echo isset(
-                                    $rowPaciente["sintomasC"]) ? $rowPaciente["sintomasC"] : ''; ?>">
-                                            </div>
-                                            <label for="" class="col-1 col-form-label">Alergias:</label>
-                                            <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="text"  class="form-control-plaintext" id="" name="alergiasC" value ="<?php echo isset(
-        $rowPaciente["alergiasC"]) ? $rowPaciente["alergiasC"] : ''; ?>">
-                                            </div>
-                                            <label for="" class="col-2 col-form-label text-end">tipo de sangre:</label>
-                                            <div class="border-bottom border-secondary col-1 text-start">
-                                                <select class=" form-control-plaintext" aria-label="Default select example">
-                                                <option name="tipoSangreCita" disabled selected>Tipo de sangre *</option>
-                                        <option value="A+" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "A+" ? 'selected' : ''; ?>>A+</option>
-                                        <option value="A-" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "A-" ? 'selected' : ''; ?>>A-</option>
-                                        <option value="B+" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "B+" ? 'selected' : ''; ?>>B+</option>
-                                        <option value="B-" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "B-" ? 'selected' : ''; ?>>B-</option>
-                                        <option value="O+" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "O+" ? 'selected' : ''; ?>>O+</option>
-                                        <option value="O-" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "O-" ? 'selected' : ''; ?>>O-</option>
-                                        <option value="AB+" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "AB+" ? 'selected' : ''; ?>>AB+</option>
-                                        <option value="AB-" <?php echo isset($rowPaciente["tipoSangreC"]) && $rowPaciente["tipoSangreC"] == "AB-" ? 'selected' : ''; ?>>AB-</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>    
-                            </div>
-                            <div class=" col-12 text-end" >
-                                <input type="submit" value="Modificar cita">
-                            </div>
-                    </div>
-                </div>
-                </form>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
       <!--footer-->
       <div class="container-fluid-lg ">
         <footer class="bg-dark text-center py-5 mt-5">
@@ -158,10 +157,10 @@
             </div>
         </footer>
     </div>
-    
-         <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-         <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+         
+    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
     <script src="../js/creaCitas.js"></script>
     <script src="../js/main.js"></script>
 
 </body>
+</html>

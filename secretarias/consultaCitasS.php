@@ -84,6 +84,20 @@ session_start();
                     <div class="col-12 px-5">
                         <form class="form" method="post">
                             <div class="row ">
+                                <div class="col-12 text-center">
+                                    <?php
+                                        if(isset($_SESSION['mensajeIncorrecto'])) {
+                                            $mensaje = $_SESSION['mensajeIncorrecto'];
+                                            echo "<div class='alert alert-danger'>$mensaje</div>";
+                                            unset($_SESSION['mensajeIncorrecto']);
+                                        }
+                                        if(isset($_SESSION['mensajeCorrecto'])) {
+                                            $mensaje = $_SESSION['mensajeCorrecto'];
+                                            echo "<div class='alert alert-success'>$mensaje</div>";
+                                            unset($_SESSION['mensajeCorrecto']);
+                                        }
+                                    ?>
+                                </div>
                                 <div class="col-12">
                                     <div class="row mb-1">
                                         <label for="nombre" class="col-2 col-form-label">Buscar por nombre:</label>

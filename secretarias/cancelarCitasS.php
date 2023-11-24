@@ -92,35 +92,42 @@ session_start();
 
                     <div class="col-12 px-5">
                         <div class="row ">
-                            <form class="form" method="post">
-                                <?php
-                                    $nombrePaciente = $_GET['D1'];
-                                    $fechaCita = $_GET['D2'];
-                                    $horaCita = $_GET['D3'];
-                                    $sintomasCita = $_GET['D4'];
-                                    $descripcionCita = $_GET['D5'];
-                                ?>
+                            <?php
+                                $nombrePaciente = $_GET['D1'];
+                                $fechaCita = $_GET['D2'];
+                                $horaCita = $_GET['D3'];
+                                $sintomasCita = $_GET['D4'];
+                                $descripcionCita = $_GET['D5'];
+                                $IDP = $_GET['D6'];
+                                $IDC = $_GET['D7'];
+                            ?>
+                            <form action="../php/eliminarCitasS.php" class="form" method="post">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 mt-4">
                                             <h4 class="">Datos del paciente:</h4>
                                         </div>
                                         <div class="row py-2">
+                                            <input hidden type="text" readonly id="IDPaciente" name="IDPaciente"
+                                                class="form-control-plaintext" value="<?php echo"$IDP"?>"> 
+                                            <input hidden type="text" readonly id="IDCita" name="IDCita"
+                                                class="form-control-plaintext" value="<?php echo"$IDC"?>">
+
+
                                             <label for="" class=" py-2 col-2 col-form-label">Paciente:</label>
                                             <div class="border-bottom border-secondary col-4 text-start">
                                                 <input type="text" readonly id="nombrePacienteF" name="nombrePacienteF"
-                                                    class="form-control-plaintext" value="<?php echo"
-                                                    $nombrePaciente"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$nombrePaciente"?>">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Fecha:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
                                                 <input type="date" readonly id="fechaPacienteF" name="fechaPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo" $fechaCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$fechaCita"?>">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Hora:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
                                                 <input type="time" readonly id="horaPacienteF" name="horaPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo" $horaCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$horaCita"?>">
                                             </div>
                                         </div>
                                         <div class="row py-2">
@@ -130,22 +137,57 @@ session_start();
                                             <label for="" class=" col-2 col-form-label">Sintomas:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
                                                 <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo" $sintomasCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$sintomasCita"?>">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label class="col-2 mt-1 col-form-label">Descripcion:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
                                                 <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
-                                                    class="form-control-plaintext" value="<?php echo"
-                                                    $descripcionCita"?>">
+                                                    class="form-control-plaintext" value="<?php echo"$descripcionCita"?>">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 text-center my-4">
-                                    <a href="consultaCitasS.php"><input type="submit" value="Regresar"></a>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6 text-start my-4">
+                                            <a href="consultaCitasS.php"><input type="button" value="Regresar"></a>
+                                        </div>
+                                        <div class="col-6 text-end my-4">
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#confirmEliminarC">
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div class="modal fade" id="confirmEliminarC" data-bs-backdrop="static">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content ">
+                                            <div class="modal-header my-2">
+                                                <h4>¿Eliminar cita?</h4>
+                                                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body my-2 text-center">
+                                                ¿Estás seguro de que deseas eliminarla?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6 text-start">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                        </div>
+                                                        <div class="col-6 text-end">
+                                                            <input type="submit" class="btn btn-danger" value="Sí">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -165,7 +207,9 @@ session_start();
     </div>
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+    <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
