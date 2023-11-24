@@ -8,14 +8,14 @@ $stmt = $dp->query($sql);
 
 if ($stmt === false) {
     session_start();
-    $_SESSION['mensajeIncorrecto'] = "*Error al realizar al eliminar la cita*". $dp->error;
+    $_SESSION['mensajeError'] = "*Error al realizar al eliminar la cita*". $dp->error;
 
     header("Location: ../secretarias/consultaCitasS.php");
     exit();
 } else {
     // Establecer el mensaje en una variable de sesión
     session_start();
-    $_SESSION['mensajeCorrecto'] = "*La cita se ha eliminado correctamente*";
+    $_SESSION['mensajeEliminacion'] = "*La cita se ha eliminado correctamente*";
 
     header("Location: ../secretarias/consultaCitasS.php");
     exit();
