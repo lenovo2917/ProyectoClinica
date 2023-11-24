@@ -69,12 +69,20 @@ $(document).ready(function () {
                 '<td>' + paciente.nombreCompletoP + '</td>' +
                 '<td>' + paciente.fechaC + '</td>' +
                 '<td>' + paciente.horaC + '</td>' +
-                '<td>' + paciente.estatus + '</td>' +
-                '<td class="text-center">' +
-                '<input type="button" class="styled-button" value="Aceptar">' +
-                '<input type="button" class="styled-button" value="Rechazar">' +
-                '<input type="button" class="styled-button" value="Trasladar">' +
+                '<td>' + paciente.estatusC + '</td>' +
+                '<div class="">'+
+                '<td>' +
+                '<a href="cancelarCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
+                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+'&D6='+paciente.IDP+'&D7='+paciente.IDC+
+                '"><input type="button" class="styled-button" value="Eliminar"></a>' +
+                '<a href="modificacionCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
+                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+'&D6='+paciente.IDP+'&D7='+paciente.IDC+
+                '"><input type="button" class="styled-button" value="Modificar">' +
+                '<a href="detallesCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
+                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+
+                '"><input type="button" class="styled-button" value="Detalles">' +
                 '</td>' +
+                '</div>'+
                 '</tr>';
 
             tbody.append(row);

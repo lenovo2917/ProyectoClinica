@@ -25,7 +25,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="../css/Blog.css">
 </head>
 
-<body style="background-color: #EEEEEE;">
+<body   >
     <!--Header-->
     <div class="container-fluid-lg mb-4">
         <div class="row">
@@ -59,7 +59,7 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="row border border-1 border-secondary border-opacity-50 rounded-1">
+                <div class="row mt-3 border border-1 border-opacity-25 rounded-2" style="background-color: #EEEEEE;">
                     <div class="col-12">
                         <div class="row text-start align-items-center">
                             <div class="col-4 ps-5 text-start">
@@ -84,6 +84,20 @@ session_start();
                     <div class="col-12 px-5">
                         <form class="form" method="post">
                             <div class="row ">
+                                <div class="col-12 text-center">
+                                    <?php
+                                        if(isset($_SESSION['mensajeIncorrecto'])) {
+                                            $mensaje = $_SESSION['mensajeIncorrecto'];
+                                            echo "<div class='alert alert-danger'>$mensaje</div>";
+                                            unset($_SESSION['mensajeIncorrecto']);
+                                        }
+                                        if(isset($_SESSION['mensajeCorrecto'])) {
+                                            $mensaje = $_SESSION['mensajeCorrecto'];
+                                            echo "<div class='alert alert-success'>$mensaje</div>";
+                                            unset($_SESSION['mensajeCorrecto']);
+                                        }
+                                    ?>
+                                </div>
                                 <div class="col-12">
                                     <div class="row mb-1">
                                         <label for="nombre" class="col-2 col-form-label">Buscar por nombre:</label>

@@ -1,39 +1,46 @@
 $(document).ready(function () {
-    // Cuando se haga clic en el botón "Crear Receta"...
-    $('#crearReceta').on('click', function () {
+    // Selecciona el formulario específico por su ID
+    var form = document.getElementById('recetaForm');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita que la página se recargue
+        event.stopPropagation();
+
+        if (!form.checkValidity()) {
+            // Si el formulario no es válido, no hagas nada más
+        } else {
+            // Llena el modal con los datos solo si el formulario es válido
+            showRecetaModal();
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+
+    // Función para mostrar el modal
+    function showRecetaModal() {
         // Captura los datos del formulario
         var nombre = $('#nombre').val();
-        var apellidoP = $('#apellidoP').val();
-        var apellidoM = $('#apellidoM').val();
         var fecha = $('#fecha').val();
         var diagnostico = $('#diagnostico').val();
         var medicamento = $('#medicamento').val();
         var intruccionUsoR = $('#intruccionUsoR').val();
 
-        // Imprime los datos en la consola
-        console.log('Nombre:', nombre);
-        console.log('Apellido Paterno:', apellidoP);
-        console.log('Apellido Materno:', apellidoM);
-        console.log('Fecha:', fecha);
-        console.log('Diagnóstico:', diagnostico);
-        console.log('Medicamento:', medicamento);
-        console.log('Instrucciones de Uso:', intruccionUsoR);
-        console.log('ID de la cita seleccionada:', IDC);
+        // Muestra el modal solo si todos los campos están llenos
+        if (nombre && fecha && diagnostico && medicamento && intruccionUsoR) {
+            // Llena el modal con los datos
+            $('#datosReceta').html(`
+                <tr><td>Nombre:</td><td>${nombre}</td></tr>
+                <tr><td>Fecha:</td><td>${fecha}</td></tr>
+                <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
+                <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
+                <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
+            `);
 
-        // Llena el modal con los datos
-        $('#datosReceta').html(`
-            <tr><td>Nombre:</td><td>${nombre}</td></tr>
-            <tr><td>Apellido Paterno:</td><td>${apellidoP}</td></tr>
-            <tr><td>Apellido Materno:</td><td>${apellidoM}</td></tr>
-            <tr><td>Fecha:</td><td>${fecha}</td></tr>
-            <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
-            <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
-            <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
-        `);
+            // Muestra el modal
+            $('#exampleModalToggle').modal('show');
+        }
+    }
 
-        // Muestra el modal
-        $('#exampleModalToggle').modal('show');
-    });
 
     // Variable para almacenar el ID de la cita seleccionada
     var IDC;
@@ -54,8 +61,7 @@ $(document).ready(function () {
             // Agrega el ID de la cita al formulario antes de enviar la solicitud AJAX
             $('#recetaForm').append('<input type="hidden" name="IDC" value="' + IDC + '">');
 
-
-            // Hace una solicitud AJAX a "insertarReceta.php"
+            // Hace una solicitud AJAX directamente
             $.ajax({
                 url: '../doctores/herramientas/InsertaR.php',
                 type: 'post',
