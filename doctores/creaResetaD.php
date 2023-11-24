@@ -148,36 +148,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                     <hr class="my-4">
                                     <!-- Contenido de la receta en forma de tabla -->
                                     <table class="table" id="datosReceta">
-                                        <tr>
-                                            <td>Nombre:</td>
-                                            <td>${nombre}</td>
-                                        </tr>
-                                        <!-- 
-                                        <tr>
-                                            <td>Apellido Paterno:</td>
-                                            <td>${apellidoP}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Apellido Materno:</td>
-                                            <td>${apellidoM}</td>
-                                        </tr>
-                                        -->
-                                        <tr>
-                                            <td>Fecha:</td>
-                                            <td>${fecha}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Diagnóstico:</td>
-                                            <td>${diagnostico}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Medicamento:</td>
-                                            <td>${medicamento}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Instrucciones de Uso:</td>
-                                            <td>${intruccionUsoR}</td>
-                                        </tr>
+                                      
                                     </table>
                                     <!-- Firma y nombre del doctor -->
                                     <div class="firma">
@@ -258,8 +229,8 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         style="resize: none"></textarea>
                                     <div class="invalid-feedback">Por favor, ingresa las instrucciones de uso.</div>
                                 </div>
-                                <button type="submit" id="crearReceta" class="btn btn-custom"
-                                    data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Crear Receta</button>
+                                <button type="submit" id="crearReceta" class="btn btn-custom">Crear Receta</button>
+
                             </form>
 
                         </div>
@@ -522,8 +493,7 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../js/BusquedaEspecialidad.js"></script>
     <script src="../js/FechaCalendario.js"></script>
     <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
-    <script src="../js/ValidacionesCampos.js"></script>
-
+<script src="../js/ValidacionesCampos.js"></script>
 
 
 

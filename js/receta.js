@@ -1,17 +1,23 @@
 $(document).ready(function () {
-    // Cuando se haga clic en el botón "Crear Receta"...
-    $('#crearReceta').on('click', function (event) {
-        // Previne el comportamiento predeterminado del formulario
-        event.preventDefault();
+    // Selecciona el formulario específico por su ID
+    var form = document.getElementById('recetaForm');
 
-        // Ejecuta las validaciones del formulario
-        var form = $('#recetaForm')[0];
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            form.classList.add('was-validated');
-            return;
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita que la página se recargue
+        event.stopPropagation();
+
+        if (!form.checkValidity()) {
+            // Si el formulario no es válido, no hagas nada más
+        } else {
+            // Llena el modal con los datos solo si el formulario es válido
+            showRecetaModal();
         }
 
+        form.classList.add('was-validated');
+    }, false);
+
+    // Función para mostrar el modal
+    function showRecetaModal() {
         // Captura los datos del formulario
         var nombre = $('#nombre').val();
         var fecha = $('#fecha').val();
@@ -19,26 +25,22 @@ $(document).ready(function () {
         var medicamento = $('#medicamento').val();
         var intruccionUsoR = $('#intruccionUsoR').val();
 
-        // Imprime los datos en la consola
-        console.log('Nombre:', nombre);
-        console.log('Fecha:', fecha);
-        console.log('Diagnóstico:', diagnostico);
-        console.log('Medicamento:', medicamento);
-        console.log('Instrucciones de Uso:', intruccionUsoR);
-        console.log('ID de la cita seleccionada:', IDC);
+        // Muestra el modal solo si todos los campos están llenos
+        if (nombre && fecha && diagnostico && medicamento && intruccionUsoR) {
+            // Llena el modal con los datos
+            $('#datosReceta').html(`
+                <tr><td>Nombre:</td><td>${nombre}</td></tr>
+                <tr><td>Fecha:</td><td>${fecha}</td></tr>
+                <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
+                <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
+                <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
+            `);
 
-        // Llena el modal con los datos
-        $('#datosReceta').html(`
-            <tr><td>Nombre:</td><td>${nombre}</td></tr>
-            <tr><td>Fecha:</td><td>${fecha}</td></tr>
-            <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
-            <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
-            <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
-        `);
+            // Muestra el modal
+            $('#exampleModalToggle').modal('show');
+        }
+    }
 
-        // Muestra el modal
-        $('#exampleModalToggle').modal('show');
-    });
 
     // Variable para almacenar el ID de la cita seleccionada
     var IDC;
