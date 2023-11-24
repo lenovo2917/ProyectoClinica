@@ -1,64 +1,62 @@
 <?php
 include 'acceso.php';
 
-// Recupera los datos del formulario
+// Verificar si se recibieron los datos necesarios
+if (
+    isset($_POST["fechaPacienteF"], $_POST["horaPacienteF"], $_POST["sintomasPacienteF"], $_POST["descripcionPacienteF"], $_POST["IDCita"], $_POST["IDPaciente"])
+) {
+    // Obtener los datos del formulario
+    $fechaC = $_POST["fechaPacienteF"];
+    $horaC = $_POST["horaPacienteF"];
+    $sintomasC = $_POST["sintomasPacienteF"];
+    $descripcionC = $_POST["descripcionPacienteF"];
+    $idCita = $_POST["IDCita"];
+    $idPaciente = $_POST["IDPaciente"];
 
+    // Preparar la consulta SQL usando sentencias preparadas para prevenir inyección de SQL
+    $sql = "UPDATE citas SET 
+        fechaC = ?,
+        horaC = ?,
+        sintomasC = ?,
+        descripcionC = ?
+        WHERE IDP = ? AND IDC = ?";
 
+    $stmt = $dp->prepare($sql);
 
-$idC = isset($_POST["idCita"]) ? $_POST["idCita"] : null;
-$nombrePaciente = isset($_POST["nombrePaciente"]) ? $_POST["nombrePaciente"] : null;
-$CURPPaciente = isset($_POST["CURPPaciente"]) ? $_POST["CURPPaciente"] : null;
-$fechaNacimientoPaciente = isset($_POST["fNPaciente"]) ? $_POST["fNPaciente"] : null;
-
-$enfermedadesPaciente = isset($_POST["enfermedadesPaciente"]) ? $_POST["enfermedadesPaciente"] : null;
-$telefonoPaciente = isset($_POST["telefonoPaciente"]) ? $_POST["telefonoPaciente"] : null;
-$correoPaciente = isset($_POST["correoPaciente"]) ? $_POST["correoPaciente"] : null;
-$contrasenaPaciente = isset($_POST["contrasenaPaciente"]) ? $_POST["contrasenaPaciente"] : null;
-$alergiasPaciente = isset($_POST["alergiasPaciente"]) ? $_POST["alergiasPaciente"] : null;
-$generoPaciente = isset($_POST["generoPaciente"]) ? $_POST["generoPaciente"] : null;
-$capacidadesPaciente = isset($_POST["capacidadesPaciente"]) ? $_POST["capacidadesPaciente"] : null;
-$tipoSangrePaciente = isset($_POST["tipoSangrePaciente"]) ? $_POST["tipoSangrePaciente"] : null;
-
-echo "ID Paciente: $idP<br>";
-echo "Nombre Paciente: $nombrePaciente<br>";
-
-// Verifica si el ID pertenece a un doctor o a un secretario
-if (is_numeric($idP)) {
-    $sqlCheckPaciente = "SELECT * FROM pacientes WHERE IDP = $idP";
-    $resultCheckPaciente = $dp->query($sqlCheckPaciente);
-
-    if ($resultCheckPaciente === false) {
-        echo "Error en la consulta para pacientes: " . $dp->error;
-    } elseif ($resultCheckPaciente->num_rows > 0) {
-        // Actualiza el nombre en la tabla de doctores
-        $sqlUpdatePaciente = "UPDATE pacientes SET 
-            NombreCompletoP = '$nombrePaciente',
-            CURPP = '$CURPPaciente',
-            fechaP = '$fechaNacimientoPaciente',
-            
-            enfermedadesP = '$enfermedadesPaciente',
-            capacidadesdiferentesP = '$capacidadesPaciente',
-            telefonoP = '$telefonoPaciente',
-            CorreoP = '$correoPaciente',
-            ContrasenaP = '$contrasenaPaciente',
-            alergiasP = '$alergiasPaciente',
-            generoP = '$generoPaciente',
-            tipoSangreP = '$tipoSangrePaciente'
-        WHERE IDP = $idP";
-
-        $resultUpdatePaciente = $dp->query($sqlUpdatePaciente);
-
-        if ($resultUpdatePaciente === false) {
-            echo "Error al actualizar al paciente : " . $dp->error;
-        } else {
-            // Establece un mensaje en la variable de sesión
-            session_start();
-            $_SESSION['mensaje1'] = "*Los datos del paciente $nombrePaciente se han modificado correctamente.*";
-
-            // Redirige al índice después de la modificación
-            header("Location: ../secretarias/muestraPacientesS.php");
-            exit();
-        }
+    // Verificar si la preparación de la consulta fue exitosa
+    if ($stmt === false) {
+        // Manejar el error
+        session_start();
+        $_SESSION['mensajeCorrecto'] = "*Error en la preparación de la consulta*". $dp->error;
+        header("Location: ../secretarias/consultaCitasS.php");
+        exit();
     }
+
+    // Vincular parámetros y ejecutar la consulta
+    $stmt->bind_param("ssssii", $fechaC, $horaC, $sintomasC, $descripcionC, $idPaciente, $idCita);
+    $result = $stmt->execute();
+
+    // Verificar si la consulta se ejecutó correctamente
+    if ($result === false) {
+        // Manejar el error
+        session_start();
+        $_SESSION['mensajeInorrecto'] = "*Error al actualizar la cita*". $dp->error;
+        header("Location: ../secretarias/consultaCitasS.php");
+        exit();
+    } else {
+        // Todo está bien, redirigir con mensaje de éxito
+        session_start();
+        $_SESSION['mensajeCorrecto'] = "*La cita ha sido modificada correctamente*";
+        header("Location: ../secretarias/consultaCitasS.php");
+        exit();
+    }
+
+    // Cerrar el statement y la conexión
+    $stmt->close();
+    $dp->close();
+} else {
+    // Redirigir si no se recibieron todos los datos esperados
+    header("Location: ../secretarias/consultaCitasS.php");
+    exit();
 }
 ?>
