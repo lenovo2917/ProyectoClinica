@@ -67,21 +67,29 @@
                     </div>
                     <div class="col-12 text-center">
                     <?php
-                    // En muestraPacientesD.php
                     session_start();
-                    if(isset($_SESSION['mensaje'])) {
-                      $mensaje = $_SESSION['mensaje'];
-                      echo "<div class='alert alert-danger'>$mensaje</div>";
-                      // Limpiar el mensaje después de mostrarlo
-                        unset($_SESSION['mensaje']);
-                   }
-
-                   if(isset($_SESSION['mensaje1'])) {
-                    $mensaje = $_SESSION['mensaje1'];
-                     echo "<div class='alert alert-success'>$mensaje</div>";
-                    // Limpiar el mensaje después de mostrarlo
-                      unset($_SESSION['mensaje1']);
-                 }
+                    if(isset($_SESSION['mensajeModificacion'])) {
+                        $mensaje = $_SESSION['mensajeModificacion'];
+                        echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">';
+                        echo '<i class="fa-solid fa-circle-exclamation" style="color: #0d6efd;"></i> '.$mensaje;
+                        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        echo '</div>';
+                        unset($_SESSION['mensajeModificacion']);
+                    }
+                    if(isset($_SESSION['mensajeEliminacion'])) {
+                        $mensaje = $_SESSION['mensajeEliminacion'];
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje; 
+                        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        echo '</div>';
+                        unset($_SESSION['mensajeEliminacion']);
+                    }
+                    if(isset($_SESSION['mensajeError'])) {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje;
+                        echo '<i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #7d0003;"></i>';
+                        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        echo '</div>';
+                        unset($_SESSION['mensajeError']);
+                    }
                     ?>
                     </div>
                     
@@ -163,7 +171,7 @@
     </div>
     
          <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-         <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+         <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/creaCitas.js"></script>
     <script src="../main.js"></script>
 </body>
