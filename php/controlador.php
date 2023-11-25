@@ -15,7 +15,7 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
     $result1 = $sql1->get_result();
 
     // Consulta para secretarios
-    $sql2 = $dp->prepare("SELECT * FROM secretarios WHERE NombreCompletoS=? AND ContrasenaS=? AND ESTATUS = 'Activo'");
+    $sql2 = $dp->prepare("SELECT * FROM secretarios WHERE NombreCompletoS=? AND ContrasenaS=? AND estatusS = 'Activo'");
     $sql2->bind_param("ss", $nombre, $password);
     $sql2->execute();
     $result2 = $sql2->get_result();
@@ -54,6 +54,7 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
         $_SESSION["Rol"] = 'doctor';
         $_SESSION["ID"] = $row3['IDD'];
         $_SESSION["EspecialidadD"] = $row3['EspecialidadD']; // Almacenar la especialidad en la sesión
+        $_SESSION["CedulaD"] = $row3['CedulaD']; // Almacenar la especialidad en la sesión
         header("Location: doctores/IndexDoctores.php"); // Redirigir al doctor
         exit();
     }

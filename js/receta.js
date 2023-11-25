@@ -1,3 +1,32 @@
+// Función para mostrar alertas dentro del modal
+function showAlertInModal(message, alertType) {
+    // Definir el contenedor de alertas dentro del modal
+    var alertContainer = $('#alertContainerInModal');
+
+    // Crear el elemento de alerta
+    var alertElement = $('<div class="alert alert-dismissible fade show" role="alert"></div>');
+    alertElement.addClass('alert-' + alertType);
+    alertElement.text(message);
+
+    // Agregar el botón de cierre
+    var closeButton = $('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+    alertElement.append(closeButton);
+
+    // Agregar la alerta al contenedor dentro del modal
+    alertContainer.append(alertElement);
+
+    // Desvanecer automáticamente después de 3 segundos
+    setTimeout(function () {
+        alertElement.alert('close');
+    }, 3000);
+}
+
+// Evento que se ejecuta cuando se cierra el modal
+$('#exampleModalToggle').on('hidden.bs.modal', function () {
+    // Recarga la página al cerrar el modal
+    location.reload();
+});
+
 $(document).ready(function () {
     // Selecciona el formulario específico por su ID
     var form = document.getElementById('recetaForm');
@@ -67,15 +96,16 @@ $(document).ready(function () {
                 type: 'post',
                 data: $('#recetaForm').serialize(), // Envía todo el formulario, incluyendo el nuevo campo oculto
                 success: function (response) {
+                    console.log(response); // Registra la respuesta para ver su contenido
+
                     var data = JSON.parse(response);
 
                     if (data.success) {
-                        // Oculta el botón "Agregar al expediente" y muestra los botones "Descargar" e "Imprimir"
-                        $('#agregarExpediente').hide();
-                        $('#descargar, #imprimir').show();
+                        showAlertInModal('Receta creada exitosamente', 'success');
+                    $('#agregarExpediente').hide();
+                    $('#descargar, #imprimir').show();
                     } else {
-                        // Muestra un mensaje de alerta basado en el mensaje del servidor
-                        alert(data.message);
+                        showAlertInModal('Error: ' + data.message, 'danger');
                     }
                 },
                 error: function () {
