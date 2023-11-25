@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener("click", function(event) {
         if (event.target.classList.contains("btn-aceptar")) {
@@ -150,4 +151,9 @@ if (alertType) {
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     });
+    // Evento que se ejecuta cuando se cierra el modal de trasladar
+$('#miModal').on('hidden.bs.modal', function () {
+    // Recarga la página al cerrar el modal de trasladar
+    location.reload();
+});
 });
