@@ -138,26 +138,26 @@ session_start();
                                             </div>
                                             <label for="" class="col-1 col-form-label">Fecha:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="date" id="fechaPacienteF" name="fechaPacienteF"
+                                                <input type="date" required id="fechaPacienteF" name="fechaPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Hora:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="time" id="horaPacienteF" name="horaPacienteF"
+                                                <input type="time" required  id="horaPacienteF" name="horaPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label for="" class=" col-2 col-form-label">Sintomas:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
+                                                <input type="text" required id="sintomasPacienteF" name="sintomasPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label class="col-2 mt-1 col-form-label">Descripcion:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
+                                                <input type="text" required id="descripcionPacienteF" name="descripcionPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                         </div>

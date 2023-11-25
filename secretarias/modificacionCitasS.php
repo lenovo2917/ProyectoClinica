@@ -86,13 +86,15 @@ session_start();
 
                     <div class="col-12 px-5">
                         <div class="row ">
-                            <form action="../php/mo" class="form" method="post">
+                            <form action="../php/procesaModificaCS.php" class="form" method="post">
                                 <?php
                                     $nombrePaciente = $_GET['D1'];
                                     $fechaCita = $_GET['D2'];
                                     $horaCita = $_GET['D3'];
                                     $sintomasCita = $_GET['D4'];
                                     $descripcionCita = $_GET['D5'];
+                                    $IDP = $_GET['D6'];
+                                    $IDC = $_GET['D7'];
                                 ?>
                                 <div class="col-12">
                                     <div class="row">
@@ -114,11 +116,11 @@ session_start();
                                                 <input type="date" id="fechaPacienteF" name="fechaPacienteF"
                                                     class="form-control-plaintext text-center" value="<?php echo"$fechaCita"?>">
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-3">
                                             </div>
                                             <label for="" class="col-2 col-form-label">Hora:</label>
-                                            <div class="border-bottom border-secondary col-3">
-                                                <input type="time" readonly id="horaPacienteF" name="horaPacienteF"
+                                            <div class="border-bottom border-secondary col-2">
+                                                <input type="time" id="horaPacienteF" name="horaPacienteF"
                                                     class="form-control-plaintext text-center" value="<?php echo"$horaCita"?>">
                                             </div>
                                         </div>
@@ -138,10 +140,17 @@ session_start();
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6 text-start my-4">
+                                            <a href="consultaCitasS.php"><input type="button" value="Regresar"></a>
+                                        </div>
+                                        <div class="col-6 text-end my-4">
+                                            <input type="submit" value="Modificar">
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
-                            <div class="col-12 text-center my-4">
-                                <a href="consultaCitasS.php"><input type="button" value="Regresar"></a>
-                            </div>
                         </div>
                     </div>
                 </div>

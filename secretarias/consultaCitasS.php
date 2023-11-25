@@ -14,7 +14,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@5 00&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
-    
+
     <!--ESTILOS CSS-->
     <link rel="stylesheet" href="../fontawesome/css/fontawesome.css" rel="stylesheet">
     <link rel="stylesheet" href="../fontawesome/css/all.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="../css/Blog.css">
 </head>
 
-<body   >
+<body>
     <!--Header-->
     <div class="container-fluid-lg mb-4">
         <div class="row">
@@ -73,7 +73,7 @@ session_start();
                                 </div>
                             </div>
                             <div class="col-4 text-center">
-                                <h3>Consultar citas</h3 >
+                                <h3>Consultar citas</h3>
                             </div>
                             <div class="col-4 text-end">
                                 <img src="../img/LOGO.png" style="width: 180px; height: 170px;"
@@ -82,19 +82,36 @@ session_start();
                         </div>
                     </div>
                     <div class="col-12 px-5">
+                        <div class="my-3">
+                            <a href="/proyectoClinica/Blog_Medico.php"> 
+                                <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
+                            </a>
+                        </div>
                         <form class="form" method="post">
                             <div class="row ">
                                 <div class="col-12 text-center">
                                     <?php
-                                        if(isset($_SESSION['mensajeIncorrecto'])) {
-                                            $mensaje = $_SESSION['mensajeIncorrecto'];
-                                            echo "<div class='alert alert-danger'>$mensaje</div>";
-                                            unset($_SESSION['mensajeIncorrecto']);
+                                        if(isset($_SESSION['mensajeModificacion'])) {
+                                            $mensaje = $_SESSION['mensajeModificacion'];
+                                            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">';
+                                            echo '<i class="fa-solid fa-circle-exclamation" style="color: #0d6efd;"></i> '.$mensaje;
+                                            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                                            echo '</div>';
+                                            unset($_SESSION['mensajeModificacion']);
                                         }
-                                        if(isset($_SESSION['mensajeCorrecto'])) {
-                                            $mensaje = $_SESSION['mensajeCorrecto'];
-                                            echo "<div class='alert alert-success'>$mensaje</div>";
-                                            unset($_SESSION['mensajeCorrecto']);
+                                        if(isset($_SESSION['mensajeEliminacion'])) {
+                                            $mensaje = $_SESSION['mensajeEliminacion'];
+                                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje; 
+                                            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                                            echo '</div>';
+                                            unset($_SESSION['mensajeEliminacion']);
+                                        }
+                                        if(isset($_SESSION['mensajeError'])) {
+                                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje;
+                                            echo '<i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #7d0003;"></i>';
+                                            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                                            echo '</div>';
+                                            unset($_SESSION['mensajeError']);
                                         }
                                     ?>
                                 </div>
@@ -102,7 +119,8 @@ session_start();
                                     <div class="row mb-1">
                                         <label for="nombre" class="col-2 col-form-label">Buscar por nombre:</label>
                                         <div class="col-5 text-start">
-                                            <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" value="">
+                                            <input type="text" class="form-control" id="nombrePaciente"
+                                                name="nombrePaciente" value="">
                                         </div>
                                         <div class="col-1"></div>
                                         <label for="mes" class="text-end col-2 col-form-label">Buscar por mes:</label>
@@ -124,18 +142,11 @@ session_start();
                                             </select>
                                         </div>
                                     </div>
-                                    
                                 </div>
-                                <div class="col-12">
-                                    <div class="row my-2">
-                                        <div class="col-12 my-2">
-                                            <h5 class="">Pacientes:</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class=" row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
-                                        id="listaPacientes" style="background-color: white ">
+                                
+                                <div class="col-12 mt-4">
+                                    <div class=" row mb-4 rounded-1" id="listaPacientes"
+                                        style="background-color: white ">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
@@ -155,7 +166,6 @@ session_start();
                         </form>
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </div>
@@ -171,7 +181,7 @@ session_start();
     </div>
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../js/consultarCitasS.js"></script>
     <script src="../js/main.js"></script>
