@@ -101,7 +101,8 @@ session_start();
                                         }
                                         if(isset($_SESSION['mensajeEliminacion'])) {
                                             $mensaje = $_SESSION['mensajeEliminacion'];
-                                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje; 
+                                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'; 
+                                            echo '<i class="fa-solid fa-eraser" style="color: #660909;"></i>'.$mensaje;
                                             echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
                                             echo '</div>';
                                             unset($_SESSION['mensajeEliminacion']);

@@ -89,6 +89,25 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 px-1 text-center">
+                        <?php
+                            if(isset($_SESSION['mensajeCreacion'])) {
+                                $mensaje = $_SESSION['mensajeCreacion'];
+                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                                echo '<i class="fa-solid fa-circle-check" style="color: #198754;"></i>'.$mensaje;
+                                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                                echo '</div>';
+                                unset($_SESSION['mensajeCreacion']);
+                            }
+                            if(isset($_SESSION['mensajeError'])) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje;
+                                echo '<i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #7d0003;"></i>';
+                                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                                echo '</div>';
+                                unset($_SESSION['mensajeError']);
+                            }
+                        ?>
+                    </div>
 
                     <div class="col-12 px-5">
                         <div class="row ">
@@ -101,13 +120,11 @@ session_start();
                                     <div class="col-2 text-end mt-2">
                                         <button class="" id="buscarP">Buscar</button>
                                     </div>
-                                    <div class="col-12 text-center" id="mensajeError">
-
+                                    <div class="col-12 text-center mt-3" id="mensajeError">
                                     </div>
-                                    <div class="col-12 text-center" id="mensajeResultado"></div>
                                 </div>
                             </div>
-                            <form id="citaForm" action="../php/crearCitaS.php" class="form" method="post">
+                            <form id="citaForm" action="../php/procesaCreacionCS.php" class="form" method="post">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 mt-4">
@@ -139,7 +156,7 @@ session_start();
                                             <label for="" class="col-1 col-form-label">Fecha:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
                                                 <input type="date" required id="fechaPacienteF" name="fechaPacienteF"
-                                                    id="fechaCita" class="form-control-plaintext">
+                                                    class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Hora:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
@@ -185,9 +202,8 @@ session_start();
     </div>
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/buscarPaciente.js"></script>
-    <script src="../js/FechaCalendario.js"></script>
     <script src="../js/creaCitasS.js"></script>
 
 </body>

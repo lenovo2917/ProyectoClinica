@@ -39,13 +39,13 @@ if ($resultObtenerIDP->num_rows === 1) {
     // Verificar si la inserción fue exitosa
     if ($sql === false) {
         session_start();
-        $_SESSION['mensajeError'] = "*Error al actualizar la cita*". $dp->error;
-        header("Location: ../secretarias/consultaCitasS.php");
+        $_SESSION['mensajeError'] = "*Error al crear la cita*". $dp->error;
+        header("Location: ../secretarias/creacionCitasS.php");
         exit();
     } else {
         session_start();
-        $_SESSION['mensajeModificacion'] = "*La cita ha sido modificada correctamente*";
-        header("Location: ../secretarias/consultaCitasS.php");
+        $_SESSION['mensajeCreacion'] = "*La cita ha sido creada correctamente*";
+        header("Location: ../secretarias/creacionCitasS.php");
         exit();
     }
     // Cerrar la consulta de inserción
