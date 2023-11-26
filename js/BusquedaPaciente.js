@@ -1,65 +1,14 @@
-function mostrarReceta(receta) {
-    var areaTextoReceta = document.getElementById('areaTextoReceta');
+function manejarRespuestaBusqueda(respuesta) {
+    var pacienteNoEncontradoModal = new bootstrap.Modal(document.getElementById('pacienteNoEncontradoModal'));
 
-    if (receta) {
-        // Construir la tabla con los datos de la receta
-        var tablaReceta = '<table class="table table-bordered" style="max-width: 100%;">';
-        tablaReceta += '<tr><th>ID Expediente</th><th>ID Paciente</th><th>Nombre Paciente</th><th>Fecha Receta</th><th>Medicamento</th><th>Instrucciones</th><th>ID Doctor</th><th>Nombre Doctor</th><th>Especialidad Doctor</th><th>Fecha Cita</th><th>Diagnóstico</th></tr>';
-        tablaReceta += '<tr>';
-        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.idE + '</td>';
-        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.IDP + '</td>';
-        tablaReceta += '<td>' + receta.NombreCompletoP + '</td>';
-        tablaReceta += '<td>' + receta.fechaR + '</td>';
-        tablaReceta += '<td>' + receta.medicamentoR + '</td>';
-        tablaReceta += '<td>' + receta.intruccionUsoR + '</td>';
-        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.IDDoctor + '</td>';
-        tablaReceta += '<td>' + receta.NombreDoctor + '</td>';
-        tablaReceta += '<td>' + receta.EspecialidadDoctor + '</td>';
-        tablaReceta += '<td>' + receta.fechaCita + '</td>';
-        tablaReceta += '<td>' + receta.diagnosticoC + '</td>';
-        tablaReceta += '</tr>';
-        tablaReceta += '</table>';
-
-        // Establecer el contenido de la tabla en el área correspondiente
-        // Añadir la clase table-responsive
-        areaTextoReceta.innerHTML = '<div class="table-responsive">' + tablaReceta + '</div>';
-
+    if (respuesta.success) {
+        // Paciente encontrado, actualizar la información del paciente
+        actualizarDatosPaciente(respuesta.data);
     } else {
-        areaTextoReceta.innerHTML = 'No se encontraron datos de receta.';
+        // No se encontró al paciente, mostrar el modal de "Paciente no encontrado"
+        pacienteNoEncontradoModal.show();
     }
 }
-
-// Función para visualizar la receta médica
-function verNota(idReceta) {
-    var xhrReceta = new XMLHttpRequest();
-    xhrReceta.open('POST', '../doctores/herramientas/verReceta.php', true);
-    xhrReceta.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-    xhrReceta.onreadystatechange = function () {
-        if (xhrReceta.readyState == 4) {
-            if (xhrReceta.status == 200) {
-                try {
-                    console.log(xhrReceta.responseText);
-                    var respuestaReceta = JSON.parse(xhrReceta.responseText);
-
-                    if (respuestaReceta.error) {
-                        console.error('Error en la respuesta del servidor (Ver Receta):', respuestaReceta.error);
-                    } else {
-                        // Actualizar la sección de Receta Medica con la información de la receta
-                        mostrarReceta(respuestaReceta.data);
-                    }
-                } catch (error) {
-                    console.error('Error al parsear la respuesta JSON (Ver Receta):', error);
-                }
-            } else {
-                console.error('Error en la solicitud. Código de estado (Ver Receta):', xhrReceta.status);
-            }
-        }
-    };
-
-    xhrReceta.send('idReceta=' + encodeURIComponent(idReceta));
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     var form = document.getElementById('searchForm');
 
@@ -82,12 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             console.log(xhr.responseText);
                             var respuesta = JSON.parse(xhr.responseText);
 
-                            if (respuesta.error) {
-                                console.error('Error en la respuesta del servidor:', respuesta.error);
-                            } else {
-                                // Actualizar la información del paciente
-                                actualizarDatosPaciente(respuesta.data);
-                            }
+                            // Manejar la respuesta de la búsqueda de paciente
+                            manejarRespuestaBusqueda(respuesta);
                         } catch (error) {
                             console.error('Error al parsear la respuesta JSON:', error);
                         }
@@ -106,11 +51,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
 function actualizarDatosPaciente(data) {
     var nombreAutElement = document.getElementById('nombreAut');
     var edadAutElement = document.getElementById('edadAut');
     var tipoSangreAutElement = document.getElementById('tipoSangreAut');
     var alergiasAutElement = document.getElementById('alergiasAut');
+    var cuerpoTabla = document.getElementById('cuerpoTablaInformacionAdicional');
+    var areaTextoReceta = document.getElementById('areaTextoReceta');
+
+    // Limpiar el contenido de la tabla de recetas y el área de texto de receta
+    cuerpoTabla.innerHTML = '';
+    areaTextoReceta.innerHTML = '';
 
     // Deshabilitar elementos si el paciente está inactivo
     if (data.estado === 'Inactivo') {
@@ -125,7 +77,6 @@ function actualizarDatosPaciente(data) {
         tipoSangreAutElement.removeAttribute('readonly');
         alergiasAutElement.removeAttribute('readonly');
     }
-
 
     // Actualizar valores
     nombreAutElement.innerHTML = data.nombre;
@@ -150,7 +101,6 @@ function calcularEdad(fechaNacimiento) {
     return edad;
 }
 
-// Función para actualizar la tabla de recetas en la sección de información adicional
 function actualizarTablaRecetas(nombrePaciente, estadoPaciente) {
     var xhrRecetas = new XMLHttpRequest();
     xhrRecetas.open('POST', '../doctores/herramientas/busquedaRecetas.php', true);
@@ -181,7 +131,6 @@ function actualizarTablaRecetas(nombrePaciente, estadoPaciente) {
     xhrRecetas.send('nombrePaciente=' + encodeURIComponent(nombrePaciente));
 }
 
-// Función para actualizar la tabla de recetas en la sección de información adicional
 function actualizarTablaInformacionAdicional(data, estadoPaciente) {
     var cuerpoTabla = document.getElementById('cuerpoTablaInformacionAdicional');
 
@@ -200,4 +149,65 @@ function actualizarTablaInformacionAdicional(data, estadoPaciente) {
 
         cuerpoTabla.appendChild(fila);
     });
+}
+
+function verNota(idReceta) {
+    var xhrReceta = new XMLHttpRequest();
+    xhrReceta.open('POST', '../doctores/herramientas/verReceta.php', true);
+    xhrReceta.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xhrReceta.onreadystatechange = function () {
+        if (xhrReceta.readyState == 4) {
+            if (xhrReceta.status == 200) {
+                try {
+                    console.log(xhrReceta.responseText);
+                    var respuestaReceta = JSON.parse(xhrReceta.responseText);
+
+                    if (respuestaReceta.error) {
+                        console.error('Error en la respuesta del servidor (Ver Receta):', respuestaReceta.error);
+                    } else {
+                        // Actualizar la sección de Receta Medica con la información de la receta
+                        mostrarReceta(respuestaReceta.data);
+                    }
+                } catch (error) {
+                    console.error('Error al parsear la respuesta JSON (Ver Receta):', error);
+                }
+            } else {
+                console.error('Error en la solicitud. Código de estado (Ver Receta):', xhrReceta.status);
+            }
+        }
+    };
+
+    xhrReceta.send('idReceta=' + encodeURIComponent(idReceta));
+}
+
+function mostrarReceta(receta) {
+    var areaTextoReceta = document.getElementById('areaTextoReceta');
+
+    if (receta) {
+        // Construir la tabla con los datos de la receta
+        var tablaReceta = '<table class="table table-bordered" style="max-width: 100%;">';
+        tablaReceta += '<tr><th>ID Expediente</th><th>ID Paciente</th><th>Nombre Paciente</th><th>Fecha Receta</th><th>Medicamento</th><th>Instrucciones</th><th>ID Doctor</th><th>Nombre Doctor</th><th>Especialidad Doctor</th><th>Fecha Cita</th><th>Diagnóstico</th></tr>';
+        tablaReceta += '<tr>';
+        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.idE + '</td>';
+        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.IDP + '</td>';
+        tablaReceta += '<td>' + receta.NombreCompletoP + '</td>';
+        tablaReceta += '<td>' + receta.fechaR + '</td>';
+        tablaReceta += '<td>' + receta.medicamentoR + '</td>';
+        tablaReceta += '<td>' + receta.intruccionUsoR + '</td>';
+        tablaReceta += '<td class="d-none d-sm-table-cell">' + receta.IDDoctor + '</td>';
+        tablaReceta += '<td>' + receta.NombreDoctor + '</td>';
+        tablaReceta += '<td>' + receta.EspecialidadDoctor + '</td>';
+        tablaReceta += '<td>' + receta.fechaCita + '</td>';
+        tablaReceta += '<td>' + receta.diagnosticoC + '</td>';
+        tablaReceta += '</tr>';
+        tablaReceta += '</table>';
+
+        // Establecer el contenido de la tabla en el área correspondiente
+        // Añadir la clase table-responsive
+        areaTextoReceta.innerHTML = '<div class="table-responsive">' + tablaReceta + '</div>';
+
+    } else {
+        areaTextoReceta.innerHTML = 'No se encontraron datos de receta.';
+    }
 }

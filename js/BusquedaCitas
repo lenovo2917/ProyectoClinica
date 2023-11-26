@@ -3,14 +3,12 @@ $(document).ready(function () {
     $('#nombre, #apellidoP, #apellidoM').on('input', function () {
         // Captura los datos del paciente
         var nombre = $('#nombre').val();
-        var apellidoP = $('#apellidoP').val();
-        var apellidoM = $('#apellidoM').val();
 
         // Realiza la solicitud AJAX para obtener las citas del paciente
         $.ajax({
             url: '../doctores/herramientas/obtenerCitas.php',
             type: 'post',
-            data: { nombre: nombre, apellidoP: apellidoP, apellidoM: apellidoM },
+            data: { nombre: nombre },
             success: function (response) {
                 // Llena dinámicamente el menú desplegable con las citas obtenidas
                 $('#citasDropdown').html(response);

@@ -15,7 +15,6 @@ tabLinks.forEach(link => {
     });
 });
 });
-
 $(document).ready(function () {
     $("#crearCitaForm").submit(function (event) {
         if (this.checkValidity() === false) {
@@ -32,8 +31,24 @@ $(document).ready(function () {
                 data: $("#crearCitaForm").serialize(),
                 success: function (response) {
                     console.log(response);
-                    $("#crearCitaForm")[0].reset(); // Restablecer el formulario
-                    $("#crearCitaForm").removeClass('was-validated'); // Quitar la clase de validación de Bootstrap
+
+                    // Resetear el formulario y quitar la clase de validación de Bootstrap
+                    $("#crearCitaForm")[0].reset();
+                    $("#crearCitaForm").removeClass('was-validated');
+
+                    // Mostrar la alerta según la respuesta del servidor
+                    if (response.includes("exitosamente")) {
+                        $(".alerta").html(`
+                        <div class="alert alert-primary alert-success fade show" role="alert">
+                            <strong>¡Cita creada con éxito!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    `);
+                    } else {
+                        $(".alerta").html('<div class="alert alert-danger alert-dismissible fade show" role="alert">' 
+                        + response +
+                        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    }
                 },
                 error: function (error) {
                     console.error(error);

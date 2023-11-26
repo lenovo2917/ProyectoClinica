@@ -142,9 +142,12 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </div>
                                 <div class="modal-body">
                                     <!-- Información del doctor -->
-                                    <p>Nombre del doctor: <span id="doctorNombre">Nombre del doctor</span></p>
-                                    <p>Cedula profesional: <span id="cedulaProfesional">Cedula del doctor</span></p>
-                                    <p>Dirección: <span id="direccion">Dirección del doctor</span></p>
+                                    <p>Nombre del doctor: <span id="doctorNombre"> <?php echo $_SESSION["NombreCompleto"];?></span></p>
+                                    <p>Cedula profesional: <span id="cedulaProfesional"><?php echo $_SESSION["CedulaD"];?></span></p>
+                                    <p>Dirección: <span id="direccion">Avenida de los Jacarandas #567 
+                                       Colonia del Sol 
+                                       Cuernavaca, Morelos. 
+                                       Código Postal: 62100</span></p>
                                     <hr class="my-4">
                                     <!-- Contenido de la receta en forma de tabla -->
                                     <table class="table" id="datosReceta">
@@ -154,7 +157,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                     <div class="firma">
                                         <hr class="my-4">
                                         <p>Firma del doctor: __________________________</p>
-                                        <p>Nombre del doctor: <span id="nombreFirma">Nombre del doctor</span></p>
+                                        <p>Nombre del doctor: <span id="nombreFirma"> <?php echo $_SESSION["NombreCompleto"];?></span></p>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -165,7 +168,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                                             class="fas fa-download"></i></button>
                                     <button id="imprimir" class="btn btn-secondary" style="display: none;"><i
                                             class="fas fa-print"></i></button>
+                                            
                                 </div>
+
+                                <!-- modal footer para alertas -->
+                                <div class="modal-footer">
+                                    <div id="alertContainerInModal"></div>
+                                </div>
+                                
                                 <div class="modal-footer">
                                     <!-- Texto y línea adicional -->
                                     <p class="indicaciones">Seguir indicaciones y tomar tratamiento completo</p>
@@ -244,6 +254,24 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </a>
                                 <h2>Expedientes de Paciente</h2>
                             </div>
+
+                            <div class="modal fade" id="pacienteNoEncontradoModal" tabindex="-1" role="dialog" aria-labelledby="pacienteNoEncontradoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pacienteNoEncontradoModalLabel">Paciente no encontrado</h5>
+            </div>
+            <div class="modal-body">
+                <p>No se encontró un paciente con el nombre proporcionado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
                             <div class="row">
                                 <!-- Fila 1: Barra de búsqueda -->
@@ -328,6 +356,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                         </div>
 
 
+
+
+
             
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
                             <div class="navbar">
@@ -336,6 +367,17 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </a>
                                 <h2>Crear Cita Medica</h2>
                             </div>
+                            <br>
+                            <div class="alerta">          
+                                <div class="col-12">
+                                    <div class="row my-2">
+                                        <div class="col-12 my-2">
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <br>
 
 
 
@@ -485,14 +527,12 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../js/BusquedaPaciente.js"></script>
-    <script src="../js/receta.js"></script>
-    <script src="../js/Crear_Receta.js"></script>
-
-    <script src="../js/BusquedaCitas"></script>
+    <script src="../js/BusquedaPaciente.js"></script> <!--ESTE JS SIRVE PARA BUSCAR AL PACIENTE EN EL EXPEDIENTE EN EL APARTADP DE INFORMACION-->
+    <script src="../js/receta.js"></script>  <!-- ESTE JS SIRVE PARA CREAR LA RECETA Y AGREGAR AL EXPEDIENTE -->
+    <script src="../js/Crear_Receta.js"></script> <!-- ESTE JS SIRVE PARA CREAR CITAS EN EL DOCTOR -->
+    <script src="../js/BusquedaCitas"></script> <!--ESTE JS SIRVE PARA BUSCAR LAS CITAS DEL PACIENTE PARA CREAR LA RECETA EN EL APARTADO DE CITAS-->
     <script src="../js/BusquedaEspecialidad.js"></script>
-    <script src="../js/FechaCalendario.js"></script>
-    <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
+    <script src="../js/FechaCalendario.js"></script>  <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
 <script src="../js/ValidacionesCampos.js"></script>
 
 

@@ -184,73 +184,71 @@ if(empty($_SESSION["NombreCompleto"])) {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- Aquí se cargarán las citas -->         
                                     <?php
-                                    include '../php/acceso.php';
-                                    
-                                    $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
-                                    LEFT JOIN pacientes p ON c.IDP = p.IDP
-                                    WHERE c.IDD = '".$_SESSION["ID"]."'";
-                                    
-                                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                        $nombrePaciente = $_POST['nombrePaciente'];
-                                        $mesSeleccionado = $_POST['mes'];
-                                    
-                                        if (!empty($nombrePaciente)) {
-                                            $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
-                                        }
-                                    
-                                        if (isset($_POST['mes'])) {
-                                            $mesSeleccionado = $_POST['mes'];
-                                    
-                                            // Mapea el nombre del mes al número de mes
-                                            $meses = [
-                                                'enero' => '01',
-                                                'febrero' => '02',
-                                                'marzo' => '03',
-                                                'abril' => '04',
-                                                'mayo' => '05',
-                                                'junio' => '06',
-                                                'julio' => '07',
-                                                'agosto' => '08',
-                                                'septiempre' => '09',
-                                                'octubre' => '10',
-                                                'noviembre' => '11',
-                                                'diciembre' => '12'
-                                            ];
-                                    
-                                            if (isset($meses[$mesSeleccionado])) {
-                                                $mesNumero = $meses[$mesSeleccionado];
-                                                $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
-                                            } else {
-                                                // Handle the case where $mesSeleccionado is not a valid month
-                                            }
-                                        }
-                                    }
-                                    
-                                    // Ejecutar la consulta
-                                    $result = mysqli_query($dp, $query);
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row['IDC'] . "</td>";
-                                        echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
-                                        echo "<td>" . $row['fechaC'] . "</td>";
-                                        echo "<td>" . $row['ESTATUS'] . "</td>";
-                                        echo '<td class="text-center">';
-                                        
-                                        if ($row['ESTATUS'] == 'Cancelada' || $row['ESTATUS'] == 'finalizada') {
-                                            // Si la cita está cancelada o finalizada, deshabilitar todos los botones
-                                            echo '<button type="button" class="btn btn-trasladar"  " disabled>Aceptar</button>';
-                                            echo '<button type="button" class="btn btn-trasladar" disabled>Rechazar</button>';
-                                            echo '<button type="button" class="btn btn-trasladar"  disabled>Trasladar</button>';
-                                        } else {
-                                            // Si la cita no está cancelada ni finalizada, habilitar todos los botones
-                                            echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-                                            echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
-                                            echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
-                                        }
-                                    }
-                                    ?>
+include '../php/acceso.php';
 
+$query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
+LEFT JOIN pacientes p ON c.IDP = p.IDP
+WHERE c.IDD = '" . $_SESSION["ID"] . "'";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombrePaciente = $_POST['nombrePaciente'];
+    $mesSeleccionado = $_POST['mes'];
+
+    if (!empty($nombrePaciente)) {
+        $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
+    }
+
+    if (isset($_POST['mes'])) {
+        $mesSeleccionado = $_POST['mes'];
+
+        $meses = [
+            'enero' => '01',
+            'febrero' => '02',
+            'marzo' => '03',
+            'abril' => '04',
+            'mayo' => '05',
+            'junio' => '06',
+            'julio' => '07',
+            'agosto' => '08',
+            'septiempre' => '09',
+            'octubre' => '10',
+            'noviembre' => '11',
+            'diciembre' => '12'
+        ];
+
+        if (isset($meses[$mesSeleccionado])) {
+            $mesNumero = $meses[$mesSeleccionado];
+            $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
+        } else {
+            // Handle the case where $mesSeleccionado is not a valid month
+        }
+    }
+}
+
+// Agrega la condición para excluir citas con estado 'finalizada' o 'cancelada'
+$query .= " AND c.ESTATUS NOT IN ('finalizada', 'Cancelada')";
+
+// Ejecutar la consulta
+$result = mysqli_query($dp, $query);
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['IDC'] . "</td>";
+    echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
+    echo "<td>" . $row['fechaC'] . "</td>";
+    echo "<td>" . $row['ESTATUS'] . "</td>";
+    echo '<td class="text-center">';
+    
+    // Habilitar todos los botones ya que las citas finalizadas o canceladas no se mostrarán
+    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
+    echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
+    echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
+    echo "</tr>";
+}
+?>
+
+                             
 
                                 </tbody>
                             </table>
