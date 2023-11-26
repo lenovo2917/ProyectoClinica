@@ -84,7 +84,7 @@ session_start();
                     <div class="col-12 px-5">
                         <div class="my-3">
                             <a href="/proyectoClinica/Blog_Medico.php"> 
-                                <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
+                                <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Ir a inicio</button>
                             </a>
                         </div>
                         <form class="form" method="post">
@@ -147,10 +147,10 @@ session_start();
                                 
                                 <div class="col-12 mt-4">
                                     <div class=" row mb-4 rounded-1" id="listaPacientes"
-                                        style="background-color: white ">
+                                        style="background-color: white; height: 500px; overflow-y: auto;">
                                         <table class="table table-striped">
                                             <thead>
-                                                <tr>
+                                                <tr class="text-center">
                                                     <th class="col-4">Paciente</th>
                                                     <th class="col-1">Fecha</th>
                                                     <th class="col-1">Hora</th>

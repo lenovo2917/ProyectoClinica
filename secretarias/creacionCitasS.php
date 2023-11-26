@@ -60,6 +60,11 @@ session_start();
         <div class="row justify-content-center">
             <div class="col-10">
                 <div class="row mt-3 border border-1  border-opacity-25 rounded-2 " style="background-color: #EEEEEE;">
+                    <div class="col-12 px-5 mt-3">
+                        <a href="/proyectoClinica/Blog_Medico.php"> 
+                            <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Ir a inicio</button>
+                        </a>
+                    </div>
                     <div class="col-12">
                         <div class="row text-start align-items-center">
                             <div class="col-4 ps-5 text-start">
@@ -89,7 +94,9 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-12 px-1 text-center">
+                        
                         <?php
                             if(isset($_SESSION['mensajeCreacion'])) {
                                 $mensaje = $_SESSION['mensajeCreacion'];
@@ -180,8 +187,8 @@ session_start();
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 text-end">
-                                    <input type="submit" name="crearCitaS" value="Crear cita">
+                                <div class="col-12 text-end mb-3">
+                                    <input type="submit" value="Crear cita">
                                 </div>
                             </form>
                         </div>
