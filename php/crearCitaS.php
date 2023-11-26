@@ -37,12 +37,17 @@ if ($resultObtenerIDP->num_rows === 1) {
     $sql->bind_param("sssssss", $fecha, $hora, $sintomas, $descripcion, $idPaciente, $IDSecretaria, $IDDoctor);
     $sql->execute();
     // Verificar si la inserción fue exitosa
-    if ($sql->affected_rows > 0) {
-        echo "Cita creada exitosamente.";
+    if ($sql === false) {
+        session_start();
+        $_SESSION['mensajeError'] = "*Error al actualizar la cita*". $dp->error;
+        header("Location: ../secretarias/consultaCitasS.php");
+        exit();
     } else {
-        echo "Error al crear la cita: " . $dp->error;
+        session_start();
+        $_SESSION['mensajeModificacion'] = "*La cita ha sido modificada correctamente*";
+        header("Location: ../secretarias/consultaCitasS.php");
+        exit();
     }
-
     // Cerrar la consulta de inserción
     $sql->close();
 } else {

@@ -35,7 +35,7 @@ if (
 
     if ($result === false) {
         session_start();
-        $_SESSION['mensajeInorrecto'] = "*Error al actualizar la cita*". $dp->error;
+        $_SESSION['mensajeError'] = "*Error al actualizar la cita*". $dp->error;
         header("Location: ../secretarias/consultaCitasS.php");
         exit();
     } else {

@@ -101,7 +101,7 @@ session_start();
                                 $IDP = $_GET['D6'];
                                 $IDC = $_GET['D7'];
                             ?>
-                            <form action="../php/eliminarCitasS.php" class="form" method="post">
+                            <form action="../php/procesaEliminarCS.php" class="form" method="post">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 mt-4">

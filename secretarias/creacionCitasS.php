@@ -107,7 +107,7 @@ session_start();
                                     <div class="col-12 text-center" id="mensajeResultado"></div>
                                 </div>
                             </div>
-                            <form action="../php/crearCitaS.php" class="form" method="post">
+                            <form id="citaForm" action="../php/crearCitaS.php" class="form" method="post">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 mt-4">
@@ -139,7 +139,7 @@ session_start();
                                             <label for="" class="col-1 col-form-label">Fecha:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
                                                 <input type="date" required id="fechaPacienteF" name="fechaPacienteF"
-                                                    class="form-control-plaintext">
+                                                    id="fechaCita" class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Hora:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
@@ -187,6 +187,8 @@ session_start();
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
     <script src="../js/buscarPaciente.js"></script>
+    <script src="../js/FechaCalendario.js"></script>
+    <script src="../js/creaCitasS.js"></script>
 
 </body>
 
