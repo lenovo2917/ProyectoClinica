@@ -18,8 +18,8 @@ if (!empty($mesCita)) {
 }
 
 // Consulta SQL con la condición de filtrado
-$sql = "SELECT nombreCompletoP, fechaC, TIME_FORMAT(horaC, '%H:%i') AS horaC, estatusC 
- FROM pacientes_citas_vista WHERE $condicionFiltro";
+$sql = "SELECT nombreCompletoP, fechaC, TIME_FORMAT(horaC, '%H:%i') AS horaC, 
+    estatusC,sintomasC,descripcionC, IDC, IDP FROM pacientes_citas_vista WHERE $condicionFiltro";
 
 $resultado = $dp->query($sql);
 
