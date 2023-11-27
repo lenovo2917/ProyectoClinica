@@ -94,7 +94,14 @@
                 NombreCompletoS as nombreU, 
                 CURPS as CURPU,
                 FechaNacimientoS as fNU,
-                EstatusS as estatusU ------------------------------------
+                TipoSangreS as tipoSangreU,
+                GeneroS as generoU,
+                AlergiasS as alergiasU,
+                TelefonoS as telefonoU,
+                CorreoS as correoU,
+                IDD as IDDU,
+                ContrasenaS as contrasenaU,
+                EstatusS as estatusU
             FROM secretarios WHERE IDS = $idUsuarioS";
         } else {
             echo "ID de usuario no proporcionado";
