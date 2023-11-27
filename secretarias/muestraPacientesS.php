@@ -101,7 +101,7 @@ session_start();
                     }
                     ?>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12" style="height: 500px; overflow-y: auto;">
                     <table class="table table-striped" style="vertical-align: middle;">
                             <tr>
                                 <th>Nombre</th>
@@ -152,12 +152,13 @@ session_start();
                             ?>
                         </table>
 
-                        <div class="d-grid gap-2 col-6 mx-auto form" style="padding: 1rem;">
-                            <a href="../Blog_Medico.php?rol=secretario"> 
-                                <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
-                            </a>
-                        </div>
+                        
                          
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto form" style="padding: 1rem;">
+                    <a href="../Blog_Medico.php?rol=secretario"> 
+                        <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
+                    </a>
                 </div>
                     
                 </div>
