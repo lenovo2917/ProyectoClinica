@@ -67,20 +67,35 @@
                     </div>
                     <div class="col-12 text-center">
                     <?php
-                    // En muestraPacientesD.php
                     session_start();
-                    if(isset($_SESSION['mensaje'])) {
-                      $mensaje = $_SESSION['mensaje'];
-                       echo "<p style='color: red;'>$mensaje</p>";
-                      // Limpiar el mensaje después de mostrarlo
-                        unset($_SESSION['mensaje']);
-                   }
+                    if(isset($_SESSION['mensajeModificacion'])) {
+                        $mensaje = $_SESSION['mensajeModificacion'];
+                        echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">';
+                        echo '<i class="fa-solid fa-circle-exclamation" style="color: #0d6efd;"></i> '.$mensaje;
+                        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        echo '</div>';
+                        unset($_SESSION['mensajeModificacion']);
+                    }
+                    if(isset($_SESSION['mensajeEliminacion'])) {
+                        $mensaje = $_SESSION['mensajeEliminacion'];
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje; 
+                        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        echo '</div>';
+                        unset($_SESSION['mensajeEliminacion']);
+                    }
+                    if(isset($_SESSION['mensajeError'])) {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje;
+                        echo '<i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #7d0003;"></i>';
+                        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        echo '</div>';
+                        unset($_SESSION['mensajeError']);
+                    }
                     ?>
                     </div>
                     
 
-                    <div class="col-12">
-                    <table class="table table-striped" style="vertical-align: middle;">
+                    <div class="col-12" style="height: 500px; overflow-y: auto;">
+                        <table class="table table-striped" style="vertical-align: middle;">
                             <tr>
                                 <th>Nombre</th>
                                 <th>CURP</th>
@@ -129,17 +144,13 @@
                             $dp->close();
                             ?>
                         </table>
-
-                        <div class="d-grid gap-2 col-6 mx-auto form" style="padding: 1rem;">
-                            <a href="../doctores/IndexDoctores.php?"> 
-                                <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
-                            </a>
-                        </div>
-                         
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto form" style="padding: 1rem;">
+                        <a href="../doctores/IndexDoctores.php?"> 
+                            <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Regresar</button>
+                        </a>
+                    </div>
                 </div>
-                    
-                </div>
-                
             </div>
         </div>
     </div>
@@ -156,7 +167,7 @@
     </div>
     
          <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-         <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+         <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/creaCitas.js"></script>
     <script src="../main.js"></script>
 </body>

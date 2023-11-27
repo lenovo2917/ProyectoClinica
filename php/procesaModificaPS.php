@@ -49,13 +49,13 @@ if (is_numeric($idP)) {
         $resultUpdatePaciente = $dp->query($sqlUpdatePaciente);
 
         if ($resultUpdatePaciente === false) {
-            echo "Error al actualizar al paciente : " . $dp->error;
-        } else {
-            // Establece un mensaje en la variable de sesión
             session_start();
-            $_SESSION['mensaje'] = "Los datos del paciente $nombrePaciente se han modificado correctamente";
-
-            // Redirige al índice después de la modificación
+            $_SESSION['mensajeError'] = "*No se ha podido modificar los datos del paciente.*";
+            header("Location: ../secretarias/muestraPacientesS.php");
+            exit();
+        } else {
+            session_start();
+            $_SESSION['mensajeModificacion'] = "*Los datos del paciente $nombrePaciente se han modificado correctamente.*";
             header("Location: ../secretarias/muestraPacientesS.php");
             exit();
         }

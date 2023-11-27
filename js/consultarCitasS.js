@@ -38,8 +38,7 @@ $(document).ready(function () {
                     mostrarDatos(data);
                 },
                 error: function () {
-                   
-                    
+
                 }
             });
         } else {
@@ -67,14 +66,22 @@ $(document).ready(function () {
         $.each(data, function (index, paciente) {
             var row = '<tr>' +
                 '<td>' + paciente.nombreCompletoP + '</td>' +
-                '<td>' + paciente.fechaC + '</td>' +
-                '<td>' + paciente.horaC + '</td>' +
-                '<td>' + paciente.estatus + '</td>' +
-                '<td class="text-center">' +
-                '<input type="button" class="styled-button" value="Aceptar">' +
-                '<input type="button" class="styled-button" value="Rechazar">' +
-                '<input type="button" class="styled-button" value="Trasladar">' +
+                '<td class="text-center">' + paciente.fechaC + '</td>' +
+                '<td class="text-center">' + paciente.horaC + '</td>' +
+                '<td class="text-center">' + paciente.estatusC + '</td>' +
+                '<div>'+
+                '<td class="text-center py-3">' +
+                '<a href="detallesCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
+                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+
+                '"><input type="button" class="styled-button" value="Detalles">' +
+                '<a href="modificacionCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
+                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+'&D6='+paciente.IDP+'&D7='+paciente.IDC+
+                '"><input type="button" class="styled-button" value="Modificar">' +
+                '<a href="cancelarCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
+                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+'&D6='+paciente.IDP+'&D7='+paciente.IDC+
+                '"><input type="button" class="styled-button" value="Eliminar"></a>' +
                 '</td>' +
+                '</div>'+
                 '</tr>';
 
             tbody.append(row);

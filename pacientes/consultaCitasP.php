@@ -24,6 +24,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
   <!--ESTILOS CSS-->
+  <link rel="stylesheet" href="../fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="../fontawesome/css/all.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="../img/web.png" type="img">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../css/nav2.css">
@@ -124,13 +126,13 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
   
             <div class="col-md-3">
               <div class="form-group">
-                <label for="doctor" style="color: black; font-size: 16px; font-family: 'Rubik';">Buscar doctor:</label>
+                <label for="doctor" style="color: black; font-size: 16px; font-family: 'Rubik';">Buscar por doctor:</label>
                 <input type="text" name="iddoctor" class="form-control">
               </div>
             </div>
           
         </div>
-
+        
         <table class="table table-striped mt-4" style="color: black; font-size: 16px; font-family: 'Rubik';">
           <thead class="thead-dark">
             <tr>
@@ -170,7 +172,24 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         <?php
         $conexion->close();
         ?>
-
+        <?php
+// Verifica si hay un mensaje de eliminación de cita
+if (isset($_SESSION['mensaje_eliminar_cita'])) {
+  echo "<div style='color: red;' class='alert alert-dismissible fade show' role='alert'>" . $_SESSION['mensaje_eliminar_cita'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    // Limpia la variable de sesión después de mostrar el mensaje
+    unset($_SESSION['mensaje_eliminar_cita']);
+}
+if (isset($_SESSION['mensaje_actualizar_cita'])) {
+  echo "<div style='color: blue;' class='alert  alert-dismissible fade show' role='alert'>" . $_SESSION['mensaje_actualizar_cita'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+  // Limpia la variable de sesión después de mostrar el mensaje
+  unset($_SESSION['mensaje_actualizar_cita']);
+}
+if (isset($_SESSION['mensaje_crear_cita'])) {
+  echo "<div style='color: green;' class='alert alert-dismissible fade show' role='alert'>" . $_SESSION['mensaje_crear_cita'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+  // Limpia la variable de sesión después de mostrar el mensaje
+  unset($_SESSION['mensaje_crear_cita']);
+}
+?>
       </div>
       <div class="container">
         <div class="col-md-2">
@@ -195,7 +214,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
 
   <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-  <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+  <script src="../bootstrap/js/bootstrap.min.js"></script>
   <script src="../js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>

@@ -9,8 +9,8 @@ $diagnostico = $_POST['diagnostico'];
 
 
 // Para obtener el IDP (ID del paciente) a partir del nombre completo
-$nombreCompleto = trim($_POST['nombre'] . ' ' . $_POST['apellidoP'] . ' ' . $_POST['apellidoM']); 
-$nombreCompleto = $dp->real_escape_string($nombreCompleto);
+$nombreCompleto = ($_POST['nombre']); 
+
 
 $sqlSelectPaciente = "SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombreCompleto'";
 $resultPaciente = $dp->query($sqlSelectPaciente);

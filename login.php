@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +45,9 @@
                 </div>
                 <!--Main o contenido-->
                 <!--Main o contenido-->
+                
+       
+
             <div class="container-fluid formatoLogin mt-5 mb-2">
                 <form class="form" action="" method="post">
                 <?php
@@ -54,6 +58,12 @@
                 ?>
                     <div class="row">
                         <div class="col-12" style="padding: 2rem;">
+                        <?php
+                        if (isset($_SESSION['registrado'])) {
+                            echo "<div class='col-12 alert alert-success'>".$_SESSION['registrado']."</div>";
+                            unset($_SESSION['registrado']);
+                        }
+                        ?>
                             <h2><i class="fa-solid fa-lock"></i> Login</h2>
                         </div>
                         <div class="col-12">
@@ -90,6 +100,7 @@
         <script src="bootstrap/js/bootstrap.esm.min.js"></script>
         <script src="js/creaCitas.js"></script>
         <script src="js/main.js"></script>
+        <script src="../js/ValidacionesCampos.js"></script>
 </body>
 
 </html>

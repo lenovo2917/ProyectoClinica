@@ -1,39 +1,78 @@
+// Función para mostrar alertas dentro del modal
+function showAlertInModal(message, alertType) {
+    // Definir el contenedor de alertas dentro del modal
+    var alertContainer = $('#alertContainerInModal');
+
+    // Crear el elemento de alerta
+    var alertElement = $('<div class="alert alert-dismissible fade show" role="alert"></div>');
+    alertElement.addClass('alert-' + alertType);
+    alertElement.text(message);
+
+    // Agregar el botón de cierre
+    var closeButton = $('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+    alertElement.append(closeButton);
+
+    // Agregar la alerta al contenedor dentro del modal
+    alertContainer.append(alertElement);
+
+    // Desvanecer automáticamente después de 3 segundos
+    setTimeout(function () {
+        alertElement.alert('close');
+    }, 3000);
+}
+
+// Evento que se ejecuta cuando se cierra el modal
+$('#exampleModalToggle').on('hidden.bs.modal', function () {
+    // Recarga la página al cerrar el modal
+    location.reload();
+});
+
 $(document).ready(function () {
-    // Cuando se haga clic en el botón "Crear Receta"...
-    $('#crearReceta').on('click', function () {
-        // Captura los datos del formulario
-        var nombre = $('#nombre').val();
-        var apellidoP = $('#apellidoP').val();
-        var apellidoM = $('#apellidoM').val();
-        var fecha = $('#fecha').val();
-        var diagnostico = $('#diagnostico').val();
-        var medicamento = $('#medicamento').val();
-        var intruccionUsoR = $('#intruccionUsoR').val();
+    // Selecciona el formulario específico por su ID
+    var form = document.getElementById('recetaForm');
 
-        // Imprime los datos en la consola
-        console.log('Nombre:', nombre);
-        console.log('Apellido Paterno:', apellidoP);
-        console.log('Apellido Materno:', apellidoM);
-        console.log('Fecha:', fecha);
-        console.log('Diagnóstico:', diagnostico);
-        console.log('Medicamento:', medicamento);
-        console.log('Instrucciones de Uso:', intruccionUsoR);
-        console.log('ID de la cita seleccionada:', IDC);
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita que la página se recargue
+        event.stopPropagation();
 
+        if (!form.checkValidity()) {
+            // Si el formulario no es válido, no hagas nada más
+        } else {
+            // Llena el modal con los datos solo si el formulario es válido
+            showRecetaModal();
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+
+    // Función para mostrar el modal
+// Función para mostrar el modal
+function showRecetaModal() {
+    // Captura los datos del formulario
+    var nombre = $('#nombre').val();
+    var fecha = $('#fecha').val();
+    var diagnostico = $('#diagnostico').val();
+    var medicamento = $('#medicamento').val();
+    var intruccionUsoR = $('#intruccionUsoR').val();
+
+    // Muestra el modal solo si todos los campos están llenos
+    if (nombre && fecha && diagnostico && medicamento && intruccionUsoR) {
         // Llena el modal con los datos
         $('#datosReceta').html(`
-            <tr><td>Nombre:</td><td>${nombre}</td></tr>
-            <tr><td>Apellido Paterno:</td><td>${apellidoP}</td></tr>
-            <tr><td>Apellido Materno:</td><td>${apellidoM}</td></tr>
-            <tr><td>Fecha:</td><td>${fecha}</td></tr>
-            <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
-            <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
-            <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
+            <table class="table">
+                <tr><td>Nombre:</td><td>${nombre}</td></tr>
+                <tr><td>Fecha:</td><td>${fecha}</td></tr>
+                <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
+                <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
+                <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
+            </table>
         `);
 
         // Muestra el modal
         $('#exampleModalToggle').modal('show');
-    });
+    }
+}
+
 
     // Variable para almacenar el ID de la cita seleccionada
     var IDC;
@@ -54,22 +93,22 @@ $(document).ready(function () {
             // Agrega el ID de la cita al formulario antes de enviar la solicitud AJAX
             $('#recetaForm').append('<input type="hidden" name="IDC" value="' + IDC + '">');
 
-
-            // Hace una solicitud AJAX a "insertarReceta.php"
+            // Hace una solicitud AJAX directamente
             $.ajax({
                 url: '../doctores/herramientas/InsertaR.php',
                 type: 'post',
                 data: $('#recetaForm').serialize(), // Envía todo el formulario, incluyendo el nuevo campo oculto
                 success: function (response) {
+                    console.log(response); // Registra la respuesta para ver su contenido
+
                     var data = JSON.parse(response);
 
                     if (data.success) {
-                        // Oculta el botón "Agregar al expediente" y muestra los botones "Descargar" e "Imprimir"
-                        $('#agregarExpediente').hide();
-                        $('#descargar, #imprimir').show();
+                        showAlertInModal('Receta creada exitosamente', 'success');
+                    $('#agregarExpediente').hide();
+                    $('#descargar, #imprimir').show();
                     } else {
-                        // Muestra un mensaje de alerta basado en el mensaje del servidor
-                        alert(data.message);
+                        showAlertInModal('Error: ' + data.message, 'danger');
                     }
                 },
                 error: function () {

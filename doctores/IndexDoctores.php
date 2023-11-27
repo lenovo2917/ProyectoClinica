@@ -15,7 +15,7 @@ if(empty($_SESSION["NombreCompleto"])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@500&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+       <link rel="stylesheet" href="../fontawesome/css/all.css" rel="stylesheet">
 
         <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/fontawesome.css"rel="stylesheet">
         <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
@@ -43,7 +43,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <?php
                         if ($_SESSION["Rol"] === 'doctor') {
                             echo '<span style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Bienvenido Doctor/a ' . $_SESSION["NombreCompleto"] . '</span>';
-                            echo '<span style="margin-right: 10px;"><i class="fas fa-user-md fa-2x"></i></span>';
+                            echo '<span style="margin-right: 20px;"><i class="fas fa-user-md fa-2x"></i></span>';
                         }
                         ?>
                     </div>
@@ -67,7 +67,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                   exit();
               } else if(!isset($_SESSION['sesion_cerrada'])) {
                 echo '
-                <ul class="nav-links">
+                <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
                 <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
                 style="color: white;">
                 Cerrar Sesión </a>
@@ -107,9 +107,10 @@ if(empty($_SESSION["NombreCompleto"])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="accordion-link collapsed" href="../doctores/creaResetaD.php" onclick="scrollToCitas()">
-                                        Crear Citas
-                                    </a>
+                                <a class="accordion-link collapsed" href="../doctores/creaResetaD.php?tab=citas">
+                                   Crear Citas
+                                </a>
+
                                                                         
                                 </li>
                                 <li>
@@ -158,8 +159,47 @@ if(empty($_SESSION["NombreCompleto"])) {
 
             <div class="col-9">
                 <!-- Contenido principal -->
-                <h1>Contenido Principal</h1>
-                <p>Este es el contenido principal de la página.</p>
+                <h1>Perfil</h1>
+                
+                <?php
+              include '../php/acceso.php';
+
+              if ($_SESSION["Rol"] === 'doctor') {
+                  // Obtener los datos del doctor
+                  $sql = "SELECT * FROM doctores WHERE IDD = '{$_SESSION["ID"]}'"; 
+                  $result = mysqli_query($dp, $sql);
+              
+                  if (mysqli_num_rows($result) > 0) {
+                      while ($row = mysqli_fetch_assoc($result)) {
+                          echo '<table class="table">';
+                          echo '<thead>';
+                          echo '<tr>';
+                          echo '<th scope="col">Campo</th>';
+                          echo '<th scope="col">Valor</th>';
+                          echo '</tr>';
+                          echo '</thead>';
+                          echo '<tbody>';
+                          echo '<tr><td><i class="fas fa-user"></i> Nombre Completo</td><td>' . $row['NombreCompletoD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-birthday-cake"></i> Fecha de Nacimiento</td><td>' . $row['FechaNacimientoD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-toggle-on"></i> Estatus</td><td>' . $row['EstatusD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-tint"></i> Tipo de Sangre</td><td>' . $row['TipoSangreD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-venus-mars"></i> Género</td><td>' . $row['GeneroD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-id-card"></i> CURP</td><td>' . $row['CURPD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-allergies"></i> Alergias</td><td>' . $row['AlergiasD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-phone"></i> Teléfono</td><td>' . $row['TelefonoD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-envelope"></i> Correo</td><td>' . $row['CorreoD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-id-badge"></i> Cédula</td><td>' . $row['CedulaD'] . '</td></tr>';
+                          echo '<tr><td><i class="fas fa-user-md"></i> Especialidad</td><td>' . $row['EspecialidadD'] . '</td></tr>';
+                          echo '</tbody>';
+                          echo '</table>';
+                      }
+                  } else {
+                      echo '<div class="alert alert-danger">No se encontraron datos del doctor.</div>';
+                  }
+              }
+              
+               
+                ?>
             </div>
         </div>
     </div>
@@ -173,7 +213,6 @@ if(empty($_SESSION["NombreCompleto"])) {
         </footer>
     </div>
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
 
 </body>

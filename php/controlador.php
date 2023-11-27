@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+session_start(); // Asegúrate de iniciar la sesión
+
 include 'acceso.php';
 
 if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
@@ -7,19 +9,19 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
     $password = $_POST["clave"];
 
     // Consulta para pacientes
-    $sql1 = $dp->prepare("SELECT * FROM pacientes WHERE NombreCompletoP=? AND ContrasenaP=?");
+    $sql1 = $dp->prepare("SELECT * FROM pacientes WHERE NombreCompletoP=? AND ContrasenaP=? AND ESTATUS = 'Activo'");
     $sql1->bind_param("ss", $nombre, $password);
     $sql1->execute();
     $result1 = $sql1->get_result();
 
     // Consulta para secretarios
-    $sql2 = $dp->prepare("SELECT * FROM secretarios WHERE NombreCompletoS=? AND ContrasenaS=?");
+    $sql2 = $dp->prepare("SELECT * FROM secretarios WHERE NombreCompletoS=? AND ContrasenaS=? AND estatusS = 'Activo'");
     $sql2->bind_param("ss", $nombre, $password);
     $sql2->execute();
     $result2 = $sql2->get_result();
 
     // Consulta para doctores
-    $sql3 = $dp->prepare("SELECT * FROM doctores WHERE NombreCompletoD=? AND ContrasenaD=?");
+    $sql3 = $dp->prepare("SELECT * FROM doctores WHERE NombreCompletoD=? AND ContrasenaD=? AND ESTATUS = 'Activo'");
     $sql3->bind_param("ss", $nombre, $password);
     $sql3->execute();
     $result3 = $sql3->get_result();
@@ -52,6 +54,7 @@ if (!empty($_POST["nombree"]) && !empty($_POST["clave"])) {
         $_SESSION["Rol"] = 'doctor';
         $_SESSION["ID"] = $row3['IDD'];
         $_SESSION["EspecialidadD"] = $row3['EspecialidadD']; // Almacenar la especialidad en la sesión
+        $_SESSION["CedulaD"] = $row3['CedulaD']; // Almacenar la especialidad en la sesión
         header("Location: doctores/IndexDoctores.php"); // Redirigir al doctor
         exit();
     }

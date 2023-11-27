@@ -5,27 +5,40 @@ include '../../php/acceso.php';
 $fechaCita = $_POST['fechaCita'];
 $horaCita = $_POST['horaCita'];
 $nombrePaciente = $_POST['nombrePacienteCita'];
-$apellidoPaterno = $_POST['apellidoPacientePaternoCita'];
-$apellidoMaterno = $_POST['apellidoPacienteMaternoCita'];
 $especialidadCita = $_POST['especialidadCita'];
 $motivoCita = $_POST['motivoCita'];
 $notaMedica = $_POST['notaMedica'];
 $Descripcion = $_POST['Descripcion'];
 
-// Concatenar nombre completo del paciente
-$nombreCompletoPaciente = "$nombrePaciente $apellidoPaterno $apellidoMaterno";
+// Verificar si el paciente existe y está activo
+$consultaPaciente = "SELECT Estatus FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'";
+$resultadoPaciente = mysqli_query($dp, $consultaPaciente);
 
-// Insertar cita en la base de datos
-$query = "INSERT INTO citas (fechaC, HoraC, IDP, IDD, IDS, sintomasC, diagnosticoC, descripcionC)
-         VALUES ('$fechaCita', '$horaCita', 
-         (SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombreCompletoPaciente'), 
-         (SELECT IDD FROM doctores WHERE EspecialidadD = '$especialidadCita' LIMIT 1), 1, 
-         '$notaMedica', '$motivoCita', '$Descripcion')";
+if ($resultadoPaciente) {
+    $paciente = mysqli_fetch_assoc($resultadoPaciente);
+    
+    if ($paciente && isset($paciente['Estatus']) && $paciente['Estatus'] == 'Activo') {
+        // Insertar cita en la base de datos
+        $query = "INSERT INTO citas (fechaC, HoraC, IDP, IDD, IDS, sintomasC, diagnosticoC, descripcionC)
+                 VALUES ('$fechaCita', '$horaCita', 
+                 (SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'), 
+                 (SELECT IDD FROM doctores WHERE EspecialidadD = '$especialidadCita' LIMIT 1), 1, 
+                 '$notaMedica', '$motivoCita', '$Descripcion')";
 
-if (mysqli_query($dp, $query)) {
-    echo "Cita creada exitosamente";
+        if (mysqli_query($dp, $query)) {
+            echo "Cita creada exitosamente";
+        } else {
+            echo "Error al crear la cita: " . mysqli_error($dp);
+        }
+    } else {
+        if (!$paciente) {
+            echo "No se puede crear la cita. El paciente no existe.";
+        } else {
+            echo "No se puede crear la cita. El paciente no está activo.";
+        }
+    }
 } else {
-    echo "Error al crear la cita: " . mysqli_error($dp);
+    echo "Error al verificar el paciente: " . mysqli_error($dp);
 }
 
 // Cerrar la conexión

@@ -14,23 +14,21 @@ if (isset($_POST['buscar'])) {
             // Verificar si el campo ESTATUS está presente
             $estadoPaciente = isset($paciente['Estatus']) ? $paciente['Estatus'] : '';
 
-            // Si el paciente está inactivo, actualiza el estado y devuelve los datos
-          
-                // Devuelve los datos como respuesta JSON
-                header('Content-Type: application/json');
-                echo json_encode(array(
-                    'success' => true,
-                    'data' => array(
-                        'nombre' => $paciente['NombreCompletoP'],
-                        'fecha' => $paciente['fechaP'],
-                        'tipoSangre' => $paciente['tipoSangreP'],
-                        'alergias' => $paciente['alergiasP'],
-                        'estado' => $estadoPaciente,
-                    ),
-                ));
-         
+            // Devuelve los datos como respuesta JSON
+            header('Content-Type: application/json');
+            echo json_encode(array(
+                'success' => true,
+                'data' => array(
+                    'nombre' => $paciente['NombreCompletoP'],
+                    'fecha' => $paciente['fechaP'],
+                    'tipoSangre' => $paciente['tipoSangreP'],
+                    'alergias' => $paciente['alergiasP'],
+                    'estado' => $estadoPaciente,
+                ),
+            ));
         } else {
             // No se encontraron resultados
+            header('Content-Type: application/json');
             echo json_encode(array(
                 'success' => false,
                 'error' => 'No se encontraron pacientes con ese nombre.',
@@ -38,6 +36,7 @@ if (isset($_POST['buscar'])) {
         }
     } else {
         // Manejar el error y devolver una respuesta JSON
+        header('Content-Type: application/json');
         echo json_encode(array(
             'success' => false,
             'error' => 'Hubo un error en la consulta: ' . mysqli_error($dp),

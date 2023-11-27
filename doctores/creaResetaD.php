@@ -65,7 +65,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                   exit();
               } else if(!isset($_SESSION['sesion_cerrada'])) {
                 echo '
-                <ul class="nav-links">
+                <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
                 <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
                 style="color: white;">
                 Cerrar Sesión </a>
@@ -85,26 +85,22 @@ if(empty($_SESSION["NombreCompleto"])) {
         <div class="row">
             <div class="col">
                 <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="titulo">Página del Médico</h1>
-                        </div>
-                    </div>
+                  
 
 
                     <!-- Fila con dos columnas: imagen y doctor-info -->
                     <div class="row">
                         <div class="col-lg-2">
-                            <img src="../img/LOGO_CLINICA_TACHIRITO.png" alt="Logo del médico" width="150" height="150">
+                            <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
                         </div>
                         <div class="col-lg-4 doctor-info">
                             <h3>Información del Doctor</h3>
-                            <p>Doctor/a:
+                            <h2>Doctor/a:
                                 <?php echo $_SESSION["NombreCompleto"];?>
-                            </p>
-                            <p>Especialidad:
+        </h2>
+                            <h2>Especialidad:
                                 <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
-                            </p>
+        </h2>
 
                         </div>
                     </div>
@@ -133,55 +129,62 @@ if(empty($_SESSION["NombreCompleto"])) {
                         aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                         <div class="modal-dialog modal-xl modal-dialog-centered">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <!-- Encabezado -->
-                                    <img src="../img/LOGO.png" alt="Clinica Tachirito" class="logo">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">RECETA MÉDICA</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
+                            <div class="modal-header text-center">
+    <!-- Encabezado -->
+    <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
+    <h1 class="modal-title display-2" id="exampleModalToggleLabel">RECETA MÉDICA</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
                                 <div class="modal-body">
+                                    <div style="text-align: center;">
                                     <!-- Información del doctor -->
-                                    <p>Nombre del doctor: <span id="doctorNombre">Nombre del doctor</span></p>
-                                    <p>Cedula profesional: <span id="cedulaProfesional">Cedula del doctor</span></p>
-                                    <p>Dirección: <span id="direccion">Dirección del doctor</span></p>
+                                    <p>Nombre del doctor: <span id="doctorNombre"> <?php echo $_SESSION["NombreCompleto"];?></span></p>
+                                    <p>Cedula profesional: <span id="cedulaProfesional"><?php echo $_SESSION["CedulaD"];?></span></p>
+                                    <p>Dirección: <span id="direccion">Avenida de los Jacarandas #567 
+                                       Colonia del Sol 
+                                       Cuernavaca, Morelos. 
+                                       Código Postal: 62100</span></p>
+        </div>
                                     <hr class="my-4">
-                                    <!-- Contenido de la receta en forma de tabla -->
-                                    <table class="table" id="datosReceta">
-                                        <tr>
-                                            <td>Nombre:</td>
-                                            <td>${nombre}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Apellido Paterno:</td>
-                                            <td>${apellidoP}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Apellido Materno:</td>
-                                            <td>${apellidoM}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fecha:</td>
-                                            <td>${fecha}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Diagnóstico:</td>
-                                            <td>${diagnostico}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Medicamento:</td>
-                                            <td>${medicamento}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Instrucciones de Uso:</td>
-                                            <td>${intruccionUsoR}</td>
-                                        </tr>
-                                    </table>
+                               
+                                   <!-- Contenido de la receta en forma de tabla -->
+<table class="table table-bordered" id="datosReceta">
+    <thead>
+        <tr>
+            <th scope="col">Campo</th>
+            <th scope="col">Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nombre</td>
+            <td id="nombreReceta"></td>
+        </tr>
+        <tr>
+            <td>Fecha</td>
+            <td id="fechaReceta"></td>
+        </tr>
+        <tr>
+            <td>Diagnóstico</td>
+            <td id="diagnosticoReceta"></td>
+        </tr>
+        <tr>
+            <td>Medicamento</td>
+            <td id="medicamentoReceta"></td>
+        </tr>
+        <tr>
+            <td>Instrucciones de Uso</td>
+            <td id="instruccionesReceta"></td>
+        </tr>
+    </tbody>
+</table>
+
                                     <!-- Firma y nombre del doctor -->
                                     <div class="firma">
                                         <hr class="my-4">
                                         <p>Firma del doctor: __________________________</p>
-                                        <p>Nombre del doctor: <span id="nombreFirma">Nombre del doctor</span></p>
+                                        <p>Nombre del doctor: <span id="nombreFirma"> <?php echo $_SESSION["NombreCompleto"];?></span></p>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -192,7 +195,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                                             class="fas fa-download"></i></button>
                                     <button id="imprimir" class="btn btn-secondary" style="display: none;"><i
                                             class="fas fa-print"></i></button>
+                                            
                                 </div>
+
+                                <!-- modal footer para alertas -->
+                                <div class="modal-footer">
+                                    <div id="alertContainerInModal"></div>
+                                </div>
+                                
                                 <div class="modal-footer">
                                     <!-- Texto y línea adicional -->
                                     <p class="indicaciones">Seguir indicaciones y tomar tratamiento completo</p>
@@ -221,18 +231,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         placeholder="Nombre" required>
                                     <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="apellidoPaterno">Apellido Paterno *</label>
-                                    <input type="text" class="form-control" id="apellidoP" name="apellidoP"
-                                        placeholder="ApellidoP" required>
-                                    <div class="invalid-feedback">Por favor, ingresa el apellido paterno.</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="apellidoMaterno">Apellido Materno *</label>
-                                    <input type="text" class="form-control" id="apellidoM" name="apellidoM"
-                                        placeholder="ApellidoM" required>
-                                    <div class="invalid-feedback">Por favor, ingresa el apellido materno.</div>
-                                </div>
+                            
                                 <div class="form-group">
                                     <label for="fecha">Fecha de la Receta *</label>
                                     <div class="input-group mb-3">
@@ -267,11 +266,12 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         style="resize: none"></textarea>
                                     <div class="invalid-feedback">Por favor, ingresa las instrucciones de uso.</div>
                                 </div>
-                                <button type="submit" id="crearReceta" class="btn btn-custom"
-                                    data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Crear Receta</button>
+                                <button type="submit" id="crearReceta" class="btn btn-custom">Crear Receta</button>
+
                             </form>
 
                         </div>
+                        
 
                         <!-- Tab 2: Expedientes de Paciente -->
                         <div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
@@ -281,6 +281,24 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </a>
                                 <h2>Expedientes de Paciente</h2>
                             </div>
+
+                            <div class="modal fade" id="pacienteNoEncontradoModal" tabindex="-1" role="dialog" aria-labelledby="pacienteNoEncontradoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pacienteNoEncontradoModalLabel">Paciente no encontrado</h5>
+            </div>
+            <div class="modal-body">
+                <p>No se encontró un paciente con el nombre proporcionado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
                             <div class="row">
                                 <!-- Fila 1: Barra de búsqueda -->
@@ -365,6 +383,9 @@ if(empty($_SESSION["NombreCompleto"])) {
                         </div>
 
 
+
+
+
             
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
                             <div class="navbar">
@@ -373,6 +394,17 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </a>
                                 <h2>Crear Cita Medica</h2>
                             </div>
+                            <br>
+                            <div class="alerta">          
+                                <div class="col-12">
+                                    <div class="row my-2">
+                                        <div class="col-12 my-2">
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <br>
 
 
 
@@ -397,15 +429,16 @@ if(empty($_SESSION["NombreCompleto"])) {
 
                                         <div class="col-md-9">
                                             <div class="row">
-                                                <div class="col-md-3">
-                                                    <label for="nombrePacienteCita" class="form-label">Paciente
+                                                <div class="col-md-2">
+                                                    <label for="nombrePacienteCita" class="form-label">Nombre completo del paciente
                                                         *</label>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-10">
                                                     <input type="text" class="form-control" id="nombrePacienteCita"
-                                                        name="nombrePacienteCita" placeholder="Nombre" required>
+                                                        name="nombrePacienteCita" placeholder="Nombre completo del paciente *" required>
                                                     <div class="invalid-feedback">Campo obligatorio *</div>
                                                 </div>
+                                                <!--
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control"
                                                         id="apellidoPacientePaternoCita"
@@ -421,7 +454,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                     <div class="invalid-feedback">Campo obligatorio *</div>
                                                 </div>
                                             </div>
-
+                                               -->
                                             <div class="row align-items-center">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -506,6 +539,7 @@ if(empty($_SESSION["NombreCompleto"])) {
             </div>
         </div>
     </div>
+</div>
     <!--footer-->
     <div class="container-fluid-lg py-5">
         <footer class="bg-dark text-white text-center py-5 mt-5">
@@ -520,15 +554,14 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../js/BusquedaPaciente.js"></script>
-    <script src="../js/receta.js"></script>
-    <script src="../js/Crear_Receta.js"></script>
-
-    <script src="../js/BusquedaCitas"></script>
+    <script src="../js/BusquedaPaciente.js"></script> <!--ESTE JS SIRVE PARA BUSCAR AL PACIENTE EN EL EXPEDIENTE EN EL APARTADP DE INFORMACION-->
+    <script src="../js/receta.js"></script>  <!-- ESTE JS SIRVE PARA CREAR LA RECETA Y AGREGAR AL EXPEDIENTE -->
+    <script src="../js/Crear_Receta.js"></script> <!-- ESTE JS SIRVE PARA CREAR CITAS EN EL DOCTOR -->
+    <script src="../js/BusquedaCitas"></script> <!--ESTE JS SIRVE PARA BUSCAR LAS CITAS DEL PACIENTE PARA CREAR LA RECETA EN EL APARTADO DE CITAS-->
     <script src="../js/BusquedaEspecialidad.js"></script>
-    <script src="../js/FechaCalendario.js"></script>
-    <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
-    <script src="../js/ValidacionesCampos.js"></script>
+    <script src="../js/FechaCalendario.js"></script>  <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
+<script src="../js/ValidacionesCampos.js"></script>
+
 
 
 
