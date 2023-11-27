@@ -42,6 +42,15 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
             $sql="UPDATE citas set fechaC='".$fecha."', HoraC='".$hora."', sintomasC='".$sintomas."', descripcionC='".$descripcion."' WHERE IDC='".$id."'";
             $resultado = $conexion->query($sql);
+            if ($resultado) {
+                $_SESSION['mensaje_actualizar_cita'] = '*La cita fue actualizada exitosamente.*';
+                header("Location: consultaCitasP.php");
+                exit();
+            } else {
+                $_SESSION['mensaje_actualizar_cita'] = '*La cita no se pudo actualizar.*';
+                header("Location: consultaCitasP.php");
+                exit();
+            }
 
          }else{
             $id=$_GET['IDC'];
@@ -146,8 +155,6 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         <input type="submit" name="enviar" value="Modificar cita">
         <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
         margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
-
-        <div id="mensaje" style="margin-top: 20px;"></div>
     </form>
     </div>
             <!--footer-->
@@ -164,17 +171,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <script src="../js/actualizaCitas.js"></script>
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
     <script>
-    <?php
-    // Verificar si se ha enviado el formulario y se ha modificado la cita
-    if (isset($_POST['enviar'])) {
-        // Verificar si la cita se ha actualizado correctamente
-        if ($resultado) {
-            echo "document.getElementById('mensaje').innerHTML = '<div class=\"alert alert-success\">La cita fue actualizada exitosamente.</div>';";
-        } else {
-            echo "document.getElementById('mensaje').innerHTML = '<div class=\"alert alert-danger\">La cita no se pudo actualizar.</div>';";
-        }
-    }
-    ?>
+    
 </script>
 </body>
 </html>

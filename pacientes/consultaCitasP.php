@@ -130,7 +130,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             </div>
           
         </div>
-
+        
         <table class="table table-striped mt-4" style="color: black; font-size: 16px; font-family: 'Rubik';">
           <thead class="thead-dark">
             <tr>
@@ -170,7 +170,24 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         <?php
         $conexion->close();
         ?>
-
+        <?php
+// Verifica si hay un mensaje de eliminación de cita
+if (isset($_SESSION['mensaje_eliminar_cita'])) {
+    echo "<div class='alert alert-success' style='color:red;'>" . $_SESSION['mensaje_eliminar_cita'] . "</div>";
+    // Limpia la variable de sesión después de mostrar el mensaje
+    unset($_SESSION['mensaje_eliminar_cita']);
+}
+if (isset($_SESSION['mensaje_actualizar_cita'])) {
+  echo "<div class='alert alert-success' style='color:blue;'>" . $_SESSION['mensaje_actualizar_cita'] . "</div>";
+  // Limpia la variable de sesión después de mostrar el mensaje
+  unset($_SESSION['mensaje_actualizar_cita']);
+}
+if (isset($_SESSION['mensaje_crear_cita'])) {
+  echo "<div class='alert alert-success' style='color:green;'>" . $_SESSION['mensaje_crear_cita'] . "</div>";
+  // Limpia la variable de sesión después de mostrar el mensaje
+  unset($_SESSION['mensaje_crear_cita']);
+}
+?>
       </div>
       <div class="container">
         <div class="col-md-2">
