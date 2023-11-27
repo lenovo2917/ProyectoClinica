@@ -20,7 +20,7 @@ if (isset($_POST['citaID'], $_POST['fechaCita'], $_POST['especialidadCita'], $_P
         mysqli_stmt_close($stmtDoctor);
 
         // Actualizar la tabla citas con el nuevo médico y especialidad
-        $queryCitas = "UPDATE citas SET IDD = ?, fechaC = ?, HoraC = ? WHERE IDC = ?";
+        $queryCitas = "UPDATE citas SET IDD = ?, fechaC = ?, HoraC = ? ,ESTATUS = 'Pendiente' WHERE IDC = ?";
         $stmtCitas = mysqli_prepare($dp, $queryCitas);
 
         if ($stmtCitas) {
