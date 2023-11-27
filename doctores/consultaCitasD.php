@@ -23,6 +23,7 @@ if(empty($_SESSION["NombreCompleto"])) {
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/doctores.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
+    <link rel="stylesheet" type="text/css" href="../css/Diseño_Crear_Receta.css">
 
 </head>
 
@@ -90,18 +91,17 @@ if(empty($_SESSION["NombreCompleto"])) {
                     <div class="col-12">
                         <div class="row text-start align-items-center">
                             <div class="col-2 text-center">
-                                <img src="../img/LOGO.png" style="width: 180px; height: 170px;"
-                                    alt="Descripción de la imagen">
-                            </div>
-                            <div class="col-1">
-                            </div>
-                            <div class="col-9">
-                                <p>Doctor/a:
-                                    <?php echo $_SESSION["NombreCompleto"];?>
-                                </p>
-                                <p>Especialidad:
-                                    <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
-                                </p>
+                            <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
+                        </div>
+                        <div class="col-lg-4 doctor-info">
+                            <h3>Información del Doctor</h3>
+                            <h2>Doctor/a:
+                                <?php echo $_SESSION["NombreCompleto"];?>
+        </h2>
+                            <h2>Especialidad:
+                                <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
+        </h2>
+
                             </div>
                         </div>
                     </div>

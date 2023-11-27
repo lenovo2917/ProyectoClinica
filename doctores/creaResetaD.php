@@ -85,26 +85,22 @@ if(empty($_SESSION["NombreCompleto"])) {
         <div class="row">
             <div class="col">
                 <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="titulo">Página del Médico</h1>
-                        </div>
-                    </div>
+                  
 
 
                     <!-- Fila con dos columnas: imagen y doctor-info -->
                     <div class="row">
                         <div class="col-lg-2">
-                            <img src="../img/LOGO_CLINICA_TACHIRITO.png" alt="Logo del médico" width="150" height="150">
+                            <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
                         </div>
                         <div class="col-lg-4 doctor-info">
                             <h3>Información del Doctor</h3>
-                            <p>Doctor/a:
+                            <h2>Doctor/a:
                                 <?php echo $_SESSION["NombreCompleto"];?>
-                            </p>
-                            <p>Especialidad:
+        </h2>
+                            <h2>Especialidad:
                                 <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
-                            </p>
+        </h2>
 
                         </div>
                     </div>
@@ -133,14 +129,15 @@ if(empty($_SESSION["NombreCompleto"])) {
                         aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                         <div class="modal-dialog modal-xl modal-dialog-centered">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <!-- Encabezado -->
-                                    <img src="../img/LOGO.png" alt="Clinica Tachirito" class="logo">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">RECETA MÉDICA</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
+                            <div class="modal-header text-center">
+    <!-- Encabezado -->
+    <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
+    <h1 class="modal-title display-2" id="exampleModalToggleLabel">RECETA MÉDICA</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
                                 <div class="modal-body">
+                                    <div style="text-align: center;">
                                     <!-- Información del doctor -->
                                     <p>Nombre del doctor: <span id="doctorNombre"> <?php echo $_SESSION["NombreCompleto"];?></span></p>
                                     <p>Cedula profesional: <span id="cedulaProfesional"><?php echo $_SESSION["CedulaD"];?></span></p>
@@ -148,11 +145,41 @@ if(empty($_SESSION["NombreCompleto"])) {
                                        Colonia del Sol 
                                        Cuernavaca, Morelos. 
                                        Código Postal: 62100</span></p>
+        </div>
                                     <hr class="my-4">
-                                    <!-- Contenido de la receta en forma de tabla -->
-                                    <table class="table" id="datosReceta">
-                                      
-                                    </table>
+                               
+                                   <!-- Contenido de la receta en forma de tabla -->
+<table class="table table-bordered" id="datosReceta">
+    <thead>
+        <tr>
+            <th scope="col">Campo</th>
+            <th scope="col">Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nombre</td>
+            <td id="nombreReceta"></td>
+        </tr>
+        <tr>
+            <td>Fecha</td>
+            <td id="fechaReceta"></td>
+        </tr>
+        <tr>
+            <td>Diagnóstico</td>
+            <td id="diagnosticoReceta"></td>
+        </tr>
+        <tr>
+            <td>Medicamento</td>
+            <td id="medicamentoReceta"></td>
+        </tr>
+        <tr>
+            <td>Instrucciones de Uso</td>
+            <td id="instruccionesReceta"></td>
+        </tr>
+    </tbody>
+</table>
+
                                     <!-- Firma y nombre del doctor -->
                                     <div class="firma">
                                         <hr class="my-4">
@@ -534,6 +561,8 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../js/BusquedaEspecialidad.js"></script>
     <script src="../js/FechaCalendario.js"></script>  <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
 <script src="../js/ValidacionesCampos.js"></script>
+
+
 
 
 
