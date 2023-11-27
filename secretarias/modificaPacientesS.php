@@ -124,7 +124,7 @@ session_start();
                             </div>
                             <div class="col-6" style="text-align: left; padding: 1rem;" >
                                 <label class="form-label">CURP:</label>
-                                <input class="form-control" type="text" placeholder="CURP *" required maxlength="18"
+                                <input class="form-control" type="text" readonly placeholder="CURP *" required maxlength="18"
                                     title="Ingrese correctamente su CURP" name="CURPPaciente" value ="<?php echo isset(
                                     $rowPaciente["CURPP"]) ? $rowPaciente["CURPP"] : ''; ?>" required />
                             </div>

@@ -43,7 +43,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <?php
                         if ($_SESSION["Rol"] === 'doctor') {
                             echo '<span style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Bienvenido Doctor/a ' . $_SESSION["NombreCompleto"] . '</span>';
-                            echo '<span style="margin-right: 10px;"><i class="fas fa-user-md fa-2x"></i></span>';
+                            echo '<span style="margin-right: 20px;"><i class="fas fa-user-md fa-2x"></i></span>';
                         }
                         ?>
                     </div>
@@ -107,9 +107,10 @@ if(empty($_SESSION["NombreCompleto"])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="accordion-link collapsed" href="../doctores/creaResetaD.php" onclick="scrollToCitas()">
-                                        Crear Citas
-                                    </a>
+                                <a class="accordion-link collapsed" href="../doctores/creaResetaD.php?tab=citas">
+    Crear Citas
+</a>
+
                                                                         
                                 </li>
                                 <li>
@@ -173,7 +174,6 @@ if(empty($_SESSION["NombreCompleto"])) {
         </footer>
     </div>
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
 
 </body>

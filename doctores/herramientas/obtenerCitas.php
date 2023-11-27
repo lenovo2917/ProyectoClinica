@@ -3,13 +3,10 @@ include '../../php/acceso.php';
 
 // Valores obtenidos de las variables
 $nombre = trim($_POST['nombre']);
-$apellidoP = trim($_POST['apellidoP']);
-$apellidoM = trim($_POST['apellidoM']);
 
-$nombreCompleto = $nombre . ' ' . $apellidoP . ' ' . $apellidoM;
 
 // Consulta SQL para obtener el ID del paciente a partir del nombre completo
-$sqlSelectPaciente = "SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombreCompleto'";
+$sqlSelectPaciente = "SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombre'";
 $resultPaciente = $dp->query($sqlSelectPaciente);
 
 if ($resultPaciente->num_rows > 0) {

@@ -23,6 +23,7 @@ if(empty($_SESSION["NombreCompleto"])) {
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/doctores.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
+    <link rel="stylesheet" type="text/css" href="../css/Diseño_Crear_Receta.css">
 
 </head>
 
@@ -90,18 +91,17 @@ if(empty($_SESSION["NombreCompleto"])) {
                     <div class="col-12">
                         <div class="row text-start align-items-center">
                             <div class="col-2 text-center">
-                                <img src="../img/LOGO.png" style="width: 180px; height: 170px;"
-                                    alt="Descripción de la imagen">
-                            </div>
-                            <div class="col-1">
-                            </div>
-                            <div class="col-9">
-                                <p>Doctor/a:
-                                    <?php echo $_SESSION["NombreCompleto"];?>
-                                </p>
-                                <p>Especialidad:
-                                    <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
-                                </p>
+                            <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
+                        </div>
+                        <div class="col-lg-4 doctor-info">
+                            <h3>Información del Doctor</h3>
+                            <h2>Doctor/a:
+                                <?php echo $_SESSION["NombreCompleto"];?>
+        </h2>
+                            <h2>Especialidad:
+                                <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
+        </h2>
+
                             </div>
                         </div>
                     </div>
@@ -129,28 +129,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
 
                     <div class="col-12 px-5">
-                        <form class="needs-validation" novalidate method="post">
-                            <div class="row ">
                                 <div class="col-12">
-                                    <div class="row mb-1">
-                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por
-                                            nombre:</label>
-                                        <div class="col-5 text-start">
-                                            <input type="text" class="form-control" id="nombrePaciente"
-                                                name="nombrePaciente" required>
+                                    <form class="needs-validation row mb-1" novalidate method="post">
+                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por nombre:</label>
+                                        <div class="col-4 text-start">
+                                            <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" required>
                                             <div class="invalid-feedback">Campo obligatorio *</div>
-
                                         </div>
-                                        <div class="invalid-feedback">Campo obligatorio *</div>
-
-                                        <div class="col-1">
-                                            <button id="buscarButton" type="submit"
-                                                class="btn my-custom-button">Buscar</button>
-
-                                        </div>
-
-
-                                    </form>
+                                        
                                         <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
                                         <div class="col-2 text-start">
                                             <select class="form-select" aria-label="" name="mes">
@@ -168,38 +154,43 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 <option value="noviembre">noviembre</option>
                                                 <option value="diciembre">diciembre</option>
                                             </select>
-
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row my-2">
-                                        <div class="col-12 my-2">
-                                            <h5 class="">Pacientes:</h5>
+                                        <div class="col-1">
+                                            <button id="buscarButton" type="submit" class="btn my-custom-button">Buscar</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
-                                <div class="col-12">
-                                    <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
-                                        style="background-color: white">
-                                        <div style="height: 400px; overflow-y: auto;">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="col-1">#</th>
-                                                        <th class="col-3">Paciente</th>
-                                                        <th class="col-2">Fecha</th>
-                                                        <th class="col-2">Estado</th>
-                                                        <th class="col-4">Opciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
+                                <div class="alerta">          
+                <div class="col-12">
+                    <div class="row my-2">
+                        <div class="col-12 my-2">
+                            <h5 class="">Pacientes:</h5>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-12">
+                    <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
+                        style="background-color: white">
+                        <div style="height: 400px; overflow-y: auto;">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-1">#</th>
+                                        <th class="col-3">Paciente</th>
+                                        <th class="col-2">Fecha</th>
+                                        <th class="col-2">Estado</th>
+                                        <th class="col-4">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Aquí se cargarán las citas -->         
+                                    <?php
 include '../php/acceso.php';
 
 $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
 LEFT JOIN pacientes p ON c.IDP = p.IDP
-WHERE c.IDD = '".$_SESSION["ID"]."'";
+WHERE c.IDD = '" . $_SESSION["ID"] . "'";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombrePaciente = $_POST['nombrePaciente'];
@@ -212,7 +203,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['mes'])) {
         $mesSeleccionado = $_POST['mes'];
 
-        // Mapea el nombre del mes al número de mes
         $meses = [
             'enero' => '01',
             'febrero' => '02',
@@ -237,6 +227,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+// Agrega la condición para excluir citas con estado 'finalizada' o 'cancelada'
+$query .= " AND c.ESTATUS NOT IN ('finalizada', 'Cancelada')";
+
 // Ejecutar la consulta
 $result = mysqli_query($dp, $query);
 while ($row = mysqli_fetch_assoc($result)) {
@@ -247,39 +240,27 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td>" . $row['ESTATUS'] . "</td>";
     echo '<td class="text-center">';
     
-    if ($row['ESTATUS'] == 'Cancelada' || $row['ESTATUS'] == 'finalizada') {
-        // Si la cita está cancelada o finalizada, deshabilitar todos los botones
-        echo '<button type="button" class="btn btn-trasladar"  " disabled>Aceptar</button>';
-        echo '<button type="button" class="btn btn-trasladar" disabled>Rechazar</button>';
-        echo '<button type="button" class="btn btn-trasladar"  disabled>Trasladar</button>';
-    } else {
-        // Si la cita no está cancelada ni finalizada, habilitar todos los botones
-        echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-        echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
-        echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
-    }
+    // Habilitar todos los botones ya que las citas finalizadas o canceladas no se mostrarán
+    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
+    echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
+    echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
+    echo "</tr>";
 }
 ?>
 
+                             
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-1">
-
-
-                                </div>
-                            </div>
-                     
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
+                <div class="col-1"></div>
             </div>
-        </div>
+        </div class="prueba">
+    </div>
+    </div>
+    </div>
     </div>
     <div class="modal" tabindex="-1" id="miModal">
         <div class="modal-dialog">
