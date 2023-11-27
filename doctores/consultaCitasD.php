@@ -170,6 +170,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                 </div>
                 </div>
                 <div class="col-12">
+                    <div class="alerta">
                     <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
                         style="background-color: white">
                         <div style="height: 400px; overflow-y: auto;">
@@ -230,8 +231,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Agrega la condición para excluir citas con estado 'finalizada' o 'cancelada'
 $query .= " AND c.ESTATUS NOT IN ('finalizada', 'Cancelada')";
 
-// Ejecutar la consulta
+//Si no se encuentra paciente entonces aparecera una advertencia
+//pero que se muestre en el div de alerta
+
+if (mysqli_num_rows(mysqli_query($dp, $query)) == 0) {
+    echo '
+    <div class="alert alert-danger fade show" role="alert">
+    <strong>¡No se encontraron citas!</strong>
+</div>
+  ';
+}else{
 $result = mysqli_query($dp, $query);
+
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
     echo "<td>" . $row['IDC'] . "</td>";
@@ -245,6 +256,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
     echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
     echo "</tr>";
+}
 }
 ?>
 
