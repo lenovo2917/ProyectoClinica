@@ -124,7 +124,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
   
             <div class="col-md-3">
               <div class="form-group">
-                <label for="doctor" style="color: black; font-size: 16px; font-family: 'Rubik';">Buscar doctor:</label>
+                <label for="doctor" style="color: black; font-size: 16px; font-family: 'Rubik';">Buscar por doctor:</label>
                 <input type="text" name="iddoctor" class="form-control">
               </div>
             </div>
