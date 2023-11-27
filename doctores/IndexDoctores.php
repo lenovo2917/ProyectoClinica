@@ -108,8 +108,8 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 </li>
                                 <li>
                                 <a class="accordion-link collapsed" href="../doctores/creaResetaD.php?tab=citas">
-    Crear Citas
-</a>
+                                   Crear Citas
+                                </a>
 
                                                                         
                                 </li>
@@ -159,8 +159,23 @@ if(empty($_SESSION["NombreCompleto"])) {
 
             <div class="col-9">
                 <!-- Contenido principal -->
-                <h1>Contenido Principal</h1>
-                <p>Este es el contenido principal de la página.</p>
+                <h1>Perfil</h1>
+                
+                <?php
+                include '../php/acceso.php';
+                        if ($_SESSION["Rol"] === 'doctor') {
+                            // Obtener especialidad desde la URL
+                           
+                            // Obtener los nombres de los doctores para la especialidad seleccionada
+                            $sql = "SELECT * FROM doctores WHERE IDD = '{$_SESSION["ID"]}'"; 
+                            $result = $dp->query($sql);
+                            if ($result->num_rows > 0) {
+                                //mostrar todos los datos de la tabla doctor
+                                 
+                            }                         
+                        
+                        }
+                ?>
             </div>
         </div>
     </div>

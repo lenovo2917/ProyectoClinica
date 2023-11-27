@@ -39,15 +39,13 @@ if ($resultObtenerIDP->num_rows === 1) {
 
     // Verifica si la inserción fue exitosa
     if ($sql->affected_rows > 0) {
-        echo "<script language='JavaScript'>
-        alert('La cita fue creada exitosamente.');
-        location.assign('../pacientes/consultaCitasP.php');
-        </script>";
+        $_SESSION['mensaje_crear_cita'] = ' *La cita fue creada exitosamente.*';
+                header("Location: ../pacientes/consultaCitasP.php");
+                exit();
     } else {
-        echo "<script language='JavaScript'>
-        alert('La cita no pudo ser creada.');
-        location.assign('../pacientes/consultaCitasP.php');
-        </script>";
+        $_SESSION['mensaje_crear_cita'] = ' *La cita no pudo ser creada.*';
+                header("Location: ../pacientes/consultaCitasP.php");
+                exit();
     }
 
     // Cierra la consulta de inserción
