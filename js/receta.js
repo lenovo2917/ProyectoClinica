@@ -46,29 +46,32 @@ $(document).ready(function () {
     }, false);
 
     // Función para mostrar el modal
-    function showRecetaModal() {
-        // Captura los datos del formulario
-        var nombre = $('#nombre').val();
-        var fecha = $('#fecha').val();
-        var diagnostico = $('#diagnostico').val();
-        var medicamento = $('#medicamento').val();
-        var intruccionUsoR = $('#intruccionUsoR').val();
+// Función para mostrar el modal
+function showRecetaModal() {
+    // Captura los datos del formulario
+    var nombre = $('#nombre').val();
+    var fecha = $('#fecha').val();
+    var diagnostico = $('#diagnostico').val();
+    var medicamento = $('#medicamento').val();
+    var intruccionUsoR = $('#intruccionUsoR').val();
 
-        // Muestra el modal solo si todos los campos están llenos
-        if (nombre && fecha && diagnostico && medicamento && intruccionUsoR) {
-            // Llena el modal con los datos
-            $('#datosReceta').html(`
+    // Muestra el modal solo si todos los campos están llenos
+    if (nombre && fecha && diagnostico && medicamento && intruccionUsoR) {
+        // Llena el modal con los datos
+        $('#datosReceta').html(`
+            <table class="table">
                 <tr><td>Nombre:</td><td>${nombre}</td></tr>
                 <tr><td>Fecha:</td><td>${fecha}</td></tr>
                 <tr><td>Diagnóstico:</td><td>${diagnostico}</td></tr>
                 <tr><td>Medicamento:</td><td>${medicamento}</td></tr>
                 <tr><td>Instrucciones de Uso:</td><td>${intruccionUsoR}</td></tr>
-            `);
+            </table>
+        `);
 
-            // Muestra el modal
-            $('#exampleModalToggle').modal('show');
-        }
+        // Muestra el modal
+        $('#exampleModalToggle').modal('show');
     }
+}
 
 
     // Variable para almacenar el ID de la cita seleccionada
