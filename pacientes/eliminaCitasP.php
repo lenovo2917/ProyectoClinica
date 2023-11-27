@@ -38,11 +38,11 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             $sql="UPDATE citas set ESTATUS='Cancelada' WHERE IDC='".$id."'";
             $resultado = $conexion->query($sql);
             if ($resultado) {
-                $_SESSION['mensaje_eliminar_cita'] = '*La cita fue eliminada exitosamente.*';
+                $_SESSION['mensaje_eliminar_cita'] = ' *La cita fue eliminada exitosamente.*';
                 header("Location: consultaCitasP.php");
                 exit();
             } else {
-                $_SESSION['mensaje_eliminar_cita'] = '*La cita no se pudo eliminar.*';
+                $_SESSION['mensaje_eliminar_cita'] = ' *La cita no se pudo eliminar.*';
                 header("Location: consultaCitasP.php");
                 exit();
             }

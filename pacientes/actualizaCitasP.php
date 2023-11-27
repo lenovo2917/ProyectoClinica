@@ -43,11 +43,11 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             $sql="UPDATE citas set fechaC='".$fecha."', HoraC='".$hora."', sintomasC='".$sintomas."', descripcionC='".$descripcion."' WHERE IDC='".$id."'";
             $resultado = $conexion->query($sql);
             if ($resultado) {
-                $_SESSION['mensaje_actualizar_cita'] = '*La cita fue actualizada exitosamente.*';
+                $_SESSION['mensaje_actualizar_cita'] = ' *La cita fue actualizada exitosamente.*';
                 header("Location: consultaCitasP.php");
                 exit();
             } else {
-                $_SESSION['mensaje_actualizar_cita'] = '*La cita no se pudo actualizar.*';
+                $_SESSION['mensaje_actualizar_cita'] = ' *La cita no se pudo actualizar.*';
                 header("Location: consultaCitasP.php");
                 exit();
             }

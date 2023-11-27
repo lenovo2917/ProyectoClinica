@@ -24,6 +24,8 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
   <!--ESTILOS CSS-->
+  <link rel="stylesheet" href="../fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="../fontawesome/css/all.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="../img/web.png" type="img">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../css/nav2.css">
@@ -173,17 +175,17 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
         <?php
 // Verifica si hay un mensaje de eliminación de cita
 if (isset($_SESSION['mensaje_eliminar_cita'])) {
-    echo "<div class='alert alert-success' style='color:red;'>" . $_SESSION['mensaje_eliminar_cita'] . "</div>";
+  echo "<div style='color: red;' class='alert alert-dismissible fade show' role='alert'>" . $_SESSION['mensaje_eliminar_cita'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     // Limpia la variable de sesión después de mostrar el mensaje
     unset($_SESSION['mensaje_eliminar_cita']);
 }
 if (isset($_SESSION['mensaje_actualizar_cita'])) {
-  echo "<div class='alert alert-success' style='color:blue;'>" . $_SESSION['mensaje_actualizar_cita'] . "</div>";
+  echo "<div style='color: blue;' class='alert  alert-dismissible fade show' role='alert'>" . $_SESSION['mensaje_actualizar_cita'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
   // Limpia la variable de sesión después de mostrar el mensaje
   unset($_SESSION['mensaje_actualizar_cita']);
 }
 if (isset($_SESSION['mensaje_crear_cita'])) {
-  echo "<div class='alert alert-success' style='color:green;'>" . $_SESSION['mensaje_crear_cita'] . "</div>";
+  echo "<div style='color: green;' class='alert alert-dismissible fade show' role='alert'>" . $_SESSION['mensaje_crear_cita'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
   // Limpia la variable de sesión después de mostrar el mensaje
   unset($_SESSION['mensaje_crear_cita']);
 }
@@ -212,7 +214,7 @@ if (isset($_SESSION['mensaje_crear_cita'])) {
 
 
   <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-  <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+  <script src="../bootstrap/js/bootstrap.min.js"></script>
   <script src="../js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>

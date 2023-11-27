@@ -39,11 +39,11 @@ if ($resultObtenerIDP->num_rows === 1) {
 
     // Verifica si la inserción fue exitosa
     if ($sql->affected_rows > 0) {
-        $_SESSION['mensaje_crear_cita'] = '*La cita fue creada exitosamente.*';
+        $_SESSION['mensaje_crear_cita'] = ' *La cita fue creada exitosamente.*';
                 header("Location: ../pacientes/consultaCitasP.php");
                 exit();
     } else {
-        $_SESSION['mensaje_crear_cita'] = '*La cita no pudo ser creada.*';
+        $_SESSION['mensaje_crear_cita'] = ' *La cita no pudo ser creada.*';
                 header("Location: ../pacientes/consultaCitasP.php");
                 exit();
     }
