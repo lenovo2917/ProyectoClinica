@@ -19,17 +19,13 @@ $contrasenaUsuario = isset($_POST["contrasenaUsuario"]) ? $_POST["contrasenaUsua
 $alergiasUsuario = isset($_POST["alergiasUsuario"]) ? $_POST["alergiasUsuario"] : null;
 $generoUsuario = isset($_POST["generoUsuario"]) ? $_POST["generoUsuario"] : null;
 $tipoSangreUsuario = isset($_POST["tipoSangreUsuario"]) ? $_POST["tipoSangreUsuario"] : null;
+$iddUsuario = isset($_POST["iddUsuario"]) ? $_POST["iddUsuario"] : null; //IDD de secretario en la BD
 /*
-
-
-
-
-
 
 $IDAUsuario = isset($_POST["IDAU"]) ? $_POST["IDAU"] : null;
 $EspecialidadIDUsuario = isset($_POST["especialidadIDU"]) ? $_POST["especialidadIDU"] : null;
 */
-// Agrega mensajes de depuración
+// Agrega mensajes de depuración (Solo imprime cuando hay errores)
 echo "ID Doctor: $idUsuarioD<br>";
 echo "ID Secretario: $idUsuarioS<br>";
 echo "Nombre Usuario: $nombreUsuario<br>";
@@ -54,10 +50,8 @@ if (is_numeric($idUsuarioD)) {
             ContrasenaD = '$contrasenaUsuario',
             AlergiasD = '$alergiasUsuario',
             GeneroD = '$generoUsuario',
-            TipoSangreD = '$tipoSangreUsuario'/*,
-
-            IDA = '$IDAUsuario',
-            EspecialidadD = '$EspecialidadIDUsuario',*/
+            TipoSangreD = '$tipoSangreUsuario'
+            /*EspecialidadD = '$EspecialidadIDUsuario',*/
         WHERE IDD = $idUsuarioD";
 
         $resultUpdateDoctor = $dp->query($sqlUpdateDoctor);
@@ -83,19 +77,11 @@ if (is_numeric($idUsuarioD)) {
         $sqlUpdateSecretario = "UPDATE secretarios SET 
             NombreCompletoS = '$nombreUsuario',
             CURPS = '$CURPUsuario',
-            FechaNacimientoS = '$fechaNacimientoUsuario'
-            /*EstatusS = '$estatusUsuario', ///////////////////////////////////////
-            TipoSangreD = '$tipoSangreUsuario',
-            GeneroD = '$generoUsuario',
-            
-            AlergiasD = '$alergiasUsuario',
-            TelefonoD = '$telefonoUsuario',
-            CorreoD = '$correoUsuario',
-            CedulaD = '$cedulaUsuario',
-            ContrasenaD = '$contrasenaUsuario',
-            IDA = '$IDAUsuario',
-            EspecialidadD = '$EspecialidadIDUsuario',*/
-             WHERE IDS = $idUsuarioS";
+            FechaNacimientoS = '$fechaNacimientoUsuario',
+            IDD = '$iddUsuario'
+        WHERE IDS = $idUsuarioS";
+
+
         $resultUpdateSecretario = $dp->query($sqlUpdateSecretario);
 
         if ($resultUpdateSecretario === false) {

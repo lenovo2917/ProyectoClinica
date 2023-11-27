@@ -136,7 +136,7 @@
                                             alt="Descripción de la imagen" />
                                     </div>
                                     <div class="col-5 text-center">
-                                        <h2><i class="fa-solid fa-users"></i> Modificación de Usuarios</h2> <!---->
+                                        <h2><i class="fa-solid fa-users"></i> Eliminación de Usuarios</h2> <!---->
                                     </div>
                                     <div class="col-3 text-end">
                                         <img src="../img/LOGO.png" style="width: 200px; height: 190px;"
@@ -236,7 +236,7 @@
                                 </div>
                             </div>
                             
-                            <!--
+                            
                             <div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Estatus:</label>
@@ -247,10 +247,10 @@
                                     </select>
                                 </div>
                             </div>
-                            -->
+                            
                             
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
-                                <button type="submit" name="submit">Modificar Usuario</button>
+                                <button type="submit" name="submit">Eliminar Usuario</button>
                             </div>
 
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
