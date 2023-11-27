@@ -19,13 +19,18 @@ $contrasenaUsuario = isset($_POST["contrasenaUsuario"]) ? $_POST["contrasenaUsua
 $alergiasUsuario = isset($_POST["alergiasUsuario"]) ? $_POST["alergiasUsuario"] : null;
 $generoUsuario = isset($_POST["generoUsuario"]) ? $_POST["generoUsuario"] : null;
 $tipoSangreUsuario = isset($_POST["tipoSangreUsuario"]) ? $_POST["tipoSangreUsuario"] : null;
-$iddUsuario = isset($_POST["iddUsuario"]) ? $_POST["iddUsuario"] : null; //IDD de secretario en la BD
+$iddUsuario = isset($_POST["IDDUsuario"]) ? $_POST["IDDUsuario"] : null; //IDD de secretario en la BD
 /*
+
+
+
+
+
 
 $IDAUsuario = isset($_POST["IDAU"]) ? $_POST["IDAU"] : null;
 $EspecialidadIDUsuario = isset($_POST["especialidadIDU"]) ? $_POST["especialidadIDU"] : null;
 */
-// Agrega mensajes de depuración 
+// Agrega mensajes de depuración
 echo "ID Doctor: $idUsuarioD<br>";
 echo "ID Secretario: $idUsuarioS<br>";
 echo "Nombre Usuario: $nombreUsuario<br>";
@@ -78,9 +83,15 @@ if (is_numeric($idUsuarioD)) {
             NombreCompletoS = '$nombreUsuario',
             CURPS = '$CURPUsuario',
             FechaNacimientoS = '$fechaNacimientoUsuario',
-            IDD = '$iddUsuario'
+            EstatusS = '$estatusUsuario',
+            TipoSangreS = '$tipoSangreUsuario',
+            GeneroS = '$generoUsuario',
+            AlergiasS = '$alergiasUsuario',
+            TelefonoS = '$telefonoUsuario',
+            CorreoS = '$correoUsuario',
+            IDD = $iddUsuario,
+            ContrasenaS = '$contrasenaUsuario'
         WHERE IDS = $idUsuarioS";
-
 
         $resultUpdateSecretario = $dp->query($sqlUpdateSecretario);
 
