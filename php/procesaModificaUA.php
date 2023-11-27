@@ -25,7 +25,7 @@ $iddUsuario = isset($_POST["iddUsuario"]) ? $_POST["iddUsuario"] : null; //IDD d
 $IDAUsuario = isset($_POST["IDAU"]) ? $_POST["IDAU"] : null;
 $EspecialidadIDUsuario = isset($_POST["especialidadIDU"]) ? $_POST["especialidadIDU"] : null;
 */
-// Agrega mensajes de depuración (Solo imprime cuando hay errores)
+// Agrega mensajes de depuración 
 echo "ID Doctor: $idUsuarioD<br>";
 echo "ID Secretario: $idUsuarioS<br>";
 echo "Nombre Usuario: $nombreUsuario<br>";
