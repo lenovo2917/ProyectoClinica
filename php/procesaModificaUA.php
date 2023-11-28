@@ -19,6 +19,7 @@ $contrasenaUsuario = isset($_POST["contrasenaUsuario"]) ? $_POST["contrasenaUsua
 $alergiasUsuario = isset($_POST["alergiasUsuario"]) ? $_POST["alergiasUsuario"] : null;
 $generoUsuario = isset($_POST["generoUsuario"]) ? $_POST["generoUsuario"] : null;
 $tipoSangreUsuario = isset($_POST["tipoSangreUsuario"]) ? $_POST["tipoSangreUsuario"] : null;
+$iddUsuario = isset($_POST["IDDUsuario"]) ? $_POST["IDDUsuario"] : null; //IDD de secretario en la BD
 /*
 
 
@@ -54,10 +55,8 @@ if (is_numeric($idUsuarioD)) {
             ContrasenaD = '$contrasenaUsuario',
             AlergiasD = '$alergiasUsuario',
             GeneroD = '$generoUsuario',
-            TipoSangreD = '$tipoSangreUsuario'/*,
-
-            IDA = '$IDAUsuario',
-            EspecialidadD = '$EspecialidadIDUsuario',*/
+            TipoSangreD = '$tipoSangreUsuario'
+            /*EspecialidadD = '$EspecialidadIDUsuario',*/
         WHERE IDD = $idUsuarioD";
 
         $resultUpdateDoctor = $dp->query($sqlUpdateDoctor);
@@ -83,19 +82,17 @@ if (is_numeric($idUsuarioD)) {
         $sqlUpdateSecretario = "UPDATE secretarios SET 
             NombreCompletoS = '$nombreUsuario',
             CURPS = '$CURPUsuario',
-            FechaNacimientoS = '$fechaNacimientoUsuario'
-            /*EstatusS = '$estatusUsuario', ///////////////////////////////////////
-            TipoSangreD = '$tipoSangreUsuario',
-            GeneroD = '$generoUsuario',
-            
-            AlergiasD = '$alergiasUsuario',
-            TelefonoD = '$telefonoUsuario',
-            CorreoD = '$correoUsuario',
-            CedulaD = '$cedulaUsuario',
-            ContrasenaD = '$contrasenaUsuario',
-            IDA = '$IDAUsuario',
-            EspecialidadD = '$EspecialidadIDUsuario',*/
-             WHERE IDS = $idUsuarioS";
+            FechaNacimientoS = '$fechaNacimientoUsuario',
+            EstatusS = '$estatusUsuario',
+            TipoSangreS = '$tipoSangreUsuario',
+            GeneroS = '$generoUsuario',
+            AlergiasS = '$alergiasUsuario',
+            TelefonoS = '$telefonoUsuario',
+            CorreoS = '$correoUsuario',
+            IDD = $iddUsuario,
+            ContrasenaS = '$contrasenaUsuario'
+        WHERE IDS = $idUsuarioS";
+
         $resultUpdateSecretario = $dp->query($sqlUpdateSecretario);
 
         if ($resultUpdateSecretario === false) {

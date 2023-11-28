@@ -43,42 +43,42 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
                     <div class="doctor-info" style="display: flex; align-items: center; margin-right: 20px;">
                         <?php
-                        if ($_SESSION["Rol"] === 'doctor') {
-                            echo '<span style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Bienvenido Doctor/a ' . $_SESSION["NombreCompleto"] . '</span>';
-                            echo '<span style="margin-right: 10px;"><i class="fas fa-user-md fa-2x"></i></span>';
-                        }
-                        ?>
+                                                if ($_SESSION["Rol"] === 'doctor') {
+                                                    echo '<span style="color: #000000; font-size: 16px; font-weight: bold; letter-spacing: 1px;">Bienvenido Doctor/a ' . $_SESSION["NombreCompleto"] . '</span>';
+                                                    echo '<span style="margin-right: 10px;"><i class="fas fa-user-md fa-2x"></i></span>';
+                                                }
+                                                ?>
                     </div>
 
                     <?php
-                       if(isset($_GET['cerrar_sesion'])) {
-                        // Eliminar las cookies de sesión
-                        if (ini_get("session.use_cookies")) {
-                            $params = session_get_cookie_params();
-                            setcookie(session_name(), '', time() - 42000,
-                                $params["path"], $params["domain"],
-                                $params["secure"], $params["httponly"]
-                            );
-                        }
-                  // Destruir la sesión
-                  session_unset();
-                  session_destroy();
-                  $_SESSION = array();
-                  // Redirigir a la página de inicio de sesión
-                  header("Location:../login.php");
-                  exit();
-              } else if(!isset($_SESSION['sesion_cerrada'])) {
-                echo '
-                <ul class="nav-links">
-                <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
-                style="color: white;">
-                Cerrar Sesión </a>
-            </li>
-            </ul>';
-              }else {   
-          }
-          unset($_SESSION['sesion_cerrada']);
-                        ?>
+                                           if(isset($_GET['cerrar_sesion'])) {
+                                            // Eliminar las cookies de sesión
+                                            if (ini_get("session.use_cookies")) {
+                                                $params = session_get_cookie_params();
+                                                setcookie(session_name(), '', time() - 42000,
+                                                    $params["path"], $params["domain"],
+                                                    $params["secure"], $params["httponly"]
+                                                );
+                                            }
+                                      // Destruir la sesión
+                                      session_unset();
+                                      session_destroy();
+                                      $_SESSION = array();
+                                      // Redirigir a la página de inicio de sesión
+                                      header("Location:../login.php");
+                                      exit();
+                                  } else if(!isset($_SESSION['sesion_cerrada'])) {
+                                    echo '
+                                    <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
+                                    <li><a href="../login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                                    style="color: white;">
+                                    Cerrar Sesión </a>
+                                </li>
+                                </ul>';
+                                  }else {   
+                              }
+                              unset($_SESSION['sesion_cerrada']);
+                                            ?>
                 </nav>
             </div>
         </div>
@@ -91,16 +91,16 @@ if(empty($_SESSION["NombreCompleto"])) {
                     <div class="col-12">
                         <div class="row text-start align-items-center">
                             <div class="col-2 text-center">
-                            <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
-                        </div>
-                        <div class="col-lg-4 doctor-info">
-                            <h3>Información del Doctor</h3>
-                            <h2>Doctor/a:
-                                <?php echo $_SESSION["NombreCompleto"];?>
-        </h2>
-                            <h2>Especialidad:
-                                <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
-        </h2>
+                                <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
+                            </div>
+                            <div class="col-lg-4 doctor-info">
+                                <h3>Información del Doctor</h3>
+                                <h2>Doctor/a:
+                                    <?php echo $_SESSION["NombreCompleto"];?>
+                                </h2>
+                                <h2>Especialidad:
+                                    <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
+                                </h2>
 
                             </div>
                         </div>
@@ -129,138 +129,158 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
 
                     <div class="col-12 px-5">
-                                <div class="col-12">
-                                    <form class="needs-validation row mb-1" novalidate method="post">
-                                        <label for="nombrePaciente" class="col-2 col-form-label">Buscar por nombre:</label>
-                                        <div class="col-4 text-start">
-                                            <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" required>
-                                            <div class="invalid-feedback">Campo obligatorio *</div>
-                                        </div>
-                                        
-                                        <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
-                                        <div class="col-2 text-start">
-                                            <select class="form-select" aria-label="" name="mes">
-                                                <option value="">Seleccione un mes</option>
-                                                <option value="enero">enero</option>
-                                                <option value="febrero">febrero</option>
-                                                <option value="marzo">marzo</option>
-                                                <option value="abril">abril</option>
-                                                <option value="mayo">mayo</option>
-                                                <option value="junio">junio</option>
-                                                <option value="julio">julio</option>
-                                                <option value="agosto">agosto</option>
-                                                <option value="septiempre">septiempre</option>
-                                                <option value="octubre">octubre</option>
-                                                <option value="noviembre">noviembre</option>
-                                                <option value="diciembre">diciembre</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-1">
-                                            <button id="buscarButton" type="submit" class="btn my-custom-button">Buscar</button>
-                                        </div>
-                                    </form>
+                        <div class="col-12">
+                            <form class="needs-validation row mb-1" novalidate method="post">
+                                <label for="nombrePaciente" class="col-2 col-form-label">Buscar por nombre:</label>
+                                <div class="col-4 text-start">
+                                    <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente"
+                                        required>
+                                    <div class="invalid-feedback">Campo obligatorio *</div>
                                 </div>
-                                <div class="alerta">          
-                <div class="col-12">
-                    <div class="row my-2">
-                        <div class="col-12 my-2">
-                            <h5 class="">Pacientes:</h5>
+
+                                <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
+                                <div class="col-2 text-start">
+                                    <select class="form-select" aria-label="" name="mes">
+                                        <option value="">Seleccione un mes</option>
+                                        <option value="enero">enero</option>
+                                        <option value="febrero">febrero</option>
+                                        <option value="marzo">marzo</option>
+                                        <option value="abril">abril</option>
+                                        <option value="mayo">mayo</option>
+                                        <option value="junio">junio</option>
+                                        <option value="julio">julio</option>
+                                        <option value="agosto">agosto</option>
+                                        <option value="septiempre">septiempre</option>
+                                        <option value="octubre">octubre</option>
+                                        <option value="noviembre">noviembre</option>
+                                        <option value="diciembre">diciembre</option>
+                                    </select>
+                                </div>
+                                <div class="col-1">
+                                    <button id="buscarButton" type="submit" class="btn my-custom-button">Buscar</button>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-12">
-                    <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
-                        style="background-color: white">
-                        <div style="height: 400px; overflow-y: auto;">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="col-1">#</th>
-                                        <th class="col-3">Paciente</th>
-                                        <th class="col-2">Fecha</th>
-                                        <th class="col-2">Estado</th>
-                                        <th class="col-4">Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Aquí se cargarán las citas -->         
-                                    <?php
-include '../php/acceso.php';
-
-$query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
-LEFT JOIN pacientes p ON c.IDP = p.IDP
-WHERE c.IDD = '" . $_SESSION["ID"] . "'";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombrePaciente = $_POST['nombrePaciente'];
-    $mesSeleccionado = $_POST['mes'];
-
-    if (!empty($nombrePaciente)) {
-        $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
-    }
-
-    if (isset($_POST['mes'])) {
-        $mesSeleccionado = $_POST['mes'];
-
-        $meses = [
-            'enero' => '01',
-            'febrero' => '02',
-            'marzo' => '03',
-            'abril' => '04',
-            'mayo' => '05',
-            'junio' => '06',
-            'julio' => '07',
-            'agosto' => '08',
-            'septiempre' => '09',
-            'octubre' => '10',
-            'noviembre' => '11',
-            'diciembre' => '12'
-        ];
-
-        if (isset($meses[$mesSeleccionado])) {
-            $mesNumero = $meses[$mesSeleccionado];
-            $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
-        } else {
-            // Handle the case where $mesSeleccionado is not a valid month
-        }
-    }
-}
-
-// Agrega la condición para excluir citas con estado 'finalizada' o 'cancelada'
-$query .= " AND c.ESTATUS NOT IN ('finalizada', 'Cancelada')";
-
-// Ejecutar la consulta
-$result = mysqli_query($dp, $query);
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
-    echo "<td>" . $row['IDC'] . "</td>";
-    echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
-    echo "<td>" . $row['fechaC'] . "</td>";
-    echo "<td>" . $row['ESTATUS'] . "</td>";
-    echo '<td class="text-center">';
-    
-    // Habilitar todos los botones ya que las citas finalizadas o canceladas no se mostrarán
-    echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
-    echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
-    echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
-    echo "</tr>";
-}
-?>
-
-                             
-
-                                </tbody>
-                            </table>
+                        <div class="alerta">
+                            <div class="col-12">
+                                <div class="row my-2">
+                                    <div class="col-12 my-2">
+                                        <h5 class="">Pacientes:</h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-12">
+                            <div class="alerta">
+                                <div class="row mb-4 border border-1 border-secondary border-opacity-75 rounded-1"
+                                    style="background-color: white">
+                                    <div style="height: 400px; overflow-y: auto;">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-1">#</th>
+                                                    <th class="col-3">Paciente</th>
+                                                    <th class="col-2">Fecha</th>
+                                                    <th class="col-2">Estado</th>
+                                                    <th class="col-4">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Aquí se cargarán las citas -->
+                                                <?php
+                                                include '../php/acceso.php';
+                                                
+                                                $query = "SELECT c.IDC, p.NombreCompletoP, c.fechaC, c.ESTATUS FROM citas c
+                                                LEFT JOIN pacientes p ON c.IDP = p.IDP
+                                                WHERE c.IDD = '" . $_SESSION["ID"] . "'";
+                                                
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    $nombrePaciente = $_POST['nombrePaciente'];
+                                                    $mesSeleccionado = $_POST['mes'];
+                                                
+                                                    if (!empty($nombrePaciente)) {
+                                                        $query .= " AND p.NombreCompletoP LIKE '%$nombrePaciente%'";
+                                                    }
+                                                
+                                                    if (isset($_POST['mes'])) {
+                                                        $mesSeleccionado = $_POST['mes'];
+                                                
+                                                        $meses = [
+                                                            'enero' => '01',
+                                                            'febrero' => '02',
+                                                            'marzo' => '03',
+                                                            'abril' => '04',
+                                                            'mayo' => '05',
+                                                            'junio' => '06',
+                                                            'julio' => '07',
+                                                            'agosto' => '08',
+                                                            'septiempre' => '09',
+                                                            'octubre' => '10',
+                                                            'noviembre' => '11',
+                                                            'diciembre' => '12'
+                                                        ];
+                                                
+                                                        if (isset($meses[$mesSeleccionado])) {
+                                                            $mesNumero = $meses[$mesSeleccionado];
+                                                            $query .= " AND MONTH(c.fechaC) = '$mesNumero'";
+                                                        } else {
+                                                            // Handle the case where $mesSeleccionado is not a valid month
+                                                        }
+                                                    }
+                                                }
+                                                
+                                                // Agrega la condición para excluir citas con estado 'finalizada' o 'cancelada'
+                                                $query .= " AND c.ESTATUS NOT IN ('finalizada', 'Cancelada')";
+                                                
+                                                $result = mysqli_query($dp, $query);
+                                                
+                                                $result = mysqli_query($dp, $query);
+                                                
+                                                if (mysqli_num_rows($result) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        echo "<tr>";
+                                                        echo "<td>" . $row['IDC'] . "</td>";
+                                                        echo "<td>" . $row['NombreCompletoP'] . "</td>"; 
+                                                        echo "<td>" . $row['fechaC'] . "</td>";
+                                                        echo "<td>" . $row['ESTATUS'] . "</td>";
+                                                        echo '<td class="text-center">';
+                                                        
+                                                        // Habilitar todos los botones ya que las citas finalizadas o canceladas no se mostrarán
+                                                        echo '<button class="btn-aceptar" data-id="' . $row['IDC'] . '">Aceptar</button>';
+                                                        echo '<button class="btn-rechazar" data-id="' . $row['IDC'] . '">Rechazar</button>';
+                                                        echo '<button type="button" class="btn btn-trasladar" data-bs-toggle="modal" data-bs-target="#miModal" data-cita-id="' . $row['IDC'] . '">Trasladar</button>';
+                                                        echo "</tr>";
+                                                    }
+                                                } else {
+                                                    echo '<div class="alerta">';
+                                                    echo '<div class="col-12">';
+                                                    echo '<div class="row my-2">';
+                                                    echo '<div class="col-12 my-2">';
+                                                    echo '</div>';
+                                                    echo '</div>';
+                                                    echo '<div class="alert alert-danger fade show" role="alert">';
+                                                echo '<strong>No hay pacientes</strong>';
+                                                echo '</div>';
+                                                    echo '</div>';
+                                                    echo '</div>';
+                                                }
+                                                
+                                                
+                                                ?>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div class="prueba">
                 </div>
-                <div class="col-1"></div>
             </div>
-        </div class="prueba">
-    </div>
-    </div>
-    </div>
+        </div>
     </div>
     <div class="modal" tabindex="-1" id="miModal">
         <div class="modal-dialog">
