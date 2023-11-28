@@ -23,39 +23,31 @@ if (
 
     $stmt = $dp->prepare($sql);
 
-    // Verificar si la preparación de la consulta fue exitosa
     if ($stmt === false) {
-        // Manejar el error
         session_start();
-        $_SESSION['mensajeCorrecto'] = "*Error en la preparación de la consulta*". $dp->error;
+        $_SESSION['mensajeError'] = "*Error en la preparación de la consulta*". $dp->error;
         header("Location: ../secretarias/consultaCitasS.php");
         exit();
     }
 
-    // Vincular parámetros y ejecutar la consulta
     $stmt->bind_param("ssssii", $fechaC, $horaC, $sintomasC, $descripcionC, $idPaciente, $idCita);
     $result = $stmt->execute();
 
-    // Verificar si la consulta se ejecutó correctamente
     if ($result === false) {
-        // Manejar el error
         session_start();
-        $_SESSION['mensajeInorrecto'] = "*Error al actualizar la cita*". $dp->error;
+        $_SESSION['mensajeError'] = "*Error al actualizar la cita*". $dp->error;
         header("Location: ../secretarias/consultaCitasS.php");
         exit();
     } else {
-        // Todo está bien, redirigir con mensaje de éxito
         session_start();
-        $_SESSION['mensajeCorrecto'] = "*La cita ha sido modificada correctamente*";
+        $_SESSION['mensajeModificacion'] = "*La cita ha sido modificada correctamente*";
         header("Location: ../secretarias/consultaCitasS.php");
         exit();
     }
 
-    // Cerrar el statement y la conexión
     $stmt->close();
     $dp->close();
 } else {
-    // Redirigir si no se recibieron todos los datos esperados
     header("Location: ../secretarias/consultaCitasS.php");
     exit();
 }

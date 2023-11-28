@@ -20,13 +20,12 @@ if (is_numeric($idP)) {
 
         if ($resultUpdatePaciente === false) {
             session_start();
-            $_SESSION['mensaje'] = "*Error al realizar el borrado lógico del paciente:  $nombrePaciente*". $dp->error;
+            $_SESSION['mensajeError'] = "*No se ha podido eliminar el paciente.*";
+            header("Location: ../secretarias/muestraPacientesS.php");
+            exit();
         } else {
-            // Establecer el mensaje en una variable de sesión
             session_start();
-            $_SESSION['mensaje'] = "*El paciente $nombrePaciente se ha eliminado correctamente.*";
-
-            // Redirige al índice después de la modificación
+            $_SESSION['mensajeEliminacion'] = "*El paciente $nombrePaciente se han eliminado correctamente.*";
             header("Location: ../secretarias/muestraPacientesS.php");
             exit();
         }

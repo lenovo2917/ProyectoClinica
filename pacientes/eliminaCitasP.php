@@ -37,16 +37,14 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
             $sql="UPDATE citas set ESTATUS='Cancelada' WHERE IDC='".$id."'";
             $resultado = $conexion->query($sql);
-            if($resultado){
-                echo "<script language='JavaScript'>
-                alert('La cita fue eliminada exitosamente.');
-                location.assign('consultaCitasP.php');
-                </script>";
-            }else{
-                echo "<script language='JavaScript'>
-                alert('La cita no se pudo eliminar.');
-                location.assign('consultaCitasP.php');
-                </script>";
+            if ($resultado) {
+                $_SESSION['mensaje_eliminar_cita'] = ' *La cita fue eliminada exitosamente.*';
+                header("Location: consultaCitasP.php");
+                exit();
+            } else {
+                $_SESSION['mensaje_eliminar_cita'] = ' *La cita no se pudo eliminar.*';
+                header("Location: consultaCitasP.php");
+                exit();
             }
 
          }else{
@@ -150,10 +148,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <span><?php echo htmlspecialchars($descripcion);?></span>
     </div>
 
-    <input type="submit" name="enviar" value="Eliminar cita" style="background-color: #176b87; color: #fff; padding-top: 8px;
-    margin-top: 100px; margin-right: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">
+    <input type="submit" name="enviar" value="Eliminar cita" style="background-color: #176b87; color: #fff; float: right; padding-top: 8px;
+    margin-top: 150px; margin-right: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">
     <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-    margin-top: 100px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">Regresar</a>
+    margin-top: 150px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">Regresar</a>
     </form>
     </div>
 
@@ -170,6 +168,5 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
     <script src="../js/eliminaCitas.js"></script>
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
-
 </body>
 </html>

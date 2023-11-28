@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/nav2.css">
     <link rel="stylesheet" type="text/css" href="../css/doctor.css">
-
+    <title>Consulta de Citas</title>
 </head>
 
 <body>
@@ -121,13 +121,12 @@
         }
     ?>
 
-
     <!--Main o contenido-->
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="container-fluid formato">
-                    <form class="form" method="post" action="../php/procesaModificaUA.php">                        
+                    <form class="form" method="post" action="../php/procesaModificaUA.php">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row align-items-center">
@@ -136,7 +135,7 @@
                                             alt="Descripción de la imagen" />
                                     </div>
                                     <div class="col-5 text-center">
-                                        <h2><i class="fa-solid fa-users"></i> Modificación de Usuarios</h2> <!---->
+                                        <h2><i class="fa-solid fa-users"></i> Detalles de Usuarios</h2> <!---->
                                     </div>
                                     <div class="col-3 text-end">
                                         <img src="../img/LOGO.png" style="width: 200px; height: 190px;"
@@ -145,117 +144,68 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="idDoctor" value="<?php echo $idUsuarioD; ?>"> <!--Estos id son para que los tome procesaModificaUA.php y sepa qué usuario tomar-->
-                            <input type="hidden" name="idSecretario" value="<?php echo $idUsuarioS; ?>">
-
                             <div class="col-8" style="text-align: left;">
                                 <label class="form-label">Nombre Completo:</label>
-                                <input class="form-control" type="text" name="nombreUsuario" value="<?php echo isset(
-                                    $rowUsuario["nombreU"]) ? $rowUsuario["nombreU"] : ''; ?>" required />
+                                <input class="form-control" type="text" value="<?php echo isset($rowUsuario["nombreU"]) ? $rowUsuario["nombreU"] : ''; ?>" readonly />
                             </div>
-
 
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">CURP:</label>
-                                <input class="form-control" type="text" name="CURPUsuario" value ="<?php echo isset(
-                                    $rowUsuario["CURPU"]) ? $rowUsuario["CURPU"] : ''; ?>" required />
+                                <input class="form-control" type="text" value="<?php echo isset($rowUsuario["CURPU"]) ? $rowUsuario["CURPU"] : ''; ?>" readonly />
                             </div>
 
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Fecha de Nacimiento:</label>
-                                <input class="form-control" type="date" name="fNUsuario" value ="<?php echo isset(
-                                    $rowUsuario["fNU"]) ? $rowUsuario["fNU"] : ''; ?>" required />
+                                <input class="form-control" type="date" value="<?php echo isset($rowUsuario["fNU"]) ? $rowUsuario["fNU"] : ''; ?>" readonly />
                             </div>
-                            
+
                             <div class="col-4" style="text-align: left;">
                                 <?php if (!empty($idUsuarioD)) { ?>
                                     <label class="form-label">Cédula Profesional:</label>
-                                    <input class="form-control" type="text" name="cedulaUsuario" value ="<?php echo isset(
-                                        $rowUsuario["cedulaU"]) ? $rowUsuario["cedulaU"] : ''; ?>" required />
+                                    <input class="form-control" type="text" value="<?php echo isset($rowUsuario["cedulaU"]) ? $rowUsuario["cedulaU"] : ''; ?>" readonly />
                                 <?php }elseif(!empty($idUsuarioS)) { ?>
                                     <label class="form-label">ID Doctor:</label>
-                                    <input class="form-control" type="text" name="iddUsuario" value ="<?php echo isset(
-                                        $rowUsuario["IDDU"]) ? $rowUsuario["IDDU"] : ''; ?>" required />
+                                    <input class="form-control" type="text" value="<?php echo isset($rowUsuario["IDDU"]) ? $rowUsuario["IDDU"] : ''; ?>" readonly />
                                 <?php } ?>
                             </div>
 
-
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Télefono:</label>
-                                <input class="form-control" type="tel" name="telefonoUsuario" value ="<?php echo isset(
-                                    $rowUsuario["telefonoU"]) ? $rowUsuario["telefonoU"] : ''; ?>" required />
-                            </div>
-                            <!--maxlength="10"-->
-                            <div class="col-8" style="text-align: left;">
-                                <label class="form-label">Correo:</label>
-                                <input class="form-control" type="email" name="correoUsuario" value ="<?php echo isset(
-                                    $rowUsuario["correoU"]) ? $rowUsuario["correoU"] : ''; ?>" required />
-                            </div>
-                            <!--maxlength="25"-->
-                            <div class="col-4" style="text-align: left;">
-                                <label class="form-label">Contraseña:</label>
-                                <input class="form-control" type="password" name="contrasenaUsuario" value ="<?php echo isset(
-                                    $rowUsuario["contrasenaU"]) ? $rowUsuario["contrasenaU"] : ''; ?>" required
-                                    maxlength="8" placeholder="********" />
-                            </div>
-                            <!--maxlength="8"-->
-                            <div class="col-4" style="text-align: left;">
-                                <label class="form-label">Alergias:</label>
-                                <input class="form-control" type="text" name="alergiasUsuario" value ="<?php echo isset(
-                                    $rowUsuario["alergiasU"]) ? $rowUsuario["alergiasU"] : ''; ?>" required />
+                                <input class="form-control" type="tel" value="<?php echo isset($rowUsuario["telefonoU"]) ? $rowUsuario["telefonoU"] : ''; ?>" readonly />
                             </div>
 
+                            <div class="col-8" style="text-align: left;">
+                                <label class="form-label">Correo:</label>
+                                <input class="form-control" type="email" value="<?php echo isset($rowUsuario["correoU"]) ? $rowUsuario["correoU"] : ''; ?>" readonly />
+                            </div>
+
+                            <div class="col-4" style="text-align: left;">
+                                <label class="form-label">Contraseña:</label>
+                                <input class="form-control" type="password" value="<?php echo isset($rowUsuario["contrasenaU"]) ? $rowUsuario["contrasenaU"] : ''; ?>" readonly maxlength="8" placeholder="********" />
+                            </div>
+
+                            <div class="col-4" style="text-align: left;">
+                                <label class="form-label">Alergias:</label>
+                                <input class="form-control" type="text" value="<?php echo isset($rowUsuario["alergiasU"]) ? $rowUsuario["alergiasU"] : ''; ?>" readonly />
+                            </div>
 
                             <div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Tipo de sangre:</label>
-                                    <select name="tipoSangreUsuario" class="formato2" style="width: 100%;">
-                                        <option value="" disabled selected>Tipo de sangre *</option>
-                                        <option value="A+" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "A+" ? 'selected' : ''; ?>>A+</option>
-                                        <option value="A-" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "A-" ? 'selected' : ''; ?>>A-</option>
-                                        <option value="B+" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "B+" ? 'selected' : ''; ?>>B+</option>
-                                        <option value="B-" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "B-" ? 'selected' : ''; ?>>B-</option>
-                                        <option value="O+" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "O+" ? 'selected' : ''; ?>>O+</option>
-                                        <option value="O-" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "O-" ? 'selected' : ''; ?>>O-</option>
-                                        <option value="AB+" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "AB+" ? 'selected' : ''; ?>>AB+</option>
-                                        <option value="AB-" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "AB-" ? 'selected' : ''; ?>>AB-</option>
-                                    </select>
+                                    <input class="form-control" type="text" value="<?php echo isset($rowUsuario["tipoSangreU"]) ? $rowUsuario["tipoSangreU"] : ''; ?>" readonly />
                                 </div>
                             </div>
-
 
                             <div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Género:</label>
-                                    <select name="generoUsuario" class="formato2" style="width: 100%;">
-                                        <option value="" disabled selected>Género</option>
-                                        <option value="F" <?php echo isset($rowUsuario["generoU"]) && $rowUsuario["generoU"] == "F" ? 'selected' : ''; ?>>F</option>
-                                        <option value="M" <?php echo isset($rowUsuario["generoU"]) && $rowUsuario["generoU"] == "M" ? 'selected' : ''; ?>>M</option>
-                                        <option value="Otro" <?php echo isset($rowUsuario["generoU"]) && $rowUsuario["generoU"] == "Otro" ? 'selected' : ''; ?>>Otro</option>
-                                    </select>
+                                    <input class="form-control" type="text" value="<?php echo isset($rowUsuario["generoU"]) ? $rowUsuario["generoU"] : ''; ?>" readonly />
                                 </div>
-                            </div>
-                            
-                            <!--
-                            <div class="col-4" style="text-align: left;">
-                                <div class="form-group">
-                                    <label class="form-label">Estatus:</label>
-                                    <select name="estatusUsuario" class="formato2" style="width: 100%;">
-                                        <option value="" disabled selected>Estatus</option>
-                                        <option value="Activo" <?php echo isset($rowUsuario["estatusU"]) && $rowUsuario["estatusU"] == "Activo" ? 'selected' : ''; ?>>Activo</option>
-                                        <option value="Inactivo" <?php echo isset($rowUsuario["estatusU"]) && $rowUsuario["estatusU"] == "Inactivo" ? 'selected' : ''; ?>>Inactivo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            -->
-                            
-                            <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
-                                <button type="submit" name="submit">Modificar Usuario</button>
                             </div>
 
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <a href="consultaUsuariosA.php" type="button">
-                                    <button type="button">Cancelar</button>
+                                    <button type="button">Regresar</button>
                                 </a>
                             </div>
                         </div>
@@ -264,14 +214,10 @@
 
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="/main.js"></script>
-
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="/main.js"></script>
             </div>
         </div>
     </div>
 
-    
     <br>
     <!--footer-->
     <footer class="bg-dark text-white text-center py-3">
@@ -280,13 +226,9 @@
     </div>
     </div>
 
-
-
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
     <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
-
+    <script src="../js/creaCitas.js"></script>
 </body>
-
-</html>
 
 </html>

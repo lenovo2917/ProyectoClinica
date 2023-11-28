@@ -37,13 +37,43 @@ session_start();
                         <div class="line2"></div>
                         <div class="line3"></div>
                     </div>
-                    <ul class="nav-links">
-                        <li><a href="../Blog_Medico.html">Inicio</a></li>
-                        <li><a href="creaCitasP.html">Crear cita</a></li>
-                        <li><a href="consultaCitasP.html">Consultar citas</a></li>
-                        <li><a class="login-button" type="button" style="color: white;" href="login.html">Login</a>
-                        </li>
-                      </ul>
+                    <?php 
+                        $rol=$_SESSION['Rol'];
+                        // Incluye barraNavegacion.php antes de llamar a la función generarMenu
+                        include('../php/barraNavegacion.php');
+                  
+                        // Llama a la función generarMenu con el rol del usuario
+                        generarMenu($rol);
+                    ?>
+                    <?php
+                        if(isset($_GET['cerrar_sesion'])) {
+                            // Eliminar las cookies de sesión
+                            if (ini_get("session.use_cookies")) {
+                                $params = session_get_cookie_params();
+                                setcookie(session_name(), '', time() - 42000,
+                                    $params["path"], $params["domain"],
+                                    $params["secure"], $params["httponly"]
+                                );
+                            }
+                            // Destruir la sesión
+                            session_unset();
+                            session_destroy();
+                            $_SESSION = array();
+                            // Redirigir a la página de inicio de sesión
+                            header("Location: login.php");
+                            exit();
+                        } else if(!isset($_SESSION['sesion_cerrada'])) {
+                            echo '
+                            <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
+                            <li><a href="/ProyectoClinica/login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                            style="color: white;">
+                            Cerrar Sesión </a>
+                            </li>
+                            </ul>';
+                        }else {   
+                        }
+                        unset($_SESSION['sesion_cerrada']);
+                    ?>
                 </nav>
             </div>
         </div>

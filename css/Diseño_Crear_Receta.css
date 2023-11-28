@@ -40,11 +40,12 @@ h1, .titulo {
 .nav.nav-tabs .nav-item .nav-link:hover {
     color: #000; /* Cambio de color del texto al pasar el mouse (negro) */
 }
-
-form {
-    background-color: #E4E4E4; /* Fondo gris claro para los formularios */
-    padding: 20px; /* Espacio adicional para que no estén pegados al borde */
+#recetaForm,
+#crearCitaForm {
+    background-color: #E4E4E4;
+    padding: 20px;
 }
+
 
 /* Estilo para la segunda columna de expedientes */
 .expedientes-column {

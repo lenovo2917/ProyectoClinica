@@ -46,7 +46,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                   <div class="line3"></div>
                 </div>
                 <ul class="nav-links">
-                  <?php 
+                <?php 
                  $rol=$_SESSION['Rol'];
                   // Incluye barraNavegacion.php antes de llamar a la función generarMenu
                   include('php/barraNavegacion.php');
@@ -73,8 +73,8 @@ if(empty($_SESSION["NombreCompleto"])) {
                     exit();
                 } else if(!isset($_SESSION['sesion_cerrada'])) {
                   echo '
-                  <ul class="nav-links">
-                  <li><a href="login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                  <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
+                  <li><a href="/ProyectoClinica/login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
                   style="color: white;">
                   Cerrar Sesión </a>
               </li>

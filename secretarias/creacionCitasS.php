@@ -50,6 +50,35 @@ session_start();
                         // Llama a la función generarMenu con el rol del usuario
                         generarMenu($rol);
                     ?>
+                    <?php
+                        if(isset($_GET['cerrar_sesion'])) {
+                            // Eliminar las cookies de sesión
+                            if (ini_get("session.use_cookies")) {
+                                $params = session_get_cookie_params();
+                                setcookie(session_name(), '', time() - 42000,
+                                    $params["path"], $params["domain"],
+                                    $params["secure"], $params["httponly"]
+                                );
+                            }
+                            // Destruir la sesión
+                            session_unset();
+                            session_destroy();
+                            $_SESSION = array();
+                            // Redirigir a la página de inicio de sesión
+                            header("Location: login.php");
+                            exit();
+                        } else if(!isset($_SESSION['sesion_cerrada'])) {
+                            echo '
+                            <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
+                            <li><a href="/ProyectoClinica/login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                            style="color: white;">
+                            Cerrar Sesión </a>
+                            </li>
+                            </ul>';
+                        }else {   
+                        }
+                        unset($_SESSION['sesion_cerrada']);
+                    ?>
                 </nav>
             </div>
         </div>
@@ -60,6 +89,11 @@ session_start();
         <div class="row justify-content-center">
             <div class="col-10">
                 <div class="row mt-3 border border-1  border-opacity-25 rounded-2 " style="background-color: #EEEEEE;">
+                    <div class="col-12 px-5 mt-3">
+                        <a href="/proyectoClinica/Blog_Medico.php"> 
+                            <button type=""><i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i> Ir a inicio</button>
+                        </a>
+                    </div>
                     <div class="col-12">
                         <div class="row text-start align-items-center">
                             <div class="col-4 ps-5 text-start">
@@ -89,6 +123,26 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="col-12 px-1 text-center">
+                    <?php
+                        if(isset($_SESSION['mensajeCreacion'])) {
+                            $mensaje = $_SESSION['mensajeCreacion'];
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                            echo '<i class="fa-solid fa-circle-check" style="color: #198754;"></i>'.$mensaje;
+                            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                            echo '</div>';
+                            unset($_SESSION['mensajeCreacion']);
+                        }
+                        if(isset($_SESSION['mensajeError'])) {
+                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje;
+                            echo '<i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #7d0003;"></i>';
+                            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                            echo '</div>';
+                            unset($_SESSION['mensajeError']);
+                        }
+                    ?>
+                    </div>
 
                     <div class="col-12 px-5">
                         <div class="row ">
@@ -101,13 +155,11 @@ session_start();
                                     <div class="col-2 text-end mt-2">
                                         <button class="" id="buscarP">Buscar</button>
                                     </div>
-                                    <div class="col-12 text-center" id="mensajeError">
-
+                                    <div class="col-12 text-center mt-3" id="mensajeError">
                                     </div>
-                                    <div class="col-12 text-center" id="mensajeResultado"></div>
                                 </div>
                             </div>
-                            <form action="../php/crearCitaS.php" class="form" method="post">
+                            <form id="citaForm" action="../php/procesaCreacionCS.php" class="form" method="post">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 mt-4">
@@ -138,33 +190,33 @@ session_start();
                                             </div>
                                             <label for="" class="col-1 col-form-label">Fecha:</label>
                                             <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="date" id="fechaPacienteF" name="fechaPacienteF"
+                                                <input type="date" required id="fechaPacienteF" name="fechaPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                             <label for="" class="col-1 col-form-label">Hora:</label>
                                             <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="time" id="horaPacienteF" name="horaPacienteF"
+                                                <input type="time" required  id="horaPacienteF" name="horaPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label for="" class=" col-2 col-form-label">Sintomas:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
+                                                <input type="text" required id="sintomasPacienteF" name="sintomasPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                         </div>
                                         <div class="row py-2">
                                             <label class="col-2 mt-1 col-form-label">Descripcion:</label>
                                             <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
+                                                <input type="text" required id="descripcionPacienteF" name="descripcionPacienteF"
                                                     class="form-control-plaintext">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 text-end">
-                                    <input type="submit" name="crearCitaS" value="Crear cita">
+                                <div class="col-12 text-end mb-3">
+                                    <input type="submit" value="Crear cita">
                                 </div>
                             </form>
                         </div>
@@ -185,8 +237,10 @@ session_start();
     </div>
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
-    <script src="../bootstrap/js/bootstrap.esm.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/buscarPaciente.js"></script>
+    <script src="../js/FechaCalendario.js"></script>
+    <script src="../js/creaCitasS.js"></script>
 
 </body>
 
