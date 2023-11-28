@@ -45,9 +45,6 @@
                 </div>
                 <!--Main o contenido-->
                 <!--Main o contenido-->
-                
-       
-
             <div class="container-fluid formatoLogin mt-5 mb-2">
                 <form class="form" action="" method="post">
                 <?php
