@@ -50,6 +50,35 @@ session_start();
                         // Llama a la función generarMenu con el rol del usuario
                         generarMenu($rol);
                     ?>
+                    <?php
+                        if(isset($_GET['cerrar_sesion'])) {
+                            // Eliminar las cookies de sesión
+                            if (ini_get("session.use_cookies")) {
+                                $params = session_get_cookie_params();
+                                setcookie(session_name(), '', time() - 42000,
+                                    $params["path"], $params["domain"],
+                                    $params["secure"], $params["httponly"]
+                                );
+                            }
+                            // Destruir la sesión
+                            session_unset();
+                            session_destroy();
+                            $_SESSION = array();
+                            // Redirigir a la página de inicio de sesión
+                            header("Location: login.php");
+                            exit();
+                        } else if(!isset($_SESSION['sesion_cerrada'])) {
+                            echo '
+                            <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
+                            <li><a href="/ProyectoClinica/login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                            style="color: white;">
+                            Cerrar Sesión </a>
+                            </li>
+                            </ul>';
+                        }else {   
+                        }
+                        unset($_SESSION['sesion_cerrada']);
+                    ?>
                 </nav>
             </div>
         </div>
@@ -96,24 +125,23 @@ session_start();
                     </div>
                     
                     <div class="col-12 px-1 text-center">
-                        
-                        <?php
-                            if(isset($_SESSION['mensajeCreacion'])) {
-                                $mensaje = $_SESSION['mensajeCreacion'];
-                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
-                                echo '<i class="fa-solid fa-circle-check" style="color: #198754;"></i>'.$mensaje;
-                                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-                                echo '</div>';
-                                unset($_SESSION['mensajeCreacion']);
-                            }
-                            if(isset($_SESSION['mensajeError'])) {
-                                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje;
-                                echo '<i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #7d0003;"></i>';
-                                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-                                echo '</div>';
-                                unset($_SESSION['mensajeError']);
-                            }
-                        ?>
+                    <?php
+                        if(isset($_SESSION['mensajeCreacion'])) {
+                            $mensaje = $_SESSION['mensajeCreacion'];
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                            echo '<i class="fa-solid fa-circle-check" style="color: #198754;"></i>'.$mensaje;
+                            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                            echo '</div>';
+                            unset($_SESSION['mensajeCreacion']);
+                        }
+                        if(isset($_SESSION['mensajeError'])) {
+                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$mensaje;
+                            echo '<i class="fa-solid fa-triangle-exclamation fa-sm" style="color: #7d0003;"></i>';
+                            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                            echo '</div>';
+                            unset($_SESSION['mensajeError']);
+                        }
+                    ?>
                     </div>
 
                     <div class="col-12 px-5">
@@ -211,6 +239,7 @@ session_start();
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/buscarPaciente.js"></script>
+    <script src="../js/FechaCalendario.js"></script>
     <script src="../js/creaCitasS.js"></script>
 
 </body>
