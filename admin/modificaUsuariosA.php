@@ -236,7 +236,7 @@
                                 </div>
                             </div>
                             
-                            <!--
+                            
                             <div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Estatus:</label>
@@ -247,7 +247,6 @@
                                     </select>
                                 </div>
                             </div>
-                            -->
                             
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <button type="submit" name="submit">Modificar Usuario</button>
