@@ -58,33 +58,40 @@ $(document).ready(function () {
         }
     }
 
-    // Mostrar datos (como antes)
     function mostrarDatos(data) {
         var tbody = $('#tbodyPacientes');
         tbody.empty(); // Limpiar contenido existente antes de agregar nuevos datos
-
+    
         $.each(data, function (index, paciente) {
             var row = '<tr>' +
                 '<td>' + paciente.nombreCompletoP + '</td>' +
                 '<td class="text-center">' + paciente.fechaC + '</td>' +
                 '<td class="text-center">' + paciente.horaC + '</td>' +
                 '<td class="text-center">' + paciente.estatusC + '</td>' +
-                '<div>'+
-                '<td class="text-center py-3">' +
-                '<a href="detallesCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
-                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+
-                '"><input type="button" class="styled-button" value="Detalles">' +
-                '<a href="modificacionCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
-                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+'&D6='+paciente.IDP+'&D7='+paciente.IDC+
-                '"><input type="button" class="styled-button" value="Modificar">' +
-                '<a href="cancelarCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
-                '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+'&D6='+paciente.IDP+'&D7='+paciente.IDC+
-                '"><input type="button" class="styled-button" value="Eliminar"></a>' +
-                '</td>' +
-                '</div>'+
+                '<td class="text-center py-3">';
+    
+            // Agregar botón de Detalles
+            row += '<a href="detallesCitasS.php?D1=' + paciente.nombreCompletoP + '&D2=' + paciente.fechaC +
+                '&D3=' + paciente.horaC + '&D4=' + paciente.sintomasC + '&D5=' + paciente.descripcionC +
+                '"><input type="button" class="styled-button" value="Detalles"></a>';
+    
+            // Agregar botones de Modificar y Cancelar solo si el estatus es "pendiente"
+            if (paciente.estatusC !== "pendiente") {
+                row += '<a href="modificacionCitasS.php?D1=' + paciente.nombreCompletoP + '&D2=' + paciente.fechaC +
+                    '&D3=' + paciente.horaC + '&D4=' + paciente.sintomasC + '&D5=' + paciente.descripcionC + '&D6=' + paciente.IDP + '&D7=' + paciente.IDC +
+                    '"><input type="button" class="styled-button" value="Modificar"></a>' +
+                    '<a href="cancelarCitasS.php?D1=' + paciente.nombreCompletoP + '&D2=' + paciente.fechaC +
+                    '&D3=' + paciente.horaC + '&D4=' + paciente.sintomasC + '&D5=' + paciente.descripcionC + '&D6=' + paciente.IDP + '&D7=' + paciente.IDC +
+                    '"><input type="button" class="styled-button" value="Cancelar"></a>';
+            }
+    
+            row += '</td>' +
                 '</tr>';
-
+    
             tbody.append(row);
         });
     }
+    
+    
+    
 });
