@@ -174,7 +174,7 @@
                                 <input class="form-control" type="tel" value="<?php echo isset($rowUsuario["telefonoU"]) ? $rowUsuario["telefonoU"] : ''; ?>" readonly />
                             </div>
 
-                            <div class="col-8" style="text-align: left;">
+                            <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Correo:</label>
                                 <input class="form-control" type="email" value="<?php echo isset($rowUsuario["correoU"]) ? $rowUsuario["correoU"] : ''; ?>" readonly />
                             </div>
@@ -202,6 +202,13 @@
                                     <input class="form-control" type="text" value="<?php echo isset($rowUsuario["generoU"]) ? $rowUsuario["generoU"] : ''; ?>" readonly />
                                 </div>
                             </div>
+
+                            <div class="col-4" style="text-align: left;">
+                                <div class="form-group">
+                                    <input class="form-control" type="hidden" value="<?php echo isset($rowUsuario["generoU"]) ? $rowUsuario["generoU"] : ''; ?>" readonly />
+                                </div>
+                            </div>
+
 
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <a href="consultaUsuariosA.php" type="button">
