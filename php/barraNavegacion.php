@@ -7,7 +7,7 @@ function generarMenu($rolUsuario) {
         </ul>';
     } elseif ($rolUsuario === "admin") {
         echo '<ul class="nav-links">
-        <li><a href="admin/creacionUsuarios.html">Crear usuario</a></li>
+        <li><a href="admin/creacionUsuarios.php">Crear usuario</a></li>
         <li><a href="admin/consultaUsuariosA.php">Usuarios</a></li>
         <li><button class="login-button" style="color: white;">Admin</button></li>
         </ul>';
