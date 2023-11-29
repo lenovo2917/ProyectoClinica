@@ -96,6 +96,9 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
+
+    <form id="citaForm" action="../php/procesaCitaP.php" method="post">
+    
     <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
           if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           // Accede al nombre completo del paciente
@@ -103,18 +106,18 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           echo $nombreCompletoP;
            } ?>!
     </h4>
+    
     <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agende una nueva cita:</h1>
 
-    <form id="citaForm" action="../php/procesaCitaP.php" method="post">
         <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
-        <label for="fecha">Fecha de Cita:</label>
+        <label for="fecha">* Fecha de cita:</label>
         <input type="date" id="fecha" name="fecha" required><br>
 
-        <label for="hora">Hora cita:</label>
+        <label for="hora">* Hora de cita:</label>
         <input type="time" id="hora" name="hora" required><br>
 
         <label for="sintomas">Síntomas:</label>
-        <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas" required></textarea><br>
+        <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas"></textarea><br>
 
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" name="descripcion" rows="4" placeholder="Ingrese descripción de padecimiento"></textarea><br>

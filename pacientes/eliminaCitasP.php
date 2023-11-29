@@ -126,9 +126,12 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-            <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Eliminación de cita:</h1>
+            
 
     <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post">
+
+    <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Eliminación de cita:</h1>
+
     <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
     <input type="hidden" name="id" value="<?php echo $id;?>">
 
@@ -149,9 +152,9 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     </div>
 
     <input type="submit" name="enviar" value="Eliminar cita" style="background-color: #176b87; color: #fff; float: right; padding-top: 8px;
-    margin-top: 150px; margin-right: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">
+    margin-top: 100px; margin-right: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">
     <a href="consultaCitasP.php" style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-    margin-top: 150px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">Regresar</a>
+    margin-top: 100px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 6%; text-decoration: none;">Regresar</a>
     </form>
     </div>
 
