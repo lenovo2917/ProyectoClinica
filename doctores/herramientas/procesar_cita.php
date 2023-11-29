@@ -6,11 +6,12 @@ $fechaCita = $_POST['fechaCita'];
 $horaCita = $_POST['horaCita'];
 $nombrePaciente = $_POST['nombrePacienteCita'];
 $especialidadCita = $_POST['especialidadCita'];
+
 $motivoCita = $_POST['motivoCita'];
 $notaMedica = $_POST['notaMedica'];
 $Descripcion = $_POST['Descripcion'];
 $doctorCita = $_POST['doctorCita'];
-
+$doctorCita = intval($doctorCita);  // Convertir a entero
 
 // Verificar si el paciente existe y está activo
 $consultaPaciente = "SELECT Estatus FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'";
@@ -18,18 +19,14 @@ $resultadoPaciente = mysqli_query($dp, $consultaPaciente);
 
 if ($resultadoPaciente) {
     $paciente = mysqli_fetch_assoc($resultadoPaciente);
-    
+
     if ($paciente && isset($paciente['Estatus']) && $paciente['Estatus'] == 'Activo') {
         // Insertar cita en la base de datos
-        $consultaIDD = "SELECT IDD from doctores where nombreCompletoD = '$doctorCita' AND EspecialidadD = '$especialidadCita'";
-        $idDoctor = mysqli_query($dp,$consultaIDD);
-        
-        $consultaIDS = "SELECT IDS from secretarios where IDD = '$idDoctor'";
-        $idSecretaria = mysqli_query($dp,$consultaIDS);
-        $query = "INSERT INTO citas (fechaC, HoraC, IDP, IDD, sintomasC, diagnosticoC, descripcionC)
-                 VALUES ('$fechaCita', '$horaCita', 
-                 (SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'), $idDoctor,$idSecretaria 
-                 '$notaMedica', '$motivoCita', '$Descripcion')";
+        $query = "INSERT INTO citas (fechaC, HoraC, IDP, IDD, IDS, sintomasC, diagnosticoC, descripcionC)
+        VALUES ('$fechaCita', '$horaCita', 
+        (SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'), '$doctorCita',
+        (SELECT IDS FROM secretarios WHERE IDD = '$doctorCita' LIMIT 1), 
+        '$notaMedica', '$motivoCita', '$Descripcion')";
 
         if (mysqli_query($dp, $query)) {
             echo "Cita creada exitosamente";
@@ -49,4 +46,3 @@ if ($resultadoPaciente) {
 
 // Cerrar la conexión
 mysqli_close($dp);
-?>
