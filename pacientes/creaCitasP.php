@@ -111,10 +111,12 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
                     <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
                     <label for="fechaCita">Fecha de Cita:</label>
                     <input type="date" id="fechaCita" name="fecha" required><br>
+
                     <label for="hora">Hora cita:</label>
                     <select class="form-control-sm" id="hora" name="hora" required>
                         <option value="" disabled selected>Seleccione una hora</option>
                     </select><br>
+                    
                     <label for="sintomas">Síntomas:</label>
                     <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas"
                         required></textarea><br>

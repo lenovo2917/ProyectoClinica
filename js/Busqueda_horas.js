@@ -1,19 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var fechaInput = document.getElementById("fechaCita");
-    var horaSelect = document.getElementById("hora");
+    // Manejar el primer formulario
+    manejarFormulario("fechaCita", "hora");
 
-    // Evento de cambio en la fecha
-    fechaInput.addEventListener("change", cargarHorasDisponibles);
+    // Manejar el segundo formulario
+    manejarFormulario("fechaPacienteF", "horaPacienteF");
+
+    // Función para manejar los eventos del formulario
+    function manejarFormulario(idFecha, idHora) {
+        var fechaInput = document.getElementById(idFecha);
+        var horaSelect = document.getElementById(idHora);
+
+        if (fechaInput && horaSelect) {
+            // Evento de cambio en la fecha
+            fechaInput.addEventListener("change", function () {
+                cargarHorasDisponibles(fechaInput, horaSelect);
+            });
+        } else {
+            console.error("Elementos no encontrados para el manejo del formulario.");
+        }
+    }
 
     // Función para cargar las horas disponibles mediante AJAX
-    function cargarHorasDisponibles() {
+    function cargarHorasDisponibles(fechaInput, horaSelect) {
         // Obtener la fecha seleccionada
         var fechaSeleccionada = fechaInput.value;
 
         // Mostrar mensaje en la consola
         console.log("Fecha seleccionada:", fechaSeleccionada);
 
-        // Realizar la solicitud AJAX para obtener las horas disponibles de los médicos generales
+        // Realizar la solicitud AJAX para obtener las horas disponibles
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "../php/Horas_disponibles.php?fecha=" + fechaSeleccionada, true);
 

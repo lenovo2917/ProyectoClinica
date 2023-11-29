@@ -193,8 +193,9 @@ session_start();
                                         </div>
                                         <div class="col-2">
                                             <label for="horaPacienteF" class="col-form-label">Hora:</label>
-                                            <input type="time"  id="horaPacienteF" name="horaPacienteF"
+                                            <select  id="horaPacienteF" name="horaPacienteF"
                                                 class="form-control" style="border: none; background-color: #cecece;" required>
+                                            </select>
                                             <div class="invalid-feedback">Campo obligatorio*</div>
                                         </div>
                                         <div class="col-7">
@@ -238,6 +239,7 @@ session_start();
     <script src="../js/FechaCalendario.js"></script>
     <script src="../js/creaCitasS.js"></script>
     <script src="../js/ValidacionesCampos.js"></script>
+    <script src="../js/Busqueda_horas.js"></script> <!-- SCRIPT PARA HORAS-->
 </body>
 
 </html>
