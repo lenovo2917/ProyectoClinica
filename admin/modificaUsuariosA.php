@@ -130,6 +130,7 @@
             return confirmacion;
         }
     </script>
+    <script src="../js/ValidacionesCampos.js"></script>
 
 
     <!--Main o contenido-->
@@ -137,7 +138,7 @@
         <div class="row">
             <div class="col">
                 <div class="container-fluid formato">
-                    <form class="form" method="post" action="../php/procesaModificaUA.php" onsubmit="return confirmarModificar()">                        
+                    <form class="form needs-validation" novalidate method="post" action="../php/procesaModificaUA.php" onsubmit="return confirmarModificar()">                        
                         <div class="row">
                             <div class="col-12">
                                 <div class="row align-items-center">
@@ -159,8 +160,8 @@
                             <input type="hidden" name="idSecretario" value="<?php echo $idUsuarioS; ?>">
 
                             <div class="col-8" style="text-align: left;">
-                                <label class="form-label">Nombre Completo:</label>
-                                <input class="form-control" type="text" name="nombreUsuario" value="<?php echo isset(
+                                <label class="form-label" for="nombre">Nombre Completo:</label>
+                                <input class="form-control" type="text" id="nombre" name="nombreUsuario" value="<?php echo isset(
                                     $rowUsuario["nombreU"]) ? $rowUsuario["nombreU"] : ''; ?>" required />
                             </div>
 
