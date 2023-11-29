@@ -121,13 +121,22 @@
         }
     ?>
 
+    <script>
+        function confirmarEliminar() {
+            // Preguntar al usuario si está seguro de eliminar
+            var confirmacion = confirm("¿Estás seguro de que quieres eliminar este usuario?");
+
+            // Devolver true si el usuario hace clic en "Aceptar" y false si hace clic en "Cancelar"
+            return confirmacion;
+        }
+    </script>
 
     <!--Main o contenido-->
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="container-fluid formato">
-                    <form class="form" method="post" action="../php/procesaModificaUA.php">                        
+                    <form class="form" method="post" action="../php/procesaModificaUA.php" onsubmit="return confirmarEliminar()">                        
                         <div class="row">
                             <div class="col-12">
                                 <div class="row align-items-center">
@@ -136,7 +145,7 @@
                                             alt="Descripción de la imagen" />
                                     </div>
                                     <div class="col-5 text-center">
-                                        <h2><i class="fa-solid fa-users"></i> Eliminación de Usuarios</h2> <!---->
+                                        <h2><i class="fa-solid fa-users"></i> Modificación de Usuarios</h2> <!---->
                                     </div>
                                     <div class="col-3 text-end">
                                         <img src="../img/LOGO.png" style="width: 200px; height: 190px;"
@@ -151,31 +160,31 @@
                             <div class="col-8" style="text-align: left;">
                                 <label class="form-label">Nombre Completo:</label>
                                 <input class="form-control" type="text" name="nombreUsuario" value="<?php echo isset(
-                                    $rowUsuario["nombreU"]) ? $rowUsuario["nombreU"] : ''; ?>" required />
+                                    $rowUsuario["nombreU"]) ? $rowUsuario["nombreU"] : ''; ?>" required readonly />
                             </div>
 
 
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">CURP:</label>
                                 <input class="form-control" type="text" name="CURPUsuario" value ="<?php echo isset(
-                                    $rowUsuario["CURPU"]) ? $rowUsuario["CURPU"] : ''; ?>" required />
+                                    $rowUsuario["CURPU"]) ? $rowUsuario["CURPU"] : ''; ?>" required readonly/>
                             </div>
 
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Fecha de Nacimiento:</label>
                                 <input class="form-control" type="date" name="fNUsuario" value ="<?php echo isset(
-                                    $rowUsuario["fNU"]) ? $rowUsuario["fNU"] : ''; ?>" required />
+                                    $rowUsuario["fNU"]) ? $rowUsuario["fNU"] : ''; ?>" required readonly/>
                             </div>
                             
                             <div class="col-4" style="text-align: left;">
                                 <?php if (!empty($idUsuarioD)) { ?>
                                     <label class="form-label">Cédula Profesional:</label>
                                     <input class="form-control" type="text" name="cedulaUsuario" value ="<?php echo isset(
-                                        $rowUsuario["cedulaU"]) ? $rowUsuario["cedulaU"] : ''; ?>" required />
+                                        $rowUsuario["cedulaU"]) ? $rowUsuario["cedulaU"] : ''; ?>" required readonly/>
                                 <?php }elseif(!empty($idUsuarioS)) { ?>
                                     <label class="form-label">ID Doctor:</label>
                                     <input class="form-control" type="text" name="iddUsuario" value ="<?php echo isset(
-                                        $rowUsuario["IDDU"]) ? $rowUsuario["IDDU"] : ''; ?>" required />
+                                        $rowUsuario["IDDU"]) ? $rowUsuario["IDDU"] : ''; ?>" required readonly/>
                                 <?php } ?>
                             </div>
 
@@ -183,33 +192,33 @@
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Télefono:</label>
                                 <input class="form-control" type="tel" name="telefonoUsuario" value ="<?php echo isset(
-                                    $rowUsuario["telefonoU"]) ? $rowUsuario["telefonoU"] : ''; ?>" required />
+                                    $rowUsuario["telefonoU"]) ? $rowUsuario["telefonoU"] : ''; ?>" required readonly/>
                             </div>
                             <!--maxlength="10"-->
                             <div class="col-8" style="text-align: left;">
                                 <label class="form-label">Correo:</label>
                                 <input class="form-control" type="email" name="correoUsuario" value ="<?php echo isset(
-                                    $rowUsuario["correoU"]) ? $rowUsuario["correoU"] : ''; ?>" required />
+                                    $rowUsuario["correoU"]) ? $rowUsuario["correoU"] : ''; ?>" required readonly/>
                             </div>
                             <!--maxlength="25"-->
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Contraseña:</label>
                                 <input class="form-control" type="password" name="contrasenaUsuario" value ="<?php echo isset(
-                                    $rowUsuario["contrasenaU"]) ? $rowUsuario["contrasenaU"] : ''; ?>" required
+                                    $rowUsuario["contrasenaU"]) ? $rowUsuario["contrasenaU"] : ''; ?>" required readonly
                                     maxlength="8" placeholder="********" />
                             </div>
                             <!--maxlength="8"-->
                             <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Alergias:</label>
                                 <input class="form-control" type="text" name="alergiasUsuario" value ="<?php echo isset(
-                                    $rowUsuario["alergiasU"]) ? $rowUsuario["alergiasU"] : ''; ?>" required />
+                                    $rowUsuario["alergiasU"]) ? $rowUsuario["alergiasU"] : ''; ?>" required readonly/>
                             </div>
 
 
                             <div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Tipo de sangre:</label>
-                                    <select name="tipoSangreUsuario" class="formato2" style="width: 100%;">
+                                    <select name="tipoSangreUsuario" class="formato2" style="width: 100%;" disabled>
                                         <option value="" disabled selected>Tipo de sangre *</option>
                                         <option value="A+" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "A+" ? 'selected' : ''; ?>>A+</option>
                                         <option value="A-" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["tipoSangreU"] == "A-" ? 'selected' : ''; ?>>A-</option>
@@ -227,7 +236,7 @@
                             <div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Género:</label>
-                                    <select name="generoUsuario" class="formato2" style="width: 100%;">
+                                    <select name="generoUsuario" class="formato2" style="width: 100%;" disabled>
                                         <option value="" disabled selected>Género</option>
                                         <option value="F" <?php echo isset($rowUsuario["generoU"]) && $rowUsuario["generoU"] == "F" ? 'selected' : ''; ?>>F</option>
                                         <option value="M" <?php echo isset($rowUsuario["generoU"]) && $rowUsuario["generoU"] == "M" ? 'selected' : ''; ?>>M</option>
@@ -236,18 +245,9 @@
                                 </div>
                             </div>
                             
-                            <!--
                             <div class="col-4" style="text-align: left;">
-                                <div class="form-group">
-                                    <label class="form-label">Estatus:</label>
-                                    <select name="estatusUsuario" class="formato2" style="width: 100%;">
-                                        <option value="" disabled selected>Estatus</option>
-                                        <option value="Activo" <?php echo isset($rowUsuario["estatusU"]) && $rowUsuario["estatusU"] == "Activo" ? 'selected' : ''; ?>>Activo</option>
-                                        <option value="Inactivo" <?php echo isset($rowUsuario["estatusU"]) && $rowUsuario["estatusU"] == "Inactivo" ? 'selected' : ''; ?>>Inactivo</option>
-                                    </select>
-                                </div>
+                                <input class="form-control" type="hidden" name="estatusUsuario" value ="Inactivo" required readonly/>
                             </div>
-                            -->
                             
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <button type="submit" name="submit">Eliminar Usuario</button>
