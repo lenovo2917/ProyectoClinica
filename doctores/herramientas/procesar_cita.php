@@ -9,6 +9,8 @@ $especialidadCita = $_POST['especialidadCita'];
 $motivoCita = $_POST['motivoCita'];
 $notaMedica = $_POST['notaMedica'];
 $Descripcion = $_POST['Descripcion'];
+$doctorCita = $_POST['doctorCita'];
+
 
 // Verificar si el paciente existe y está activo
 $consultaPaciente = "SELECT Estatus FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'";
@@ -19,10 +21,14 @@ if ($resultadoPaciente) {
     
     if ($paciente && isset($paciente['Estatus']) && $paciente['Estatus'] == 'Activo') {
         // Insertar cita en la base de datos
-        $query = "INSERT INTO citas (fechaC, HoraC, IDP, IDD, IDS, sintomasC, diagnosticoC, descripcionC)
+        $consultaIDD = "SELECT IDD from doctores where nombreCompletoD = '$doctorCita' AND EspecialidadD = '$especialidadCita'";
+        $idDoctor = mysqli_query($dp,$consultaIDD);
+        
+        $consultaIDS = "SELECT IDS from secretarios where IDD = '$idDoctor'";
+        $idSecretaria = mysqli_query($dp,$consultaIDS);
+        $query = "INSERT INTO citas (fechaC, HoraC, IDP, IDD, sintomasC, diagnosticoC, descripcionC)
                  VALUES ('$fechaCita', '$horaCita', 
-                 (SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'), 
-                 (SELECT IDD FROM doctores WHERE EspecialidadD = '$especialidadCita' LIMIT 1), 1, 
+                 (SELECT IDP FROM pacientes WHERE NombreCompletoP = '$nombrePaciente'), $idDoctor,$idSecretaria 
                  '$notaMedica', '$motivoCita', '$Descripcion')";
 
         if (mysqli_query($dp, $query)) {
