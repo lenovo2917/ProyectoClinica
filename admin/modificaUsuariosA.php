@@ -269,7 +269,7 @@
                             </div>
                             
                             
-                            <div class="col-4" style="text-align: left;">
+                            <!--<div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Estatus:</label>
                                     <select name="estatusUsuario" class="formato2" style="width: 100%;">
@@ -278,7 +278,7 @@
                                         <option value="Inactivo" <?php echo isset($rowUsuario["estatusU"]) && $rowUsuario["estatusU"] == "Inactivo" ? 'selected' : ''; ?>>Inactivo</option>
                                     </select>
                                 </div>
-                            </div> <!--Este se quita, solo está para hacer pruebas con el apartado de borrado-->
+                            </div> Este se quita, solo está para hacer pruebas con el apartado de borrado-->
                             
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <button type="submit" name="submit">Modificar Usuario</button>
