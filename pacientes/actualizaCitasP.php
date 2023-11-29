@@ -131,10 +131,10 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             
             <!--Main o contenido-->
     <div class="container" style="text-align: center; margin-top: 100px;">
-            <h1><img src="../img/mod.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Modifique los datos de su cita:</h1>
 
     <form id="citaForm" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-    
+        <h1><img src="../img/mod.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Modifique los datos de su cita:</h1>
+
         <div id="mensaje" style="margin-top: 20px;"></div>
  
         <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
