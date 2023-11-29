@@ -113,7 +113,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 
                
                     <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
-                    <label for="fechaCita">Fecha de Cita:</label>
+                    <label for="fechaCita">Fecha de cita:</label>
                     <input type="date" id="fechaCita" name="fecha" required><br>
 
                     <label for="hora">Hora cita:</label>
