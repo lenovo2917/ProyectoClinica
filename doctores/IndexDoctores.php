@@ -39,6 +39,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
                     <span style="padding: 0.5rem;"><img src="../img/cora2.png" alt="Descripción de la imagen"></span>
                     </div>
+                    <div></div>
                     <div class="doctor-info" style="display: flex; align-items: center; margin-right: 20px;">
                         <?php
                         if ($_SESSION["Rol"] === 'doctor') {
