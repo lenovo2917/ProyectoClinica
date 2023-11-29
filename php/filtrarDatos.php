@@ -18,7 +18,6 @@ if ($conexion->connect_error) {
 
 //Obtener los valores de los campos del filtro
 $fecha = $_POST['fecha'];
-$iddoctor = $_POST['iddoctor'];
 $encontrados = false; 
 
 if (!empty($fecha)) {
@@ -56,39 +55,4 @@ if (!$encontrados && !empty($fecha)) {
     echo '<tr><td colspan="5">No se han encontrado resultados.</td></tr>';
 }
 
-if (!empty($iddoctor)) {
-    $sql = "SELECT citas.IDC, doctores.NombreCompletoD, citas.fechaC, citas.HoraC, citas.ESTATUS FROM citas
-    JOIN pacientes ON citas.IDP = pacientes.IDP JOIN doctores ON citas.IDD = doctores.IDD
-    WHERE doctores.NombreCompletoD = '$iddoctor' AND pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada'";
-
-    $resultado = $conexion->query($sql);
-
-// Construir el HTML de la tabla con los resultados
-$html = '';
-while ($fila = $resultado->fetch_assoc()) {
-    if($fila['NombreCompletoD'] == $iddoctor){
-    $html .= '<tr>';
-    $html .= '<th>' . $fila['IDC'] . '</th>';
-    $html .= '<th>' . $fila['fechaC'] . '</th>';
-    $html .= '<th>' . $fila['HoraC'] . '</th>';
-    $html .= '<th>' . $fila['ESTATUS'] . '</th>';
-    $html .= '<td>
-    <a href="../pacientes/actualizaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Actualizar</a>
-    <a href="../pacientes/eliminaCitasP.php?IDC=' . $fila['IDC'] . '" style="background-color: #176b87; color: #fff; text-decoration: none; margin-top: 30px; border: none; border-radius: 3px; cursor: pointer; width: 30%; padding: 5px; text-align: center;">Eliminar</a>
-    </td>';
-    $html .= '</tr>';
-    $encontrados = true;
-    }
-}
-
-// Cerrar la conexión
-$conexion->close();
-
-// Enviar el HTML de la tabla al cliente
-echo $html;
-}
-
-if (!$encontrados && !empty($iddoctor)) {
-    echo '<tr><td colspan="5">No se han encontrado resultados.</td></tr>';
-}
 ?>

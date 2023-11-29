@@ -4,15 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     citaForm.addEventListener("submit", function (event) {
         const fechaInput = document.getElementById("fecha");
         const horaInput = document.getElementById("hora");
-        const sintomasInput = document.getElementById("sintomas");
-        const diagnosticoInput = document.getElementById("diagnostico");
 
         if (new Date(fechaInput.value) < new Date()) {
             alert("La fecha de la cita no puede ser en el pasado.");
             event.preventDefault();
         }
 
-        if (!horaInput.value || !sintomasInput.value || !diagnosticoInput.value) {
+        if (!horaInput.value || !fechaInput.value) {
             alert("Por favor, complete los campos solicitados.");
             event.preventDefault();
         }

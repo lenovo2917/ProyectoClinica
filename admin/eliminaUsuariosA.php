@@ -87,7 +87,8 @@
                 ContrasenaD as contrasenaU,
                 AlergiasD as alergiasU,
                 GeneroD as generoU,
-                TipoSangreD as tipoSangreU
+                TipoSangreD as tipoSangreU,
+                EspecialidadD as especialidadU
             FROM doctores WHERE IDD = $idUsuarioD";
         } elseif (!empty($idUsuarioS)) {
             $sql = "SELECT 
@@ -145,7 +146,7 @@
                                             alt="Descripción de la imagen" />
                                     </div>
                                     <div class="col-5 text-center">
-                                        <h2><i class="fa-solid fa-users"></i> Modificación de Usuarios</h2> <!---->
+                                        <h2><i class="fa-solid fa-users"></i> Eliminación de Usuarios</h2> <!---->
                                     </div>
                                     <div class="col-3 text-end">
                                         <img src="../img/LOGO.png" style="width: 200px; height: 190px;"
@@ -195,7 +196,7 @@
                                     $rowUsuario["telefonoU"]) ? $rowUsuario["telefonoU"] : ''; ?>" required readonly/>
                             </div>
                             <!--maxlength="10"-->
-                            <div class="col-8" style="text-align: left;">
+                            <div class="col-4" style="text-align: left;">
                                 <label class="form-label">Correo:</label>
                                 <input class="form-control" type="email" name="correoUsuario" value ="<?php echo isset(
                                     $rowUsuario["correoU"]) ? $rowUsuario["correoU"] : ''; ?>" required readonly/>
@@ -206,6 +207,25 @@
                                 <input class="form-control" type="password" name="contrasenaUsuario" value ="<?php echo isset(
                                     $rowUsuario["contrasenaU"]) ? $rowUsuario["contrasenaU"] : ''; ?>" required readonly
                                     maxlength="8" placeholder="********" />
+                            </div>
+                            <div class="col-4" style="text-align: left;">
+                                <?php if (!empty($idUsuarioD)) { ?>
+                                <div class="form-group">
+                                    <label class="form-label">Especialidad:</label>
+                                    <select name="especialidadUsuario" class="formato2" style="width: 100%;" disabled>
+                                        <option value="" disabled selected>Especialidad *</option>
+                                        <option value="Medico General" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Medico General" ? 'selected' : ''; ?>>Medico General</option>
+                                        <option value="Nutricion" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Nutricion" ? 'selected' : ''; ?>>Nutricion</option>
+                                        <option value="Oftamologo" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Oftamologo" ? 'selected' : ''; ?>>Oftamologo</option>
+                                        <option value="Ginecologo" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Ginecologo" ? 'selected' : ''; ?>>Ginecologo</option>
+                                        <option value="Cardiologo" <?php echo isset($rowUsuario["tipoSangreU"]) && $rowUsuario["especialidadU"] == "Cardiologo" ? 'selected' : ''; ?>>Cardiologo</option>
+                                        <option value="Dermatologa" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Dermatologa" ? 'selected' : ''; ?>>Dermatologa</option>
+                                        <option value="Internista" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Internista" ? 'selected' : ''; ?>>Internista</option>
+                                        <option value="Neurología" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Neurología" ? 'selected' : ''; ?>>Neurología</option>
+                                        <option value="Pediatría" <?php echo isset($rowUsuario["especialidadU"]) && $rowUsuario["especialidadU"] == "Pediatría" ? 'selected' : ''; ?>>Pediatría</option>
+                                    </select>
+                                </div>
+                                <?php } ?>
                             </div>
                             <!--maxlength="8"-->
                             <div class="col-4" style="text-align: left;">
