@@ -79,7 +79,7 @@ $(document).ready(function () {
                 '"><input type="button" class="styled-button" value="Modificar">' +
                 '<a href="cancelarCitasS.php?D1='+paciente.nombreCompletoP+'&D2='+paciente.fechaC+
                 '&D3='+paciente.horaC+'&D4='+paciente.sintomasC+'&D5='+paciente.descripcionC+'&D6='+paciente.IDP+'&D7='+paciente.IDC+
-                '"><input type="button" class="styled-button" value="Eliminar"></a>' +
+                '"><input type="button" class="styled-button" value="Cancelar"></a>' +
                 '</td>' +
                 '</div>'+
                 '</tr>';

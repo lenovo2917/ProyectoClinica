@@ -103,13 +103,12 @@ session_start();
                                     </div>
                                     <div class="col-12">
                                         <h4>
-                                            <?php
-                                        
-                                        if (isset($_SESSION["NombreCompleto"])) {
-                                            $nombreUsuario = $_SESSION["NombreCompleto"];
-                                            echo "$nombreUsuario";
-                                        }    
-                                        ?>
+                                            <?php 
+                                                if (isset($_SESSION["NombreCompleto"])) {
+                                                    $nombreUsuario = $_SESSION["NombreCompleto"];
+                                                    echo "$nombreUsuario";
+                                                }    
+                                            ?>
                                         </h4>
                                     </div>
                                 </div>
@@ -159,64 +158,59 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <form id="citaForm" action="../php/procesaCreacionCS.php" class="form" method="post">
+                            <form id="citaForm" action="../php/procesaCreacionCS.php" class="needs-validation" novalidate method="post">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 mt-4">
-                                            <h4 class="">Datos del paciente:</h4>
+                                            <h4 class="">Datos de la cita:</h4>
                                         </div>
-                                        <div class="row py-2">
-                                            <label for="" class=" py-2 col-2 col-form-label">Paciente:</label>
-                                            <div class="border-bottom border-secondary col-4 text-start">
-                                                <input type="text" readonly id="nombrePacienteF" name="nombrePacienteF"
-                                                    class="form-control-plaintext">
-                                            </div>
-                                            <label for="" class=" col-1 col-form-label">CURP:</label>
-                                            <div class="border-bottom border-secondary col-2 text-start">
-                                                <input type="text" readonly id="curpPacienteF" name="curpPacienteF"
-                                                    class="form-control-plaintext">
-                                            </div>
-                                            <label for="" class="col-2 col-form-label text-end">tipo de sangre:</label>
-                                            <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="text" readonly id="sangrePacienteF" name="sangrePacienteF"
-                                                    class="form-control-plaintext">
-                                            </div>
+                                        <div class="col-7">
+                                            <label for="nombrePacienteF" class="col-form-label">Paciente:</label>
+                                            <input type="text" readonly id="nombrePacienteF" name="nombrePacienteF"
+                                                class="form-control" style="border: none; background-color: #EEEEEE;" required>
+                                            <div class="invalid-feedback">Campo obligatorio*</div>
                                         </div>
-                                        <div class="row py-2">
-                                            <label for="" class="col-2 col-form-label">Alergias:</label>
-                                            <div class="border-bottom border-secondary col-4 text-start">
-                                                <input type="text" readonly id="alergiasPacienteF"
-                                                    name="alergiasPacienteF" class="form-control-plaintext">
-                                            </div>
-                                            <label for="" class="col-1 col-form-label">Fecha:</label>
-                                            <div class="border-bottom border-secondary col-3 text-start">
-                                                <input type="date" required id="fechaPacienteF" name="fechaPacienteF"
-                                                    class="form-control-plaintext">
-                                            </div>
-                                            <label for="" class="col-1 col-form-label">Hora:</label>
-                                            <div class="border-bottom border-secondary col-1 text-start">
-                                                <input type="time" required  id="horaPacienteF" name="horaPacienteF"
-                                                    class="form-control-plaintext">
-                                            </div>
+                                        <div class="col-5">
+                                            <label for="" class="col-form-label">CURP:</label>
+                                            <input type="text" readonly id="curpPacienteF" name="curpPacienteF"
+                                                class="form-control" style="border: none; background-color: #EEEEEE;" >
                                         </div>
-                                        <div class="row py-2">
-                                            <label for="" class=" col-2 col-form-label">Sintomas:</label>
-                                            <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" required id="sintomasPacienteF" name="sintomasPacienteF"
-                                                    class="form-control-plaintext">
-                                            </div>
+                                        <div class="col-3">
+                                            <label for="sangrePacienteF" class="col-form-label">tipo de sangre:</label>
+                                            <input type="text" readonly id="sangrePacienteF" name="sangrePacienteF"
+                                                class="form-control" style="border: none; background-color: #EEEEEE;" >
                                         </div>
-                                        <div class="row py-2">
-                                            <label class="col-2 mt-1 col-form-label">Descripcion:</label>
-                                            <div class="border-bottom border-secondary col-10 text-start">
-                                                <input type="text" required id="descripcionPacienteF" name="descripcionPacienteF"
-                                                    class="form-control-plaintext">
-                                            </div>
+                                        <div class="col-9">
+                                            <label for="" class="col-form-label">Alergias:</label>
+                                            <input type="text" readonly id="alergiasPacienteF"  
+                                                name="alergiasPacienteF" style="border: none; background-color: #EEEEEE;"  class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="fechaPacienteF" class="col-form-label">Fecha:</label>
+                                            <input type="date" id="fechaPacienteF" name="fechaPacienteF"
+                                                class="form-control" style="border: none; background-color: #cecece;"  required>                                                    
+                                            <div class="invalid-feedback">Campo obligatorio*</div>
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="horaPacienteF" class="col-form-label">Hora:</label>
+                                            <input type="time"  id="horaPacienteF" name="horaPacienteF"
+                                                class="form-control" style="border: none; background-color: #cecece;" required>
+                                            <div class="invalid-feedback">Campo obligatorio*</div>
+                                        </div>
+                                        <div class="col-7">
+                                            <label for="sintomasPacienteF" class="col-form-label">Sintomas:</label>
+                                            <input type="text" id="sintomasPacienteF" name="sintomasPacienteF"
+                                                class="form-control" style="border: none; background-color: #cecece;" >
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="descripcionPacienteF" class="col-form-label">Descripcion:</label>
+                                            <input type="text" id="descripcionPacienteF" name="descripcionPacienteF"
+                                                class="form-control" style="border: none; background-color: #cecece;" >
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 text-end mb-3">
-                                    <input type="submit" value="Crear cita">
+                                <div class="col-12 text-end my-4">
+                                    <input class="botonCrear" type="submit" value="Crear cita">
                                 </div>
                             </form>
                         </div>
@@ -237,11 +231,13 @@ session_start();
     </div>
 
     <!-- Agregamos los scripts de Bootstrap y jQuery al final del body para una mejor carga -->
+    <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/buscarPaciente.js"></script>
     <script src="../js/FechaCalendario.js"></script>
     <script src="../js/creaCitasS.js"></script>
-
+    <script src="../js/ValidacionesCampos.js"></script>
 </body>
 
 </html>
