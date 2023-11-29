@@ -121,13 +121,23 @@
         }
     ?>
 
+    <script>
+        function confirmarModificar() {
+            // Preguntar al usuario si está seguro de modificar
+            var confirmacion = confirm("¿Estás seguro modificar los datos de este usuario?");
+
+            // Devolver true si el usuario hace clic en "Aceptar" y false si hace clic en "Cancelar"
+            return confirmacion;
+        }
+    </script>
+
 
     <!--Main o contenido-->
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="container-fluid formato">
-                    <form class="form" method="post" action="../php/procesaModificaUA.php">                        
+                    <form class="form" method="post" action="../php/procesaModificaUA.php" onsubmit="return confirmarModificar()">                        
                         <div class="row">
                             <div class="col-12">
                                 <div class="row align-items-center">
@@ -236,7 +246,7 @@
                                 </div>
                             </div>
                             
-                            <!--
+                            
                             <div class="col-4" style="text-align: left;">
                                 <div class="form-group">
                                     <label class="form-label">Estatus:</label>
@@ -247,7 +257,6 @@
                                     </select>
                                 </div>
                             </div>
-                            -->
                             
                             <div class="d-grid gap-2 col-4 mx-auto" style="padding: 1rem;">
                                 <button type="submit" name="submit">Modificar Usuario</button>

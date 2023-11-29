@@ -73,7 +73,7 @@
             </div>
             <!--Main o contenido-->
             <div class="container-fluid formato mt-5 mb-2">
-                <form class="form" method="post" action="../php/crearUsuariosA.php">
+                <form class="form" method="post" action="../php/crearUsuariosA.php" onsubmit="return confirmarCreacion()">
                     <div class="row ">
                         <div class="col-12">
                             <div class="row align-items-center">
@@ -117,6 +117,15 @@
                                         // Agrega un evento de cambio al campo de selección del rol
                                         rolSelect.addEventListener("change", toggleCedulaField);
                                     });
+
+                                    function confirmarCreacion() {
+                                        // Preguntar al usuario si está seguro de crear
+                                        var confirmacion = confirm("¿Estás seguro de que quieres crear este usuario?");
+
+                                        // Devolver true si el usuario hace clic en "Aceptar" y false si hace clic en "Cancelar"
+                                        return confirmacion;
+                                    }
+
                                 </script>
 
                             </div>
