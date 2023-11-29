@@ -36,7 +36,7 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
 <?php
      $conexion = new mysqli('localhost', 'root', '', 'medicatec_2023');
      $sql="SELECT * FROM citas
-     JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada' ORDER BY citas.fechaC ASC";
+     JOIN pacientes ON citas.IDP = pacientes.IDP WHERE pacientes.NombreCompletoP = '$nombreCompletoP' AND citas.ESTATUS != 'Cancelada' ORDER BY citas.fechaC DESC";
      $resultado = $conexion->query($sql);
 ?>
 
@@ -106,31 +106,26 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
       <!--Main o contenido-->
       <div class="container mt-5 rowborder-secondary border-opacity-50 rounded-1"
         style="margin-top: 20%; background-color: #e4e4e4; padding: 50px; margin-left: 1%;">
-        <h1 class="display-4" style="color: black; font-size: 36px; font-family: 'DM Serif Display';">Consulta de
-          citas del paciente: <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px; float: right;"></h1>
-          <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
+
+        <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
           if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           // Accede al nombre completo del paciente
           $nombreCompletoP = $_SESSION["NombreCompleto"];
           echo $nombreCompletoP;
            } ?>!
-          </h4>
+        </h4>
+        
+        <h1 class="display-4" style="color: black; font-size: 36px; font-family: 'DM Serif Display';">Consulta de
+          citas del paciente: <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px; float: right;"></h1>
 
           <div class="row mt-4">
-            <div class="col-md-2">
+            <div class="col-md-3">
               <div class="form-group">
                 <label for="date" style="color: black; font-size: 16px; font-family: 'Rubik';">Filtrar por fecha:</label>
                 <input type="date" name="fecha" class="form-control">
               </div>
             </div>
   
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="doctor" style="color: black; font-size: 16px; font-family: 'Rubik';">Buscar por doctor:</label>
-                <input type="text" name="iddoctor" class="form-control">
-              </div>
-            </div>
-          
         </div>
         
         <table class="table table-striped mt-4" style="color: black; font-size: 16px; font-family: 'Rubik';">
@@ -232,7 +227,7 @@ if (isset($_SESSION['mensaje_crear_cita'])) {
     $.ajax({
       type: 'POST',
       url: '../php/filtrarDatos.php',
-      data: { fecha: fecha, iddoctor: iddoctor },
+      data: { fecha: fecha},
       success: function (response) {
         // Si la respuesta está vacía, restaurar el contenido original de la tabla
         if (response.trim() === '') {

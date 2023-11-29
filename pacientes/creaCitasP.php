@@ -96,42 +96,43 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
             </div>
 
             <!--Main o contenido-->
-            <div class="container" style="text-align: center; margin-top: 100px;">
-                <h4 style="font-family: 'DM Serif Display';">¡Hola, <?php
+    <div class="container" style="text-align: center; margin-top: 100px;">
+
+    <form id="citaForm" action="../php/procesaCitaP.php" method="post">
+    
+    <h4 style="font-family: 'DM Serif Display';">
+    ¡Hola, <?php
           if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
           // Accede al nombre completo del paciente
           $nombreCompletoP = $_SESSION["NombreCompleto"];
           echo $nombreCompletoP;
            } ?>!
-                </h4>
-                <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;"
-                        alt="Des">Agende una nueva cita:</h1>
+    </h4>
+    
+    <h1><img src="../img/li.png" style="width: 40px; height: 40px; margin-right: 10px; margin-bottom: 7px;" alt="Des">Agende una nueva cita:</h1>
 
-                <form id="citaForm" action="../php/procesaCitaP.php" method="post">
+               
                     <img src="../img/ct.png" alt="img" style="width: 180px; height: 170px;">
-                    <label for="fechaCita">Fecha de Cita:</label>
+                    <label for="fechaCita">Fecha de cita:</label>
                     <input type="date" id="fechaCita" name="fecha" required><br>
 
                     <label for="hora">Hora cita:</label>
-                    <select class="form-control-sm" id="hora" name="hora" required>
-                        <option value="" disabled selected>Seleccione una hora</option>
-                    </select><br>
+                    <input type="time" id="HoraCita" name="hora" required><br>
                     
                     <label for="sintomas">Síntomas:</label>
-                    <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas"
-                        required></textarea><br>
+                    <textarea id="sintomas" name="sintomas" rows="4" placeholder="Ingrese sus sintomas"></textarea><br>
 
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" rows="4"
-                        placeholder="Ingrese descripción de padecimiento"></textarea><br>
+                    placeholder="Ingrese descripción de padecimiento"></textarea><br>
+
 
                     <input type="submit" name="crear_cita" value="Realizar cita">
-                    <input type="reset" value="Borrar"
-                        style="background-color: #176b87; color: #fff; padding-top: 8px;
-        margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 5%; text-decoration: none;">
+                    <input type="reset" value="Borrar" style="background-color: #176b87; color: #fff; padding-top: 8px;
+                    margin-top: 30px; margin-left: 15px; border: none; border-radius: 3px; cursor: pointer; width: 10%; height: 5%; text-decoration: none;">
                     <a class="b" href="../Blog_Medico.php?rol=paciente"
-                        style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
-        margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
+                    style="background-color: #176b87; color: #fff; float: left; padding-top: 8px;
+                    margin-top: 30px; margin-left: 100px; border: none; border-radius: 3px; cursor: pointer; width: 20%; height: 5%; text-decoration: none;">Regresar</a>
                 </form>
             </div>
 
@@ -151,5 +152,4 @@ if(isset($_SESSION["NombreCompleto"]) && $_SESSION["Rol"] === 'paciente') {
     <script src="../js/FechaCalendario.js"></script> <!-- SCRIPT PARA FECHA-->
     <script src="../js/Busqueda_horas.js"></script> <!-- SCRIPT PARA HORAS-->
 </body>
-
 </html>
