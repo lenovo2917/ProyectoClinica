@@ -40,6 +40,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         <span style="padding: 0.5rem;"><img src="../img/cora2.png"
                                 alt="Descripción de la imagen"></span>
                     </div>
+                    <div></div>
                     <div class="doctor-info" style="display: flex; align-items: center; margin-right: 20px;">
                         <?php
                         if ($_SESSION["Rol"] === 'doctor') {
