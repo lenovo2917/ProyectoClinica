@@ -31,8 +31,18 @@ $(document).ready(function () {
             event.preventDefault();
             event.stopPropagation();
         } else {
-            // Evitar el envío predeterminado para manejarlo con AJAX
-            event.preventDefault();
+              // Evitar el envío predeterminado para manejarlo con AJAX
+              event.preventDefault();
+
+              // Obtener todos los datos del formulario
+              var formData = $("#crearCitaForm").serializeArray();
+              var dataObject = {};
+              $.each(formData, function (index, element) {
+                  dataObject[element.name] = element.value;
+              });
+  
+              // Imprimir los datos en la consola para verificar
+              console.log(dataObject);
 
             // Resto del código AJAX aquí...
             $.ajax({
