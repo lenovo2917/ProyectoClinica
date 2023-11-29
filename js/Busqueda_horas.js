@@ -1,19 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Manejar el primer formulario
-    manejarFormulario("fechaCita", "hora");
+    manejarFormulario("fechaCita", "hora", "../php/Horas_disponibles.php");
 
     // Manejar el segundo formulario
-    manejarFormulario("fechaPacienteF", "horaPacienteF");
+    manejarFormulario("fechaPacienteF", "horaPacienteF", "../php/Horas_disponiblesSe.php");
 
     // Función para manejar los eventos del formulario
-    function manejarFormulario(idFecha, idHora) {
+    function manejarFormulario(idFecha, idHora, paginaPHP) {
         var fechaInput = document.getElementById(idFecha);
         var horaSelect = document.getElementById(idHora);
 
         if (fechaInput && horaSelect) {
             // Evento de cambio en la fecha
             fechaInput.addEventListener("change", function () {
-                cargarHorasDisponibles(fechaInput, horaSelect);
+                cargarHorasDisponibles(fechaInput, horaSelect, paginaPHP);
             });
         } else {
             console.error("Elementos no encontrados para el manejo del formulario.");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Función para cargar las horas disponibles mediante AJAX
-    function cargarHorasDisponibles(fechaInput, horaSelect) {
+    function cargarHorasDisponibles(fechaInput, horaSelect, paginaPHP) {
         // Obtener la fecha seleccionada
         var fechaSeleccionada = fechaInput.value;
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Realizar la solicitud AJAX para obtener las horas disponibles
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "../php/Horas_disponibles.php?fecha=" + fechaSeleccionada, true);
+        xhr.open("GET", paginaPHP + "?fecha=" + fechaSeleccionada, true);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
