@@ -85,7 +85,7 @@ if(empty($_SESSION["NombreCompleto"])) {
         <div class="row">
             <div class="col">
                 <div class="container mt-5">
-                  
+
 
 
                     <!-- Fila con dos columnas: imagen y doctor-info -->
@@ -97,10 +97,10 @@ if(empty($_SESSION["NombreCompleto"])) {
                             <h3>Información del Doctor</h3>
                             <h2>Doctor/a:
                                 <?php echo $_SESSION["NombreCompleto"];?>
-        </h2>
+                            </h2>
                             <h2>Especialidad:
                                 <?php echo isset($_SESSION["EspecialidadD"]) ? $_SESSION["EspecialidadD"] : ''; ?>
-        </h2>
+                            </h2>
 
                         </div>
                     </div>
@@ -129,62 +129,66 @@ if(empty($_SESSION["NombreCompleto"])) {
                         aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                         <div class="modal-dialog modal-xl modal-dialog-centered">
                             <div class="modal-content">
-                            <div class="modal-header text-center">
-    <!-- Encabezado -->
-    <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
-    <h1 class="modal-title display-2" id="exampleModalToggleLabel">RECETA MÉDICA</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
+                                <div class="modal-header text-center">
+                                    <!-- Encabezado -->
+                                    <img src="../img/ct.png" alt="Logo del médico" width="150" height="150">
+                                    <h1 class="modal-title display-2" id="exampleModalToggleLabel">RECETA MÉDICA</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
 
                                 <div class="modal-body">
                                     <div style="text-align: center;">
-                                    <!-- Información del doctor -->
-                                    <p>Nombre del doctor: <span id="doctorNombre"> <?php echo $_SESSION["NombreCompleto"];?></span></p>
-                                    <p>Cedula profesional: <span id="cedulaProfesional"><?php echo $_SESSION["CedulaD"];?></span></p>
-                                    <p>Dirección: <span id="direccion">Avenida de los Jacarandas #567 
-                                       Colonia del Sol 
-                                       Cuernavaca, Morelos. 
-                                       Código Postal: 62100</span></p>
-        </div>
+                                        <!-- Información del doctor -->
+                                        <p>Nombre del doctor: <span id="doctorNombre">
+                                                <?php echo $_SESSION["NombreCompleto"];?></span></p>
+                                        <p>Cédula profesional: <span
+                                                id="cedulaProfesional"><?php echo $_SESSION["CedulaD"];?></span></p>
+                                        <p>Dirección: <span id="direccion">Avenida de los Jacarandas #567
+                                                Colonia del Sol
+                                                Cuernavaca, Morelos.
+                                                Código Postal: 62100</span></p>
+                                    </div>
                                     <hr class="my-4">
-                               
-                                   <!-- Contenido de la receta en forma de tabla -->
-<table class="table table-bordered" id="datosReceta">
-    <thead>
-        <tr>
-            <th scope="col">Campo</th>
-            <th scope="col">Valor</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Nombre</td>
-            <td id="nombreReceta"></td>
-        </tr>
-        <tr>
-            <td>Fecha</td>
-            <td id="fechaReceta"></td>
-        </tr>
-        <tr>
-            <td>Diagnóstico</td>
-            <td id="diagnosticoReceta"></td>
-        </tr>
-        <tr>
-            <td>Medicamento</td>
-            <td id="medicamentoReceta"></td>
-        </tr>
-        <tr>
-            <td>Instrucciones de Uso</td>
-            <td id="instruccionesReceta"></td>
-        </tr>
-    </tbody>
-</table>
+
+                                    <!-- Contenido de la receta en forma de tabla -->
+                                    <table class="table table-bordered" id="datosReceta">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Campo</th>
+                                                <th scope="col">Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                <td id="nombreReceta"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fecha</td>
+                                                <td id="fechaReceta"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Diagnóstico</td>
+                                                <td id="diagnosticoReceta"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Medicamento</td>
+                                                <td id="medicamentoReceta"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Instrucciones de Uso</td>
+                                                <td id="instruccionesReceta"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
                                     <!-- Firma y nombre del doctor -->
                                     <div class="firma">
                                         <hr class="my-4">
                                         <p>Firma del doctor: __________________________</p>
-                                        <p>Nombre del doctor: <span id="nombreFirma"> <?php echo $_SESSION["NombreCompleto"];?></span></p>
+                                        <p>Nombre del doctor: <span id="nombreFirma">
+                                                <?php echo $_SESSION["NombreCompleto"];?></span></p>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -195,14 +199,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                                             class="fas fa-download"></i></button>
                                     <button id="imprimir" class="btn btn-secondary" style="display: none;"><i
                                             class="fas fa-print"></i></button>
-                                            
+
                                 </div>
 
                                 <!-- modal footer para alertas -->
                                 <div class="modal-footer">
                                     <div id="alertContainerInModal"></div>
                                 </div>
-                                
+
                                 <div class="modal-footer">
                                     <!-- Texto y línea adicional -->
                                     <p class="indicaciones">Seguir indicaciones y tomar tratamiento completo</p>
@@ -231,7 +235,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         placeholder="Nombre" required>
                                     <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
                                 </div>
-                            
+
                                 <div class="form-group">
                                     <label for="fecha">Fecha de la Receta *</label>
                                     <div class="input-group mb-3">
@@ -271,7 +275,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                             </form>
 
                         </div>
-                        
+
 
                         <!-- Tab 2: Expedientes de Paciente -->
                         <div class="tab-pane fade" id="expedientes" role="tabpanel" aria-labelledby="expedientes-tab">
@@ -282,21 +286,24 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 <h2>Expedientes de Paciente</h2>
                             </div>
 
-                            <div class="modal fade" id="pacienteNoEncontradoModal" tabindex="-1" role="dialog" aria-labelledby="pacienteNoEncontradoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pacienteNoEncontradoModalLabel">Paciente no encontrado</h5>
-            </div>
-            <div class="modal-body">
-                <p>No se encontró un paciente con el nombre proporcionado.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
+                            <div class="modal fade" id="pacienteNoEncontradoModal" tabindex="-1" role="dialog"
+                                aria-labelledby="pacienteNoEncontradoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="pacienteNoEncontradoModalLabel">Paciente no
+                                                encontrado</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>No se encontró un paciente con el nombre proporcionado.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
@@ -346,13 +353,10 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 <i class="fa-solid fa-virus"></i>
                                                 Alergias: <span id="alergiasAut">. . .</span>
                                             </p>
-
                                             <h3>Recetas Médicas</h3>
                                             <hr />
                                             <!-- Tabla de recetas médicas (se generará con datos de la base de datos) -->
-
                                             <div id="informacionAdicional">
-
                                                 <table class="table table-striped table-hover"
                                                     id="tablaInformacionAdicional">
                                                     <thead>
@@ -368,25 +372,15 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                     </tbody>
                                                 </table>
                                             </div>
-
-
                                         </div>
                                         <div class="col-md-6">
                                             <h3>Expediente Medico</h3>
                                             <div id="areaTextoReceta" class="table-responsive"></div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-            
                         <div class="tab-pane fade" id="citas" role="tabpanel" aria-labelledby="citas-tab">
                             <div class="navbar">
                                 <a href="./IndexDoctores.php">
@@ -395,19 +389,16 @@ if(empty($_SESSION["NombreCompleto"])) {
                                 <h2>Crear Cita Medica</h2>
                             </div>
                             <br>
-                            <div class="alerta">          
+                            <div class="alerta">
                                 <div class="col-12">
                                     <div class="row my-2">
                                         <div class="col-12 my-2">
-                                          
+
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                                <br>
-
-
-
+                            </div>
+                            <br>
                             <form class="row g-3 needs-validation" novalidate id="crearCitaForm" method="POST">
                                 <div class="col-md-12">
                                     <div class="row">
@@ -430,12 +421,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                                         <div class="col-md-9">
                                             <div class="row">
                                                 <div class="col-md-2">
-                                                    <label for="nombrePacienteCita" class="form-label">Nombre completo del paciente
+                                                    <label for="nombrePacienteCita" class="form-label">Nombre completo
+                                                        del paciente
                                                         *</label>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <input type="text" class="form-control" id="nombrePacienteCita"
-                                                        name="nombrePacienteCita" placeholder="Nombre completo del paciente *" required>
+                                                        name="nombrePacienteCita"
+                                                        placeholder="Nombre completo del paciente *" required>
                                                     <div class="invalid-feedback">Campo obligatorio *</div>
                                                 </div>
                                                 <!--
@@ -455,82 +448,86 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                 </div>
                                             </div>
                                                -->
-                                            <div class="row align-items-center">
-                                                <div class="col-md-6">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="especialidadCita"
+                                                                class="form-label">Especialidad
+                                                                *</label>
+                                                            <select class="form-select" id="especialidadCita"
+                                                                name="especialidadCita"
+                                                                aria-label="Especialidad select menu" required>
+                                                                <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
+                                                            </select>
+                                                            <div class="invalid-feedback">Campo obligatorio *</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="doctorCita" class="form-label">Doctor *</label>
+                                                            <select class="form-select" id="doctorCita"
+                                                                name="doctorCita" aria-label="Doctor select menu"
+                                                                required>
+                                                                <!-- Las opciones de doctores se cargarán dinámicamente aquí -->
+                                                            </select>
+                                                            <div class="invalid-feedback">Campo obligatorio *</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="notaMedica" class="form-label">Síntomas *</label>
+                                                    <textarea class="form-control" id="notaMedica" name="notaMedica"
+                                                        rows="3" placeholder="Síntomas" required></textarea>
+                                                    <div class="invalid-feedback">Campo obligatorio *</div>
+                                                </div>
+
+                                                <div class="row align-items-center">
                                                     <div class="form-group">
-                                                        <label for="especialidadCita" class="form-label">Especialidad
+                                                        <label for="motivoCita" class="form-label">Diagnóstico *</label>
+                                                        <textarea class="form-control" id="motivoCita" name="motivoCita"
+                                                            rows="3" placeholder="Diagnóstico del paciente"
+                                                            required></textarea>
+                                                        <div class="invalid-feedback">Campo obligatorio *</div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="Descripcion" class="form-label">Motivo de cita
                                                             *</label>
-                                                        <select class="form-select" id="especialidadCita"
-                                                            name="especialidadCita"
-                                                            aria-label="Especialidad select menu" required>
-                                                            <!-- Las opciones de especialidades se cargarán dinámicamente aquí -->
-                                                        </select>
+                                                        <textarea class="form-control" id="Descripcion"
+                                                            name="Descripcion" rows="3" placeholder="Descripción"
+                                                            required></textarea>
                                                         <div class="invalid-feedback">Campo obligatorio *</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="doctorCita" class="form-label">Doctor *</label>
-                                                        <select class="form-select" id="doctorCita" name="doctorCita"
-                                                            aria-label="Doctor select menu" required>
-                                                            <!-- Las opciones de doctores se cargarán dinámicamente aquí -->
-                                                        </select>
-                                                        <div class="invalid-feedback">Campo obligatorio *</div>
+
+                                                <div style="margin-top: 50px;" class="row align-items-center">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="firmaDoctor" class="form-label">Firma del
+                                                                Doctor:</label>
+                                                            <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
+                                                                class="signature-line"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="firmaDoctor" class="form-label">Nombre del
+                                                                Doctor:</label>
+                                                            <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
+                                                                class="signature-line"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="notaMedica" class="form-label">Síntomas *</label>
-                                                <textarea class="form-control" id="notaMedica" name="notaMedica"
-                                                    rows="3" placeholder="Síntomas" required></textarea>
-                                                <div class="invalid-feedback">Campo obligatorio *</div>
-                                            </div>
-
-                                            <div class="row align-items-center">
-                                                <div class="form-group">
-                                                    <label for="motivoCita" class="form-label">Diagnóstico *</label>
-                                                    <textarea class="form-control" id="motivoCita" name="motivoCita"
-                                                        rows="3" placeholder="Diagnóstico del paciente"
-                                                        required></textarea>
-                                                    <div class="invalid-feedback">Campo obligatorio *</div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="Descripcion" class="form-label">Motivo de cita *</label>
-                                                    <textarea class="form-control" id="Descripcion" name="Descripcion"
-                                                        rows="3" placeholder="Descripción" required></textarea>
-                                                    <div class="invalid-feedback">Campo obligatorio *</div>
-                                                </div>
-                                            </div>
-
-                                            <div style="margin-top: 50px;" class="row align-items-center">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="firmaDoctor" class="form-label">Firma del
-                                                            Doctor:</label>
-                                                        <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
-                                                            class="signature-line"></div>
+                                                        <button id="btnGenerarCita" type="submit"
+                                                            class="btn btn-custom">Generar Cita</button>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="firmaDoctor" class="form-label">Nombre del
-                                                            Doctor:</label>
-                                                        <div style="border-bottom: 2px solid #5f5f5f; width: 60%; margin-top: 30px;"
-                                                            class="signature-line"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <button id="btnGenerarCita" type="submit"
-                                                        class="btn btn-custom">Generar Cita</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </form>
 
                         </div>
@@ -539,7 +536,7 @@ if(empty($_SESSION["NombreCompleto"])) {
             </div>
         </div>
     </div>
-</div>
+    </div>
     <!--footer-->
     <div class="container-fluid-lg py-5">
         <footer class="bg-dark text-white text-center py-5 mt-5">
@@ -554,13 +551,16 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../js/BusquedaPaciente.js"></script> <!--ESTE JS SIRVE PARA BUSCAR AL PACIENTE EN EL EXPEDIENTE EN EL APARTADP DE INFORMACION-->
-    <script src="../js/receta.js"></script>  <!-- ESTE JS SIRVE PARA CREAR LA RECETA Y AGREGAR AL EXPEDIENTE -->
+    <script src="../js/BusquedaPaciente.js"></script>
+    <!--ESTE JS SIRVE PARA BUSCAR AL PACIENTE EN EL EXPEDIENTE EN EL APARTADP DE INFORMACION-->
+    <script src="../js/receta.js"></script> <!-- ESTE JS SIRVE PARA CREAR LA RECETA Y AGREGAR AL EXPEDIENTE -->
     <script src="../js/Crear_Receta.js"></script> <!-- ESTE JS SIRVE PARA CREAR CITAS EN EL DOCTOR -->
-    <script src="../js/BusquedaCitas"></script> <!--ESTE JS SIRVE PARA BUSCAR LAS CITAS DEL PACIENTE PARA CREAR LA RECETA EN EL APARTADO DE CITAS-->
+    <script src="../js/BusquedaCitas"></script>
+    <!--ESTE JS SIRVE PARA BUSCAR LAS CITAS DEL PACIENTE PARA CREAR LA RECETA EN EL APARTADO DE CITAS-->
     <script src="../js/BusquedaEspecialidad.js"></script>
-    <script src="../js/FechaCalendario.js"></script>  <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
-<script src="../js/ValidacionesCampos.js"></script>
+    <script src="../js/FechaCalendario.js"></script>
+    <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
+    <script src="../js/ValidacionesCampos.js"></script>
 
 
 

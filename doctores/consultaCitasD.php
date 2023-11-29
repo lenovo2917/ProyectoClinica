@@ -28,10 +28,7 @@ if(empty($_SESSION["NombreCompleto"])) {
 </head>
 
 <body style="background-color: #EEEEEE;">
-
-
-    <!--Header-->
-    <div class="container-fluid-lg mb-4">
+<div class="container-fluid-lg mb-4">
         <div class="row">
             <div class="col-12">
                 <nav style="display: flex; justify-content: space-between; align-items: center;">
@@ -138,22 +135,22 @@ if(empty($_SESSION["NombreCompleto"])) {
                                     <div class="invalid-feedback">Campo obligatorio *</div>
                                 </div>
 
-                                <label for="" class="text-end col-2 col-form-label">Busqueda por mes:</label>
+                                <label for="" class="text-end col-2 col-form-label">Buscar por mes:</label>
                                 <div class="col-2 text-start">
                                     <select class="form-select" aria-label="" name="mes">
                                         <option value="">Seleccione un mes</option>
-                                        <option value="enero">enero</option>
-                                        <option value="febrero">febrero</option>
-                                        <option value="marzo">marzo</option>
-                                        <option value="abril">abril</option>
-                                        <option value="mayo">mayo</option>
-                                        <option value="junio">junio</option>
-                                        <option value="julio">julio</option>
-                                        <option value="agosto">agosto</option>
-                                        <option value="septiempre">septiempre</option>
-                                        <option value="octubre">octubre</option>
-                                        <option value="noviembre">noviembre</option>
-                                        <option value="diciembre">diciembre</option>
+                                        <option value="enero">Enero</option>
+                                        <option value="febrero">Febrero</option>
+                                        <option value="marzo">Marzo</option>
+                                        <option value="abril">Abril</option>
+                                        <option value="mayo">Mayo</option>
+                                        <option value="junio">Junio</option>
+                                        <option value="julio">Julio</option>
+                                        <option value="agosto">Agosto</option>
+                                        <option value="septiembre">Septiembre</option>
+                                        <option value="octubre">Octubre</option>
+                                        <option value="noviembre">Noviembre</option>
+                                        <option value="diciembre">Diciembre</option>
                                     </select>
                                 </div>
                                 <div class="col-1">
@@ -214,7 +211,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                                                             'junio' => '06',
                                                             'julio' => '07',
                                                             'agosto' => '08',
-                                                            'septiempre' => '09',
+                                                            'septiembre' => '09',
                                                             'octubre' => '10',
                                                             'noviembre' => '11',
                                                             'diciembre' => '12'
@@ -358,18 +355,6 @@ if(empty($_SESSION["NombreCompleto"])) {
     <script src="../js/FechaCalendario.js"></script>
     <!--SCRIPT PARA QUE EL CALENDARIO NO SE ELIJA MENOR A FECHAS ANTERIORES Y MAYOR A 20 DIAS-->
     <script src="../js/ValidacionesCampos.js"></script>
-
-
-
-
-
-
-
-
-</body>
-
-
-
 </body>
 
 </html>

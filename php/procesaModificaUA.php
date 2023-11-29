@@ -19,7 +19,7 @@ $contrasenaUsuario = isset($_POST["contrasenaUsuario"]) ? $_POST["contrasenaUsua
 $alergiasUsuario = isset($_POST["alergiasUsuario"]) ? $_POST["alergiasUsuario"] : null;
 $generoUsuario = isset($_POST["generoUsuario"]) ? $_POST["generoUsuario"] : null;
 $tipoSangreUsuario = isset($_POST["tipoSangreUsuario"]) ? $_POST["tipoSangreUsuario"] : null;
-$iddUsuario = isset($_POST["IDDUsuario"]) ? $_POST["IDDUsuario"] : null; //IDD de secretario en la BD
+$iddUsuario = isset($_POST["iddUsuario"]) ? $_POST["iddUsuario"] : null; //IDD de secretario en la BD
 /*
 
 
@@ -89,8 +89,8 @@ if (is_numeric($idUsuarioD)) {
             AlergiasS = '$alergiasUsuario',
             TelefonoS = '$telefonoUsuario',
             CorreoS = '$correoUsuario',
-            IDD = $iddUsuario,
-            ContrasenaS = '$contrasenaUsuario'
+            IDD = $iddUsuario/*,
+            ContrasenaS = '$contrasenaUsuario'*/
         WHERE IDS = $idUsuarioS";
 
         $resultUpdateSecretario = $dp->query($sqlUpdateSecretario);
