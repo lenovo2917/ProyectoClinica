@@ -42,7 +42,7 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response);
 
-                    // Resetear el formulario y quitar la clase de validación de Bootstrap
+                    // Resetea el formulario y quitar la clase de validación de Bootstrap
                     $("#crearCitaForm")[0].reset();
                     $("#crearCitaForm").removeClass('was-validated');
 

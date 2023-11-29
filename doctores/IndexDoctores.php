@@ -15,10 +15,10 @@ if(empty($_SESSION["NombreCompleto"])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@500&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
-       <link rel="stylesheet" href="../fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="../fontawesome/css/all.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/fontawesome.css"rel="stylesheet">
-        <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css"rel="stylesheet">
+    <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/fontawesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
 
     <!--ESTILOS CSS-->
@@ -29,16 +29,18 @@ if(empty($_SESSION["NombreCompleto"])) {
 </head>
 
 <body>
-   <!--Header-->
-<div class="container-fluid-lg mb-5">
-    <div class="row">
-        <div class="col-12">
-            <nav style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="logo">
-                    <span
-                        style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
-                    <span style="padding: 0.5rem;"><img src="../img/cora2.png" alt="Descripción de la imagen"></span>
+    <!--Header-->
+    <div class="container-fluid-lg mb-5">
+        <div class="row">
+            <div class="col-12">
+                <nav style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="logo">
+                        <span
+                            style="color: #000000; font-size: 26px; font-weight: bold; letter-spacing: 1px; margin-left: 20px;">MEDICATEC</span>
+                        <span style="padding: 0.5rem;"><img src="../img/cora2.png"
+                                alt="Descripción de la imagen"></span>
                     </div>
+                    <div></div>
                     <div class="doctor-info" style="display: flex; align-items: center; margin-right: 20px;">
                         <?php
                         if ($_SESSION["Rol"] === 'doctor') {
@@ -48,7 +50,7 @@ if(empty($_SESSION["NombreCompleto"])) {
                         ?>
                     </div>
 
-                     <?php
+                    <?php
                        if(isset($_GET['cerrar_sesion'])) {
                         // Eliminar las cookies de sesión
                         if (ini_get("session.use_cookies")) {
@@ -77,10 +79,10 @@ if(empty($_SESSION["NombreCompleto"])) {
           }
           unset($_SESSION['sesion_cerrada']);
                         ?>
-                    </nav>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
 
     <!--Main o contenido-->
     <div class="container-fluid">
@@ -90,11 +92,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
                                 Citas
                             </button>
                         </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
                             <ul>
                                 <li>
                                     <a class="accordion-link collapsed" href="../doctores/consultaCitasD.php">
@@ -107,11 +112,11 @@ if(empty($_SESSION["NombreCompleto"])) {
                                     </a>
                                 </li>
                                 <li>
-                                <a class="accordion-link collapsed" href="../doctores/creaResetaD.php?tab=citas">
-                                   Crear Citas
-                                </a>
+                                    <a class="accordion-link collapsed" href="../doctores/creaResetaD.php?tab=citas">
+                                        Crear Citas
+                                    </a>
 
-                                                                        
+
                                 </li>
                                 <li>
                                     <a class="accordion-link collapsed" href="../doctores/consultaCitasD.php">
@@ -123,11 +128,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
                                 Receta
                             </button>
                         </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
                             <ul>
                                 <li>
                                     <a class="accordion-link collapsed" href="../doctores/creaResetaD.php">
@@ -139,11 +147,14 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                aria-controls="flush-collapseThree">
                                 Paciente
                             </button>
                         </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div id="flush-collapseThree" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
                             <ul>
                                 <li>
                                     <a class="accordion-link collapsed" href="muestraPacientesD.php">
@@ -155,12 +166,12 @@ if(empty($_SESSION["NombreCompleto"])) {
                     </div>
                 </div>
             </div>
-            
+
 
             <div class="col-9">
                 <!-- Contenido principal -->
                 <h1>Perfil</h1>
-                
+
                 <?php
               include '../php/acceso.php';
 
@@ -203,7 +214,7 @@ if(empty($_SESSION["NombreCompleto"])) {
             </div>
         </div>
     </div>
-    
+
     <!--footer-->
     <div class="container-fluid-lg py-5">
         <footer class="bg-dark text-white text-center py-5 mt-5">

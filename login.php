@@ -45,11 +45,8 @@
                 </div>
                 <!--Main o contenido-->
                 <!--Main o contenido-->
-                
-       
-
             <div class="container-fluid formatoLogin mt-5 mb-2">
-                <form class="form" action="" method="post">
+                <form class="form needs-validation" novalidate action="" method="post">
                 <?php
                     include "php/acceso.php";
                    
@@ -67,10 +64,14 @@
                             <h2><i class="fa-solid fa-lock"></i> Login</h2>
                         </div>
                         <div class="col-12">
-                            <input type="text" name="nombree" placeholder="Nombre Completo *" required />
+                            <input type="text" name="nombree" placeholder="Nombre Completo *" id="nombrePaciente" required />
+                            <div class="invalid-feedback">Por favor, ingresa tu nombre.
+                            </div>
                         </div>
                         <div class="col-12">
-                            <input type="password" name="clave" placeholder="Contraseña *" required />
+                            <input type="password" name="clave" placeholder="Contraseña *" id="contraseñaPaciente" required />
+                            <div class="invalid-feedback">Por favor, ingresa tu contraseña.
+                            </div>
                         </div>
                         <!--<div class="d-grid gap-2 col-6 mx-auto" style="padding: 1rem;">
                             <button type="submit" name="btningresar" type="button"><i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Inicia sesión</button>
@@ -100,7 +101,7 @@
         <script src="bootstrap/js/bootstrap.esm.min.js"></script>
         <script src="js/creaCitas.js"></script>
         <script src="js/main.js"></script>
-        <script src="../js/ValidacionesCampos.js"></script>
+        <script src="js/ValidacionesCampos.js"></script>
 </body>
 
 </html>

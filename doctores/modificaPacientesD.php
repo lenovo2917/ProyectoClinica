@@ -40,6 +40,35 @@
                         <ul class="nav-links">
                             <li><a href="../doctores/IndexDoctores.php">Inicio</a></li>
                           </ul>
+                          <?php
+                        if(isset($_GET['cerrar_sesion'])) {
+                            // Eliminar las cookies de sesión
+                            if (ini_get("session.use_cookies")) {
+                                $params = session_get_cookie_params();
+                                setcookie(session_name(), '', time() - 42000,
+                                    $params["path"], $params["domain"],
+                                    $params["secure"], $params["httponly"]
+                                );
+                            }
+                            // Destruir la sesión
+                            session_unset();
+                            session_destroy();
+                            $_SESSION = array();
+                            // Redirigir a la página de inicio de sesión
+                            header("Location: login.php");
+                            exit();
+                        } else if(!isset($_SESSION['sesion_cerrada'])) {
+                            echo '
+                            <ul class="nav-links" style="justify-content: end; margin-right: 5rem;">
+                            <li><a href="/ProyectoClinica/login.php?cerrar_sesion=true" class="login-button"  onclick="return confirm(\'¿Seguro que quieres salir?\')" 
+                            style="color: white;">
+                            Cerrar Sesión </a>
+                            </li>
+                            </ul>';
+                        }else {   
+                        }
+                        unset($_SESSION['sesion_cerrada']);
+                    ?>
                     </nav>
                 </div>
             </div>
@@ -89,7 +118,7 @@
         <div class="row">
             <div class="col">
                 <div class="container-fluid formato mt-5 mb-2">
-                    <form class="form" method="post" action="../php/procesaModificaPD.php">
+                    <form class="form needs-validation" novalidate method="post" action="../php/procesaModificaPD.php">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row align-items-center">
@@ -106,64 +135,81 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="idPaciente" value="<?php echo $idP; ?>"> <!--Estos id son para que los tome procesaModificaUA.php y sepa qué usuario tomar-->
+                             <input type="hidden" name="idPaciente" value="<?php echo $idP; ?>"> <!--Estos id son para que los tome procesaModificaUA.php y sepa qué usuario tomar-->
+
 
                             <div class="col-6" style="text-align: left;padding: 1rem;">
-                                <label class="form-label">Nombre Completo:</label>
-                                <input class="form-control" type="text" placeholder="Nombre Completo *" name="nombrePaciente" value="<?php echo isset(
+                                <label class="form-label" for="nombre">Nombre Completo:</label>
+                                <input class="form-control" type="text" id="nombre" placeholder="Nombre Completo *" name="nombrePaciente" value="<?php echo isset(
                                     $rowPaciente["nombreP"]) ? $rowPaciente["nombreP"] : ''; ?>" required />
+                                    <div class="invalid-feedback">Por favor, ingresa tu nombre.
+                            </div>
                             </div>
                             <div class="col-6" style="text-align: left; padding: 1rem;" >
                                 <label class="form-label">CURP:</label>
-                                <input class="form-control" readonly type="text" placeholder="CURP *" required maxlength="18"
+                                <input class="form-control" type="text" readonly placeholder="CURP *" required maxlength="18"
                                     title="Ingrese correctamente su CURP" name="CURPPaciente" value ="<?php echo isset(
-                                    $rowPaciente["CURPP"]) ? $rowPaciente["CURPP"] : ''; ?>" required />
+                                    $rowPaciente["CURPP"]) ? $rowPaciente["CURPP"] : ''; ?>" />
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Fecha de Nacimiento:</label>
-                                <input class="form-control" type="date" placeholder="Fecha de Nacimiento *" name="fNPaciente" value ="<?php echo isset(
+                                <label class="form-label" for="fecha">Fecha de Nacimiento:</label>
+                                <input class="form-control" type="date" id="fecha" placeholder="Fecha de Nacimiento *" name="fNPaciente" value ="<?php echo isset(
                                     $rowPaciente["fNP"]) ? $rowPaciente["fNP"] : ''; ?>" required />
+                                    <div class="invalid-feedback">Por favor, ingresa tu fecha de nacimiento.
+                            </div>
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Télefono:</label>
-                                <input class="form-control" type="tel" placeholder="Teléfono" maxlength="10"
-                                    title="Ingrese un formato válido (xxx-xxx-xxxx)" name="telefonoPaciente" value ="<?php echo isset(
+                                <label class="form-label" for="telefono">Télefono:</label>
+                                <input class="form-control" type="tel" id="telefono" placeholder="Teléfono" maxlength="10"
+                                    title="Ingrese un formato válido (xxxxxxxxxx)" name="telefonoPaciente" value ="<?php echo isset(
                                     $rowPaciente["telefonoP"]) ? $rowPaciente["telefonoP"] : ''; ?>" required />
+                                    <div class="invalid-feedback">Por favor, ingresa tu teléfono.
+                            </div>
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Correo:</label>
-                                <input class="form-control" type="email" placeholder="ejemplo@gmail.com" required
-                                     title="ejemplo@gmail.com" name="correoPaciente" value ="<?php echo isset(
+                                <label class="form-label" for="email">Correo:</label>
+                                <input class="form-control" type="email" id="email" placeholder="ejemplo@gmail.com" required
+                                    title="ejemplo@gmail.com" name="correoPaciente" value ="<?php echo isset(
                                     $rowPaciente["correoP"]) ? $rowPaciente["correoP"] : ''; ?>" required />
+                                    <div class="invalid-feedback">Por favor, ingresa tu correo.
+                            </div>
                             </div>
                             <div class="col-3" style="text-align: left; padding: 1rem;">
-                                <label class="form-label">Contraseña:</label>
-                                <input class="form-control" type="password" placeholder="Contraseña *" name="contrasenaPaciente" value ="<?php echo isset(
+                                <label class="form-label" for="pass">Contraseña:</label>
+                                <input class="form-control" type="password" id="pass" placeholder="Contraseña *" name="contrasenaPaciente" value ="<?php echo isset(
                                     $rowPaciente["contrasenaP"]) ? $rowPaciente["contrasenaP"] : ''; ?>" required
                                     maxlength="8" placeholder="********" />
+                                    <div class="invalid-feedback">Por favor, ingresa tu contraseña.
+                            </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
-    <label class="form-label">Capacidades diferentes:</label>
-    <!--<input class="form-control" type="text" placeholder="Capacidades diferentes" maxlength="20"
-    title="Sea especifico" />-->
-    <input class="form-control" type="text" id="capacidades" 
-        placeholder="Capacidades diferentes...." name="capacidadesPaciente" value ="<?php echo isset(
-        $rowPaciente["capacidadesP"]) ? $rowPaciente["capacidadesP"] : ''; ?>" required />
-</div>
-<div class="col-4" style="text-align: left; padding: 1rem;">
-    <label class="form-label">Alergias:</label>
-    <!--<input class="form-control" type="text" placeholder="Alergias" maxlength="20"
-    title="Sea especifico" />-->
-    <input class="form-control" type="text" id="alergias" placeholder="Alergias...."name="alergiasPaciente" value ="<?php echo isset(
-        $rowPaciente["alergiasP"]) ? $rowPaciente["alergiasP"] : ''; ?>" required />
-</div>
-<div class="col-4" style="text-align: left; padding: 1rem;">
-    <label class="form-label">Enfermedades patológicas:</label>
-    <!--<input class="form-control" type="text" placeholder="Enfermedades patológicas" maxlength="20"
-    title="Sea especifico" />-->
-    <input class="form-control" type="text" id="enfermedades" name="enfermedadesPaciente" placeholder="Enfermedades patológicas...." value ="<?php echo isset(
-        $rowPaciente["enfermedadesP"]) ? $rowPaciente["enfermedadesP"] : ''; ?>" required />
-</div>
+                            <label class="form-label" for="capacidades">Capacidades diferentes:</label>
+                            <!--<input class="form-control" type="text" placeholder="Capacidades diferentes" maxlength="20"
+                            title="Sea especifico" />-->
+                            <input class="form-control" type="text" id="capacidades" 
+                            placeholder="Capacidades diferentes...." name="capacidadesPaciente" value ="<?php echo isset(
+                            $rowPaciente["capacidadesP"]) ? $rowPaciente["capacidadesP"] : ''; ?>" required />
+                            <div class="invalid-feedback">Por favor, ingresa tus capacidades diferentes.
+                            </div>
+                            </div>
+                            <div class="col-4" style="text-align: left; padding: 1rem;">
+                            <label class="form-label" for="alergias">Alergias:</label>
+                            <!--<input class="form-control" type="text" placeholder="Alergias" maxlength="20"
+                            title="Sea especifico" />-->
+                            <input class="form-control" type="text" id="alergias" placeholder="Alergias...."name="alergiasPaciente" value ="<?php echo isset(
+                            $rowPaciente["alergiasP"]) ? $rowPaciente["alergiasP"] : ''; ?>" required />
+                            <div class="invalid-feedback">Por favor, ingresa tus alergias.
+                            </div>
+                            </div>
+                            <div class="col-4" style="text-align: left; padding: 1rem;">
+                            <label class="form-label" for="enfermedades">Enfermedades patológicas:</label>
+                            <!--<input class="form-control" type="text" placeholder="Enfermedades patológicas" maxlength="20"
+                            title="Sea especifico" />-->
+                            <input class="form-control" type="text" id="enfermedades" name="enfermedadesPaciente" placeholder="Enfermedades patológicas...." value ="<?php echo isset(
+                            $rowPaciente["enfermedadesP"]) ? $rowPaciente["enfermedadesP"] : ''; ?>" required />
+                            <div class="invalid-feedback">Por favor, ingresa tus enfermedades patológicas.
+                            </div>
+                            </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
                                 <div class="form-group">
                                     <label class="form-label">Tipo de sangre:</label>
@@ -192,7 +238,7 @@
                                 </div>
                             </div>
                             <div class="col-4" style="text-align: left; padding: 1rem;">
-                                                           <!--      <div class="form-group">
+                                                        <!--      <div class="form-group">
                                     <label class="form-label">Estatus:</label>
                                     <select name="estatusPaciente" id="estatus" class="formato2" style="width: 100%;">
                                     <option value="" disabled selected>Estatus</option>
@@ -232,6 +278,7 @@
      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../js/creaCitas.js"></script>
     <script src="../main.js"></script>
+    <script src="../js/ValidacionesCampos.js"></script>
     
 </body>
 </html>
